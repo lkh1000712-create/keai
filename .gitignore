@@ -1,0 +1,21 @@
+# 민감 정보 파일
+automation/
+.wrangler/
+.vercel/
+.claude/settings.local.json
+js/config.js
+
+# 환경변수
+.env
+.env.*
+wrangler.toml
+
+# 빌드/캐시
+node_modules/
+dist/
+.cache/
+
+# OS/IDE
+.DS_Store
+Thumbs.db
+*.log

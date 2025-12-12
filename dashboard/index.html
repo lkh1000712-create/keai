@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>대시보드 - KEAI</title>
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="dashboard-container">
+    <!-- 사이드바 -->
+    <aside class="sidebar"></aside>
+
+    <!-- 메인 콘텐츠 -->
+    <main class="main-content">
+      <!-- 헤더 -->
+      <header class="dashboard-header"></header>
+
+      <!-- 통계 카드 -->
+      <section class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon icon-inbox">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/>
+              <path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/>
+            </svg>
+          </div>
+          <div class="stat-content">
+            <p class="stat-label">전체 접수</p>
+            <p class="stat-value" id="totalLeads">-</p>
+            <p class="stat-change" id="totalLeadsChange">로딩 중...</p>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </div>
+          <div class="stat-content">
+            <p class="stat-label">대기 중</p>
+            <p class="stat-value" id="pendingLeads">-</p>
+            <p class="stat-change" id="pendingLeadsChange">로딩 중...</p>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon icon-page">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+              <polyline points="22 4 12 14.01 9 11.01"/>
+            </svg>
+          </div>
+          <div class="stat-content">
+            <p class="stat-label">완료</p>
+            <p class="stat-value" id="completedLeads">-</p>
+            <p class="stat-change" id="completedLeadsChange">로딩 중...</p>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon icon-time">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+            </svg>
+          </div>
+          <div class="stat-content">
+            <p class="stat-label">게시글 수</p>
+            <p class="stat-value" id="totalPosts">-</p>
+            <p class="stat-change" id="totalPostsChange">로딩 중...</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 최근 접수 내역 -->
+      <section class="recent-section">
+        <div class="section-header">
+          <h3 class="section-title">최근 접수 내역</h3>
+          <a href="leads.html" class="section-link">전체보기 →</a>
+        </div>
+        <div class="table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>접수일</th>
+                <th>기업명</th>
+                <th>대표자</th>
+                <th>연락처</th>
+                <th>필요자금</th>
+                <th>상태</th>
+              </tr>
+            </thead>
+            <tbody id="recentLeadsBody">
+              <tr>
+                <td colspan="6" style="text-align: center; padding: 40px; color: var(--neutral-400);">
+                  데이터를 불러오는 중...
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 최근 게시글 -->
+      <section class="recent-section" style="margin-top: 20px;">
+        <div class="section-header">
+          <h3 class="section-title">최근 게시글</h3>
+          <a href="board.html" class="section-link">전체보기 →</a>
+        </div>
+        <div class="table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>작성일</th>
+                <th>제목</th>
+                <th>카테고리</th>
+                <th>조회수</th>
+                <th>상태</th>
+              </tr>
+            </thead>
+            <tbody id="recentPostsBody">
+              <tr>
+                <td colspan="5" style="text-align: center; padding: 40px; color: var(--neutral-400);">
+                  데이터를 불러오는 중...
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- 설정 파일 로드 (보안: .gitignore에 포함) -->
+  <script src="../js/config.js"></script>
+  <script src="../js/components.js"></script>
+  <script>
+    // CONFIG에서 WORKER_URL 가져오기
+    const WORKER_URL = window.CONFIG?.WORKER_URL || '';
+
+    // 페이지 로드 시 초기화
+    document.addEventListener('DOMContentLoaded', function() {
+      loadSidebar('dashboard');
+      loadDashboardHeader('대시보드', '실시간 현황을 확인하세요');
+
+      if (!WORKER_URL || WORKER_URL === 'YOUR_WORKER_URL_HERE') {
+        showConfigError();
+        return;
+      }
+
+      loadStats();
+      loadRecentLeads();
+      loadRecentPosts();
+    });
+
+    // 설정 오류 표시
+    function showConfigError() {
+      document.getElementById('totalLeads').textContent = '-';
+      document.getElementById('totalLeadsChange').textContent = 'config.js 설정 필요';
+      document.getElementById('totalLeadsChange').className = 'stat-change negative';
+
+      document.getElementById('pendingLeads').textContent = '-';
+      document.getElementById('pendingLeadsChange').textContent = 'WORKER_URL 입력';
+
+      document.getElementById('completedLeads').textContent = '-';
+      document.getElementById('completedLeadsChange').textContent = '';
+
+      document.getElementById('totalPosts').textContent = '-';
+      document.getElementById('totalPostsChange').textContent = '';
+
+      document.getElementById('recentLeadsBody').innerHTML = `
+        <tr>
+          <td colspan="6" style="text-align: center; padding: 40px; color: var(--error);">
+            js/config.js 파일의 WORKER_URL을 설정해주세요.
+          </td>
+        </tr>
+      `;
+
+      document.getElementById('recentPostsBody').innerHTML = `
+        <tr>
+          <td colspan="5" style="text-align: center; padding: 40px; color: var(--error);">
+            js/config.js 파일의 WORKER_URL을 설정해주세요.
+          </td>
+        </tr>
+      `;
+    }
+
+    // 통계 로드
+    async function loadStats() {
+      try {
+        // 접수 내역 통계
+        const leadsResponse = await fetch(`${WORKER_URL}/leads`);
+        let leadsData = [];
+        if (leadsResponse.ok) {
+          const leadsResult = await leadsResponse.json();
+          leadsData = leadsResult.leads || [];
+        }
+
+        const total = leadsData.length;
+        const pending = leadsData.filter(l => l.상태 === '대기' || l.상태 === '신규' || !l.상태).length;
+        const completed = leadsData.filter(l => l.상태 === '완료').length;
+
+        document.getElementById('totalLeads').textContent = total.toLocaleString();
+        document.getElementById('totalLeadsChange').textContent = '전체 접수 건수';
+        document.getElementById('totalLeadsChange').className = 'stat-change';
+
+        document.getElementById('pendingLeads').textContent = pending.toLocaleString();
+        document.getElementById('pendingLeadsChange').textContent = '처리 필요';
+        document.getElementById('pendingLeadsChange').className = 'stat-change negative';
+
+        document.getElementById('completedLeads').textContent = completed.toLocaleString();
+        document.getElementById('completedLeadsChange').textContent = '처리 완료';
+        document.getElementById('completedLeadsChange').className = 'stat-change positive';
+
+        // 게시글 통계
+        const postsResponse = await fetch(`${WORKER_URL}/board/all`);
+        let postsData = [];
+        if (postsResponse.ok) {
+          const postsResult = await postsResponse.json();
+          postsData = postsResult.posts || [];
+        }
+
+        const publishedPosts = postsData.filter(p => p.게시여부).length;
+        document.getElementById('totalPosts').textContent = postsData.length.toLocaleString();
+        document.getElementById('totalPostsChange').textContent = `${publishedPosts}개 게시 중`;
+        document.getElementById('totalPostsChange').className = 'stat-change positive';
+
+      } catch (error) {
+        console.error('Stats load error:', error);
+        document.getElementById('totalLeads').textContent = '-';
+        document.getElementById('pendingLeads').textContent = '-';
+        document.getElementById('completedLeads').textContent = '-';
+        document.getElementById('totalPosts').textContent = '-';
+      }
+    }
+
+    // 최근 접수 내역 로드
+    async function loadRecentLeads() {
+      const tbody = document.getElementById('recentLeadsBody');
+
+      try {
+        const response = await fetch(`${WORKER_URL}/leads`);
+        if (!response.ok) throw new Error('API error');
+
+        const result = await response.json();
+        const leads = (result.leads || []).slice(0, 5);
+
+        if (leads.length === 0) {
+          tbody.innerHTML = `
+            <tr>
+              <td colspan="6" style="text-align: center; padding: 40px; color: var(--neutral-400);">
+                접수 내역이 없습니다.
+              </td>
+            </tr>
+          `;
+          return;
+        }
+
+        tbody.innerHTML = leads.map(lead => `
+          <tr>
+            <td>${formatDate(lead.접수일)}</td>
+            <td>${lead.기업명 || '-'}</td>
+            <td>${lead.대표자명 || '-'}</td>
+            <td>${lead.연락처 || '-'}</td>
+            <td>${lead.필요자금규모 || '-'}</td>
+            <td><span class="status-badge ${getStatusClass(lead.상태)}">${lead.상태 || '신규'}</span></td>
+          </tr>
+        `).join('');
+
+      } catch (error) {
+        console.error('Recent leads error:', error);
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="6" style="text-align: center; padding: 40px; color: var(--error);">
+              데이터를 불러올 수 없습니다.
+            </td>
+          </tr>
+        `;
+      }
+    }
+
+    // 최근 게시글 로드
+    async function loadRecentPosts() {
+      const tbody = document.getElementById('recentPostsBody');
+
+      try {
+        const response = await fetch(`${WORKER_URL}/board/all`);
+        if (!response.ok) throw new Error('API error');
+
+        const result = await response.json();
+        const posts = (result.posts || []).slice(0, 5);
+
+        if (posts.length === 0) {
+          tbody.innerHTML = `
+            <tr>
+              <td colspan="5" style="text-align: center; padding: 40px; color: var(--neutral-400);">
+                게시글이 없습니다.
+              </td>
+            </tr>
+          `;
+          return;
+        }
+
+        tbody.innerHTML = posts.map(post => `
+          <tr>
+            <td>${formatDate(post.작성일)}</td>
+            <td style="max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${post.제목 || '-'}</td>
+            <td><span class="status-badge ${getCategoryClass(post.카테고리)}">${post.카테고리 || '-'}</span></td>
+            <td>${(post.조회수 || 0).toLocaleString()}</td>
+            <td><span class="status-badge ${post.게시여부 ? 'complete' : 'pending'}">${post.게시여부 ? '게시중' : '비공개'}</span></td>
+          </tr>
+        `).join('');
+
+      } catch (error) {
+        console.error('Recent posts error:', error);
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="5" style="text-align: center; padding: 40px; color: var(--error);">
+              데이터를 불러올 수 없습니다.
+            </td>
+          </tr>
+        `;
+      }
+    }
+
+    // 날짜 포맷
+    function formatDate(dateStr) {
+      if (!dateStr) return '-';
+      const date = new Date(dateStr);
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    }
+
+    // 상태 클래스
+    function getStatusClass(status) {
+      const classes = {
+        '신규': 'pending',
+        '대기': 'pending',
+        '상담중': 'progress',
+        '진행중': 'progress',
+        '완료': 'complete'
+      };
+      return classes[status] || 'pending';
+    }
+
+    // 카테고리 클래스
+    function getCategoryClass(category) {
+      const classes = {
+        '공지': 'complete',
+        '뉴스': 'pending',
+        '정보': 'in-progress',
+        '성공사례': 'complete'
+      };
+      return classes[category] || '';
+    }
+  </script>
+</body>
+</html>
