@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloudflare API 토큰 설정 가이드 (2025)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .copy-btn:active { transform: scale(0.95); }
+        .step-card { transition: all 0.2s ease; }
+        .step-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .path-arrow { display: inline-block; margin: 0 8px; color: #9CA3AF; }
+        .permission-row:nth-child(even) { background-color: #f9fafb; }
+        details summary { cursor: pointer; }
+        details summary::-webkit-details-marker { display: none; }
+        .tab-btn.active { background-color: #F97316; color: white; }
+        code { font-family: 'Consolas', 'Monaco', monospace; }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div class="max-w-4xl mx-auto p-6">
+        <!-- 헤더 -->
+        <div class="bg-gradient-to-r from-orange-500 to-orange-600 rounded-2xl p-8 mb-8 text-white">
+            <div class="flex items-center gap-3 mb-2">
+                <span class="text-4xl">☁️</span>
+                <div>
+                    <h1 class="text-3xl font-bold">Cloudflare API 토큰 설정 가이드</h1>
+                    <p class="text-orange-100">2025년 최신 버전 | Workers 배포용</p>
+                </div>
+            </div>
+            <div class="mt-4 bg-white/20 rounded-lg p-3 text-sm">
+                <strong>📚 공식 문서 기반:</strong>
+                <a href="https://developers.cloudflare.com/fundamentals/api/get-started/create-token/" target="_blank" class="underline">Cloudflare Fundamentals</a>
+            </div>
+        </div>
+
+        <!-- 진행 체크리스트 -->
+        <div class="bg-white rounded-xl p-6 mb-8 shadow-sm">
+            <h2 class="text-lg font-semibold mb-4 text-gray-800">📋 진행 체크리스트</h2>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
+                <label class="flex items-center gap-2 cursor-pointer text-sm">
+                    <input type="checkbox" id="check1" class="w-4 h-4 rounded" onchange="updateProgress()">
+                    <span>토큰 유형 선택</span>
+                </label>
+                <label class="flex items-center gap-2 cursor-pointer text-sm">
+                    <input type="checkbox" id="check2" class="w-4 h-4 rounded" onchange="updateProgress()">
+                    <span>템플릿 선택</span>
+                </label>
+                <label class="flex items-center gap-2 cursor-pointer text-sm">
+                    <input type="checkbox" id="check3" class="w-4 h-4 rounded" onchange="updateProgress()">
+                    <span>권한 설정</span>
+                </label>
+                <label class="flex items-center gap-2 cursor-pointer text-sm">
+                    <input type="checkbox" id="check4" class="w-4 h-4 rounded" onchange="updateProgress()">
+                    <span>리소스 지정</span>
+                </label>
+                <label class="flex items-center gap-2 cursor-pointer text-sm">
+                    <input type="checkbox" id="check5" class="w-4 h-4 rounded" onchange="updateProgress()">
+                    <span>토큰 저장</span>
+                </label>
+            </div>
+            <div class="mt-4 bg-gray-200 rounded-full h-2">
+                <div id="progressBar" class="bg-orange-500 h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
+            </div>
+        </div>
+
+        <!-- 사전 준비 -->
+        <div class="bg-blue-50 border border-blue-200 rounded-xl p-6 mb-8">
+            <h2 class="text-lg font-semibold mb-3 text-blue-800">🔧 사전 준비 사항</h2>
+            <div class="space-y-3">
+                <div class="flex items-start gap-3">
+                    <span class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm shrink-0">1</span>
+                    <div>
+                        <p class="text-blue-800 font-medium">Cloudflare 계정</p>
+                        <p class="text-blue-600 text-sm">계정이 없다면 <a href="https://dash.cloudflare.com/sign-up" target="_blank" class="underline">회원가입</a> 먼저 진행</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-3">
+                    <span class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm shrink-0">2</span>
+                    <div>
+                        <p class="text-blue-800 font-medium">Account ID 확인</p>
+                        <p class="text-blue-600 text-sm">대시보드 우측 하단 또는 Overview 페이지에서 확인 가능</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 토큰 유형 설명 -->
+        <div class="bg-white rounded-xl p-6 mb-6 shadow-sm">
+            <h2 class="text-xl font-semibold mb-4 text-gray-800">🔑 토큰 유형 이해하기</h2>
+
+            <div class="grid md:grid-cols-2 gap-4 mb-4">
+                <div class="border-2 border-green-200 rounded-lg p-4 bg-green-50">
+                    <h3 class="font-semibold text-green-800 mb-2">✅ 사용자 토큰 (User Token) - 권장</h3>
+                    <ul class="text-sm text-green-700 space-y-1">
+                        <li>• My Profile > API Tokens에서 생성</li>
+                        <li>• 사용자 권한 상속</li>
+                        <li>• <strong>Memberships 권한 포함 가능</strong></li>
+                        <li>• Wrangler 배포에 적합</li>
+                    </ul>
+                </div>
+                <div class="border-2 border-gray-200 rounded-lg p-4 bg-gray-50">
+                    <h3 class="font-semibold text-gray-700 mb-2">⚠️ 계정 토큰 (Account Token)</h3>
+                    <ul class="text-sm text-gray-600 space-y-1">
+                        <li>• Manage Account > API Tokens에서 생성</li>
+                        <li>• 서비스 주체로 동작</li>
+                        <li>• Memberships 권한 추가 불가</li>
+                        <li>• CI/CD 장기 통합에 적합</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                <p class="text-sm text-yellow-800">
+                    <strong>💡 2025년 권장:</strong> Workers 배포 목적이라면 <strong>사용자 토큰(User Token)</strong>을 사용하세요.
+                    계정 토큰은 Memberships 권한이 없어 일부 Wrangler 명령어에서 오류가 발생할 수 있습니다.
+                </p>
+            </div>
+        </div>
+
+        <!-- Step 1 -->
+        <div class="step-card bg-white rounded-xl p-6 mb-6 shadow-sm border-l-4 border-orange-500">
+            <div class="flex items-start gap-4">
+                <div class="bg-orange-500 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold shrink-0">1</div>
+                <div class="flex-1">
+                    <h3 class="text-xl font-semibold mb-3 text-gray-800">API 토큰 페이지 접속</h3>
+
+                    <div class="bg-gray-50 rounded-lg p-4 mb-4">
+                        <p class="text-sm text-gray-600 mb-2">📍 경로 (사용자 토큰):</p>
+                        <div class="flex items-center flex-wrap text-sm gap-1">
+                            <span class="bg-gray-200 px-3 py-1 rounded">Cloudflare 대시보드</span>
+                            <span class="path-arrow">→</span>
+                            <span class="bg-gray-200 px-3 py-1 rounded">우측 상단 프로필 아이콘</span>
+                            <span class="path-arrow">→</span>
+                            <span class="bg-gray-200 px-3 py-1 rounded">My Profile</span>
+                            <span class="path-arrow">→</span>
+                            <span class="bg-orange-100 text-orange-700 px-3 py-1 rounded font-medium">API Tokens</span>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap gap-3">
+                        <a href="https://dash.cloudflare.com/profile/api-tokens" target="_blank"
+                           class="inline-flex items-center gap-2 bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition text-sm">
+                            <span>🔗</span> 사용자 토큰 페이지 열기
+                        </a>
+                        <a href="https://dash.cloudflare.com/?to=/:account/api-tokens" target="_blank"
+                           class="inline-flex items-center gap-2 bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition text-sm">
+                            <span>🔗</span> 계정 토큰 페이지 열기
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="step-card bg-white rounded-xl p-6 mb-6 shadow-sm border-l-4 border-orange-500">
+            <div class="flex items-start gap-4">
+                <div class="bg-orange-500 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold shrink-0">2</div>
+                <div class="flex-1">
+                    <h3 class="text-xl font-semibold mb-3 text-gray-800">템플릿 선택</h3>
+
+                    <p class="text-gray-600 mb-4">
+                        <span class="bg-blue-500 text-white px-3 py-1 rounded text-sm font-medium">Create Token</span> 클릭 후 템플릿을 선택합니다.
+                    </p>
+
+                    <div class="bg-green-50 border border-green-200 rounded-lg p-4 mb-4">
+                        <h4 class="font-semibold text-green-800 mb-2">✅ Workers 배포용 권장 템플릿</h4>
+                        <div class="flex items-center gap-3">
+                            <span class="text-3xl">📝</span>
+                            <div>
+                                <p class="font-medium text-green-800">Edit Cloudflare Workers</p>
+                                <p class="text-sm text-green-600">Workers Scripts, KV Storage, R2 Storage, Routes 권한 자동 설정</p>
+                            </div>
+                            <span class="bg-green-500 text-white px-2 py-1 rounded text-xs ml-auto">Use template</span>
+                        </div>
+                    </div>
+
+                    <details class="bg-gray-50 rounded-lg p-4">
+                        <summary class="font-medium text-gray-700 flex items-center gap-2">
+                            <span>📋</span> 전체 템플릿 목록 보기
+                        </summary>
+                        <div class="mt-3 space-y-2 text-sm">
+                            <div class="flex justify-between p-2 bg-white rounded">
+                                <span>Edit Zone DNS</span>
+                                <span class="text-gray-500">DNS 레코드 관리</span>
+                            </div>
+                            <div class="flex justify-between p-2 bg-white rounded">
+                                <span>Read billing info</span>
+                                <span class="text-gray-500">청구 정보 읽기</span>
+                            </div>
+                            <div class="flex justify-between p-2 bg-white rounded">
+                                <span>Read analytics and logs</span>
+                                <span class="text-gray-500">분석 및 로그 읽기</span>
+                            </div>
+                            <div class="flex justify-between p-2 bg-white rounded border-2 border-orange-300">
+                                <span class="font-medium text-orange-600">Edit Cloudflare Workers</span>
+                                <span class="text-orange-500">Workers 배포용 ⭐</span>
+                            </div>
+                            <div class="flex justify-between p-2 bg-white rounded">
+                                <span>Edit load balancing</span>
+                                <span class="text-gray-500">로드 밸런싱 설정</span>
+                            </div>
+                            <div class="flex justify-between p-2 bg-white rounded">
+                                <span>WordPress</span>
+                                <span class="text-gray-500">WordPress 통합용</span>
+                            </div>
+                            <div class="flex justify-between p-2 bg-white rounded">
+                                <span>Create Additional Tokens</span>
+                                <span class="text-gray-500">토큰 생성 권한</span>
+                            </div>
+                            <div class="flex justify-between p-2 bg-white rounded">
+                                <span>Read All Resources</span>
+                                <span class="text-gray-500">전체 읽기 권한</span>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="step-card bg-white rounded-xl p-6 mb-6 shadow-sm border-l-4 border-orange-500">
+            <div class="flex items-start gap-4">
+                <div class="bg-orange-500 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold shrink-0">3</div>
+                <div class="flex-1">
+                    <h3 class="text-xl font-semibold mb-3 text-gray-800">토큰 이름 설정</h3>
+
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Token name</label>
+                        <input type="text" value="Workers Deploy Token"
+                               class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm"
+                               placeholder="토큰 용도를 설명하는 이름">
+                    </div>
+
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-3">
+                        <p class="text-sm text-blue-800">
+                            <strong>💡 팁:</strong> 나중에 구분하기 쉽도록 용도를 명확히 적으세요.
+                            <br>예: "GitHub Actions Deploy", "Local Development", "CI/CD Pipeline"
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="step-card bg-white rounded-xl p-6 mb-6 shadow-sm border-l-4 border-orange-500">
+            <div class="flex items-start gap-4">
+                <div class="bg-orange-500 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold shrink-0">4</div>
+                <div class="flex-1">
+                    <h3 class="text-xl font-semibold mb-3 text-gray-800">권한 설정 (Permissions)</h3>
+
+                    <p class="text-gray-600 mb-4">
+                        "Edit Cloudflare Workers" 템플릿 선택 시 아래 권한이 <strong>자동 설정</strong>됩니다.
+                        <br>Custom token인 경우 아래 권한을 직접 추가하세요.
+                    </p>
+
+                    <!-- 탭 버튼 -->
+                    <div class="flex gap-2 mb-4">
+                        <button onclick="showTab('essential')" id="tab-essential" class="tab-btn active px-4 py-2 rounded-lg text-sm font-medium transition">
+                            필수 권한
+                        </button>
+                        <button onclick="showTab('optional')" id="tab-optional" class="tab-btn bg-gray-200 px-4 py-2 rounded-lg text-sm font-medium transition">
+                            선택 권한
+                        </button>
+                        <button onclick="showTab('all')" id="tab-all" class="tab-btn bg-gray-200 px-4 py-2 rounded-lg text-sm font-medium transition">
+                            전체 권한 목록
+                        </button>
+                    </div>
+
+                    <!-- 필수 권한 -->
+                    <div id="content-essential" class="tab-content">
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-sm border-collapse border border-gray-200 rounded-lg overflow-hidden">
+                                <thead>
+                                    <tr class="bg-orange-100">
+                                        <th class="border border-gray-200 p-3 text-left">Scope</th>
+                                        <th class="border border-gray-200 p-3 text-left">Permission</th>
+                                        <th class="border border-gray-200 p-3 text-left">Access</th>
+                                        <th class="border border-gray-200 p-3 text-left">용도</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="permission-row">
+                                        <td class="border border-gray-200 p-3">
+                                            <span class="bg-purple-100 text-purple-700 px-2 py-1 rounded text-xs">Account</span>
+                                        </td>
+                                        <td class="border border-gray-200 p-3 font-medium">Account Settings</td>
+                                        <td class="border border-gray-200 p-3">
+                                            <span class="bg-blue-100 text-blue-700 px-2 py-1 rounded text-xs">Read</span>
+                                        </td>
+                                        <td class="border border-gray-200 p-3 text-gray-600">계정 정보 확인</td>
+                                    </tr>
+                                    <tr class="permission-row">
+                                        <td class="border border-gray-200 p-3">
+                                            <span class="bg-purple-100 text-purple-700 px-2 py-1 rounded text-xs">Account</span>
+                                        </td>
+                                        <td class="border border-gray-200 p-3 font-medium">Workers Scripts</td>
+                                        <td class="border border-gray-200 p-3">
+                                            <span class="bg-green-100 text-green-700 px-2 py-1 rounded text-xs">Edit</span>
+                                        </td>
+                                        <td class="border border-gray-200 p-3 text-gray-600">Workers 코드 배포</td>
+                                    </tr>
+                                    <tr class="permission-row">
+                                        <td class="border border-gray-200 p-3">
+                                            <span class="bg-purple-100 text-purple-700 px-2 py-1 rounded text-xs">Account</span>
+                                        </td>
+                                        <td class="border border-gray-200 p-3 font-medium">Workers KV Storage</td>
+                                        <td class="border border-gray-200 p-3">
+                                            <span class="bg-green-100 text-green-700 px-2 py-1 rounded text-xs">Edit</span>
+                                        </td>
+                                        <td class="border border-gray-200 p-3 text-gray-600">KV 네임스페이스 관리</td>
+                                    </tr>
+                                    <tr class="permission-row">
+                                        <td class="border border-gray-200 p-3">
+                                            <span class="bg-purple-100 text-purple-700 px-2 py-1 rounded text-xs">Account</span>
+                                        </td>
+                                        <td class="border border-gray-200 p-3 font-medium">Workers R2 Storage</td>
+                                        <td class="border border-gray-200 p-3">
+                                            <span class="bg-green-100 text-green-700 px-2 py-1 rounded text-xs">Edit</span>
+                                        </td>
+                                        <td class="border border-gray-200 p-3 text-gray-600">R2 버킷 관리</td>
+                                    </tr>
+                                    <tr class="permission-row">
+                                        <td class="border border-gray-200 p-3">
+                                            <span class="bg-blue-100 text-blue-700 px-2 py-1 rounded text-xs">Zone</span>
+                                        </td>
+                                        <td class="border border-gray-200 p-3 font-medium">Workers Routes</td>
+                                        <td class="border border-gray-200 p-3">
+                                            <span class="bg-green-100 text-green-700 px-2 py-1 rounded text-xs">Edit</span>
+                                        </td>
+                                        <td class="border border-gray-200 p-3 text-gray-600">도메인 라우트 설정</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- 선택 권한 -->
+                    <div id="content-optional" class="tab-content hidden">
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-sm border-collapse border border-gray-200 rounded-lg overflow-hidden">
+                                <thead>
+                                    <tr class="bg-gray-100">
+                                        <th class="border border-gray-200 p-3 text-left">Scope</th>
+                                        <th class="border border-gray-200 p-3 text-left">Permission</th>
+                                        <th class="border border-gray-200 p-3 text-left">Access</th>
+                                        <th class="border border-gray-200 p-3 text-left">필요 상황</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="permission-row">
+                                        <td class="border border-gray-200 p-3">
+                                            <span class="bg-green-100 text-green-700 px-2 py-1 rounded text-xs">User</span>
+                                        </td>
+                                        <td class="border border-gray-200 p-3 font-medium">User Details</td>
+                                        <td class="border border-gray-200 p-3">
+                                            <span class="bg-blue-100 text-blue-700 px-2 py-1 rounded text-xs">Read</span>
+                                        </td>
+                                        <td class="border border-gray-200 p-3 text-gray-600">"Unable to retrieve email" 오류 해결</td>
+                                    </tr>
+                                    <tr class="permission-row">
+                                        <td class="border border-gray-200 p-3">
+                                            <span class="bg-green-100 text-green-700 px-2 py-1 rounded text-xs">User</span>
+                                        </td>
+                                        <td class="border border-gray-200 p-3 font-medium">Memberships</td>
+                                        <td class="border border-gray-200 p-3">
+                                            <span class="bg-blue-100 text-blue-700 px-2 py-1 rounded text-xs">Read</span>
+                                        </td>
+                                        <td class="border border-gray-200 p-3 text-gray-600">멀티 계정 환경에서 필요</td>
+                                    </tr>
+                                    <tr class="permission-row">
+                                        <td class="border border-gray-200 p-3">
+                                            <span class="bg-purple-100 text-purple-700 px-2 py-1 rounded text-xs">Account</span>
+                                        </td>
+                                        <td class="border border-gray-200 p-3 font-medium">Workers AI</td>
+                                        <td class="border border-gray-200 p-3">
+                                            <span class="bg-green-100 text-green-700 px-2 py-1 rounded text-xs">Edit</span>
+                                        </td>
+                                        <td class="border border-gray-200 p-3 text-gray-600">Workers AI 사용 시</td>
+                                    </tr>
+                                    <tr class="permission-row">
+                                        <td class="border border-gray-200 p-3">
+                                            <span class="bg-purple-100 text-purple-700 px-2 py-1 rounded text-xs">Account</span>
+                                        </td>
+                                        <td class="border border-gray-200 p-3 font-medium">Cloudflare Pages</td>
+                                        <td class="border border-gray-200 p-3">
+                                            <span class="bg-green-100 text-green-700 px-2 py-1 rounded text-xs">Edit</span>
+                                        </td>
+                                        <td class="border border-gray-200 p-3 text-gray-600">Pages 배포 시 필수</td>
+                                    </tr>
+                                    <tr class="permission-row">
+                                        <td class="border border-gray-200 p-3">
+                                            <span class="bg-purple-100 text-purple-700 px-2 py-1 rounded text-xs">Account</span>
+                                        </td>
+                                        <td class="border border-gray-200 p-3 font-medium">D1</td>
+                                        <td class="border border-gray-200 p-3">
+                                            <span class="bg-green-100 text-green-700 px-2 py-1 rounded text-xs">Edit</span>
+                                        </td>
+                                        <td class="border border-gray-200 p-3 text-gray-600">D1 데이터베이스 사용 시</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- 전체 권한 목록 -->
+                    <div id="content-all" class="tab-content hidden">
+                        <div class="grid md:grid-cols-3 gap-4">
+                            <div class="bg-purple-50 rounded-lg p-4">
+                                <h4 class="font-semibold text-purple-800 mb-3">Account 권한</h4>
+                                <ul class="text-xs space-y-1 text-purple-700">
+                                    <li>• Account Settings</li>
+                                    <li>• Workers Scripts</li>
+                                    <li>• Workers KV Storage</li>
+                                    <li>• Workers R2 Storage</li>
+                                    <li>• Workers AI</li>
+                                    <li>• Workers Pipelines</li>
+                                    <li>• D1</li>
+                                    <li>• Cloudflare Pages</li>
+                                    <li>• Queues</li>
+                                    <li>• Durable Objects</li>
+                                    <li>• Access: Apps & Policies</li>
+                                    <li>• Load Balancing</li>
+                                    <li>• DNS Firewall</li>
+                                    <li>• Billing</li>
+                                </ul>
+                            </div>
+                            <div class="bg-blue-50 rounded-lg p-4">
+                                <h4 class="font-semibold text-blue-800 mb-3">Zone 권한</h4>
+                                <ul class="text-xs space-y-1 text-blue-700">
+                                    <li>• Workers Routes</li>
+                                    <li>• DNS</li>
+                                    <li>• SSL and Certificates</li>
+                                    <li>• Firewall Services</li>
+                                    <li>• Cache Purge</li>
+                                    <li>• Page Rules</li>
+                                    <li>• Zone Settings</li>
+                                    <li>• Analytics</li>
+                                    <li>• Logs</li>
+                                    <li>• Health Checks</li>
+                                    <li>• Email Routing</li>
+                                    <li>• Web3 Hostnames</li>
+                                </ul>
+                            </div>
+                            <div class="bg-green-50 rounded-lg p-4">
+                                <h4 class="font-semibold text-green-800 mb-3">User 권한</h4>
+                                <ul class="text-xs space-y-1 text-green-700">
+                                    <li>• API Tokens</li>
+                                    <li>• Memberships</li>
+                                    <li>• User Details</li>
+                                </ul>
+                                <p class="text-xs text-green-600 mt-3 italic">
+                                    ※ User 권한은 사용자 토큰에서만 설정 가능
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 bg-red-50 border border-red-200 rounded-lg p-4">
+                        <p class="text-sm text-red-800">
+                            <strong>⚠️ 알려진 이슈 (2025):</strong> 계정 토큰(Account Token)은 <strong>User > Memberships</strong> 권한을 추가할 수 없습니다.
+                            이로 인해 일부 Wrangler 명령어가 실패할 수 있으므로, Workers 배포 시 <strong>사용자 토큰</strong>을 권장합니다.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 5 -->
+        <div class="step-card bg-white rounded-xl p-6 mb-6 shadow-sm border-l-4 border-orange-500">
+            <div class="flex items-start gap-4">
+                <div class="bg-orange-500 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold shrink-0">5</div>
+                <div class="flex-1">
+                    <h3 class="text-xl font-semibold mb-3 text-gray-800">리소스 범위 설정</h3>
+
+                    <div class="space-y-4">
+                        <!-- Account Resources -->
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <h4 class="font-medium text-gray-700 mb-3">📁 Account Resources</h4>
+                            <div class="space-y-2">
+                                <label class="flex items-center gap-3 cursor-pointer">
+                                    <input type="radio" name="account" checked class="w-4 h-4">
+                                    <div>
+                                        <span class="font-medium">All accounts</span>
+                                        <span class="text-sm text-gray-500 ml-2">모든 계정에 적용</span>
+                                    </div>
+                                </label>
+                                <label class="flex items-center gap-3 cursor-pointer">
+                                    <input type="radio" name="account" class="w-4 h-4">
+                                    <div>
+                                        <span class="font-medium">Specific account</span>
+                                        <span class="text-sm text-gray-500 ml-2">특정 계정만 선택</span>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Zone Resources -->
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <h4 class="font-medium text-gray-700 mb-3">🌐 Zone Resources (Workers Routes 권한 추가 시)</h4>
+                            <div class="space-y-2">
+                                <label class="flex items-center gap-3 cursor-pointer">
+                                    <input type="radio" name="zone" checked class="w-4 h-4">
+                                    <div>
+                                        <span class="font-medium">All zones</span>
+                                        <span class="text-sm text-gray-500 ml-2">모든 도메인에 적용</span>
+                                    </div>
+                                </label>
+                                <label class="flex items-center gap-3 cursor-pointer">
+                                    <input type="radio" name="zone" class="w-4 h-4">
+                                    <div>
+                                        <span class="font-medium">Specific zone</span>
+                                        <span class="text-sm text-gray-500 ml-2">특정 도메인만 선택</span>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 bg-blue-50 border border-blue-200 rounded-lg p-4">
+                        <p class="text-sm text-blue-800">
+                            <strong>💡 보안 권장:</strong> 프로덕션 환경에서는 필요한 계정/도메인만 선택하여 권한을 최소화하세요.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 6 -->
+        <div class="step-card bg-white rounded-xl p-6 mb-6 shadow-sm border-l-4 border-orange-500">
+            <div class="flex items-start gap-4">
+                <div class="bg-orange-500 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold shrink-0">6</div>
+                <div class="flex-1">
+                    <h3 class="text-xl font-semibold mb-3 text-gray-800">보안 설정 (선택사항)</h3>
+
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <!-- IP Filtering -->
+                        <div class="border border-gray-200 rounded-lg p-4">
+                            <h4 class="font-medium text-gray-700 mb-2">🔒 Client IP Address Filtering</h4>
+                            <p class="text-sm text-gray-600 mb-3">특정 IP에서만 토큰 사용 허용</p>
+
+                            <div class="space-y-2">
+                                <div class="flex gap-2">
+                                    <select class="border border-gray-300 rounded px-3 py-2 text-sm">
+                                        <option>Is in</option>
+                                        <option>Is not in</option>
+                                    </select>
+                                    <input type="text" placeholder="192.168.1.0/24" class="flex-1 border border-gray-300 rounded px-3 py-2 text-sm">
+                                </div>
+                            </div>
+                            <p class="text-xs text-gray-400 mt-2">CIDR 표기법 지원 (예: 192.168.1.0/24)</p>
+                        </div>
+
+                        <!-- TTL -->
+                        <div class="border border-gray-200 rounded-lg p-4">
+                            <h4 class="font-medium text-gray-700 mb-2">⏰ TTL (Time To Live)</h4>
+                            <p class="text-sm text-gray-600 mb-3">토큰 유효 기간 설정</p>
+
+                            <div class="grid grid-cols-2 gap-2">
+                                <div>
+                                    <label class="text-xs text-gray-500">Start Date</label>
+                                    <input type="date" class="w-full border border-gray-300 rounded px-3 py-2 text-sm">
+                                </div>
+                                <div>
+                                    <label class="text-xs text-gray-500">End Date</label>
+                                    <input type="date" class="w-full border border-gray-300 rounded px-3 py-2 text-sm">
+                                </div>
+                            </div>
+                            <p class="text-xs text-gray-400 mt-2">비워두면 무기한 유효</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                        <p class="text-sm text-yellow-800">
+                            <strong>⚠️ 일반적인 경우:</strong> 로컬 개발용이라면 IP 필터링과 TTL 설정은 건너뛰어도 됩니다.
+                            <br>CI/CD 파이프라인용이라면 IP 필터링을 고려하세요.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 7 -->
+        <div class="step-card bg-white rounded-xl p-6 mb-6 shadow-sm border-l-4 border-green-500">
+            <div class="flex items-start gap-4">
+                <div class="bg-green-500 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold shrink-0">7</div>
+                <div class="flex-1">
+                    <h3 class="text-xl font-semibold mb-3 text-gray-800">토큰 생성 및 저장</h3>
+
+                    <ol class="list-decimal list-inside text-gray-600 space-y-3 mb-4">
+                        <li>
+                            <span class="bg-blue-500 text-white px-3 py-1 rounded text-sm">Continue to summary</span> 클릭
+                        </li>
+                        <li>설정 내용을 검토하고 <span class="bg-blue-500 text-white px-3 py-1 rounded text-sm">Create Token</span> 클릭</li>
+                        <li>생성된 토큰을 <strong class="text-red-600">즉시 복사</strong>하여 안전한 곳에 저장</li>
+                    </ol>
+
+                    <div class="bg-red-100 border-2 border-red-300 rounded-lg p-4 mb-4">
+                        <div class="flex items-start gap-3">
+                            <span class="text-2xl">🚨</span>
+                            <div>
+                                <p class="font-bold text-red-800 mb-1">중요: 토큰은 한 번만 표시됩니다!</p>
+                                <p class="text-sm text-red-700">
+                                    페이지를 닫거나 새로고침하면 토큰을 다시 볼 수 없습니다.
+                                    <br>반드시 즉시 복사하여 안전한 곳(비밀번호 관리자, 환경변수 등)에 저장하세요.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-800 rounded-lg p-4 text-green-400 font-mono text-sm">
+                        <p class="text-gray-400 mb-2"># 토큰 테스트 명령어</p>
+                        <code>curl -X GET "https://api.cloudflare.com/client/v4/user/tokens/verify" \<br>
+                        &nbsp;&nbsp;-H "Authorization: Bearer YOUR_TOKEN_HERE"</code>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 토큰 저장 영역 -->
+        <div class="bg-white rounded-xl p-6 mb-6 shadow-sm border-2 border-orange-200">
+            <h3 class="text-lg font-semibold mb-4 text-gray-800">🔑 생성된 토큰 저장</h3>
+
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">API Token</label>
+                    <div class="flex gap-2">
+                        <input type="password" id="apiToken" placeholder="생성된 토큰을 여기에 붙여넣으세요"
+                               class="flex-1 border border-gray-300 rounded-lg px-4 py-3 font-mono text-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500">
+                        <button onclick="toggleTokenVisibility()" class="bg-gray-200 text-gray-700 px-4 py-3 rounded-lg hover:bg-gray-300 transition">
+                            👁️
+                        </button>
+                        <button onclick="copyToken()" class="copy-btn bg-orange-500 text-white px-4 py-3 rounded-lg hover:bg-orange-600 transition">
+                            복사
+                        </button>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Account ID (선택)</label>
+                    <div class="flex gap-2">
+                        <input type="text" id="accountId" placeholder="대시보드에서 Account ID 복사"
+                               class="flex-1 border border-gray-300 rounded-lg px-4 py-3 font-mono text-sm focus:ring-2 focus:ring-orange-500 focus:border-orange-500">
+                        <button onclick="copyAccountId()" class="copy-btn bg-gray-500 text-white px-4 py-3 rounded-lg hover:bg-gray-600 transition">
+                            복사
+                        </button>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-1">대시보드 우측 하단 또는 Overview 페이지에서 확인</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 환경 설정 -->
+        <div class="bg-white rounded-xl p-6 mb-6 shadow-sm">
+            <h3 class="text-lg font-semibold mb-4 text-gray-800">⚙️ 환경 설정 방법</h3>
+
+            <!-- 탭 버튼 -->
+            <div class="flex gap-2 mb-4 border-b border-gray-200 pb-2">
+                <button onclick="showEnvTab('wrangler')" id="env-tab-wrangler" class="env-tab-btn bg-orange-500 text-white px-4 py-2 rounded-t-lg text-sm font-medium">
+                    Wrangler CLI
+                </button>
+                <button onclick="showEnvTab('env')" id="env-tab-env" class="env-tab-btn bg-gray-200 px-4 py-2 rounded-t-lg text-sm font-medium">
+                    환경변수
+                </button>
+                <button onclick="showEnvTab('github')" id="env-tab-github" class="env-tab-btn bg-gray-200 px-4 py-2 rounded-t-lg text-sm font-medium">
+                    GitHub Actions
+                </button>
+            </div>
+
+            <!-- Wrangler CLI -->
+            <div id="env-content-wrangler" class="env-tab-content">
+                <div class="bg-gray-800 rounded-lg p-4 text-green-400 font-mono text-sm mb-3">
+                    <p class="text-gray-400 mb-2"># 브라우저 인증 (권장)</p>
+                    <code>npx wrangler login</code>
+                    <br><br>
+                    <p class="text-gray-400 mb-2"># 또는 토큰으로 직접 설정</p>
+                    <code>npx wrangler config</code>
+                </div>
+                <p class="text-sm text-gray-600">
+                    <code>wrangler login</code>은 브라우저를 열어 OAuth 인증을 진행합니다.
+                    로컬 개발 환경에서 가장 간편한 방법입니다.
+                </p>
+            </div>
+
+            <!-- 환경변수 -->
+            <div id="env-content-env" class="env-tab-content hidden">
+                <div class="space-y-3">
+                    <div class="bg-gray-800 rounded-lg p-4 text-green-400 font-mono text-sm">
+                        <p class="text-gray-400 mb-2"># Linux/Mac (bash/zsh)</p>
+                        <code>export CLOUDFLARE_API_TOKEN="<span id="tokenPlaceholder1">your-token-here</span>"</code>
+                        <br>
+                        <code>export CLOUDFLARE_ACCOUNT_ID="<span id="accountPlaceholder1">your-account-id</span>"</code>
+                    </div>
+                    <div class="bg-gray-800 rounded-lg p-4 text-green-400 font-mono text-sm">
+                        <p class="text-gray-400 mb-2"># Windows (PowerShell)</p>
+                        <code>$env:CLOUDFLARE_API_TOKEN="<span id="tokenPlaceholder2">your-token-here</span>"</code>
+                        <br>
+                        <code>$env:CLOUDFLARE_ACCOUNT_ID="<span id="accountPlaceholder2">your-account-id</span>"</code>
+                    </div>
+                    <div class="bg-gray-800 rounded-lg p-4 text-green-400 font-mono text-sm">
+                        <p class="text-gray-400 mb-2"># Windows (CMD)</p>
+                        <code>set CLOUDFLARE_API_TOKEN=<span id="tokenPlaceholder3">your-token-here</span></code>
+                        <br>
+                        <code>set CLOUDFLARE_ACCOUNT_ID=<span id="accountPlaceholder3">your-account-id</span></code>
+                    </div>
+                </div>
+                <button onclick="copyEnvCommands()" class="mt-3 text-sm text-orange-600 hover:text-orange-700 font-medium">
+                    📋 환경변수 명령어 복사
+                </button>
+            </div>
+
+            <!-- GitHub Actions -->
+            <div id="env-content-github" class="env-tab-content hidden">
+                <div class="bg-gray-800 rounded-lg p-4 text-green-400 font-mono text-sm mb-3 overflow-x-auto">
+                    <p class="text-gray-400 mb-2"># .github/workflows/deploy.yml</p>
+<pre>name: Deploy Worker
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}</pre>
+                </div>
+                <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                    <p class="text-sm text-yellow-800">
+                        <strong>🔐 Secrets 설정:</strong> GitHub Repository → Settings → Secrets and variables → Actions
+                        <br>에서 <code>CLOUDFLARE_API_TOKEN</code>과 <code>CLOUDFLARE_ACCOUNT_ID</code>를 추가하세요.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 문제 해결 -->
+        <div class="bg-white rounded-xl p-6 mb-6 shadow-sm">
+            <h3 class="text-lg font-semibold mb-4 text-gray-800">🔧 자주 발생하는 문제 해결</h3>
+
+            <div class="space-y-4">
+                <details class="border border-gray-200 rounded-lg">
+                    <summary class="p-4 font-medium text-gray-700 hover:bg-gray-50">
+                        ❌ "Unable to retrieve email for this user" 오류
+                    </summary>
+                    <div class="p-4 pt-0 text-sm text-gray-600">
+                        <p class="mb-2"><strong>원인:</strong> User Details 권한이 없음</p>
+                        <p><strong>해결:</strong> 토큰에 <code>User > User Details > Read</code> 권한 추가</p>
+                    </div>
+                </details>
+
+                <details class="border border-gray-200 rounded-lg">
+                    <summary class="p-4 font-medium text-gray-700 hover:bg-gray-50">
+                        ❌ "Authentication error" 또는 "Invalid API token"
+                    </summary>
+                    <div class="p-4 pt-0 text-sm text-gray-600">
+                        <p class="mb-2"><strong>원인:</strong> 토큰이 잘못되었거나 만료됨</p>
+                        <p><strong>해결:</strong></p>
+                        <ul class="list-disc list-inside ml-4 space-y-1">
+                            <li>토큰을 다시 복사하여 확인</li>
+                            <li>토큰 앞뒤 공백 제거</li>
+                            <li>TTL 만료 여부 확인</li>
+                            <li>새 토큰 생성</li>
+                        </ul>
+                    </div>
+                </details>
+
+                <details class="border border-gray-200 rounded-lg">
+                    <summary class="p-4 font-medium text-gray-700 hover:bg-gray-50">
+                        ❌ "Missing account ID" 또는 계정을 찾을 수 없음
+                    </summary>
+                    <div class="p-4 pt-0 text-sm text-gray-600">
+                        <p class="mb-2"><strong>원인:</strong> Account ID가 설정되지 않았거나 권한 부족</p>
+                        <p><strong>해결:</strong></p>
+                        <ul class="list-disc list-inside ml-4 space-y-1">
+                            <li><code>CLOUDFLARE_ACCOUNT_ID</code> 환경변수 설정</li>
+                            <li>또는 <code>wrangler.toml</code>에 <code>account_id</code> 추가</li>
+                            <li>토큰에 해당 계정 접근 권한 확인</li>
+                        </ul>
+                    </div>
+                </details>
+
+                <details class="border border-gray-200 rounded-lg">
+                    <summary class="p-4 font-medium text-gray-700 hover:bg-gray-50">
+                        ❌ 계정 토큰으로 Wrangler 실행 시 오류
+                    </summary>
+                    <div class="p-4 pt-0 text-sm text-gray-600">
+                        <p class="mb-2"><strong>원인:</strong> 계정 토큰은 User > Memberships 권한 추가 불가</p>
+                        <p><strong>해결:</strong> 사용자 토큰(My Profile > API Tokens)으로 생성</p>
+                    </div>
+                </details>
+
+                <details class="border border-gray-200 rounded-lg">
+                    <summary class="p-4 font-medium text-gray-700 hover:bg-gray-50">
+                        ❌ "You do not have permission to access this resource"
+                    </summary>
+                    <div class="p-4 pt-0 text-sm text-gray-600">
+                        <p class="mb-2"><strong>원인:</strong> 필요한 권한이 없음</p>
+                        <p><strong>해결:</strong> 토큰 권한 확인 후 필요한 권한 추가 (새 토큰 생성 필요)</p>
+                    </div>
+                </details>
+            </div>
+        </div>
+
+        <!-- 보안 모범 사례 -->
+        <div class="bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl p-6 mb-6 text-white">
+            <h3 class="text-xl font-bold mb-4">🛡️ 보안 모범 사례</h3>
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="bg-white/20 rounded-lg p-4">
+                    <h4 class="font-semibold mb-2">✅ 권장</h4>
+                    <ul class="text-sm space-y-1 text-blue-100">
+                        <li>• 최소 권한 원칙 적용</li>
+                        <li>• 용도별 토큰 분리</li>
+                        <li>• 환경변수로 토큰 관리</li>
+                        <li>• 정기적 토큰 교체</li>
+                        <li>• 사용하지 않는 토큰 삭제</li>
+                    </ul>
+                </div>
+                <div class="bg-white/20 rounded-lg p-4">
+                    <h4 class="font-semibold mb-2">❌ 금지</h4>
+                    <ul class="text-sm space-y-1 text-blue-100">
+                        <li>• 토큰을 코드에 하드코딩</li>
+                        <li>• Git 저장소에 토큰 커밋</li>
+                        <li>• 토큰을 평문으로 저장</li>
+                        <li>• 토큰을 타인과 공유</li>
+                        <li>• 불필요한 전체 권한 부여</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 완료 섹션 -->
+        <div class="bg-gradient-to-r from-green-500 to-green-600 rounded-xl p-6 text-white">
+            <h3 class="text-xl font-bold mb-2">✅ 설정 완료!</h3>
+            <p class="text-green-100 mb-4">
+                이제 Cloudflare Workers를 배포할 준비가 되었습니다.
+            </p>
+            <div class="bg-white/20 rounded-lg p-4">
+                <p class="text-sm mb-3">
+                    <strong>다음 단계:</strong>
+                </p>
+                <div class="bg-white/10 rounded p-3 font-mono text-sm">
+                    <code># 1. 프로젝트 초기화</code><br>
+                    <code>npx wrangler init my-worker</code><br><br>
+                    <code># 2. 배포</code><br>
+                    <code>npx wrangler deploy</code>
+                </div>
+            </div>
+        </div>
+
+        <!-- 참고 링크 -->
+        <div class="mt-8 p-6 bg-gray-100 rounded-xl">
+            <h3 class="font-semibold text-gray-800 mb-3">📚 참고 자료</h3>
+            <div class="grid md:grid-cols-2 gap-3 text-sm">
+                <a href="https://developers.cloudflare.com/fundamentals/api/get-started/create-token/" target="_blank" class="flex items-center gap-2 text-blue-600 hover:underline">
+                    <span>📄</span> Create API Token - 공식 문서
+                </a>
+                <a href="https://developers.cloudflare.com/fundamentals/api/reference/permissions/" target="_blank" class="flex items-center gap-2 text-blue-600 hover:underline">
+                    <span>📄</span> API Token Permissions - 권한 목록
+                </a>
+                <a href="https://developers.cloudflare.com/fundamentals/api/reference/template/" target="_blank" class="flex items-center gap-2 text-blue-600 hover:underline">
+                    <span>📄</span> API Token Templates - 템플릿 목록
+                </a>
+                <a href="https://developers.cloudflare.com/workers/wrangler/system-environment-variables/" target="_blank" class="flex items-center gap-2 text-blue-600 hover:underline">
+                    <span>📄</span> Wrangler Environment Variables
+                </a>
+                <a href="https://developers.cloudflare.com/workers/ci-cd/external-cicd/github-actions/" target="_blank" class="flex items-center gap-2 text-blue-600 hover:underline">
+                    <span>📄</span> GitHub Actions 설정
+                </a>
+                <a href="https://blog.cloudflare.com/permissions-best-practices/" target="_blank" class="flex items-center gap-2 text-blue-600 hover:underline">
+                    <span>📄</span> Permissions Best Practices
+                </a>
+            </div>
+        </div>
+
+        <!-- 푸터 -->
+        <div class="text-center mt-8 text-gray-500 text-sm">
+            <p>BAS 홈페이지 제작 프로젝트 | Cloudflare API 토큰 가이드 2025</p>
+            <p class="text-xs mt-1">최종 업데이트: 2025년 12월</p>
+        </div>
+    </div>
+
+    <script>
+        function updateProgress() {
+            const checks = [
+                document.getElementById('check1').checked,
+                document.getElementById('check2').checked,
+                document.getElementById('check3').checked,
+                document.getElementById('check4').checked,
+                document.getElementById('check5').checked
+            ];
+            const completed = checks.filter(c => c).length;
+            const percentage = (completed / 5) * 100;
+            document.getElementById('progressBar').style.width = percentage + '%';
+        }
+
+        function toggleTokenVisibility() {
+            const input = document.getElementById('apiToken');
+            input.type = input.type === 'password' ? 'text' : 'password';
+        }
+
+        function copyToken() {
+            const tokenInput = document.getElementById('apiToken');
+            if (tokenInput.value) {
+                navigator.clipboard.writeText(tokenInput.value);
+                alert('토큰이 복사되었습니다!');
+                updatePlaceholders();
+            } else {
+                alert('토큰을 먼저 입력해주세요.');
+            }
+        }
+
+        function copyAccountId() {
+            const input = document.getElementById('accountId');
+            if (input.value) {
+                navigator.clipboard.writeText(input.value);
+                alert('Account ID가 복사되었습니다!');
+                updatePlaceholders();
+            } else {
+                alert('Account ID를 먼저 입력해주세요.');
+            }
+        }
+
+        function updatePlaceholders() {
+            const token = document.getElementById('apiToken').value || 'your-token-here';
+            const accountId = document.getElementById('accountId').value || 'your-account-id';
+
+            for (let i = 1; i <= 3; i++) {
+                document.getElementById('tokenPlaceholder' + i).textContent = token;
+                document.getElementById('accountPlaceholder' + i).textContent = accountId;
+            }
+        }
+
+        function copyEnvCommands() {
+            const token = document.getElementById('apiToken').value || 'your-token-here';
+            const accountId = document.getElementById('accountId').value || 'your-account-id';
+            const commands = `export CLOUDFLARE_API_TOKEN="${token}"\nexport CLOUDFLARE_ACCOUNT_ID="${accountId}"`;
+            navigator.clipboard.writeText(commands);
+            alert('환경변수 설정 명령어가 복사되었습니다!');
+        }
+
+        // 입력 시 자동 업데이트
+        document.getElementById('apiToken').addEventListener('input', updatePlaceholders);
+        document.getElementById('accountId').addEventListener('input', updatePlaceholders);
+
+        // 권한 탭
+        function showTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(el => {
+                el.classList.remove('active', 'bg-orange-500', 'text-white');
+                el.classList.add('bg-gray-200');
+            });
+
+            document.getElementById('content-' + tabName).classList.remove('hidden');
+            const activeBtn = document.getElementById('tab-' + tabName);
+            activeBtn.classList.add('active');
+            activeBtn.classList.remove('bg-gray-200');
+        }
+
+        // 환경 설정 탭
+        function showEnvTab(tabName) {
+            document.querySelectorAll('.env-tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.env-tab-btn').forEach(el => {
+                el.classList.remove('bg-orange-500', 'text-white');
+                el.classList.add('bg-gray-200');
+            });
+
+            document.getElementById('env-content-' + tabName).classList.remove('hidden');
+            const activeBtn = document.getElementById('env-tab-' + tabName);
+            activeBtn.classList.add('bg-orange-500', 'text-white');
+            activeBtn.classList.remove('bg-gray-200');
+        }
+    </script>
+</body>
+</html>
