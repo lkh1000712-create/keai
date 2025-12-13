@@ -262,8 +262,14 @@ export default async function handler(req, res) {
             // R2 업로드
             const imageUrl = await uploadToR2(buffer, key, mimeType);
 
-            // Airtable에 URL 저장
-            await updateImageUrl(imageId, imageUrl);
+            // Airtable에 URL 저장 (실패해도 계속 진행)
+            let airtableError = null;
+            try {
+                await updateImageUrl(imageId, imageUrl);
+            } catch (err) {
+                console.error('Airtable save error (non-fatal):', err.message);
+                airtableError = err.message;
+            }
 
             return res.status(200).json({
                 success: true,
@@ -271,7 +277,8 @@ export default async function handler(req, res) {
                 originalSize: originalSize || compressedSize,
                 compressedSize,
                 compressionRatio: originalSize ? Math.round((1 - compressedSize / originalSize) * 100) : 0,
-                message: `이미지가 업로드되었습니다 (${Math.round(compressedSize / 1024)}KB)`
+                message: `이미지가 업로드되었습니다 (${Math.round(compressedSize / 1024)}KB)`,
+                airtableError: airtableError
             });
         }
 
