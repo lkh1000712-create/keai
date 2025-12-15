@@ -1,0 +1,826 @@
+<!-- 이음파트너스 신청 절차 섹션 - 은행 스타일 -->
+<!-- Swiper CSS (모바일 전용) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+<style>
+/* Pretendard 폰트 */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
+
+/* CSS Variables - 이음파트너스 브랜드 컬러 */
+:root {
+    --primary-orange: #EA8A4C;
+    --primary-orange-dark: #D77839;
+    --primary-purple: #5B4B8A;
+    --navy: #2C3E50;
+    --beige-light: #F5F1E8;
+    --gray-50: #F9FAFB;
+    --gray-200: #E5E7EB;
+    --gray-600: #4B5563;
+    --gray-800: #1F2937;
+}
+
+/* 기본 스타일 초기화 */
+#s202510282b121676fb3fa * {
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif !important;
+}
+
+/* 아임웹 구조 완전 리셋 */
+#s202510282b121676fb3fa .section_body,
+#s202510282b121676fb3fa .inside,
+#s202510282b121676fb3fa .widget,
+#s202510282b121676fb3fa .widget_inner {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 auto !important;
+    background: transparent !important;
+}
+
+/* 프로세스 섹션 래퍼 */
+#s202510282b121676fb3fa {
+    position: relative !important;
+    width: 100% !important;
+    background: url('https://cdn.imweb.me/upload/S20251117ed7f35ec2bb5b/710f959602a89.png') center/cover no-repeat !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* 프로세스 섹션 오버레이 효과 */
+#s202510282b121676fb3fa::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: linear-gradient(180deg,
+        rgba(255, 255, 255, 0.92) 0%,
+        rgba(245, 250, 255, 0.90) 50%,
+        rgba(240, 255, 250, 0.88) 100%) !important;
+    z-index: 0 !important;
+}
+
+/* 컨테이너 */
+#s202510282b121676fb3fa .bank-process-container {
+    position: relative !important;
+    z-index: 1 !important;
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    padding: 50px 20px 60px !important;  /* 모바일: 상하 패딩 축소 */
+    min-height: 100% !important;
+}
+
+/* 섹션 헤더 */
+#s202510282b121676fb3fa .bank-section-header {
+    text-align: center !important;
+    margin-bottom: 60px !important;
+}
+
+#s202510282b121676fb3fa .bank-section-badge {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    padding: 8px 16px !important;
+    background: rgba(234, 138, 76, 0.1) !important;
+    border: 1px solid var(--primary-orange) !important;
+    border-radius: 100px !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    color: var(--primary-orange) !important;
+    margin-bottom: 16px !important;
+}
+
+#s202510282b121676fb3fa .bank-section-badge svg {
+    width: 16px !important;
+    height: 16px !important;
+    fill: var(--primary-orange) !important;
+}
+
+#s202510282b121676fb3fa .bank-section-title {
+    font-size: 32px !important;
+    font-weight: 700 !important;
+    line-height: 1.4 !important;
+    color: #212529 !important;
+    margin-bottom: 16px !important;
+    word-break: keep-all !important;
+}
+
+#s202510282b121676fb3fa .bank-section-description {
+    font-size: 16px !important;
+    line-height: 1.6 !important;
+    color: #6C757D !important;
+    word-break: keep-all !important;
+}
+
+/* ========================================
+   모바일 전용 (Swiper 슬라이더)
+   ======================================== */
+
+#s202510282b121676fb3fa .mobile-only {
+    display: block !important;
+}
+
+#s202510282b121676fb3fa .desktop-only {
+    display: none !important;
+}
+
+/* Swiper 컨테이너 */
+#s202510282b121676fb3fa .mobile-swiper-container {
+    position: relative !important;
+    width: 100% !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+}
+
+#s202510282b121676fb3fa .mobile-swiper {
+    width: 100% !important;
+    padding: 0 16px 50px !important;
+    overflow: visible !important;
+}
+
+#s202510282b121676fb3fa .mobile-swiper .swiper-wrapper {
+    display: flex !important;
+    align-items: stretch !important;
+}
+
+#s202510282b121676fb3fa .mobile-swiper .swiper-slide {
+    height: auto !important;
+    width: 100% !important;
+}
+
+/* 모바일 스텝 카드 */
+#s202510282b121676fb3fa .mobile-step-card {
+    background: #FFFFFF !important;
+    border: 2px solid #DEE2E6 !important;
+    border-radius: 12px !important;
+    padding: 32px 24px !important;
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 20px !important;
+    transition: all 0.3s ease !important;
+    text-align: center !important;
+    align-items: center !important;
+}
+
+#s202510282b121676fb3fa .mobile-step-card:hover {
+    border-color: var(--primary-orange) !important;
+    box-shadow: 0 8px 16px rgba(234, 138, 76, 0.2) !important;
+}
+
+/* Swiper 네비게이션 */
+#s202510282b121676fb3fa .swiper-button-next,
+#s202510282b121676fb3fa .swiper-button-prev {
+    color: #FFFFFF !important;
+    background: var(--primary-orange) !important;
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 50% !important;
+    box-shadow: 0 4px 8px rgba(234, 138, 76, 0.3) !important;
+    transition: all 0.2s ease !important;
+}
+
+#s202510282b121676fb3fa .swiper-button-next:hover,
+#s202510282b121676fb3fa .swiper-button-prev:hover {
+    background: var(--primary-orange-dark) !important;
+}
+
+#s202510282b121676fb3fa .swiper-button-next::after,
+#s202510282b121676fb3fa .swiper-button-prev::after {
+    font-size: 18px !important;
+    font-weight: 700 !important;
+}
+
+/* Swiper 페이지네이션 */
+#s202510282b121676fb3fa .swiper-pagination {
+    position: relative !important;
+    margin-top: 0 !important;
+}
+
+#s202510282b121676fb3fa .swiper-pagination-bullet {
+    background: var(--primary-orange) !important;
+    opacity: 0.3 !important;
+    width: 10px !important;
+    height: 10px !important;
+    transition: all 0.2s ease !important;
+}
+
+#s202510282b121676fb3fa .swiper-pagination-bullet-active {
+    opacity: 1 !important;
+    width: 30px !important;
+    border-radius: 5px !important;
+}
+
+/* ========================================
+   PC 전용 (타임라인 레이아웃)
+   ======================================== */
+
+/* PC 스텝 그리드 */
+#s202510282b121676fb3fa .desktop-steps-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+    position: relative !important;
+}
+
+/* PC 스텝 카드 */
+#s202510282b121676fb3fa .desktop-step-card {
+    background: #FFFFFF !important;
+    border: 2px solid #DEE2E6 !important;
+    border-radius: 12px !important;
+    padding: 32px !important;
+    display: grid !important;
+    grid-template-columns: auto 1fr !important;
+    gap: 24px !important;
+    align-items: center !important;
+    transition: all 0.3s ease !important;
+    position: relative !important;
+}
+
+#s202510282b121676fb3fa .desktop-step-card:hover {
+    border-color: var(--primary-orange) !important;
+    box-shadow: 0 8px 16px rgba(234, 138, 76, 0.2) !important;
+    transform: translateX(8px) !important;
+}
+
+/* 공통: 스텝 아이콘 (단색 SVG) */
+#s202510282b121676fb3fa .bank-step-icon-wrapper {
+    position: relative !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 12px !important;
+}
+
+#s202510282b121676fb3fa .bank-step-icon {
+    width: 80px !important;
+    height: 80px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: linear-gradient(135deg, var(--primary-orange) 0%, var(--primary-orange-dark) 100%) !important;
+    border-radius: 50% !important;
+    box-shadow: 0 4px 12px rgba(234, 138, 76, 0.3) !important;
+    flex-shrink: 0 !important;
+}
+
+#s202510282b121676fb3fa .bank-step-icon svg {
+    width: 40px !important;
+    height: 40px !important;
+    fill: #FFFFFF !important;
+}
+
+#s202510282b121676fb3fa .bank-step-number {
+    position: absolute !important;
+    top: -8px !important;
+    right: -8px !important;
+    width: 32px !important;
+    height: 32px !important;
+    background: var(--primary-purple) !important;
+    border: 3px solid #FFFFFF !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    color: #FFFFFF !important;
+}
+
+/* 공통: 스텝 콘텐츠 */
+#s202510282b121676fb3fa .bank-step-content {
+    flex: 1 !important;
+}
+
+#s202510282b121676fb3fa .bank-step-title {
+    font-size: 20px !important;
+    font-weight: 700 !important;
+    color: #212529 !important;
+    margin-bottom: 12px !important;
+    word-break: keep-all !important;
+}
+
+#s202510282b121676fb3fa .bank-step-description {
+    font-size: 15px !important;
+    line-height: 1.7 !important;
+    color: #6C757D !important;
+    word-break: keep-all !important;
+    margin-bottom: 16px !important;
+}
+
+/* 스텝 상세 정보 - 그룹 중앙정렬 */
+#s202510282b121676fb3fa .bank-step-details {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 12px !important;
+    margin-top: 16px !important;
+    justify-content: center !important;  /* 그룹 중앙 정렬 */
+}
+
+#s202510282b121676fb3fa .bank-step-detail-item {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    padding: 6px 12px !important;
+    background: #F8F9FA !important;
+    border-radius: 4px !important;
+    font-size: 13px !important;
+    color: #495057 !important;
+}
+
+#s202510282b121676fb3fa .bank-step-detail-item svg {
+    width: 14px !important;
+    height: 14px !important;
+    fill: var(--primary-orange) !important;
+}
+
+/* CTA 버튼 */
+#s202510282b121676fb3fa .bank-process-cta {
+    text-align: center !important;
+    margin-top: 32px !important;  /* 모바일: 상단 마진 축소 */
+}
+
+#s202510282b121676fb3fa .bank-btn-cta {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    padding: 18px 40px !important;
+    background: var(--primary-orange) !important;
+    color: #FFFFFF !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
+    border-radius: 4px !important;
+    transition: all 0.2s ease !important;
+    box-shadow: 0 4px 8px rgba(234, 138, 76, 0.3) !important;
+}
+
+#s202510282b121676fb3fa .bank-btn-cta:hover {
+    background: var(--primary-orange-dark) !important;
+    box-shadow: 0 6px 12px rgba(234, 138, 76, 0.4) !important;
+    transform: translateY(-2px) !important;
+}
+
+#s202510282b121676fb3fa .bank-btn-cta svg {
+    width: 20px !important;
+    height: 20px !important;
+    fill: currentColor !important;
+}
+
+/* 반응형: 태블릿 */
+@media (min-width: 768px) {
+    #s202510282b121676fb3fa .bank-process-container {
+        padding: 80px 40px 100px !important;
+    }
+
+    #s202510282b121676fb3fa .mobile-only {
+        display: none !important;
+    }
+
+    #s202510282b121676fb3fa .desktop-only {
+        display: block !important;
+    }
+
+    #s202510282b121676fb3fa .bank-section-title {
+        font-size: 40px !important;
+    }
+
+    #s202510282b121676fb3fa .bank-section-description {
+        font-size: 18px !important;
+    }
+
+    #s202510282b121676fb3fa .desktop-steps-grid {
+        grid-template-columns: 1fr !important;
+        gap: 32px !important;
+    }
+
+    #s202510282b121676fb3fa .bank-process-cta {
+        margin-top: 60px !important;  /* 태블릿+: 기존 마진 유지 */
+    }
+}
+
+/* 반응형: 데스크톱 */
+@media (min-width: 1024px) {
+    #s202510282b121676fb3fa .bank-process-container {
+        padding: 100px 40px 120px !important;
+    }
+
+    #s202510282b121676fb3fa .bank-section-title {
+        font-size: 48px !important;
+    }
+
+    #s202510282b121676fb3fa .bank-step-title {
+        font-size: 22px !important;
+    }
+
+    #s202510282b121676fb3fa .bank-step-description {
+        font-size: 16px !important;
+    }
+}
+</style>
+
+<section id="s202510282b121676fb3fa">
+    <div class="bank-process-container">
+        <!-- 섹션 헤더 -->
+        <div class="bank-section-header">
+            <div class="bank-section-badge">
+                <svg viewBox="0 0 24 24">
+                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+                </svg>
+                <span>간편한 신청 절차</span>
+            </div>
+
+            <h2 class="bank-section-title">
+                4단계로 완료하는<br>
+                정책자금 신청
+            </h2>
+
+            <p class="bank-section-description">
+                복잡한 절차 없이 전문가의 도움을 받아<br>
+                빠르고 정확하게 정책자금을 신청하세요
+            </p>
+        </div>
+
+        <!-- 모바일 전용: Swiper 슬라이더 -->
+        <div class="mobile-only">
+            <div class="mobile-swiper-container">
+                <div class="mobile-swiper swiper">
+                    <div class="swiper-wrapper">
+                        <!-- Step 1 -->
+                        <div class="swiper-slide">
+                            <div class="mobile-step-card">
+                                <div class="bank-step-icon-wrapper">
+                                    <div class="bank-step-icon">
+                                        <svg viewBox="0 0 24 24">
+                                            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                                        </svg>
+                                        <div class="bank-step-number">1</div>
+                                    </div>
+                                </div>
+
+                                <div class="bank-step-content">
+                                    <h3 class="bank-step-title">상담 신청</h3>
+                                    <p class="bank-step-description">
+                                        온라인 상담 신청서를 작성하시면 24시간 내에 전문 상담사가 연락드립니다
+                                    </p>
+                                    <div class="bank-step-details">
+                                        <span class="bank-step-detail-item">
+                                            <svg viewBox="0 0 24 24">
+                                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                            </svg>
+                                            소요시간 5분
+                                        </span>
+                                        <span class="bank-step-detail-item">
+                                            <svg viewBox="0 0 24 24">
+                                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                            </svg>
+                                            무료 상담
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="swiper-slide">
+                            <div class="mobile-step-card">
+                                <div class="bank-step-icon-wrapper">
+                                    <div class="bank-step-icon">
+                                        <svg viewBox="0 0 24 24">
+                                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                        </svg>
+                                        <div class="bank-step-number">2</div>
+                                    </div>
+                                </div>
+
+                                <div class="bank-step-content">
+                                    <h3 class="bank-step-title">전문가 상담</h3>
+                                    <p class="bank-step-description">
+                                        기업 상황을 분석하고 최적의 정책자금 프로그램을 맞춤 제안해드립니다
+                                    </p>
+                                    <div class="bank-step-details">
+                                        <span class="bank-step-detail-item">
+                                            <svg viewBox="0 0 24 24">
+                                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                            </svg>
+                                            1:1 맞춤 상담
+                                        </span>
+                                        <span class="bank-step-detail-item">
+                                            <svg viewBox="0 0 24 24">
+                                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                            </svg>
+                                            최적 자금 추천
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="swiper-slide">
+                            <div class="mobile-step-card">
+                                <div class="bank-step-icon-wrapper">
+                                    <div class="bank-step-icon">
+                                        <svg viewBox="0 0 24 24">
+                                            <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
+                                        </svg>
+                                        <div class="bank-step-number">3</div>
+                                    </div>
+                                </div>
+
+                                <div class="bank-step-content">
+                                    <h3 class="bank-step-title">서류 준비</h3>
+                                    <p class="bank-step-description">
+                                        필요 서류 목록과 작성 가이드를 제공하고, 서류 작성을 체계적으로 지원합니다
+                                    </p>
+                                    <div class="bank-step-details">
+                                        <span class="bank-step-detail-item">
+                                            <svg viewBox="0 0 24 24">
+                                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                            </svg>
+                                            서류 가이드 제공
+                                        </span>
+                                        <span class="bank-step-detail-item">
+                                            <svg viewBox="0 0 24 24">
+                                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                            </svg>
+                                            검토 지원
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 4 -->
+                        <div class="swiper-slide">
+                            <div class="mobile-step-card">
+                                <div class="bank-step-icon-wrapper">
+                                    <div class="bank-step-icon">
+                                        <svg viewBox="0 0 24 24">
+                                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+                                        </svg>
+                                        <div class="bank-step-number">4</div>
+                                    </div>
+                                </div>
+
+                                <div class="bank-step-content">
+                                    <h3 class="bank-step-title">신청 및 승인</h3>
+                                    <p class="bank-step-description">
+                                        서류 제출부터 심사, 승인까지 전 과정을 모니터링하고 사후 관리까지 지원합니다
+                                    </p>
+                                    <div class="bank-step-details">
+                                        <span class="bank-step-detail-item">
+                                            <svg viewBox="0 0 24 24">
+                                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                            </svg>
+                                            진행 상황 공유
+                                        </span>
+                                        <span class="bank-step-detail-item">
+                                            <svg viewBox="0 0 24 24">
+                                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                            </svg>
+                                            사후 관리
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 네비게이션 -->
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+
+                    <!-- 페이지네이션 -->
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PC 전용: 타임라인 레이아웃 -->
+        <div class="desktop-only">
+            <div class="desktop-steps-grid">
+                <!-- Step 1 -->
+                <div class="desktop-step-card">
+                    <div class="bank-step-icon-wrapper">
+                        <div class="bank-step-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                            </svg>
+                            <div class="bank-step-number">1</div>
+                        </div>
+                    </div>
+
+                    <div class="bank-step-content">
+                        <h3 class="bank-step-title">상담 신청</h3>
+                        <p class="bank-step-description">
+                            온라인 상담 신청서를 작성하시면 24시간 내에 전문 상담사가 연락드립니다
+                        </p>
+                        <div class="bank-step-details">
+                            <span class="bank-step-detail-item">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                </svg>
+                                소요시간 5분
+                            </span>
+                            <span class="bank-step-detail-item">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                </svg>
+                                무료 상담
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="desktop-step-card">
+                    <div class="bank-step-icon-wrapper">
+                        <div class="bank-step-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                            </svg>
+                            <div class="bank-step-number">2</div>
+                        </div>
+                    </div>
+
+                    <div class="bank-step-content">
+                        <h3 class="bank-step-title">전문가 상담</h3>
+                        <p class="bank-step-description">
+                            기업 상황을 분석하고 최적의 정책자금 프로그램을 맞춤 제안해드립니다
+                        </p>
+                        <div class="bank-step-details">
+                            <span class="bank-step-detail-item">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                </svg>
+                                1:1 맞춤 상담
+                            </span>
+                            <span class="bank-step-detail-item">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                </svg>
+                                최적 자금 추천
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="desktop-step-card">
+                    <div class="bank-step-icon-wrapper">
+                        <div class="bank-step-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
+                            </svg>
+                            <div class="bank-step-number">3</div>
+                        </div>
+                    </div>
+
+                    <div class="bank-step-content">
+                        <h3 class="bank-step-title">서류 준비</h3>
+                        <p class="bank-step-description">
+                            필요 서류 목록과 작성 가이드를 제공하고, 서류 작성을 체계적으로 지원합니다
+                        </p>
+                        <div class="bank-step-details">
+                            <span class="bank-step-detail-item">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                </svg>
+                                서류 가이드 제공
+                            </span>
+                            <span class="bank-step-detail-item">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                </svg>
+                                검토 지원
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="desktop-step-card">
+                    <div class="bank-step-icon-wrapper">
+                        <div class="bank-step-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+                            </svg>
+                            <div class="bank-step-number">4</div>
+                        </div>
+                    </div>
+
+                    <div class="bank-step-content">
+                        <h3 class="bank-step-title">신청 및 승인</h3>
+                        <p class="bank-step-description">
+                            서류 제출부터 심사, 승인까지 전 과정을 모니터링하고 사후 관리까지 지원합니다
+                        </p>
+                        <div class="bank-step-details">
+                            <span class="bank-step-detail-item">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                </svg>
+                                진행 상황 공유
+                            </span>
+                            <span class="bank-step-detail-item">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                </svg>
+                                사후 관리
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA 버튼 -->
+        <div class="bank-process-cta">
+            <a href="#form" class="bank-btn-cta">
+                <svg viewBox="0 0 24 24">
+                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                </svg>
+                <span>지금 바로 상담 신청하기</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+(function() {
+    'use strict';
+
+    const NAMESPACE = 'BankProcess_' + Date.now();
+    let swiperInstance = null;
+
+    function initMobileSwiper() {
+        if (window.innerWidth < 768 && !swiperInstance) {
+            const swiperEl = document.querySelector('#s202510282b121676fb3fa .mobile-swiper');
+            if (!swiperEl) return;
+
+            swiperInstance = new Swiper(swiperEl, {
+                slidesPerView: 1,
+                spaceBetween: 0,
+                centeredSlides: false,
+                loop: false,
+                grabCursor: true,
+                watchOverflow: true,
+                navigation: {
+                    nextEl: '#s202510282b121676fb3fa .swiper-button-next',
+                    prevEl: '#s202510282b121676fb3fa .swiper-button-prev',
+                },
+                pagination: {
+                    el: '#s202510282b121676fb3fa .swiper-pagination',
+                    clickable: true,
+                },
+                on: {
+                    init: function() {
+                        console.log('[' + NAMESPACE + '] Swiper initialized');
+                    }
+                }
+            });
+        }
+    }
+
+    function handleResize() {
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                if (swiperInstance && window.innerWidth >= 768) {
+                    swiperInstance.destroy(true, true);
+                    swiperInstance = null;
+                }
+                initMobileSwiper();
+            }, 250);
+        });
+    }
+
+    function init() {
+        const section = document.getElementById('s202510282b121676fb3fa');
+        if (!section) return false;
+
+        initMobileSwiper();
+        handleResize();
+
+        return true;
+    }
+
+    // 초기화
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+
+    setTimeout(init, 100);
+    setTimeout(init, 500);
+})();
+</script>

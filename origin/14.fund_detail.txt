@@ -1,0 +1,1077 @@
+<!-- ================================================ -->
+<!-- 이음파트너스 정책자금 상세 안내 -->
+<!-- 섹션 ID: #s202511172ecd158bb964e -->
+<!-- ================================================ -->
+<style>
+/* Pretendard 폰트 */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
+
+/* 기본 스타일 초기화 */
+#s202511172ecd158bb964e * {
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif !important;
+}
+
+/* 아임웹 구조 완전 리셋 */
+#s202511172ecd158bb964e .section_body,
+#s202511172ecd158bb964e .inside,
+#s202511172ecd158bb964e .widget,
+#s202511172ecd158bb964e .widget_inner {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 auto !important;
+    background: transparent !important;
+}
+
+/* 섹션 배경 - 회색톤 + 배경 이미지 */
+#s202511172ecd158bb964e {
+    background: url('https://cdn.imweb.me/upload/S20251117ed7f35ec2bb5b/43ee5237d2523.png') center/cover no-repeat !important;
+    position: relative !important;
+    width: 100vw !important;
+    margin-left: calc(-50vw + 50%) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    z-index: 1 !important;
+}
+
+/* 아임웹 기본 섹션 간격 제거 */
+#s202511172ecd158bb964e.fr-section {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+/* 아임웹 자동 생성 패딩 div 완전 제거 */
+div[id^="padding_w"] {
+    display: none !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    max-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    line-height: 0 !important;
+}
+
+/* 특정 섹션 다음 패딩 제거 */
+#s202511172ecd158bb964e + div[id*="padding"] {
+    display: none !important;
+}
+
+/* 다음 섹션 중첩 방지 */
+#s202511172ecd158bb964e + section,
+#s202511172ecd158bb964e + div[class*="section"],
+#s202511172ecd158bb964e + .fr-section {
+    margin-top: 0 !important;
+    position: relative !important;
+    z-index: 2 !important;
+}
+
+/* 배경 오버레이 - 회색톤 */
+#s202511172ecd158bb964e::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: rgba(245, 245, 245, 0.95) !important;
+    z-index: 0 !important;
+}
+
+#s202511172ecd158bb964e .section-container {
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    padding: 80px 20px 60px !important;
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+/* 섹션 헤더 */
+#s202511172ecd158bb964e .section-header {
+    text-align: center !important;
+    margin: 0 0 50px 0 !important;
+    padding: 0 !important;
+}
+
+#s202511172ecd158bb964e .section-badge {
+    display: inline-block !important;
+    background: rgba(234, 138, 76, 0.1) !important;
+    color: #EA8A4C !important;
+    padding: 8px 20px !important;
+    border-radius: 30px !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    margin: 0 0 20px 0 !important;
+    border: 1px solid rgba(234, 138, 76, 0.3) !important;
+}
+
+#s202511172ecd158bb964e .section-title {
+    font-size: 42px !important;
+    font-weight: 700 !important;
+    color: #1a1a1a !important;
+    margin: 0 0 16px 0 !important;
+    line-height: 1.3 !important;
+    padding: 0 !important;
+}
+
+#s202511172ecd158bb964e .section-desc {
+    font-size: 18px !important;
+    color: #4a5568 !important;
+    line-height: 1.6 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* PC에서 첫 번째 줄바꿈 숨김 */
+#s202511172ecd158bb964e .section-desc .mobile-only-br {
+    display: inline !important;
+}
+
+@media (min-width: 769px) {
+    #s202511172ecd158bb964e .section-desc .mobile-only-br {
+        display: none !important;
+    }
+}
+
+/* 카드 설명글 모바일 줄바꿈 */
+#s202511172ecd158bb964e .mobile-br {
+    display: none !important;
+}
+
+@media (max-width: 768px) {
+    #s202511172ecd158bb964e .mobile-br {
+        display: inline !important;
+    }
+}
+
+/* 탭 네비게이션 */
+#s202511172ecd158bb964e .fund-tabs {
+    display: flex !important;
+    justify-content: center !important;
+    gap: 12px !important;
+    margin: 0 0 40px 0 !important;
+    flex-wrap: wrap !important;
+    padding: 0 !important;
+}
+
+#s202511172ecd158bb964e .tab-button {
+    background: #ffffff !important;
+    border: 2px solid #e2e8f0 !important;
+    border-radius: 10px !important;
+    padding: 14px 28px !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    color: #4a5568 !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+}
+
+#s202511172ecd158bb964e .tab-button:hover {
+    background: rgba(234, 138, 76, 0.05) !important;
+    border-color: #EA8A4C !important;
+    color: #EA8A4C !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(234, 138, 76, 0.15) !important;
+}
+
+#s202511172ecd158bb964e .tab-button.active {
+    background: linear-gradient(135deg, #EA8A4C 0%, #D77839 100%) !important;
+    color: #ffffff !important;
+    border-color: #EA8A4C !important;
+    box-shadow: 0 4px 15px rgba(234, 138, 76, 0.3) !important;
+}
+
+#s202511172ecd158bb964e .tab-icon {
+    width: 20px !important;
+    height: 20px !important;
+    fill: currentColor !important;
+}
+
+/* 탭 콘텐츠 */
+#s202511172ecd158bb964e .tab-content {
+    display: none !important;
+    animation: fadeIn 0.4s ease !important;
+}
+
+#s202511172ecd158bb964e .tab-content.active {
+    display: block !important;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 자금 상세 정보 카드 */
+#s202511172ecd158bb964e .fund-detail-card {
+    background: #ffffff !important;
+    border-radius: 20px !important;
+    padding: 40px !important;
+    border: 1px solid #e2e8f0 !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+#s202511172ecd158bb964e .fund-header {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    margin: 0 0 30px 0 !important;
+    padding: 0 0 30px 0 !important;
+    border-bottom: 2px solid #f7fafc !important;
+    gap: 20px !important;
+}
+
+#s202511172ecd158bb964e .fund-title-area {
+    flex: 1 !important;
+}
+
+#s202511172ecd158bb964e .fund-name {
+    font-size: 32px !important;
+    font-weight: 700 !important;
+    color: #1a1a1a !important;
+    margin: 0 0 12px 0 !important;
+    padding: 0 !important;
+}
+
+#s202511172ecd158bb964e .fund-summary {
+    font-size: 17px !important;
+    color: #4a5568 !important;
+    line-height: 1.6 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    word-break: keep-all !important;
+}
+
+#s202511172ecd158bb964e .fund-highlight {
+    background: linear-gradient(135deg, #EA8A4C 0%, #D77839 100%) !important;
+    color: #ffffff !important;
+    border-radius: 14px !important;
+    padding: 20px 28px !important;
+    text-align: center !important;
+    min-width: 160px !important;
+    box-shadow: 0 4px 15px rgba(234, 138, 76, 0.3) !important;
+}
+
+#s202511172ecd158bb964e .highlight-label {
+    font-size: 13px !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    margin: 0 0 6px 0 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    padding: 0 !important;
+}
+
+#s202511172ecd158bb964e .highlight-value {
+    font-size: 28px !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* 정보 그리드 */
+#s202511172ecd158bb964e .info-grid {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 16px !important;
+    margin: 0 0 35px 0 !important;
+    padding: 0 !important;
+}
+
+#s202511172ecd158bb964e .info-item {
+    text-align: center !important;
+    padding: 20px !important;
+    background: #f7fafc !important;
+    border-radius: 12px !important;
+    border: 1px solid #e2e8f0 !important;
+    transition: all 0.3s ease !important;
+}
+
+#s202511172ecd158bb964e .info-item:hover {
+    transform: translateY(-4px) !important;
+    border-color: #EA8A4C !important;
+    background: rgba(234, 138, 76, 0.05) !important;
+    box-shadow: 0 6px 20px rgba(234, 138, 76, 0.15) !important;
+}
+
+#s202511172ecd158bb964e .info-label {
+    font-size: 14px !important;
+    color: #718096 !important;
+    margin: 0 0 8px 0 !important;
+    font-weight: 500 !important;
+    padding: 0 !important;
+}
+
+#s202511172ecd158bb964e .info-value {
+    font-size: 22px !important;
+    color: #EA8A4C !important;
+    font-weight: 700 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* 자격 요건 섹션 */
+#s202511172ecd158bb964e .requirements-section {
+    margin: 0 0 35px 0 !important;
+    padding: 0 !important;
+}
+
+#s202511172ecd158bb964e .section-subtitle {
+    font-size: 22px !important;
+    font-weight: 700 !important;
+    color: #1a1a1a !important;
+    margin: 0 0 20px 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    padding: 0 !important;
+}
+
+#s202511172ecd158bb964e .section-icon {
+    width: 36px !important;
+    height: 36px !important;
+    background: rgba(234, 138, 76, 0.1) !important;
+    border: 2px solid #EA8A4C !important;
+    border-radius: 8px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+#s202511172ecd158bb964e .section-icon svg {
+    width: 18px !important;
+    height: 18px !important;
+    fill: #EA8A4C !important;
+}
+
+#s202511172ecd158bb964e .requirement-list {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 16px !important;
+}
+
+#s202511172ecd158bb964e .requirement-item {
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+#s202511172ecd158bb964e .check-icon {
+    width: 20px !important;
+    height: 20px !important;
+    fill: #EA8A4C !important;
+    flex-shrink: 0 !important;
+    margin-top: 2px !important;
+}
+
+#s202511172ecd158bb964e .requirement-text {
+    font-size: 16px !important;
+    color: #4a5568 !important;
+    line-height: 1.6 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* 장점 카드 */
+#s202511172ecd158bb964e .benefits-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 20px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+#s202511172ecd158bb964e .benefit-card {
+    background: #f7fafc !important;
+    border: 2px solid #e2e8f0 !important;
+    border-radius: 12px !important;
+    padding: 28px !important;
+    transition: all 0.3s ease !important;
+    text-align: center !important;
+}
+
+#s202511172ecd158bb964e .benefit-card:hover {
+    background: #ffffff !important;
+    transform: translateY(-6px) !important;
+    border-color: #EA8A4C !important;
+    box-shadow: 0 8px 25px rgba(234, 138, 76, 0.2) !important;
+}
+
+#s202511172ecd158bb964e .benefit-title {
+    font-size: 19px !important;
+    font-weight: 700 !important;
+    color: #1a1a1a !important;
+    margin: 0 0 10px 0 !important;
+    padding: 0 !important;
+}
+
+#s202511172ecd158bb964e .benefit-desc {
+    font-size: 15px !important;
+    color: #4a5568 !important;
+    line-height: 1.6 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* 신청 버튼 */
+#s202511172ecd158bb964e .apply-section {
+    text-align: center !important;
+    padding: 30px 0 0 0 !important;
+    border-top: 2px solid #f7fafc !important;
+    margin: 35px 0 0 0 !important;
+}
+
+#s202511172ecd158bb964e .apply-button {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    background: linear-gradient(135deg, #EA8A4C 0%, #D77839 100%) !important;
+    color: #ffffff !important;
+    padding: 18px 48px !important;
+    border-radius: 10px !important;
+    font-size: 18px !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 15px rgba(234, 138, 76, 0.3) !important;
+    border: none !important;
+}
+
+#s202511172ecd158bb964e .apply-button:hover {
+    background: linear-gradient(135deg, #D77839 0%, #EA8A4C 100%) !important;
+    transform: translateY(-3px) !important;
+    box-shadow: 0 6px 20px rgba(234, 138, 76, 0.4) !important;
+}
+
+/* 반응형 디자인 - 태블릿 */
+@media (min-width: 768px) {
+    #s202511172ecd158bb964e .section-container {
+        padding: 100px 40px 60px !important;
+    }
+}
+
+/* 반응형 디자인 - 데스크톱 */
+@media (min-width: 1024px) {
+    #s202511172ecd158bb964e .section-container {
+        padding: 120px 40px 60px !important;
+    }
+}
+
+/* 반응형 디자인 - 968px 이하 */
+@media (max-width: 968px) {
+    #s202511172ecd158bb964e .section-title {
+        font-size: 36px !important;
+    }
+
+    #s202511172ecd158bb964e .fund-header {
+        flex-direction: column !important;
+        text-align: center !important;
+    }
+
+    #s202511172ecd158bb964e .fund-highlight {
+        width: 100% !important;
+        max-width: 200px !important;
+    }
+
+    #s202511172ecd158bb964e .info-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    #s202511172ecd158bb964e .requirement-list {
+        grid-template-columns: 1fr !important;
+    }
+
+    #s202511172ecd158bb964e .benefits-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+/* 반응형 디자인 - 모바일 */
+@media (max-width: 768px) {
+    #s202511172ecd158bb964e .section-container {
+        padding: 80px 20px 60px !important;
+    }
+
+    #s202511172ecd158bb964e .section-title {
+        font-size: 28px !important;
+        word-break: keep-all !important;
+    }
+
+    #s202511172ecd158bb964e .fund-tabs {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 10px !important;
+        margin: 0 0 35px 0 !important;
+    }
+
+    #s202511172ecd158bb964e .tab-button {
+        padding: 12px 12px !important;
+        font-size: 14px !important;
+        justify-content: center !important;
+    }
+
+    #s202511172ecd158bb964e .tab-icon {
+        width: 16px !important;
+        height: 16px !important;
+    }
+
+    #s202511172ecd158bb964e .fund-detail-card {
+        padding: 28px 20px !important;
+    }
+
+    #s202511172ecd158bb964e .fund-name {
+        font-size: 24px !important;
+    }
+
+    #s202511172ecd158bb964e .info-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px !important;
+    }
+
+    #s202511172ecd158bb964e .info-item {
+        padding: 16px 12px !important;
+    }
+
+    #s202511172ecd158bb964e .benefits-grid {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+    }
+}
+
+/* 480px 이하 모바일 */
+@media (max-width: 480px) {
+    #s202511172ecd158bb964e .section-container {
+        padding: 70px 15px 60px !important;
+    }
+
+    #s202511172ecd158bb964e .section-title {
+        font-size: 24px !important;
+    }
+
+    #s202511172ecd158bb964e .apply-button {
+        font-size: 16px !important;
+        padding: 16px 36px !important;
+    }
+}
+</style>
+
+<section id="s202511172ecd158bb964e">
+<div class="section-container">
+    <div class="section-header">
+        <span class="section-badge">이음파트너스 정책자금 솔루션</span>
+        <h2 class="section-title">대표님 맞춤형 자금 지원 안내</h2>
+        <p class="section-desc">
+            정책자금부터 사업자 대출까지,<br class="mobile-only-br">
+            전문가의 정밀한 진단으로<br>
+            대표님께 최적화된 자금 솔루션을 제공합니다
+        </p>
+    </div>
+
+    <!-- 탭 네비게이션 -->
+    <div class="fund-tabs">
+        <button class="tab-button active" onclick="showTab('policy')">
+            <svg class="tab-icon" viewBox="0 0 24 24">
+                <path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm0 4c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm6 12H6v-1.4c0-2 4-3.1 6-3.1s6 1.1 6 3.1V19z"/>
+            </svg>
+            정책자금
+        </button>
+        <button class="tab-button" onclick="showTab('loan')">
+            <svg class="tab-icon" viewBox="0 0 24 24">
+                <path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+            </svg>
+            정부지원자금
+        </button>
+        <button class="tab-button" onclick="showTab('guarantee')">
+            <svg class="tab-icon" viewBox="0 0 24 24">
+                <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/>
+            </svg>
+            보증서발급
+        </button>
+        <button class="tab-button" onclick="showTab('consulting')">
+            <svg class="tab-icon" viewBox="0 0 24 24">
+                <path d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H3V5h18v14zM9 8H7v2h2V8zm0 3H7v2h2v-2zm0 3H7v2h2v-2zm4-6h-2v2h2V8zm0 3h-2v2h2v-2zm0 3h-2v2h2v-2zm4-6h-2v2h2V8zm0 3h-2v2h2v-2zm0 3h-2v2h2v-2z"/>
+            </svg>
+            맞춤 컨설팅
+        </button>
+    </div>
+
+    <!-- 정책자금 -->
+    <div id="policy" class="tab-content active">
+        <div class="fund-detail-card">
+            <div class="fund-header">
+                <div class="fund-title-area">
+                    <h3 class="fund-name">정부 정책자금 신청 지원</h3>
+                    <p class="fund-summary">창업·운전·시설자금 등<br class="mobile-br"> 사업 성장 단계별 맞춤형 정책자금 지원</p>
+                </div>
+                <div class="fund-highlight">
+                    <div class="highlight-label">최대 지원</div>
+                    <div class="highlight-value">60억원</div>
+                </div>
+            </div>
+
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">이율</div>
+                    <div class="info-value">2.99%~</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">한도</div>
+                    <div class="info-value">최대 60억</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">기간</div>
+                    <div class="info-value">최장 15년</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">거치</div>
+                    <div class="info-value">5년 가능</div>
+                </div>
+            </div>
+
+            <div class="requirements-section">
+                <h4 class="section-subtitle">
+                    <div class="section-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+                        </svg>
+                    </div>
+                    신청 대상
+                </h4>
+                <ul class="requirement-list">
+                    <li class="requirement-item">
+                        <svg class="check-icon" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                        <span class="requirement-text">창업·운전·시설 자금이 필요한 대표님</span>
+                    </li>
+                    <li class="requirement-item">
+                        <svg class="check-icon" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                        <span class="requirement-text">중소·중견 규모 사업자</span>
+                    </li>
+                    <li class="requirement-item">
+                        <svg class="check-icon" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                        <span class="requirement-text">정상 영업활동 중인 사업자</span>
+                    </li>
+                    <li class="requirement-item">
+                        <svg class="check-icon" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                        <span class="requirement-text">사업계획서 제출 가능한 대표님</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="requirements-section">
+                <h4 class="section-subtitle">
+                    <div class="section-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                    </div>
+                    이음파트너스 지원 서비스
+                </h4>
+                <div class="benefits-grid">
+                    <div class="benefit-card">
+                        <h5 class="benefit-title">맞춤 자금 매칭</h5>
+                        <p class="benefit-desc">대표님 상황별 최적 정책자금 선별</p>
+                    </div>
+                    <div class="benefit-card">
+                        <h5 class="benefit-title">직접 작성 지원</h5>
+                        <p class="benefit-desc">사업계획서 작성을 직접 안내</p>
+                    </div>
+                    <div class="benefit-card">
+                        <h5 class="benefit-title">승인률 극대화</h5>
+                        <p class="benefit-desc">전문가 컨설팅으로 심사 통과</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="apply-section">
+                <a href="#s202510319184017476688" class="apply-button" onclick="scrollToForm(event)">
+                    무료 상담 신청하기
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 정부지원자금 -->
+    <div id="loan" class="tab-content">
+        <div class="fund-detail-card">
+            <div class="fund-header">
+                <div class="fund-title-area">
+                    <h3 class="fund-name">정부지원자금 확보 지원</h3>
+                    <p class="fund-summary">중진공·소진공 등<br class="mobile-br"> 정부 지원 정책자금 확보 지원</p>
+                </div>
+                <div class="fund-highlight">
+                    <div class="highlight-label">최대 지원</div>
+                    <div class="highlight-value">60억원</div>
+                </div>
+            </div>
+
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">이율</div>
+                    <div class="info-value">2.99%~</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">한도</div>
+                    <div class="info-value">최대 60억</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">기간</div>
+                    <div class="info-value">최장 15년</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">거치</div>
+                    <div class="info-value">5년 가능</div>
+                </div>
+            </div>
+
+            <div class="requirements-section">
+                <h4 class="section-subtitle">
+                    <div class="section-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+                        </svg>
+                    </div>
+                    신청 대상
+                </h4>
+                <ul class="requirement-list">
+                    <li class="requirement-item">
+                        <svg class="check-icon" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                        <span class="requirement-text">중소기업·소상공인 대표님</span>
+                    </li>
+                    <li class="requirement-item">
+                        <svg class="check-icon" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                        <span class="requirement-text">창업·성장·재도약 단계 사업자</span>
+                    </li>
+                    <li class="requirement-item">
+                        <svg class="check-icon" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                        <span class="requirement-text">정상 영업활동 중인 사업자</span>
+                    </li>
+                    <li class="requirement-item">
+                        <svg class="check-icon" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                        <span class="requirement-text">사업계획서 제출 가능한 대표님</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="requirements-section">
+                <h4 class="section-subtitle">
+                    <div class="section-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                    </div>
+                    이음파트너스 지원 서비스
+                </h4>
+                <div class="benefits-grid">
+                    <div class="benefit-card">
+                        <h5 class="benefit-title">지원사업 매칭</h5>
+                        <p class="benefit-desc">중진공·소진공 자금 안내</p>
+                    </div>
+                    <div class="benefit-card">
+                        <h5 class="benefit-title">신청서류 지원</h5>
+                        <p class="benefit-desc">사업계획서 작성 핵심 안내</p>
+                    </div>
+                    <div class="benefit-card">
+                        <h5 class="benefit-title">승인률 극대화</h5>
+                        <p class="benefit-desc">전문가 컨설팅으로 심사 통과</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="apply-section">
+                <a href="#s202510319184017476688" class="apply-button" onclick="scrollToForm(event)">
+                    무료 상담 신청하기
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 보증서발급 -->
+    <div id="guarantee" class="tab-content">
+        <div class="fund-detail-card">
+            <div class="fund-header">
+                <div class="fund-title-area">
+                    <h3 class="fund-name">신용보증서 발급 지원</h3>
+                    <p class="fund-summary">신용보증재단·기술보증기금 등<br class="mobile-br"> 보증기관 연계 서비스</p>
+                </div>
+                <div class="fund-highlight">
+                    <div class="highlight-label">보증한도</div>
+                    <div class="highlight-value">30억원</div>
+                </div>
+            </div>
+
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">보증료</div>
+                    <div class="info-value">0.5%~</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">보증비율</div>
+                    <div class="info-value">85%~95%</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">기간</div>
+                    <div class="info-value">최장 10년</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">심사</div>
+                    <div class="info-value">3~10일</div>
+                </div>
+            </div>
+
+            <div class="requirements-section">
+                <h4 class="section-subtitle">
+                    <div class="section-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+                        </svg>
+                    </div>
+                    신청 대상
+                </h4>
+                <ul class="requirement-list">
+                    <li class="requirement-item">
+                        <svg class="check-icon" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                        <span class="requirement-text">담보 부족한 대표님</span>
+                    </li>
+                    <li class="requirement-item">
+                        <svg class="check-icon" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                        <span class="requirement-text">창업 및 성장단계 사업자</span>
+                    </li>
+                    <li class="requirement-item">
+                        <svg class="check-icon" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                        <span class="requirement-text">기술력·성장성 보유 사업자</span>
+                    </li>
+                    <li class="requirement-item">
+                        <svg class="check-icon" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                        <span class="requirement-text">정상 운영 중인 사업자</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="requirements-section">
+                <h4 class="section-subtitle">
+                    <div class="section-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                    </div>
+                    이음파트너스 지원 서비스
+                </h4>
+                <div class="benefits-grid">
+                    <div class="benefit-card">
+                        <h5 class="benefit-title">보증기관 매칭</h5>
+                        <p class="benefit-desc">신보·기보·지역보증 연계</p>
+                    </div>
+                    <div class="benefit-card">
+                        <h5 class="benefit-title">서류 준비 지원</h5>
+                        <p class="benefit-desc">사업 분석·평가 자료 작성 안내</p>
+                    </div>
+                    <div class="benefit-card">
+                        <h5 class="benefit-title">심사 성공률 UP</h5>
+                        <p class="benefit-desc">전문가 검토로 승인 확률 증대</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="apply-section">
+                <a href="#s202510319184017476688" class="apply-button" onclick="scrollToForm(event)">
+                    무료 상담 신청하기
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 맞춤 컨설팅 -->
+    <div id="consulting" class="tab-content">
+        <div class="fund-detail-card">
+            <div class="fund-header">
+                <div class="fund-title-area">
+                    <h3 class="fund-name">사업자금 전문 컨설팅</h3>
+                    <p class="fund-summary">대표님 맞춤형 자금전략<br class="mobile-br"> 수립부터 실행까지 토탈 솔루션</p>
+                </div>
+                <div class="fund-highlight">
+                    <div class="highlight-label">직접 작성</div>
+                    <div class="highlight-value">100%</div>
+                </div>
+            </div>
+
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">상담</div>
+                    <div class="info-value">무료</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">소요기간</div>
+                    <div class="info-value">1~3개월</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">성공보수</div>
+                    <div class="info-value">자금집행 시</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">사후관리</div>
+                    <div class="info-value">지속지원</div>
+                </div>
+            </div>
+
+            <div class="requirements-section">
+                <h4 class="section-subtitle">
+                    <div class="section-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+                        </svg>
+                    </div>
+                    컨설팅 대상
+                </h4>
+                <ul class="requirement-list">
+                    <li class="requirement-item">
+                        <svg class="check-icon" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                        <span class="requirement-text">자금조달 방법을 모르는 대표님</span>
+                    </li>
+                    <li class="requirement-item">
+                        <svg class="check-icon" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                        <span class="requirement-text">직접 작성하고 싶은 대표님</span>
+                    </li>
+                    <li class="requirement-item">
+                        <svg class="check-icon" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                        <span class="requirement-text">최적 조건을 찾고 싶은 대표님</span>
+                    </li>
+                    <li class="requirement-item">
+                        <svg class="check-icon" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                        <span class="requirement-text">승인 확률을 높이고 싶은 대표님</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="requirements-section">
+                <h4 class="section-subtitle">
+                    <div class="section-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                    </div>
+                    이음파트너스 컨설팅 서비스
+                </h4>
+                <div class="benefits-grid">
+                    <div class="benefit-card">
+                        <h5 class="benefit-title">자금 진단 및 전략</h5>
+                        <p class="benefit-desc">현황 분석·최적 자금 설계</p>
+                    </div>
+                    <div class="benefit-card">
+                        <h5 class="benefit-title">직접 작성 가이드</h5>
+                        <p class="benefit-desc">사업계획서 작성 단계별 안내</p>
+                    </div>
+                    <div class="benefit-card">
+                        <h5 class="benefit-title">실행 및 사후관리</h5>
+                        <p class="benefit-desc">자금 집행·상환 관리 지원</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="apply-section">
+                <a href="#s202510319184017476688" class="apply-button" onclick="scrollToForm(event)">
+                    무료 상담 신청하기
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+function showTab(tabName) {
+    const tabContents = document.querySelectorAll('#s202511172ecd158bb964e .tab-content');
+    tabContents.forEach(content => {
+        content.classList.remove('active');
+    });
+
+    const tabButtons = document.querySelectorAll('#s202511172ecd158bb964e .tab-button');
+    tabButtons.forEach(button => {
+        button.classList.remove('active');
+    });
+
+    document.getElementById(tabName).classList.add('active');
+    event.target.closest('.tab-button').classList.add('active');
+}
+
+function scrollToForm(event) {
+    event.preventDefault();
+    const formSection = document.querySelector('#s202510319184017476688');
+    if (formSection) {
+        const companyInput = formSection.querySelector('input[name="company"]');
+        if (companyInput) {
+            companyInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            setTimeout(() => { companyInput.focus(); }, 800);
+        } else {
+            formSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }
+}
+</script>
+</section>

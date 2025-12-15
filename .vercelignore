@@ -1,0 +1,32 @@
+# 민감 정보 파일
+automation/
+.wrangler/
+js/config.js
+
+# 환경변수
+.env
+.env.*
+wrangler.toml
+
+# 빌드/캐시/개발
+node_modules/
+.next/
+out/
+dist/
+.cache/
+
+# 소스 파일 (배포 불필요)
+*.psd
+*.ai
+*.md
+!README.md
+
+# IDE/OS
+.DS_Store
+Thumbs.db
+*.log
+.vscode/
+.idea/
+
+# Claude
+.claude/

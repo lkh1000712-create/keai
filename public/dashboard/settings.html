@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-KLT2444N9N"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-KLT2444N9N');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>설정 - KEAI</title>
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+</head>
+<body>
+  <div class="dashboard-container">
+    <!-- 사이드바 -->
+    <aside class="sidebar"></aside>
+
+    <!-- 메인 콘텐츠 -->
+    <main class="main-content">
+      <!-- 헤더 -->
+      <header class="dashboard-header"></header>
+
+      <!-- 과금 안내 -->
+      <section class="billing-section">
+        <h3 class="section-title">서비스 요금 안내</h3>
+        <div class="billing-grid">
+          <!-- 무료 구간 -->
+          <div class="billing-card billing-free">
+            <div class="billing-header">
+              <span class="billing-badge free">무료</span>
+              <h4>무료 사용 구간</h4>
+            </div>
+            <ul class="billing-list">
+              <li>
+                <strong>Vercel</strong>
+                <span>월 트래픽 100GB</span>
+              </li>
+              <li>
+                <strong>Airtable</strong>
+                <span>1,200 레코드</span>
+              </li>
+              <li>
+                <strong>Resend</strong>
+                <span>월 3,000통</span>
+              </li>
+              <li>
+                <strong>Google Analytics</strong>
+                <span>무제한</span>
+              </li>
+              <li>
+                <strong>Telegram</strong>
+                <span>무제한</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- 유료 구간 -->
+          <div class="billing-card billing-paid">
+            <div class="billing-header">
+              <span class="billing-badge paid">유료</span>
+              <h4>무료 초과 시 요금</h4>
+            </div>
+            <ul class="billing-list">
+              <li>
+                <strong>Vercel</strong>
+                <span>$20/월 (Pro 플랜)</span>
+              </li>
+              <li>
+                <strong>Airtable</strong>
+                <span>$20/월 (Plus 플랜)</span>
+              </li>
+              <li>
+                <strong>Resend</strong>
+                <span>$20/월</span>
+              </li>
+              <li>
+                <strong>Google Analytics</strong>
+                <span>-</span>
+              </li>
+              <li>
+                <strong>Telegram</strong>
+                <span>-</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <p class="billing-note">현재 모든 서비스가 무료 구간 내에서 운영 중입니다.</p>
+
+        <!-- 트래픽 시뮬레이션 -->
+        <div class="traffic-simulation">
+          <h4>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="12" y1="16" x2="12" y2="12"/>
+              <line x1="12" y1="8" x2="12.01" y2="8"/>
+            </svg>
+            월 트래픽 100GB, 얼마나 될까요?
+          </h4>
+          <div class="simulation-content">
+            <p>페이지 1회 방문 시 평균 <strong>2~3MB</strong> 사용 (이미지, CSS, JS 포함)</p>
+            <div class="simulation-examples">
+              <div class="simulation-item">
+                <span class="sim-visitors">하루 300명</span>
+                <span class="sim-calc">× 30일 × 3MB = 약 27GB/월</span>
+                <span class="sim-status safe">여유</span>
+              </div>
+              <div class="simulation-item">
+                <span class="sim-visitors">하루 500명</span>
+                <span class="sim-calc">× 30일 × 3MB = 약 45GB/월</span>
+                <span class="sim-status safe">여유</span>
+              </div>
+              <div class="simulation-item">
+                <span class="sim-visitors">하루 1,000명</span>
+                <span class="sim-calc">× 30일 × 3MB = 약 90GB/월</span>
+                <span class="sim-status warning">주의</span>
+              </div>
+              <div class="simulation-item">
+                <span class="sim-visitors">하루 1,500명</span>
+                <span class="sim-calc">× 30일 × 3MB = 약 135GB/월</span>
+                <span class="sim-status danger">초과</span>
+              </div>
+            </div>
+            <p class="simulation-note">일반적인 정책자금 컨설팅 사이트는 하루 100~300명 수준으로, 무료 구간 내 충분히 운영 가능합니다.</p>
+          </div>
+          <div class="traffic-check">
+            <a href="https://vercel.com/dashboard" target="_blank" class="btn-vercel">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2L2 19.5h20L12 2z"/>
+              </svg>
+              <span class="btn-vercel-text">트래픽 확인</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                <polyline points="15 3 21 3 21 9"/>
+                <line x1="10" y1="14" x2="21" y2="3"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- 스택 관리 -->
+      <section class="settings-section">
+        <div class="section-header">
+          <h3 class="section-title">서비스 스택 관리</h3>
+          <button class="btn-primary" onclick="openAddStackModal()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="12" y1="5" x2="12" y2="19"/>
+              <line x1="5" y1="12" x2="19" y2="12"/>
+            </svg>
+            스택 추가
+          </button>
+        </div>
+
+        <div class="table-container">
+          <table class="data-table stack-table">
+            <thead>
+              <tr>
+                <th>서비스명</th>
+                <th>ID / 계정</th>
+                <th>PW</th>
+                <th>서비스 URL</th>
+                <th>특이사항</th>
+                <th>관리</th>
+              </tr>
+            </thead>
+            <tbody id="stackTableBody">
+              <!-- 도메인 -->
+              <tr>
+                <td>
+                  <div class="service-name">
+                    <span class="service-icon">🌐</span>
+                    <div>
+                      <strong>도메인</strong>
+                      <small>Namecheap</small>
+                    </div>
+                  </div>
+                </td>
+                <td><code>admin@example.com</code></td>
+                <td><span class="pw-mask">••••••••</span></td>
+                <td><a href="https://namecheap.com" target="_blank">namecheap.com</a></td>
+                <td><span class="badge">연간 결제</span></td>
+                <td>
+                  <button class="btn-icon" onclick="editStack(this)" title="수정">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                      <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                    </svg>
+                  </button>
+                  <button class="btn-icon btn-icon-danger" onclick="deleteStack(this)" title="삭제">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polyline points="3 6 5 6 21 6"/>
+                      <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                    </svg>
+                  </button>
+                </td>
+              </tr>
+
+              <!-- 구글 계정 -->
+              <tr>
+                <td>
+                  <div class="service-name">
+                    <span class="service-icon">📧</span>
+                    <div>
+                      <strong>Google 계정</strong>
+                      <small>메인 계정</small>
+                    </div>
+                  </div>
+                </td>
+                <td><code>keai@gmail.com</code></td>
+                <td><span class="pw-mask">••••••••</span></td>
+                <td><a href="https://accounts.google.com" target="_blank">accounts.google.com</a></td>
+                <td><span class="badge badge-info">2FA 활성화</span></td>
+                <td>
+                  <button class="btn-icon" onclick="editStack(this)" title="수정">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                      <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                    </svg>
+                  </button>
+                  <button class="btn-icon btn-icon-danger" onclick="deleteStack(this)" title="삭제">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polyline points="3 6 5 6 21 6"/>
+                      <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                    </svg>
+                  </button>
+                </td>
+              </tr>
+
+              <!-- Vercel -->
+              <tr>
+                <td>
+                  <div class="service-name">
+                    <span class="service-icon">▲</span>
+                    <div>
+                      <strong>Vercel</strong>
+                      <small>호스팅</small>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="badge badge-google">Google 연동</span></td>
+                <td><span class="pw-mask">-</span></td>
+                <td><a href="https://vercel.com" target="_blank">vercel.com</a></td>
+                <td><span class="badge badge-success">무료</span> 100GB/월</td>
+                <td>
+                  <button class="btn-icon" onclick="editStack(this)" title="수정">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                      <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                    </svg>
+                  </button>
+                  <button class="btn-icon btn-icon-danger" onclick="deleteStack(this)" title="삭제">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polyline points="3 6 5 6 21 6"/>
+                      <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                    </svg>
+                  </button>
+                </td>
+              </tr>
+
+              <!-- Airtable -->
+              <tr>
+                <td>
+                  <div class="service-name">
+                    <span class="service-icon">📊</span>
+                    <div>
+                      <strong>Airtable</strong>
+                      <small>데이터베이스</small>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="badge badge-google">Google 연동</span></td>
+                <td><span class="pw-mask">-</span></td>
+                <td><a href="https://airtable.com" target="_blank">airtable.com</a></td>
+                <td><span class="badge badge-success">무료</span> 1,200 레코드</td>
+                <td>
+                  <button class="btn-icon" onclick="editStack(this)" title="수정">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                      <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                    </svg>
+                  </button>
+                  <button class="btn-icon btn-icon-danger" onclick="deleteStack(this)" title="삭제">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polyline points="3 6 5 6 21 6"/>
+                      <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                    </svg>
+                  </button>
+                </td>
+              </tr>
+
+              <!-- Resend -->
+              <tr>
+                <td>
+                  <div class="service-name">
+                    <span class="service-icon">✉️</span>
+                    <div>
+                      <strong>Resend</strong>
+                      <small>이메일</small>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="badge badge-google">Google 연동</span></td>
+                <td><span class="pw-mask">-</span></td>
+                <td><a href="https://resend.com" target="_blank">resend.com</a></td>
+                <td><span class="badge badge-success">무료</span> 3,000통/월</td>
+                <td>
+                  <button class="btn-icon" onclick="editStack(this)" title="수정">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                      <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                    </svg>
+                  </button>
+                  <button class="btn-icon btn-icon-danger" onclick="deleteStack(this)" title="삭제">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polyline points="3 6 5 6 21 6"/>
+                      <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                    </svg>
+                  </button>
+                </td>
+              </tr>
+
+              <!-- Google Analytics -->
+              <tr>
+                <td>
+                  <div class="service-name">
+                    <span class="service-icon">📈</span>
+                    <div>
+                      <strong>Google Analytics</strong>
+                      <small>분석</small>
+                    </div>
+                  </div>
+                </td>
+                <td><span class="badge badge-google">Google 연동</span></td>
+                <td><span class="pw-mask">-</span></td>
+                <td><a href="https://analytics.google.com" target="_blank">analytics.google.com</a></td>
+                <td><span class="badge badge-success">무료</span> 무제한</td>
+                <td>
+                  <button class="btn-icon" onclick="editStack(this)" title="수정">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                      <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                    </svg>
+                  </button>
+                  <button class="btn-icon btn-icon-danger" onclick="deleteStack(this)" title="삭제">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polyline points="3 6 5 6 21 6"/>
+                      <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                    </svg>
+                  </button>
+                </td>
+              </tr>
+
+              <!-- Telegram -->
+              <tr>
+                <td>
+                  <div class="service-name">
+                    <span class="service-icon">💬</span>
+                    <div>
+                      <strong>Telegram Bot</strong>
+                      <small>알림</small>
+                    </div>
+                  </div>
+                </td>
+                <td><code>@BotFather</code></td>
+                <td><span class="pw-mask">Bot Token</span></td>
+                <td><a href="https://telegram.org" target="_blank">telegram.org</a></td>
+                <td><span class="badge badge-success">무료</span> 무제한</td>
+                <td>
+                  <button class="btn-icon" onclick="editStack(this)" title="수정">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                      <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                    </svg>
+                  </button>
+                  <button class="btn-icon btn-icon-danger" onclick="deleteStack(this)" title="삭제">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polyline points="3 6 5 6 21 6"/>
+                      <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                    </svg>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- 스택 추가/수정 모달 -->
+  <div class="modal-overlay" id="stackModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="modal-title">스택 추가</h3>
+        <button class="modal-close" onclick="closeStackModal()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="stackForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="serviceName">서비스명 *</label>
+              <input type="text" id="serviceName" placeholder="예: Vercel" required>
+            </div>
+            <div class="form-group">
+              <label for="serviceType">서비스 유형</label>
+              <input type="text" id="serviceType" placeholder="예: 호스팅">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="isGoogleLinked" onchange="toggleGoogleLinked()">
+              <span>Google 계정 연동</span>
+            </label>
+          </div>
+
+          <div id="credentialFields">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="serviceId">ID / 계정</label>
+                <input type="text" id="serviceId" placeholder="이메일 또는 아이디">
+              </div>
+              <div class="form-group">
+                <label for="servicePw">비밀번호</label>
+                <input type="password" id="servicePw" placeholder="비밀번호">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="serviceUrl">서비스 URL</label>
+            <input type="url" id="serviceUrl" placeholder="https://example.com">
+          </div>
+
+          <div class="form-group">
+            <label for="serviceNote">특이사항</label>
+            <input type="text" id="serviceNote" placeholder="예: 무료 100GB/월">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" onclick="closeStackModal()">취소</button>
+        <button class="btn-primary" onclick="saveStack()">저장</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/components.js"></script>
+  <script src="../js/settings.js"></script>
+  <script>
+    // 컴포넌트 로드
+    document.addEventListener('DOMContentLoaded', function() {
+      loadSidebar('settings');
+      loadDashboardHeader('설정', '서비스 스택 및 계정 정보 관리');
+      loadMobileBottomNav('settings');
+    });
+  </script>
+</body>
+</html>

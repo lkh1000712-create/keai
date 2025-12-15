@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KLT2444N9N"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-KLT2444N9N');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO 기본 -->
+    <title>회사소개 | 한국기업심사원 KEAI - 자금확보 전문 경영컨설팅</title>
+    <meta name="description" content="한국기업심사원 KEAI 회사소개 - 기업심사 전문가가 직접 운영하는 정부정책자금 경영컨설팅 기업. 체계적인 분석과 맞춤 전략으로 자금확보를 지원합니다.">
+    <meta name="keywords" content="한국기업심사원, KEAI, 회사소개, 경영컨설팅, 자금확보, 기업심사 전문가">
+    <meta name="author" content="한국기업심사원 KEAI">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://keai-three.vercel.app/company.html">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="한국기업심사원 KEAI">
+    <meta property="og:title" content="회사소개 | 한국기업심사원 KEAI">
+    <meta property="og:description" content="기업심사 전문가가 직접 운영하는 정부정책자금 경영컨설팅 기업.">
+    <meta property="og:image" content="https://keai-three.vercel.app/og/og-company.png">
+    <meta property="og:url" content="https://keai-three.vercel.app/company.html">
+    <meta property="og:locale" content="ko_KR">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="회사소개 | 한국기업심사원 KEAI">
+    <meta name="twitter:description" content="기업심사 전문가가 직접 운영하는 정부정책자금 경영컨설팅 기업.">
+    <meta name="twitter:image" content="https://keai-three.vercel.app/og/og-company.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="파비콘.png">
+    <link rel="apple-touch-icon" href="파비콘.png">
+
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- ================================================
+     HEADER
+     ================================================ -->
+<header class="keai-header">
+    <div class="keai-header-container">
+        <div class="keai-header-main">
+            <a href="index.html" class="keai-logo">
+                <img src="logo.png" alt="KEAI 한국기업심사원" class="keai-logo-image" data-image-id="logo">
+            </a>
+
+            <nav class="keai-nav">
+                <ul class="keai-nav-list">
+                    <li class="keai-nav-item"><a href="index.html">홈</a></li>
+                    <li class="keai-nav-item"><a href="company.html" class="active">회사소개</a></li>
+                    <li class="keai-nav-item"><a href="process.html">진행과정</a></li>
+                    <li class="keai-nav-item"><a href="fund.html">자금상담</a></li>
+                    <li class="keai-nav-item"><a href="pro.html">전문서비스</a></li>
+                    <li class="keai-nav-item"><a href="mkt.html">온라인마케팅</a></li>
+                </ul>
+            </nav>
+
+            <div class="keai-header-cta">
+                <a href="index.html#form" class="keai-btn-header-cta">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                    <span>무료심사</span>
+                </a>
+            </div>
+
+            <button class="keai-mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="메뉴 열기">
+                <svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="keai-mobile-menu" id="keaiMobileMenu">
+        <div class="keai-mobile-menu-header">
+            <span class="keai-mobile-menu-title">메뉴</span>
+            <button class="keai-mobile-menu-close" onclick="toggleMobileMenu()" aria-label="메뉴 닫기">
+                <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+            </button>
+        </div>
+        <nav>
+            <ul class="keai-mobile-nav-list">
+                <li class="keai-mobile-nav-item"><a href="index.html" onclick="toggleMobileMenu()">홈</a></li>
+                <li class="keai-mobile-nav-item"><a href="company.html" class="active" onclick="toggleMobileMenu()">회사소개</a></li>
+                <li class="keai-mobile-nav-item"><a href="process.html" onclick="toggleMobileMenu()">진행과정</a></li>
+                <li class="keai-mobile-nav-item"><a href="fund.html" onclick="toggleMobileMenu()">자금상담</a></li>
+                <li class="keai-mobile-nav-item"><a href="pro.html" onclick="toggleMobileMenu()">전문서비스</a></li>
+                <li class="keai-mobile-nav-item"><a href="mkt.html" onclick="toggleMobileMenu()">온라인마케팅</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="keai-mobile-overlay" id="keaiMobileOverlay" onclick="toggleMobileMenu()"></div>
+</header>
+
+<!-- ================================================
+     ABOUT HERO SECTION
+     ================================================ -->
+<section class="keai-about-hero">
+    <div class="keai-about-hero-container">
+        <!-- Headline -->
+        <div class="keai-about-hero-headline">
+            <div class="keai-about-hero-badge">
+                About Us
+            </div>
+
+            <h1 class="keai-about-hero-title">
+                <span class="keai-about-hero-title-highlight">한국기업심사원</span>
+            </h1>
+
+            <p class="keai-about-hero-subtitle">
+                자금확보 전문 컨설팅 · 대표자 역량 강화<br class="keai-mobile-br">
+                중소기업의 든든한 성장 파트너
+            </p>
+
+            <p class="keai-about-hero-description">
+                기업 역량 파악부터 맞춤형 자금확보 전략까지<br class="keai-mobile-br">
+                체계적인 컨설팅으로 성장을 함께 설계합니다
+            </p>
+
+            <!-- CTA Buttons -->
+            <div class="keai-hero-cta">
+                <a href="index.html#form" class="keai-btn-primary">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                    </svg>
+                    <span>무료 심사 신청</span>
+                </a>
+                <a href="process.html" class="keai-btn-secondary">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+                    </svg>
+                    <span>진행과정 보기</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- 중요 안내 -->
+        <div class="keai-about-notice-box">
+            <div class="keai-about-notice-title">⚠️ 중요 안내</div>
+            <ul class="keai-about-notice-list">
+                <li>기업의 가치를 평가하지 않습니다</li>
+                <li>자금 접수 및 서류작성 대행을 하지 않습니다</li>
+                <li>자금 접수는 대표자가 직접 작성 및 접수합니다</li>
+                <li>서류작성에 필요한 정보를 안내하고 공유합니다</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- ================================================
+     SERVICE SECTION
+     ================================================ -->
+<section class="keai-company-service">
+    <div class="keai-company-service-container">
+        <!-- 섹션 타이틀 -->
+        <div class="keai-company-service-title">
+            <h2>자금확보 전문 컨설팅 서비스</h2>
+            <p>한국기업심사원이 제공하는 맞춤형 자금확보 지원</p>
+        </div>
+
+        <!-- 서비스 그리드 -->
+        <div class="keai-company-service-grid">
+            <!-- 역량 파악 -->
+            <div class="keai-company-service-card">
+                <img src="https://cdn.imweb.me/upload/S20251117ed7f35ec2bb5b/90a956024ae18.png" alt="자금확보 역량 파악" class="keai-company-service-card-image">
+                <div class="keai-company-service-card-content">
+                    <h3>자금확보 역량 파악</h3>
+                    <p>대표자의 강점과 사업 성장성을 파악하여,<br class="keai-pc-br">귀사에 적합한 자금확보 프로그램을 선별해 드립니다.</p>
+                    <div class="keai-company-service-tags">
+                        <span class="keai-company-service-tag">역량파악</span>
+                        <span class="keai-company-service-tag">요건검토</span>
+                        <span class="keai-company-service-tag">적합성확인</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 자금조달 전략 -->
+            <div class="keai-company-service-card">
+                <img src="https://cdn.imweb.me/upload/S20251117ed7f35ec2bb5b/8cdbda2b938d6.png" alt="맞춤형 자금조달 전략" class="keai-company-service-card-image">
+                <div class="keai-company-service-card-content">
+                    <h3>맞춤형 자금조달 전략</h3>
+                    <p>중앙부처와 지자체의 다양한 자금 프로그램 중<br class="keai-pc-br">귀사에 최적화된 자금조달 전략을 설계합니다.</p>
+                    <div class="keai-company-service-tags">
+                        <span class="keai-company-service-tag">공고파악</span>
+                        <span class="keai-company-service-tag">자금설계</span>
+                        <span class="keai-company-service-tag">지원검토</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 신청서류 준비 가이드 -->
+            <div class="keai-company-service-card">
+                <img src="https://cdn.imweb.me/upload/S20251117ed7f35ec2bb5b/8e8a0b2fccdca.png" alt="신청서류 준비 가이드" class="keai-company-service-card-image">
+                <div class="keai-company-service-card-content">
+                    <h3>신청서류 준비 가이드</h3>
+                    <p>사업계획서부터 필수증빙까지, 대표자가<br class="keai-pc-br">직접 준비할 수 있도록 단계별로 상세히 안내합니다.</p>
+                    <div class="keai-company-service-tags">
+                        <span class="keai-company-service-tag">계획수립</span>
+                        <span class="keai-company-service-tag">서류가이드</span>
+                        <span class="keai-company-service-tag">증빙안내</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 사후관리 지원 -->
+            <div class="keai-company-service-card">
+                <img src="https://cdn.imweb.me/upload/S20251117ed7f35ec2bb5b/eba7ce1584be6.png" alt="확보 후 사후관리 지원" class="keai-company-service-card-image">
+                <div class="keai-company-service-card-content">
+                    <h3>확보 후 사후관리 지원</h3>
+                    <p>협약부터 정산까지 완벽 가이드하고,<br class="keai-pc-br">연계 지원사업으로 지속적인 성장을 함께합니다.</p>
+                    <div class="keai-company-service-tags">
+                        <span class="keai-company-service-tag">협약안내</span>
+                        <span class="keai-company-service-tag">정산가이드</span>
+                        <span class="keai-company-service-tag">연계지원</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================================================
+     CEO SECTION
+     ================================================ -->
+<section class="keai-ceo-section">
+    <div class="keai-ceo-container">
+        <div class="keai-ceo-section-header">
+            <h2>대표 소개</h2>
+            <p>자금확보 전문 컨설팅, 한국기업심사원</p>
+        </div>
+
+        <!-- 대표 소개 컨테이너 -->
+        <div class="keai-ceo-intro-container">
+            <!-- 상단: 사진과 인사말 -->
+            <div class="keai-ceo-content-wrapper">
+                <!-- 왼쪽: 대표 사진 카드 -->
+                <div class="keai-ceo-photo-section">
+                    <div class="keai-ceo-card">
+                        <div class="keai-ceo-member-image">
+                            <img src="프로필사진 (8).png" alt="이강희 대표">
+                        </div>
+                    </div>
+                    <div class="keai-ceo-member-info">
+                        <div class="keai-ceo-member-name">이 강 희</div>
+                        <div class="keai-ceo-member-title">대표 / 기업심사관</div>
+                    </div>
+                </div>
+
+                <!-- 오른쪽: 인사말 -->
+                <div class="keai-ceo-greeting-section">
+                    <h3><span class="keai-ceo-highlight-text">기업의 성장</span>을 함께 고민하고<br class="keai-ceo-mobile-br"><span class="keai-ceo-highlight-text">자금확보의 길</span>을<br class="keai-ceo-mobile-br">안내하겠습니다.</h3>
+                    <div class="keai-ceo-greeting-text">
+                        <p>
+                            안녕하십니까, 한국기업심사원 대표 이강희입니다.
+                        </p>
+                        <p>
+                            자금확보의 핵심은 <span class="keai-ceo-emphasis">대표자님의 사업 역량</span>입니다. 저희는 귀사의 강점과 성장 가능성을 면밀히 파악하여, 가장 적합한 자금확보 전략을 설계해 드립니다.
+                        </p>
+                        <p>
+                            복잡한 절차가 부담되시나요? 저희가 <span class="keai-ceo-emphasis">신청 과정을 상세히 안내</span>해 드립니다. 어떤 서류가 필요한지, 어떻게 준비해야 하는지 함께 점검하고, 대표자님이 직접 접수하실 수 있도록 지원합니다.
+                        </p>
+                        <p>
+                            귀사의 성공적인 자금확보, 끝까지 함께하겠습니다.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ================================================
+     FORM SECTION
+     ================================================ -->
+<section class="keai-form-section" id="form">
+    <div class="keai-form-container">
+        <div class="keai-form-wrapper">
+            <!-- Left: Image -->
+            <div class="keai-form-image">
+                <img src="https://cdn.imweb.me/upload/S20251117ed7f35ec2bb5b/8e2759d5c1727.png" alt="한국기업심사원 자금 상담">
+                <div class="keai-form-image-overlay">
+                    <h3 class="keai-form-image-title">
+                        기업심사 전문가와 함께<br>
+                        자금확보의 새 길을 열어보세요
+                    </h3>
+                    <p class="keai-form-image-text">
+                        귀사의 성장 가능성을<br>
+                        체계적으로 지원합니다
+                    </p>
+                    <p class="keai-form-image-text" style="margin-top: 20px; font-size: 12px; opacity: 0.8;">
+                        ※ 기업대출알선 서비스가 아닙니다
+                    </p>
+                </div>
+            </div>
+
+            <!-- Right: Form -->
+            <div class="keai-form-area">
+                <div class="keai-form-header">
+                    <h3 class="keai-form-title">자금확보 무료 심사 신청</h3>
+                    <p class="keai-form-subtitle">기본 정보 입력 후 맞춤 상담을 받아보세요</p>
+                </div>
+
+                <form id="consultForm" onsubmit="handleSubmit(event)">
+                    <!-- Basic Info - 4 columns -->
+                    <div class="keai-form-row four-columns">
+                        <div class="keai-form-group">
+                            <label class="keai-form-label">기업명 <span class="keai-required">*</span></label>
+                            <input type="text" class="keai-form-control" name="company" required>
+                        </div>
+                        <div class="keai-form-group">
+                            <label class="keai-form-label">사업자번호 <span class="keai-required">*</span></label>
+                            <input type="text" class="keai-form-control" name="bizno" placeholder="000-00-00000" required>
+                        </div>
+                        <div class="keai-form-group">
+                            <label class="keai-form-label">대표자명 <span class="keai-required">*</span></label>
+                            <input type="text" class="keai-form-control" name="name" required>
+                        </div>
+                        <div class="keai-form-group">
+                            <label class="keai-form-label">직위</label>
+                            <input type="text" class="keai-form-control" name="position" placeholder="대표이사">
+                        </div>
+                    </div>
+
+                    <!-- Contact Info - 4 columns -->
+                    <div class="keai-form-row four-columns">
+                        <div class="keai-form-group">
+                            <label class="keai-form-label">연락처 <span class="keai-required">*</span></label>
+                            <input type="tel" class="keai-form-control" name="phone" placeholder="010-0000-0000" required>
+                        </div>
+                        <div class="keai-form-group">
+                            <label class="keai-form-label">이메일 <span class="keai-required">*</span></label>
+                            <input type="email" class="keai-form-control" name="email" required>
+                        </div>
+                        <div class="keai-form-group">
+                            <label class="keai-form-label">업종</label>
+                            <select class="keai-form-control" name="industry">
+                                <option value="">선택하세요</option>
+                                <option value="제조업">제조업</option>
+                                <option value="도소매업">도소매업</option>
+                                <option value="서비스업">서비스업</option>
+                                <option value="건설업">건설업</option>
+                                <option value="IT/소프트웨어">IT/소프트웨어</option>
+                                <option value="기타">기타</option>
+                            </select>
+                        </div>
+                        <div class="keai-form-group">
+                            <label class="keai-form-label">설립연도</label>
+                            <input type="text" class="keai-form-control" name="founded" placeholder="2020">
+                        </div>
+                    </div>
+
+                    <!-- Consult Time & Amount -->
+                    <div class="keai-form-row">
+                        <div class="keai-form-group">
+                            <label class="keai-form-label">통화 가능 시간 <span class="keai-required">*</span></label>
+                            <select class="keai-form-control" name="consultTime" required>
+                                <option value="">선택하세요</option>
+                                <option value="09:00-10:00">오전 09:00 - 10:00</option>
+                                <option value="10:00-11:00">오전 10:00 - 11:00</option>
+                                <option value="11:00-12:00">오전 11:00 - 12:00</option>
+                                <option value="14:00-15:00">오후 14:00 - 15:00</option>
+                                <option value="15:00-16:00">오후 15:00 - 16:00</option>
+                                <option value="16:00-17:00">오후 16:00 - 17:00</option>
+                                <option value="17:00-18:00">오후 17:00 - 18:00</option>
+                                <option value="18:00-19:00">오후 18:00 - 19:00</option>
+                                <option value="언제나가능">언제나 가능</option>
+                            </select>
+                        </div>
+                        <div class="keai-form-group">
+                            <label class="keai-form-label">필요 자금 규모</label>
+                            <select class="keai-form-control" name="amount">
+                                <option value="">선택하세요</option>
+                                <option value="5천만원 이하">5천만원 이하</option>
+                                <option value="5천만원~1억원">5천만원 ~ 1억원</option>
+                                <option value="1억원~3억원">1억원 ~ 3억원</option>
+                                <option value="3억원~5억원">3억원 ~ 5억원</option>
+                                <option value="5억원~10억원">5억원 ~ 10억원</option>
+                                <option value="10억원 이상">10억원 이상</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Fund Type -->
+                    <div class="keai-fund-type-group">
+                        <label class="keai-fund-type-label">지원받고 싶은 자금 종류 (복수 선택 가능)</label>
+                        <div class="keai-fund-type-options">
+                            <div class="keai-fund-type-option">
+                                <input type="checkbox" id="fund1" name="fundType" value="창업자금">
+                                <label for="fund1">창업자금</label>
+                            </div>
+                            <div class="keai-fund-type-option">
+                                <input type="checkbox" id="fund2" name="fundType" value="운전자금">
+                                <label for="fund2">운전자금</label>
+                            </div>
+                            <div class="keai-fund-type-option">
+                                <input type="checkbox" id="fund3" name="fundType" value="시설자금">
+                                <label for="fund3">시설자금</label>
+                            </div>
+                            <div class="keai-fund-type-option">
+                                <input type="checkbox" id="fund4" name="fundType" value="기타자금">
+                                <label for="fund4">기타자금</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Message -->
+                    <div class="keai-form-row full">
+                        <div class="keai-form-group">
+                            <label class="keai-form-label">문의사항</label>
+                            <textarea class="keai-form-control" name="message"
+                                      placeholder="필요하신 자금의 용도나 현재 경영 상황 등을 간략히 적어주세요"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Privacy -->
+                    <div class="keai-privacy-section">
+                        <h4 class="keai-privacy-title">개인정보 수집·이용 동의</h4>
+                        <div class="keai-privacy-checkbox">
+                            <input type="checkbox" id="privacy" name="privacy" required>
+                            <label for="privacy">개인정보 수집·이용에 동의합니다 <span class="keai-required">*</span>
+                            <span class="keai-privacy-detail-link" onclick="togglePrivacyDetail()">내용보기</span></label>
+                        </div>
+                        <div class="keai-privacy-content" id="privacyContent">
+                            <p>1. 수집항목: 기업명, 사업자번호, 대표자명, 연락처, 이메일, 문의내용</p>
+                            <p>2. 수집목적: 자금확보 상담 및 지원 서비스 제공</p>
+                            <p>3. 보유기간: 서비스 종료 후 3년</p>
+                            <p>4. 동의 거부 시 서비스 이용이 제한될 수 있습니다.</p>
+                        </div>
+                    </div>
+
+                    <!-- Messages -->
+                    <div class="keai-message-box success" id="successMessage">
+                        ✅ 심사 신청이 성공적으로 완료되었습니다!
+                    </div>
+                    <div class="keai-message-box error" id="errorMessage">
+                        ❌ 신청 처리 중 문제가 발생했습니다. 다시 시도해주세요.
+                    </div>
+
+                    <!-- Submit -->
+                    <div class="keai-submit-section">
+                        <button type="submit" class="keai-submit-button" id="submitButton">무료 심사 신청하기</button>
+                        <p class="keai-submit-note">신청 후 한국기업심사원 전문가가 24시간 내 연락드립니다</p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================================================
+     FOOTER
+     ================================================ -->
+<footer class="keai-footer">
+    <div class="keai-footer-wrapper">
+        <div class="keai-footer-container">
+            <div class="keai-footer-top">
+                <div class="keai-footer-info">
+                    <div class="keai-footer-logo">
+                        <img src="white_logo.png" alt="KEAI 한국기업심사원" class="keai-footer-logo-image" data-image-id="logo-white">
+                    </div>
+                    <p class="keai-footer-desc">자금확보 전문 컨설팅 | 기업심사 전문가의 1:1 맞춤 컨설팅</p>
+                </div>
+            </div>
+
+            <div class="keai-footer-middle">
+                <div class="keai-footer-contact">
+                    <h4 class="keai-footer-title">Contact</h4>
+
+                    <div class="keai-contact-item">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M16 12h-3a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h3v7z"></path>
+                        </svg>
+                        <span>대표자: 이강희</span>
+                    </div>
+
+                    <div class="keai-contact-item">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="12" y1="8" x2="12" y2="16"></line>
+                            <line x1="8" y1="12" x2="16" y2="12"></line>
+                        </svg>
+                        <span>사업자등록번호: 794-35-01595</span>
+                    </div>
+
+                    <div class="keai-contact-item">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                        </svg>
+                        <span>대표전화: 1688-8401</span>
+                    </div>
+
+                    <div class="keai-contact-item">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                            <path d="M12 12l8-5H4l8 5z"></path>
+                        </svg>
+                        <span>이메일: ceo@k-eai.kr</span>
+                    </div>
+
+                    <div class="keai-contact-item">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                        <span>주소: 인천광역시 서구 중봉대로 612번길 10-20, 505-J302호(청라동, 청라프라자)</span>
+                    </div>
+
+                    <div class="keai-contact-item">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                        <span>상담시간: 평일 09:00-18:00</span>
+                    </div>
+                </div>
+
+                <div class="keai-footer-menu">
+                    <h4 class="keai-footer-title">Menu</h4>
+                    <ul class="keai-footer-list">
+                        <li><a href="index.html">홈</a></li>
+                        <li><a href="company.html">회사소개</a></li>
+                        <li><a href="process.html">진행과정</a></li>
+                        <li><a href="fund.html">자금상담</a></li>
+                        <li><a href="pro.html">전문서비스</a></li>
+                        <li><a href="mkt.html">온라인마케팅</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- JJK 업무협약 섹션 -->
+            <div class="keai-partnership-section">
+                <a href="https://www.jjk-biz.com/" target="_blank" rel="noopener noreferrer" class="keai-partnership-link">
+                    <img src="https://cdn.imweb.me/upload/S2025072970f03c9c7eca7/ac036acf8a029.png" alt="업무협약 아이콘" class="keai-partnership-icon" data-image-id="partnership-icon">
+                    <span>정책자금지원센터 | 업무협약 한국기업심사원</span>
+                </a>
+            </div>
+
+            <div class="keai-footer-bottom">
+                <p class="keai-copyright">© 2025 한국기업심사원 KEAI. All rights reserved.</p>
+                <div class="keai-footer-links">
+                    <a href="javascript:void(0)" onclick="openModal('terms')">이용약관</a>
+                    <span class="divider">|</span>
+                    <a href="javascript:void(0)" onclick="openModal('privacy')">개인정보처리방침</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- 이용약관 모달 -->
+<div class="keai-modal-overlay" id="termsModal" onclick="closeModal('terms', event)">
+    <div class="keai-modal" onclick="event.stopPropagation()">
+        <div class="keai-modal-header">
+            <h3 class="keai-modal-title">이용약관</h3>
+            <button class="keai-modal-close" onclick="closeModal('terms')">
+                <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+            </button>
+        </div>
+        <div class="keai-modal-body">
+            <h4>제1조 (목적)</h4>
+            <p>본 약관은 한국기업심사원(이하 "회사")이 제공하는 자금확보 컨설팅 서비스의 이용조건 및 절차, 회사와 이용자의 권리, 의무 및 책임사항을 규정함을 목적으로 합니다.</p>
+
+            <h4>제2조 (용어의 정의)</h4>
+            <ul>
+                <li>"서비스"란 회사가 제공하는 자금확보 컨설팅, 서류준비 가이드, 사업계획서 작성 지원 등의 서비스를 말합니다.</li>
+                <li>"이용자"란 본 약관에 동의하고 회사의 서비스를 이용하는 개인 또는 기업을 말합니다.</li>
+                <li>"컨설팅"이란 대표자 역량분석을 기반으로 한 맞춤형 자금확보 전략 수립 서비스를 말합니다.</li>
+            </ul>
+
+            <h4>제3조 (서비스의 내용)</h4>
+            <p>회사는 다음과 같은 서비스를 제공합니다.</p>
+            <ul>
+                <li>자금확보 역량 파악 및 적합성 검토</li>
+                <li>맞춤형 자금조달 전략 설계</li>
+                <li>신청서류 준비 가이드 제공</li>
+                <li>사업계획서 작성 지원</li>
+                <li>확보 후 사후관리 지원</li>
+            </ul>
+
+            <h4>제4조 (서비스 이용의 제한)</h4>
+            <p>회사는 다음 각 호에 해당하는 경우 서비스 이용을 제한할 수 있습니다.</p>
+            <ul>
+                <li>허위 정보를 제공한 경우</li>
+                <li>타인의 정보를 도용한 경우</li>
+                <li>서비스 운영을 방해하는 행위를 한 경우</li>
+                <li>기타 관련 법령에 위반되는 행위를 한 경우</li>
+            </ul>
+
+            <h4>제5조 (면책조항)</h4>
+            <p>회사는 자금 신청 대행 서비스를 제공하지 않으며, 실제 자금 신청 및 접수는 대표자가 직접 진행합니다. 회사는 자금 확보 결과에 대해 보장하지 않으며, 컨설팅 서비스 제공에 대한 책임만을 부담합니다.</p>
+
+            <h4>제6조 (약관의 변경)</h4>
+            <p>회사는 필요한 경우 관련 법령에 위배되지 않는 범위에서 본 약관을 변경할 수 있으며, 변경된 약관은 웹사이트에 공지함으로써 효력을 발생합니다.</p>
+
+            <div class="keai-legal-info">
+                <p><strong>한국기업심사원</strong></p>
+                <p>대표자: 이강희</p>
+                <p>사업자등록번호: 794-35-01595</p>
+                <p>주소: 인천광역시 서구 중봉대로 612번길 10-20, 505-J302호</p>
+                <p>시행일: 2025년 1월 1일</p>
+            </div>
+        </div>
+        <div class="keai-modal-footer">
+            <button onclick="closeModal('terms')">확인</button>
+        </div>
+    </div>
+</div>
+
+<!-- 개인정보처리방침 모달 -->
+<div class="keai-modal-overlay" id="privacyModal" onclick="closeModal('privacy', event)">
+    <div class="keai-modal" onclick="event.stopPropagation()">
+        <div class="keai-modal-header">
+            <h3 class="keai-modal-title">개인정보처리방침</h3>
+            <button class="keai-modal-close" onclick="closeModal('privacy')">
+                <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+            </button>
+        </div>
+        <div class="keai-modal-body">
+            <h4>제1조 (개인정보의 수집 및 이용 목적)</h4>
+            <p>한국기업심사원(이하 "회사")은 다음의 목적을 위하여 개인정보를 수집 및 이용합니다.</p>
+            <ul>
+                <li>자금확보 컨설팅 서비스 제공</li>
+                <li>상담 및 문의 응대</li>
+                <li>서비스 이용에 관한 통계 분석</li>
+                <li>마케팅 및 광고에의 활용 (동의 시)</li>
+            </ul>
+
+            <h4>제2조 (수집하는 개인정보 항목)</h4>
+            <p>회사는 서비스 제공을 위해 다음과 같은 개인정보를 수집합니다.</p>
+            <ul>
+                <li>필수항목: 기업명, 사업자등록번호, 대표자명, 연락처, 이메일</li>
+                <li>선택항목: 업종, 설립연도, 필요자금규모, 문의사항</li>
+            </ul>
+
+            <h4>제3조 (개인정보의 보유 및 이용 기간)</h4>
+            <p>회사는 개인정보 수집 및 이용 목적이 달성된 후에는 해당 정보를 지체 없이 파기합니다. 단, 관련 법령에 따라 보존할 필요가 있는 경우 해당 법령에서 정한 기간 동안 보관합니다.</p>
+            <ul>
+                <li>상담 및 서비스 제공 기록: 3년</li>
+                <li>계약 또는 청약철회 등에 관한 기록: 5년</li>
+                <li>소비자 불만 또는 분쟁처리에 관한 기록: 3년</li>
+            </ul>
+
+            <h4>제4조 (개인정보의 제3자 제공)</h4>
+            <p>회사는 이용자의 개인정보를 원칙적으로 외부에 제공하지 않습니다. 다만, 다음의 경우에는 예외로 합니다.</p>
+            <ul>
+                <li>이용자가 사전에 동의한 경우</li>
+                <li>법령의 규정에 의하거나, 수사 목적으로 법령에 정해진 절차와 방법에 따라 수사기관의 요구가 있는 경우</li>
+            </ul>
+
+            <h4>제5조 (개인정보의 파기)</h4>
+            <p>회사는 개인정보 보유기간의 경과, 처리목적 달성 등 개인정보가 불필요하게 되었을 때에는 지체 없이 해당 개인정보를 파기합니다.</p>
+
+            <h4>제6조 (이용자의 권리)</h4>
+            <p>이용자는 언제든지 자신의 개인정보에 대해 열람, 정정, 삭제, 처리정지를 요청할 수 있습니다.</p>
+
+            <h4>제7조 (개인정보보호 책임자)</h4>
+            <div class="keai-legal-info">
+                <p><strong>개인정보보호 책임자</strong></p>
+                <p>성명: 이강희</p>
+                <p>직책: 대표</p>
+                <p>연락처: 1688-8401</p>
+                <p>이메일: ceo@k-eai.kr</p>
+                <p>시행일: 2025년 1월 1일</p>
+            </div>
+        </div>
+        <div class="keai-modal-footer">
+            <button onclick="closeModal('privacy')">확인</button>
+        </div>
+    </div>
+</div>
+
+<!-- Main JavaScript -->
+<script src="js/main.js"></script>
+
+<!-- Dynamic Image Loader -->
+<script src="js/image-loader.js"></script>
+
+</body>
+</html>

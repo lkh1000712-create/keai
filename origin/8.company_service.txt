@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이음파트너스 - 서비스</title>
+    <style>
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        /* 서비스 섹션 */
+        #s20251117service001 {
+            position: relative;
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            padding: 100px 20px;
+            background: #F9FAFB;
+            overflow: hidden;
+            z-index: 20;
+        }
+
+        /* 컨테이너 */
+        #s20251117service001 .service-container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* 섹션 타이틀 */
+        #s20251117service001 .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        #s20251117service001 .section-title h2 {
+            font-size: clamp(32px, 4vw, 42px);
+            font-weight: 800;
+            color: #2C3E50;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+
+        #s20251117service001 .section-title p {
+            font-size: clamp(16px, 2vw, 20px);
+            color: #4B5563;
+            font-weight: 400;
+        }
+
+        /* 서비스 그리드 */
+        #s20251117service001 .service-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+        }
+
+        /* 서비스 카드 */
+        #s20251117service001 .service-card {
+            background: #ffffff;
+            border: 1px solid #E5E7EB;
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        #s20251117service001 .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 24px rgba(234, 138, 76, 0.15);
+            border-color: #EA8A4C;
+        }
+
+        /* 카드 이미지 */
+        #s20251117service001 .service-card-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* 카드 컨텐츠 */
+        #s20251117service001 .service-card-content {
+            padding: 32px;
+        }
+
+        #s20251117service001 .service-card h3 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #2C3E50;
+            margin-bottom: 16px;
+        }
+
+        #s20251117service001 .service-card p {
+            font-size: 16px;
+            color: #4B5563;
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+
+        /* 태그 */
+        #s20251117service001 .service-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        #s20251117service001 .service-tag {
+            display: inline-block;
+            padding: 6px 14px;
+            background: #FEF3E7;
+            color: #EA8A4C;
+            font-size: 13px;
+            font-weight: 600;
+            border-radius: 20px;
+            white-space: nowrap;
+        }
+
+        /* 반응형 - 태블릿 */
+        @media (max-width: 1024px) {
+            #s20251117service001 {
+                padding: 80px 20px;
+            }
+
+            #s20251117service001 .service-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            #s20251117service001 .service-card-image {
+                height: 200px;
+            }
+        }
+
+        /* 반응형 - 모바일 */
+        @media (max-width: 768px) {
+            #s20251117service001 {
+                padding: 60px 16px;
+            }
+
+            #s20251117service001 .section-title {
+                margin-bottom: 40px;
+            }
+
+            #s20251117service001 .section-title h2 {
+                font-size: 28px;
+            }
+
+            #s20251117service001 .section-title p {
+                font-size: 16px;
+            }
+
+            #s20251117service001 .service-grid {
+                gap: 20px;
+            }
+
+            #s20251117service001 .service-card-image {
+                height: 180px;
+            }
+
+            #s20251117service001 .service-card-content {
+                padding: 24px;
+            }
+
+            #s20251117service001 .service-card h3 {
+                font-size: 20px;
+                margin-bottom: 12px;
+            }
+
+            #s20251117service001 .service-card p {
+                font-size: 15px;
+                margin-bottom: 20px;
+            }
+
+            #s20251117service001 .service-tag {
+                font-size: 12px;
+                padding: 5px 12px;
+            }
+        }
+
+        /* 반응형 - 소형 모바일 */
+        @media (max-width: 480px) {
+            #s20251117service001 .service-card-image {
+                height: 160px;
+            }
+
+            #s20251117service001 .service-card-content {
+                padding: 20px;
+            }
+
+            #s20251117service001 .service-card h3 {
+                font-size: 18px;
+            }
+
+            #s20251117service001 .service-card p {
+                font-size: 14px;
+            }
+
+            #s20251117service001 .service-tag {
+                font-size: 11px;
+                padding: 4px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section id="s20251117service001">
+        <div class="service-container">
+            <!-- 섹션 타이틀 -->
+            <div class="section-title">
+                <h2>정책자금 전문 컨설팅 서비스</h2>
+                <p>이음파트너스가 제공하는 맞춤형 정책자금 지원</p>
+            </div>
+
+            <!-- 서비스 그리드 -->
+            <div class="service-grid">
+                <!-- 적합도 진단 -->
+                <div class="service-card">
+                    <img src="https://cdn.imweb.me/upload/S20251117ed7f35ec2bb5b/90a956024ae18.png" alt="정책자금 적합도 진단" class="service-card-image">
+                    <div class="service-card-content">
+                        <h3>정책자금 적합도 진단</h3>
+                        <p>대표자 역량과 사업 성장성을 분석하여, 최적의 정책자금 지원사업을 선별합니다.</p>
+                        <div class="service-tags">
+                            <span class="service-tag">역량분석</span>
+                            <span class="service-tag">요건검토</span>
+                            <span class="service-tag">적합성판단</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 자금조달 전략 -->
+                <div class="service-card">
+                    <img src="https://cdn.imweb.me/upload/S20251117ed7f35ec2bb5b/8cdbda2b938d6.png" alt="맞춤형 자금조달 전략" class="service-card-image">
+                    <div class="service-card-content">
+                        <h3>맞춤형 자금조달 전략</h3>
+                        <p>중앙부처와 지자체의 다양한 정책자금 중 맞춤형 자금조달 전략을 설계합니다.</p>
+                        <div class="service-tags">
+                            <span class="service-tag">공고분석</span>
+                            <span class="service-tag">자금설계</span>
+                            <span class="service-tag">지원검토</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 신청서류 작성지원 -->
+                <div class="service-card">
+                    <img src="https://cdn.imweb.me/upload/S20251117ed7f35ec2bb5b/8e8a0b2fccdca.png" alt="신청서류 작성지원" class="service-card-image">
+                    <div class="service-card-content">
+                        <h3>신청서류 준비 가이드</h3>
+                        <p>사업계획서부터 필수증빙까지, 대표자가 직접 준비할 수 있도록 상세히 안내합니다.</p>
+                        <div class="service-tags">
+                            <span class="service-tag">계획수립</span>
+                            <span class="service-tag">서류가이드</span>
+                            <span class="service-tag">증빙안내</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 사후관리 지원 -->
+                <div class="service-card">
+                    <img src="https://cdn.imweb.me/upload/S20251117ed7f35ec2bb5b/eba7ce1584be6.png" alt="선정 후 사후관리 지원" class="service-card-image">
+                    <div class="service-card-content">
+                        <h3>선정 후 사후관리 지원</h3>
+                        <p>협약부터 정산까지 완벽 가이드하고, 연계 지원사업으로 지속적인 성장을 돕습니다.</p>
+                        <div class="service-tags">
+                            <span class="service-tag">협약안내</span>
+                            <span class="service-tag">정산가이드</span>
+                            <span class="service-tag">연계지원</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

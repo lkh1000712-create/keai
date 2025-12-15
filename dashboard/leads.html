@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KLT2444N9N"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-KLT2444N9N');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>접수 관리 - KEAI 관리자</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+    <style>
+        /* 필터 */
+        .filter-bar {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            background: #fff;
+            border: 1px solid var(--neutral-200);
+            border-radius: 20px;
+            font-size: 14px;
+            color: var(--neutral-500);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .filter-btn.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: #fff;
+        }
+
+        /* 테이블 카드 */
+        .table-card {
+            background: #fff;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 14px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--neutral-200);
+        }
+
+        th {
+            background: var(--neutral-50);
+            font-weight: 600;
+            font-size: 13px;
+            color: var(--neutral-500);
+            white-space: nowrap;
+        }
+
+        td {
+            font-size: 14px;
+            color: var(--neutral-700);
+        }
+
+        tbody tr:hover {
+            background: var(--neutral-50);
+        }
+
+        /* 상태 배지 */
+        .status-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .status-new { background: #DBEAFE; color: #1D4ED8; }
+        .status-pending { background: #FEF3C7; color: #D97706; }
+        .status-progress { background: #E0E7FF; color: #4338CA; }
+        .status-complete { background: #D1FAE5; color: #059669; }
+
+        /* 액션 버튼 */
+        .btn-action {
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            min-height: 44px;
+            min-width: 44px;
+        }
+
+        .btn-view {
+            background: #EFF6FF;
+            color: #1D4ED8;
+        }
+
+        .btn-view:hover {
+            background: #DBEAFE;
+        }
+
+        /* 로딩/빈 상태 */
+        .loading-state, .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--neutral-400);
+        }
+
+        .empty-state h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--neutral-500);
+        }
+
+        /* 모달 */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #fff;
+            border-radius: var(--radius-lg);
+            max-width: 600px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--neutral-200);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            background: #fff;
+            z-index: 10;
+        }
+
+        .modal-header h3 {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .modal-close {
+            width: 44px;
+            height: 44px;
+            border: none;
+            background: var(--neutral-100);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-body {
+            padding: 24px;
+        }
+
+        .detail-row {
+            display: flex;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .detail-label {
+            width: 120px;
+            font-weight: 600;
+            color: var(--neutral-500);
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .detail-value {
+            flex: 1;
+            color: var(--neutral-800);
+            font-size: 14px;
+            min-width: 0;
+            word-break: break-word;
+        }
+
+        .modal-footer {
+            padding: 16px 24px;
+            border-top: 1px solid var(--neutral-200);
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+            position: sticky;
+            bottom: 0;
+            background: #fff;
+        }
+
+        .btn-modal {
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            min-height: 48px;
+        }
+
+        .btn-cancel {
+            background: var(--neutral-100);
+            color: var(--neutral-700);
+        }
+
+        .btn-save {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .status-select {
+            padding: 10px 14px;
+            border: 1px solid var(--neutral-200);
+            border-radius: 8px;
+            font-size: 14px;
+            width: 100%;
+            max-width: 200px;
+            min-height: 44px;
+        }
+
+        /* ==========================================
+           모바일 반응형 스타일
+           ========================================== */
+        @media (max-width: 768px) {
+            /* 필터 바 - 가로 스크롤 */
+            .filter-bar {
+                overflow-x: auto;
+                flex-wrap: nowrap;
+                gap: 8px;
+                padding-bottom: 8px;
+                margin-bottom: 16px;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .filter-bar::-webkit-scrollbar {
+                display: none;
+            }
+
+            .filter-btn {
+                flex-shrink: 0;
+                padding: 10px 16px;
+                font-size: 13px;
+            }
+
+            /* 테이블 카드 */
+            .table-card {
+                background: transparent;
+                box-shadow: none;
+            }
+
+            .table-wrapper {
+                overflow: visible;
+            }
+
+            /* 테이블 → 카드 형태 변환 */
+            table {
+                display: block;
+            }
+
+            thead {
+                display: none;
+            }
+
+            tbody {
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            tbody tr {
+                display: block;
+                background: #fff;
+                border-radius: var(--radius-lg);
+                padding: 16px;
+                box-shadow: var(--shadow-sm);
+                border: 1px solid var(--neutral-200);
+            }
+
+            tbody tr:hover {
+                background: #fff;
+                box-shadow: var(--shadow-md);
+            }
+
+            td {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 8px 0;
+                border-bottom: 1px solid var(--neutral-100);
+            }
+
+            td:last-child {
+                border-bottom: none;
+                padding-top: 12px;
+                justify-content: flex-end;
+            }
+
+            td::before {
+                content: attr(data-label);
+                font-size: 12px;
+                font-weight: 600;
+                color: var(--neutral-500);
+                flex-shrink: 0;
+                margin-right: 12px;
+            }
+
+            td:last-child::before {
+                display: none;
+            }
+
+            /* 기업명 강조 */
+            td:nth-child(2) {
+                font-size: 15px;
+            }
+
+            td:nth-child(2) strong {
+                color: var(--neutral-900);
+            }
+
+            /* 이메일 숨기기 (모바일에서) */
+            td:nth-child(5) {
+                display: none;
+            }
+
+            /* 액션 버튼 확대 */
+            .btn-action {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+
+            /* 모달 모바일 */
+            .modal-overlay {
+                padding: 0;
+                align-items: flex-end;
+            }
+
+            .modal-content {
+                max-width: 100%;
+                max-height: 85vh;
+                border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+            }
+
+            .modal-header {
+                padding: 16px 20px;
+            }
+
+            .modal-header h3 {
+                font-size: 18px;
+            }
+
+            .modal-body {
+                padding: 20px;
+            }
+
+            .detail-row {
+                flex-direction: column;
+                gap: 4px;
+                margin-bottom: 14px;
+            }
+
+            .detail-label {
+                width: 100%;
+                font-size: 12px;
+            }
+
+            .detail-value {
+                font-size: 15px;
+            }
+
+            .modal-footer {
+                padding: 16px 20px;
+                flex-direction: column-reverse;
+            }
+
+            .btn-modal {
+                width: 100%;
+                text-align: center;
+                justify-content: center;
+            }
+
+            .status-select {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .filter-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+
+            tbody tr {
+                padding: 14px;
+            }
+
+            td {
+                padding: 6px 0;
+                font-size: 13px;
+            }
+
+            td::before {
+                font-size: 11px;
+            }
+
+            /* 연락처도 숨기기 (아주 작은 화면) */
+            /* td:nth-child(4) { display: none; } */
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- 사이드바 -->
+        <aside class="sidebar"></aside>
+
+        <!-- 메인 콘텐츠 -->
+        <main class="main-content">
+            <!-- 헤더 -->
+            <header class="dashboard-header"></header>
+
+            <!-- 필터 -->
+            <div class="filter-bar">
+                <button class="filter-btn active" data-filter="all">전체</button>
+                <button class="filter-btn" data-filter="신규">신규</button>
+                <button class="filter-btn" data-filter="대기">대기</button>
+                <button class="filter-btn" data-filter="상담중">상담중</button>
+                <button class="filter-btn" data-filter="완료">완료</button>
+            </div>
+
+            <!-- 테이블 -->
+            <div class="table-card">
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>접수일</th>
+                                <th>기업명</th>
+                                <th>대표자</th>
+                                <th>연락처</th>
+                                <th>이메일</th>
+                                <th>필요자금</th>
+                                <th>상태</th>
+                                <th>관리</th>
+                            </tr>
+                        </thead>
+                        <tbody id="leadsBody">
+                            <tr>
+                                <td colspan="8" class="loading-state">데이터를 불러오는 중...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- 상세 모달 -->
+    <div class="modal-overlay" id="detailModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>접수 상세</h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody"></div>
+            <div class="modal-footer">
+                <button class="btn-modal btn-cancel" onclick="closeModal()">닫기</button>
+                <button class="btn-modal btn-save" onclick="saveStatus()">상태 저장</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/components.js"></script>
+    <script>
+        const API_BASE = '/api';
+        let allLeads = [];
+        let currentFilter = 'all';
+        let currentLeadId = null;
+
+        // 초기화
+        document.addEventListener('DOMContentLoaded', function() {
+            loadSidebar('leads');
+            loadDashboardHeader('접수 관리', '고객 상담 신청 내역을 관리합니다');
+            loadMobileBottomNav('leads');
+            loadLeads();
+            initFilters();
+        });
+
+        // 필터 초기화
+        function initFilters() {
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    currentFilter = this.dataset.filter;
+                    renderLeads();
+                });
+            });
+        }
+
+        // 접수 내역 로드
+        async function loadLeads() {
+            try {
+                const response = await fetch(`${API_BASE}/leads`);
+                if (!response.ok) throw new Error('API error');
+
+                const result = await response.json();
+                allLeads = result.leads || [];
+                renderLeads();
+            } catch (error) {
+                console.error('Load error:', error);
+                document.getElementById('leadsBody').innerHTML = `
+                    <tr>
+                        <td colspan="8" class="empty-state">
+                            <h3>데이터를 불러올 수 없습니다</h3>
+                            <p>잠시 후 다시 시도해주세요</p>
+                        </td>
+                    </tr>
+                `;
+            }
+        }
+
+        // 렌더링
+        function renderLeads() {
+            const tbody = document.getElementById('leadsBody');
+
+            let leads = allLeads;
+            if (currentFilter !== 'all') {
+                leads = allLeads.filter(l => (l.상태 || '신규') === currentFilter);
+            }
+
+            if (leads.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="8" class="empty-state">
+                            <h3>접수 내역이 없습니다</h3>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            tbody.innerHTML = leads.map(lead => `
+                <tr>
+                    <td data-label="접수일">${formatDate(lead.접수일)}</td>
+                    <td data-label="기업명"><strong>${lead.기업명 || '-'}</strong></td>
+                    <td data-label="대표자">${lead.대표자명 || '-'}</td>
+                    <td data-label="연락처">${lead.연락처 || '-'}</td>
+                    <td data-label="이메일">${lead.이메일 || '-'}</td>
+                    <td data-label="필요자금">${lead.필요자금규모 || '-'}</td>
+                    <td data-label="상태"><span class="status-badge ${getStatusClass(lead.상태)}">${lead.상태 || '신규'}</span></td>
+                    <td>
+                        <button class="btn-action btn-view" onclick="showDetail('${lead.id}')">상세보기</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // 상태 클래스
+        function getStatusClass(status) {
+            const classes = {
+                '신규': 'status-new',
+                '대기': 'status-pending',
+                '상담중': 'status-progress',
+                '진행중': 'status-progress',
+                '완료': 'status-complete'
+            };
+            return classes[status] || 'status-new';
+        }
+
+        // 날짜 포맷
+        function formatDate(dateStr) {
+            if (!dateStr) return '-';
+            const date = new Date(dateStr);
+            return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+        }
+
+        // 상세 보기
+        function showDetail(id) {
+            const lead = allLeads.find(l => l.id === id);
+            if (!lead) return;
+
+            currentLeadId = id;
+
+            document.getElementById('modalBody').innerHTML = `
+                <div class="detail-row">
+                    <span class="detail-label">기업명</span>
+                    <span class="detail-value">${lead.기업명 || '-'}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">사업자번호</span>
+                    <span class="detail-value">${lead.사업자번호 || '-'}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">대표자명</span>
+                    <span class="detail-value">${lead.대표자명 || '-'}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">연락처</span>
+                    <span class="detail-value">${lead.연락처 || '-'}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">이메일</span>
+                    <span class="detail-value">${lead.이메일 || '-'}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">업종</span>
+                    <span class="detail-value">${lead.업종 || '-'}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">설립연도</span>
+                    <span class="detail-value">${lead.설립연도 || '-'}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">필요자금</span>
+                    <span class="detail-value">${lead.필요자금규모 || '-'}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">자금종류</span>
+                    <span class="detail-value">${lead.자금종류 || '-'}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">문의사항</span>
+                    <span class="detail-value">${lead.문의사항 || '-'}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">접수일</span>
+                    <span class="detail-value">${formatDate(lead.접수일)}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">상태</span>
+                    <span class="detail-value">
+                        <select class="status-select" id="statusSelect">
+                            <option value="신규" ${(lead.상태 || '신규') === '신규' ? 'selected' : ''}>신규</option>
+                            <option value="대기" ${lead.상태 === '대기' ? 'selected' : ''}>대기</option>
+                            <option value="상담중" ${lead.상태 === '상담중' ? 'selected' : ''}>상담중</option>
+                            <option value="완료" ${lead.상태 === '완료' ? 'selected' : ''}>완료</option>
+                        </select>
+                    </span>
+                </div>
+            `;
+
+            document.getElementById('detailModal').classList.add('show');
+        }
+
+        // 모달 닫기
+        function closeModal() {
+            document.getElementById('detailModal').classList.remove('show');
+            currentLeadId = null;
+        }
+
+        // 상태 저장
+        async function saveStatus() {
+            if (!currentLeadId) return;
+
+            const newStatus = document.getElementById('statusSelect').value;
+
+            try {
+                const response = await fetch(`${API_BASE}/leads?id=${currentLeadId}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 상태: newStatus })
+                });
+
+                if (!response.ok) throw new Error('Update failed');
+
+                const lead = allLeads.find(l => l.id === currentLeadId);
+                if (lead) lead.상태 = newStatus;
+
+                closeModal();
+                renderLeads();
+                alert('상태가 업데이트되었습니다.');
+
+            } catch (error) {
+                console.error('Save error:', error);
+                alert('저장 중 오류가 발생했습니다.');
+            }
+        }
+
+        // 모달 외부 클릭 닫기
+        document.getElementById('detailModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+    </script>
+</body>
+</html>

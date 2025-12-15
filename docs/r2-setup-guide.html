@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloudflare R2 설정 가이드 - KEAI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .copy-btn { transition: all 0.2s; }
+        .copy-btn:hover { transform: scale(1.05); }
+        .copy-btn.copied { background-color: #10b981 !important; }
+        .step-card { transition: all 0.3s; }
+        .step-card:hover { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1); }
+        .checked { text-decoration: line-through; color: #9ca3af; }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div class="max-w-4xl mx-auto py-8 px-4">
+        <!-- 헤더 -->
+        <header class="text-center mb-12">
+            <div class="inline-flex items-center gap-2 bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-medium mb-4">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                </svg>
+                KEAI 이미지 관리 시스템
+            </div>
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">Cloudflare R2 설정 가이드</h1>
+            <p class="text-gray-600">이미지 업로드 기능을 사용하기 위한 R2 버킷 설정 방법</p>
+        </header>
+
+        <!-- 체크리스트 -->
+        <section class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-8">
+            <h2 class="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+                </svg>
+                진행 체크리스트
+            </h2>
+            <ul class="space-y-3" id="checklist">
+                <li class="flex items-center gap-3">
+                    <input type="checkbox" class="w-5 h-5 text-blue-600 rounded" onchange="toggleCheck(this)">
+                    <span>Cloudflare 계정 생성/로그인</span>
+                </li>
+                <li class="flex items-center gap-3">
+                    <input type="checkbox" class="w-5 h-5 text-blue-600 rounded" onchange="toggleCheck(this)">
+                    <span>R2 버킷 생성</span>
+                </li>
+                <li class="flex items-center gap-3">
+                    <input type="checkbox" class="w-5 h-5 text-blue-600 rounded" onchange="toggleCheck(this)">
+                    <span>R2 API 토큰 생성</span>
+                </li>
+                <li class="flex items-center gap-3">
+                    <input type="checkbox" class="w-5 h-5 text-blue-600 rounded" onchange="toggleCheck(this)">
+                    <span>Vercel 환경변수 설정</span>
+                </li>
+                <li class="flex items-center gap-3">
+                    <input type="checkbox" class="w-5 h-5 text-blue-600 rounded" onchange="toggleCheck(this)">
+                    <span>Airtable 테이블 생성</span>
+                </li>
+                <li class="flex items-center gap-3">
+                    <input type="checkbox" class="w-5 h-5 text-blue-600 rounded" onchange="toggleCheck(this)">
+                    <span>테스트 업로드</span>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Step 1 -->
+        <section class="step-card bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+            <div class="flex items-center gap-3 mb-4">
+                <span class="flex items-center justify-center w-8 h-8 bg-blue-600 text-white rounded-full font-bold text-sm">1</span>
+                <h3 class="text-xl font-semibold text-gray-900">Cloudflare R2 버킷 생성</h3>
+            </div>
+            <ol class="space-y-4 text-gray-700">
+                <li class="flex gap-3">
+                    <span class="text-blue-600 font-bold">1.</span>
+                    <div>
+                        <a href="https://dash.cloudflare.com" target="_blank" class="text-blue-600 hover:underline font-medium">Cloudflare Dashboard</a>에 로그인합니다.
+                    </div>
+                </li>
+                <li class="flex gap-3">
+                    <span class="text-blue-600 font-bold">2.</span>
+                    <div>왼쪽 메뉴에서 <code class="bg-gray-100 px-2 py-1 rounded">R2 Object Storage</code>를 클릭합니다.</div>
+                </li>
+                <li class="flex gap-3">
+                    <span class="text-blue-600 font-bold">3.</span>
+                    <div><code class="bg-gray-100 px-2 py-1 rounded">Create bucket</code> 버튼을 클릭합니다.</div>
+                </li>
+                <li class="flex gap-3">
+                    <span class="text-blue-600 font-bold">4.</span>
+                    <div>
+                        버킷 이름을 입력합니다:
+                        <div class="flex items-center gap-2 mt-2">
+                            <code class="bg-gray-900 text-green-400 px-4 py-2 rounded font-mono" id="bucketName">keai-images</code>
+                            <button onclick="copyText('keai-images')" class="copy-btn bg-gray-200 hover:bg-gray-300 p-2 rounded">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </li>
+                <li class="flex gap-3">
+                    <span class="text-blue-600 font-bold">5.</span>
+                    <div>Location은 <code class="bg-gray-100 px-2 py-1 rounded">Automatic</code>으로 두고 Create를 클릭합니다.</div>
+                </li>
+            </ol>
+        </section>
+
+        <!-- Step 2 -->
+        <section class="step-card bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+            <div class="flex items-center gap-3 mb-4">
+                <span class="flex items-center justify-center w-8 h-8 bg-blue-600 text-white rounded-full font-bold text-sm">2</span>
+                <h3 class="text-xl font-semibold text-gray-900">R2 API 토큰 생성</h3>
+            </div>
+            <ol class="space-y-4 text-gray-700">
+                <li class="flex gap-3">
+                    <span class="text-blue-600 font-bold">1.</span>
+                    <div>R2 페이지에서 <code class="bg-gray-100 px-2 py-1 rounded">Manage R2 API Tokens</code>를 클릭합니다.</div>
+                </li>
+                <li class="flex gap-3">
+                    <span class="text-blue-600 font-bold">2.</span>
+                    <div><code class="bg-gray-100 px-2 py-1 rounded">Create API Token</code>을 클릭합니다.</div>
+                </li>
+                <li class="flex gap-3">
+                    <span class="text-blue-600 font-bold">3.</span>
+                    <div>
+                        토큰 설정:
+                        <ul class="mt-2 ml-4 space-y-1 text-sm">
+                            <li>• Token name: <code class="bg-gray-100 px-2 py-1 rounded">KEAI Image Upload</code></li>
+                            <li>• Permissions: <code class="bg-gray-100 px-2 py-1 rounded">Object Read & Write</code></li>
+                            <li>• Specify bucket: <code class="bg-gray-100 px-2 py-1 rounded">keai-images</code> 선택</li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="flex gap-3">
+                    <span class="text-blue-600 font-bold">4.</span>
+                    <div>
+                        <span class="text-red-600 font-medium">중요!</span> 생성된 토큰 정보를 안전한 곳에 저장하세요:
+                        <ul class="mt-2 ml-4 space-y-1 text-sm">
+                            <li>• Access Key ID</li>
+                            <li>• Secret Access Key</li>
+                        </ul>
+                    </div>
+                </li>
+            </ol>
+            <div class="mt-4 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                <p class="text-yellow-800 text-sm">
+                    <strong>주의:</strong> Secret Access Key는 한 번만 표시됩니다. 반드시 복사해서 저장하세요!
+                </p>
+            </div>
+        </section>
+
+        <!-- Step 3 -->
+        <section class="step-card bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+            <div class="flex items-center gap-3 mb-4">
+                <span class="flex items-center justify-center w-8 h-8 bg-blue-600 text-white rounded-full font-bold text-sm">3</span>
+                <h3 class="text-xl font-semibold text-gray-900">Account ID 확인</h3>
+            </div>
+            <ol class="space-y-4 text-gray-700">
+                <li class="flex gap-3">
+                    <span class="text-blue-600 font-bold">1.</span>
+                    <div>Cloudflare Dashboard 오른쪽 사이드바에서 <code class="bg-gray-100 px-2 py-1 rounded">Account ID</code>를 찾습니다.</div>
+                </li>
+                <li class="flex gap-3">
+                    <span class="text-blue-600 font-bold">2.</span>
+                    <div>또는 R2 버킷 상세 페이지 URL에서 확인할 수 있습니다:
+                        <code class="block mt-2 bg-gray-100 px-4 py-2 rounded text-sm break-all">
+                            https://dash.cloudflare.com/<span class="text-blue-600 font-bold">[ACCOUNT_ID]</span>/r2/default/buckets/keai-images
+                        </code>
+                    </div>
+                </li>
+            </ol>
+        </section>
+
+        <!-- Step 4 -->
+        <section class="step-card bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+            <div class="flex items-center gap-3 mb-4">
+                <span class="flex items-center justify-center w-8 h-8 bg-blue-600 text-white rounded-full font-bold text-sm">4</span>
+                <h3 class="text-xl font-semibold text-gray-900">Vercel 환경변수 설정</h3>
+            </div>
+            <ol class="space-y-4 text-gray-700">
+                <li class="flex gap-3">
+                    <span class="text-blue-600 font-bold">1.</span>
+                    <div><a href="https://vercel.com/dashboard" target="_blank" class="text-blue-600 hover:underline font-medium">Vercel Dashboard</a>에서 KEAI 프로젝트를 선택합니다.</div>
+                </li>
+                <li class="flex gap-3">
+                    <span class="text-blue-600 font-bold">2.</span>
+                    <div><code class="bg-gray-100 px-2 py-1 rounded">Settings</code> → <code class="bg-gray-100 px-2 py-1 rounded">Environment Variables</code>로 이동합니다.</div>
+                </li>
+                <li class="flex gap-3">
+                    <span class="text-blue-600 font-bold">3.</span>
+                    <div>다음 환경변수들을 추가합니다:</div>
+                </li>
+            </ol>
+
+            <div class="mt-4 space-y-3">
+                <div class="flex items-center justify-between bg-gray-900 text-white px-4 py-3 rounded-lg">
+                    <div>
+                        <span class="text-gray-400">Key:</span>
+                        <code class="text-green-400 ml-2">R2_ACCOUNT_ID</code>
+                    </div>
+                    <button onclick="copyText('R2_ACCOUNT_ID')" class="copy-btn bg-gray-700 hover:bg-gray-600 p-2 rounded">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="flex items-center justify-between bg-gray-900 text-white px-4 py-3 rounded-lg">
+                    <div>
+                        <span class="text-gray-400">Key:</span>
+                        <code class="text-green-400 ml-2">R2_ACCESS_KEY_ID</code>
+                    </div>
+                    <button onclick="copyText('R2_ACCESS_KEY_ID')" class="copy-btn bg-gray-700 hover:bg-gray-600 p-2 rounded">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="flex items-center justify-between bg-gray-900 text-white px-4 py-3 rounded-lg">
+                    <div>
+                        <span class="text-gray-400">Key:</span>
+                        <code class="text-green-400 ml-2">R2_SECRET_ACCESS_KEY</code>
+                    </div>
+                    <button onclick="copyText('R2_SECRET_ACCESS_KEY')" class="copy-btn bg-gray-700 hover:bg-gray-600 p-2 rounded">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="flex items-center justify-between bg-gray-900 text-white px-4 py-3 rounded-lg">
+                    <div>
+                        <span class="text-gray-400">Key:</span>
+                        <code class="text-green-400 ml-2">R2_BUCKET_NAME</code>
+                        <span class="text-gray-400 ml-4">Value:</span>
+                        <code class="text-yellow-400 ml-2">keai-images</code>
+                    </div>
+                    <button onclick="copyText('R2_BUCKET_NAME')" class="copy-btn bg-gray-700 hover:bg-gray-600 p-2 rounded">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="flex items-center justify-between bg-gray-900 text-white px-4 py-3 rounded-lg">
+                    <div>
+                        <span class="text-gray-400">Key:</span>
+                        <code class="text-green-400 ml-2">ADMIN_PASSWORD</code>
+                        <span class="text-gray-400 ml-4">Value:</span>
+                        <code class="text-yellow-400 ml-2">(직접 설정)</code>
+                    </div>
+                    <button onclick="copyText('ADMIN_PASSWORD')" class="copy-btn bg-gray-700 hover:bg-gray-600 p-2 rounded">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                <p class="text-blue-800 text-sm">
+                    <strong>팁:</strong> 환경변수 추가 후 <code class="bg-blue-100 px-1 rounded">Redeploy</code>를 해야 적용됩니다.
+                </p>
+            </div>
+        </section>
+
+        <!-- Step 5 -->
+        <section class="step-card bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+            <div class="flex items-center gap-3 mb-4">
+                <span class="flex items-center justify-center w-8 h-8 bg-blue-600 text-white rounded-full font-bold text-sm">5</span>
+                <h3 class="text-xl font-semibold text-gray-900">Airtable 테이블 생성</h3>
+            </div>
+            <p class="text-gray-700 mb-4">이미지 URL을 저장할 Airtable 테이블을 생성합니다.</p>
+
+            <div class="bg-gray-50 rounded-lg p-4 mb-4">
+                <p class="font-medium text-gray-900 mb-2">테이블명: <code class="bg-gray-200 px-2 py-1 rounded">이미지설정</code></p>
+                <table class="w-full text-sm">
+                    <thead>
+                        <tr class="text-left">
+                            <th class="pb-2 text-gray-600">필드명</th>
+                            <th class="pb-2 text-gray-600">타입</th>
+                            <th class="pb-2 text-gray-600">설명</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-700">
+                        <tr>
+                            <td class="py-1"><code class="bg-gray-200 px-1 rounded">이미지ID</code></td>
+                            <td>Single line text</td>
+                            <td>Primary 필드</td>
+                        </tr>
+                        <tr>
+                            <td class="py-1"><code class="bg-gray-200 px-1 rounded">설명</code></td>
+                            <td>Single line text</td>
+                            <td>이미지 설명</td>
+                        </tr>
+                        <tr>
+                            <td class="py-1"><code class="bg-gray-200 px-1 rounded">이미지URL</code></td>
+                            <td>URL</td>
+                            <td>R2 이미지 URL</td>
+                        </tr>
+                        <tr>
+                            <td class="py-1"><code class="bg-gray-200 px-1 rounded">수정일시</code></td>
+                            <td>Last modified time</td>
+                            <td>자동 기록</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Step 6 -->
+        <section class="step-card bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+            <div class="flex items-center gap-3 mb-4">
+                <span class="flex items-center justify-center w-8 h-8 bg-green-600 text-white rounded-full font-bold text-sm">✓</span>
+                <h3 class="text-xl font-semibold text-gray-900">테스트 및 사용</h3>
+            </div>
+            <ol class="space-y-4 text-gray-700">
+                <li class="flex gap-3">
+                    <span class="text-green-600 font-bold">1.</span>
+                    <div>배포 후 <code class="bg-gray-100 px-2 py-1 rounded">/dashboard/images</code> 페이지에 접속합니다.</div>
+                </li>
+                <li class="flex gap-3">
+                    <span class="text-green-600 font-bold">2.</span>
+                    <div>관리자 비밀번호로 로그인합니다.</div>
+                </li>
+                <li class="flex gap-3">
+                    <span class="text-green-600 font-bold">3.</span>
+                    <div>이미지 카드에서 "이미지 업로드" 버튼을 클릭합니다.</div>
+                </li>
+                <li class="flex gap-3">
+                    <span class="text-green-600 font-bold">4.</span>
+                    <div>파일을 선택하면 R2에 업로드되고 Airtable에 URL이 저장됩니다.</div>
+                </li>
+            </ol>
+        </section>
+
+        <!-- 관리 이미지 목록 -->
+        <section class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">관리 가능한 이미지 목록</h3>
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm">
+                    <thead>
+                        <tr class="text-left border-b">
+                            <th class="pb-3 text-gray-600">이미지 ID</th>
+                            <th class="pb-3 text-gray-600">설명</th>
+                            <th class="pb-3 text-gray-600">권장 사이즈</th>
+                            <th class="pb-3 text-gray-600">적용 페이지</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-700">
+                        <tr class="border-b">
+                            <td class="py-3"><code class="bg-blue-100 text-blue-800 px-2 py-1 rounded">hero-home</code></td>
+                            <td>홈 히어로 배경</td>
+                            <td>1920 x 1080</td>
+                            <td>index.html</td>
+                        </tr>
+                        <tr class="border-b">
+                            <td class="py-3"><code class="bg-blue-100 text-blue-800 px-2 py-1 rounded">ceo-profile</code></td>
+                            <td>대표자 프로필</td>
+                            <td>600 x 600</td>
+                            <td>company.html</td>
+                        </tr>
+                        <tr class="border-b">
+                            <td class="py-3"><code class="bg-blue-100 text-blue-800 px-2 py-1 rounded">form-image</code></td>
+                            <td>폼 섹션 이미지</td>
+                            <td>800 x 1000</td>
+                            <td>fund.html</td>
+                        </tr>
+                        <tr class="border-b">
+                            <td class="py-3"><code class="bg-blue-100 text-blue-800 px-2 py-1 rounded">hero-pro</code></td>
+                            <td>전문서비스 배경</td>
+                            <td>1920 x 1080</td>
+                            <td>pro.html</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3"><code class="bg-blue-100 text-blue-800 px-2 py-1 rounded">hero-mkt</code></td>
+                            <td>마케팅 배경</td>
+                            <td>1920 x 1080</td>
+                            <td>mkt.html</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 푸터 -->
+        <footer class="text-center text-gray-500 text-sm py-8">
+            <p>KEAI 한국기업심사원 - 이미지 관리 시스템 설정 가이드</p>
+            <p class="mt-2">문의: ceo@k-eai.kr</p>
+        </footer>
+    </div>
+
+    <script>
+        function copyText(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = event.currentTarget;
+                btn.classList.add('copied');
+                setTimeout(() => btn.classList.remove('copied'), 1500);
+            });
+        }
+
+        function toggleCheck(checkbox) {
+            const span = checkbox.nextElementSibling;
+            if (checkbox.checked) {
+                span.classList.add('checked');
+            } else {
+                span.classList.remove('checked');
+            }
+        }
+    </script>
+</body>
+</html>

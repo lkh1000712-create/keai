@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KLT2444N9N"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-KLT2444N9N');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시글 작성 - KEAI 관리자</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #F3F4F6;
+            min-height: 100vh;
+        }
+
+        /* 헤더 */
+        .editor-header {
+            background: #fff;
+            border-bottom: 1px solid #E5E7EB;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            background: #F3F4F6;
+            border: none;
+            border-radius: 8px;
+            color: #4B5563;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .back-btn:hover {
+            background: #E5E7EB;
+        }
+
+        .back-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        .page-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1F2937;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+        }
+
+        .btn-secondary {
+            background: #F3F4F6;
+            color: #4B5563;
+        }
+
+        .btn-secondary:hover {
+            background: #E5E7EB;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #0F4C81 0%, #1A73E8 100%);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(15, 76, 129, 0.3);
+        }
+
+        /* 메인 컨테이너 */
+        .editor-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        /* 폼 카드 */
+        .form-card {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            padding: 30px;
+            margin-bottom: 24px;
+        }
+
+        .form-row {
+            margin-bottom: 24px;
+        }
+
+        .form-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 8px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #E5E7EB;
+            border-radius: 10px;
+            font-size: 15px;
+            font-family: inherit;
+            transition: all 0.2s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #0F4C81;
+            box-shadow: 0 0 0 3px rgba(15, 76, 129, 0.1);
+        }
+
+        .form-input::placeholder {
+            color: #9CA3AF;
+        }
+
+        .form-row-inline {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #E5E7EB;
+            border-radius: 10px;
+            font-size: 15px;
+            font-family: inherit;
+            background: #fff;
+            cursor: pointer;
+        }
+
+        .form-select:focus {
+            outline: none;
+            border-color: #0F4C81;
+        }
+
+        /* 썸네일 업로드 */
+        .thumbnail-upload {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .thumbnail-preview {
+            width: 120px;
+            height: 80px;
+            border-radius: 8px;
+            background: #F3F4F6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border: 2px dashed #E5E7EB;
+        }
+
+        .thumbnail-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .thumbnail-preview svg {
+            width: 32px;
+            height: 32px;
+            fill: #9CA3AF;
+        }
+
+        .thumbnail-input {
+            flex: 1;
+        }
+
+        /* 에디터 영역 */
+        .editor-card {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            overflow: hidden;
+        }
+
+        /* 에디터 툴바 */
+        .editor-toolbar {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 16px;
+            border-bottom: 1px solid #E5E7EB;
+            background: #FAFBFC;
+            flex-wrap: wrap;
+        }
+
+        .toolbar-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            background: #fff;
+            border: 1px solid #E5E7EB;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #4B5563;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .toolbar-btn:hover {
+            background: #F3F4F6;
+            border-color: #D1D5DB;
+        }
+
+        .toolbar-btn:active {
+            background: #E5E7EB;
+        }
+
+        .toolbar-btn.section {
+            color: #0F4C81;
+            border-color: #0F4C81;
+        }
+
+        .toolbar-btn.number {
+            color: #059669;
+            border-color: #059669;
+        }
+
+        .toolbar-btn.bullet {
+            color: #D97706;
+            border-color: #D97706;
+        }
+
+        .toolbar-btn.indent {
+            color: #6B7280;
+        }
+
+        .toolbar-divider {
+            width: 1px;
+            height: 24px;
+            background: #E5E7EB;
+            margin: 0 8px;
+        }
+
+        .toolbar-tabs {
+            display: flex;
+            margin-left: auto;
+        }
+
+        .tab-btn {
+            padding: 8px 16px;
+            background: transparent;
+            border: none;
+            font-size: 13px;
+            font-weight: 600;
+            color: #6B7280;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .tab-btn.active {
+            color: #0F4C81;
+            border-bottom-color: #0F4C81;
+        }
+
+        .tab-btn:hover:not(.active) {
+            color: #374151;
+        }
+
+        /* 에디터 본문 */
+        .editor-body {
+            position: relative;
+        }
+
+        .editor-textarea {
+            width: 100%;
+            min-height: 400px;
+            padding: 24px;
+            border: none;
+            font-size: 15px;
+            font-family: 'Pretendard', monospace;
+            line-height: 1.8;
+            resize: vertical;
+        }
+
+        .editor-textarea:focus {
+            outline: none;
+        }
+
+        .editor-textarea::placeholder {
+            color: #9CA3AF;
+        }
+
+        /* 미리보기 */
+        .editor-preview {
+            display: none;
+            min-height: 400px;
+            padding: 24px;
+            font-size: 16px;
+            line-height: 1.9;
+            color: #374151;
+        }
+
+        .editor-preview.active {
+            display: block;
+        }
+
+        .editor-textarea.hidden {
+            display: none;
+        }
+
+        /* 미리보기 스타일 (post.html과 동일) */
+        .editor-preview .section-title {
+            color: #0F4C81;
+            font-size: 18px;
+            font-weight: 700;
+            margin: 32px 0 16px 0;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #E5E7EB;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .editor-preview .section-title::before {
+            content: '';
+            width: 4px;
+            height: 20px;
+            background: linear-gradient(135deg, #0F4C81 0%, #1A73E8 100%);
+            border-radius: 2px;
+        }
+
+        .editor-preview .number-list {
+            list-style: none;
+            padding: 0;
+            margin: 16px 0;
+        }
+
+        .editor-preview .number-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 12px;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .editor-preview .number-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, #0F4C81 0%, #1A73E8 100%);
+            color: #fff;
+            border-radius: 50%;
+            font-size: 12px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .editor-preview .bullet-list {
+            list-style: none;
+            padding: 0;
+            margin: 16px 0;
+        }
+
+        .editor-preview .bullet-list li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 10px;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .editor-preview .bullet-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 6px;
+            height: 6px;
+            background: #0F4C81;
+            border-radius: 50%;
+        }
+
+        .editor-preview .sub-item {
+            margin-left: 36px;
+            padding: 4px 0;
+            color: #6B7280;
+            font-size: 14px;
+            border-left: 2px solid #E5E7EB;
+            padding-left: 12px;
+        }
+
+        .editor-preview p {
+            margin-bottom: 16px;
+        }
+
+        /* 작성 가이드 */
+        .guide-card {
+            background: #EFF6FF;
+            border: 1px solid #BFDBFE;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 24px;
+        }
+
+        .guide-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #0F4C81;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .guide-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+        }
+
+        .guide-item {
+            font-size: 13px;
+            color: #4B5563;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .guide-item code {
+            background: #fff;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            color: #0F4C81;
+        }
+
+        /* 토스트 */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: #1F2937;
+            color: #fff;
+            padding: 14px 28px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 500;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 2000;
+        }
+
+        .toast.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .toast.success {
+            background: #059669;
+        }
+
+        .toast.error {
+            background: #DC2626;
+        }
+
+        /* 반응형 */
+        @media (max-width: 768px) {
+            .editor-header {
+                flex-direction: column;
+                gap: 16px;
+                padding: 16px;
+            }
+
+            .header-left {
+                width: 100%;
+            }
+
+            .header-actions {
+                width: 100%;
+            }
+
+            .header-actions .btn {
+                flex: 1;
+            }
+
+            .form-row-inline {
+                grid-template-columns: 1fr;
+            }
+
+            .toolbar-btn span {
+                display: none;
+            }
+
+            .toolbar-tabs {
+                margin-left: 0;
+                width: 100%;
+                justify-content: center;
+                margin-top: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 헤더 -->
+    <header class="editor-header">
+        <div class="header-left">
+            <a href="board.html" class="back-btn">
+                <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+                <span>목록</span>
+            </a>
+            <h1 class="page-title" id="page-title">새 게시글 작성</h1>
+        </div>
+        <div class="header-actions">
+            <button class="btn btn-secondary" onclick="saveDraft()">임시저장</button>
+            <button class="btn btn-primary" onclick="publishPost()">게시하기</button>
+        </div>
+    </header>
+
+    <!-- 메인 컨테이너 -->
+    <div class="editor-container">
+        <!-- 기본 정보 -->
+        <div class="form-card">
+            <div class="form-row">
+                <label class="form-label">제목 *</label>
+                <input type="text" id="post-title" class="form-input" placeholder="게시글 제목을 입력하세요">
+            </div>
+
+            <div class="form-row">
+                <label class="form-label">요약</label>
+                <input type="text" id="post-summary" class="form-input" placeholder="게시글 요약 (목록에서 미리보기로 표시됩니다)">
+            </div>
+
+            <div class="form-row-inline">
+                <div class="form-row">
+                    <label class="form-label">카테고리 *</label>
+                    <select id="post-category" class="form-select">
+                        <option value="공지">공지</option>
+                        <option value="뉴스">뉴스</option>
+                        <option value="정보">정보</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <label class="form-label">썸네일 URL</label>
+                    <input type="text" id="post-thumbnail" class="form-input" placeholder="이미지 URL (선택사항)">
+                </div>
+            </div>
+        </div>
+
+        <!-- 에디터 -->
+        <div class="editor-card">
+            <!-- 툴바 -->
+            <div class="editor-toolbar">
+                <button class="toolbar-btn section" onclick="insertSection()" title="섹션 제목 (Ctrl+H)">
+                    <strong>■</strong> <span>섹션</span>
+                </button>
+                <button class="toolbar-btn number" onclick="insertNumber()" title="숫자 리스트 (Ctrl+1)">
+                    <strong>1.</strong> <span>숫자</span>
+                </button>
+                <button class="toolbar-btn bullet" onclick="insertBullet()" title="불릿 리스트 (Ctrl+-)">
+                    <strong>•</strong> <span>불릿</span>
+                </button>
+                <button class="toolbar-btn indent" onclick="insertIndent()" title="들여쓰기 (Tab)">
+                    <strong>→</strong> <span>들여쓰기</span>
+                </button>
+
+                <div class="toolbar-divider"></div>
+
+                <div class="toolbar-tabs">
+                    <button class="tab-btn active" data-tab="write" onclick="switchTab('write')">작성</button>
+                    <button class="tab-btn" data-tab="preview" onclick="switchTab('preview')">미리보기</button>
+                </div>
+            </div>
+
+            <!-- 에디터 본문 -->
+            <div class="editor-body">
+                <textarea id="content-editor" class="editor-textarea" placeholder="내용을 입력하세요...
+
+■ 섹션 제목
+- 불릿 항목
+- 불릿 항목
+
+1. 숫자 리스트
+2. 숫자 리스트
+   - 하위 항목"></textarea>
+                <div id="content-preview" class="editor-preview"></div>
+            </div>
+        </div>
+
+        <!-- 작성 가이드 -->
+        <div class="guide-card">
+            <div class="guide-title">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                작성 가이드
+            </div>
+            <div class="guide-list">
+                <div class="guide-item"><code>■ 제목</code> → 섹션 제목</div>
+                <div class="guide-item"><code>1. 2. 3.</code> → 숫자 리스트</div>
+                <div class="guide-item"><code>- 항목</code> → 불릿 리스트</div>
+                <div class="guide-item"><code>   - 항목</code> → 들여쓰기 (공백 3개)</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 토스트 -->
+    <div class="toast" id="toast"></div>
+
+    <!-- 설정 파일 로드 -->
+    <script src="../js/config.js"></script>
+    <script>
+        // CONFIG에서 WORKER_URL 가져오기
+        const WORKER_URL = window.CONFIG?.WORKER_URL || '';
+        const API_URL = '/api/board';
+
+        // URL에서 편집 ID 확인
+        const urlParams = new URLSearchParams(window.location.search);
+        const editId = urlParams.get('id');
+        let isEditing = false;
+
+        // 초기화
+        document.addEventListener('DOMContentLoaded', function() {
+            if (editId) {
+                isEditing = true;
+                document.getElementById('page-title').textContent = '게시글 수정';
+                loadPost(editId);
+            }
+
+            // 키보드 단축키
+            document.getElementById('content-editor').addEventListener('keydown', handleKeyboard);
+        });
+
+        // 게시글 로드 (수정 모드)
+        async function loadPost(id) {
+            try {
+                const response = await fetch(`${API_URL}?id=${id}`);
+                const result = await response.json();
+
+                if (result.success && result.post) {
+                    const post = result.post;
+                    document.getElementById('post-title').value = post.제목 || '';
+                    document.getElementById('post-summary').value = post.요약 || '';
+                    document.getElementById('post-category').value = post.카테고리 || '공지';
+                    document.getElementById('post-thumbnail').value = post.썸네일 || '';
+                    document.getElementById('content-editor').value = post.내용 || '';
+                }
+            } catch (error) {
+                console.error('게시글 로드 실패:', error);
+                showToast('게시글을 불러올 수 없습니다', 'error');
+            }
+        }
+
+        // 툴바 기능
+        function insertSection() {
+            insertAtCursor('\n■ ');
+        }
+
+        function insertNumber() {
+            const editor = document.getElementById('content-editor');
+            const text = editor.value;
+            const lines = text.split('\n');
+
+            // 마지막 숫자 찾기
+            let lastNum = 0;
+            for (let i = lines.length - 1; i >= 0; i--) {
+                const match = lines[i].match(/^(\d+)\./);
+                if (match) {
+                    lastNum = parseInt(match[1]);
+                    break;
+                }
+            }
+
+            insertAtCursor(`\n${lastNum + 1}. `);
+        }
+
+        function insertBullet() {
+            insertAtCursor('\n- ');
+        }
+
+        function insertIndent() {
+            insertAtCursor('\n   - ');
+        }
+
+        function insertAtCursor(text) {
+            const editor = document.getElementById('content-editor');
+            const start = editor.selectionStart;
+            const end = editor.selectionEnd;
+            const value = editor.value;
+
+            editor.value = value.substring(0, start) + text + value.substring(end);
+            editor.selectionStart = editor.selectionEnd = start + text.length;
+            editor.focus();
+        }
+
+        // 키보드 단축키
+        function handleKeyboard(e) {
+            // Ctrl + H: 섹션
+            if (e.ctrlKey && e.key === 'h') {
+                e.preventDefault();
+                insertSection();
+            }
+            // Ctrl + 1: 숫자
+            if (e.ctrlKey && e.key === '1') {
+                e.preventDefault();
+                insertNumber();
+            }
+            // Ctrl + -: 불릿
+            if (e.ctrlKey && e.key === '-') {
+                e.preventDefault();
+                insertBullet();
+            }
+            // Tab: 들여쓰기
+            if (e.key === 'Tab') {
+                e.preventDefault();
+                insertAtCursor('   ');
+            }
+        }
+
+        // 탭 전환
+        function switchTab(tab) {
+            const writeBtn = document.querySelector('[data-tab="write"]');
+            const previewBtn = document.querySelector('[data-tab="preview"]');
+            const editor = document.getElementById('content-editor');
+            const preview = document.getElementById('content-preview');
+
+            if (tab === 'write') {
+                writeBtn.classList.add('active');
+                previewBtn.classList.remove('active');
+                editor.classList.remove('hidden');
+                preview.classList.remove('active');
+            } else {
+                writeBtn.classList.remove('active');
+                previewBtn.classList.add('active');
+                editor.classList.add('hidden');
+                preview.classList.add('active');
+                renderPreview();
+            }
+        }
+
+        // 미리보기 렌더링
+        function renderPreview() {
+            const content = document.getElementById('content-editor').value;
+            const preview = document.getElementById('content-preview');
+            preview.innerHTML = formatStructuredContent(content);
+        }
+
+        // 구조화된 콘텐츠 포맷팅 (post.html과 동일)
+        function formatStructuredContent(content) {
+            if (!content) return '<p style="color: #9CA3AF;">내용을 입력하면 미리보기가 표시됩니다.</p>';
+
+            let html = '';
+            const lines = content.split('\n');
+            let inNumberList = false;
+            let inBulletList = false;
+
+            lines.forEach((line, index) => {
+                const trimmedLine = line.trim();
+
+                if (!trimmedLine) {
+                    if (inNumberList) { html += '</ul>'; inNumberList = false; }
+                    if (inBulletList) { html += '</ul>'; inBulletList = false; }
+                    html += '<div style="height: 16px;"></div>';
+                    return;
+                }
+
+                // ■ 섹션 제목
+                if (trimmedLine.startsWith('■')) {
+                    if (inNumberList) { html += '</ul>'; inNumberList = false; }
+                    if (inBulletList) { html += '</ul>'; inBulletList = false; }
+                    const title = trimmedLine.replace(/^■\s*/, '');
+                    html += `<div class="section-title">${title}</div>`;
+                    return;
+                }
+
+                // 숫자 리스트 (1. 2. 3.)
+                if (/^\d+[\.\)]\s/.test(trimmedLine)) {
+                    if (inBulletList) { html += '</ul>'; inBulletList = false; }
+                    if (!inNumberList) {
+                        html += '<ul class="number-list">';
+                        inNumberList = true;
+                    }
+                    const number = trimmedLine.match(/^(\d+)/)[1];
+                    const text = trimmedLine.replace(/^\d+[\.\)]\s*/, '');
+                    html += `<li><span class="number-badge">${number}</span><span>${text}</span></li>`;
+                    return;
+                }
+
+                // 하위 항목 (들여쓰기 + -)
+                if (/^\s{2,}-\s/.test(line)) {
+                    const text = line.replace(/^\s*-\s*/, '');
+                    html += `<div class="sub-item">- ${text}</div>`;
+                    return;
+                }
+
+                // 불릿 리스트 (• - *)
+                if (/^[•\-\*]\s/.test(trimmedLine)) {
+                    if (inNumberList) { html += '</ul>'; inNumberList = false; }
+                    if (!inBulletList) {
+                        html += '<ul class="bullet-list">';
+                        inBulletList = true;
+                    }
+                    const text = trimmedLine.replace(/^[•\-\*]\s*/, '');
+                    html += `<li>${text}</li>`;
+                    return;
+                }
+
+                // 일반 텍스트
+                if (inNumberList) { html += '</ul>'; inNumberList = false; }
+                if (inBulletList) { html += '</ul>'; inBulletList = false; }
+                html += `<p>${trimmedLine}</p>`;
+            });
+
+            if (inNumberList) html += '</ul>';
+            if (inBulletList) html += '</ul>';
+
+            return html;
+        }
+
+        // 임시저장
+        function saveDraft() {
+            const data = collectFormData();
+            localStorage.setItem('keai_draft_post', JSON.stringify(data));
+            showToast('임시저장 되었습니다');
+        }
+
+        // 게시하기
+        async function publishPost() {
+            const data = collectFormData();
+
+            // 유효성 검사
+            if (!data.제목) {
+                showToast('제목을 입력하세요', 'error');
+                return;
+            }
+            if (!data.내용) {
+                showToast('내용을 입력하세요', 'error');
+                return;
+            }
+
+            try {
+                const url = isEditing ? `${API_URL}?id=${editId}` : API_URL;
+                const method = isEditing ? 'PUT' : 'POST';
+
+                const response = await fetch(url, {
+                    method: method,
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    showToast(isEditing ? '수정되었습니다' : '게시되었습니다', 'success');
+                    localStorage.removeItem('keai_draft_post');
+                    setTimeout(() => {
+                        window.location.href = 'board.html';
+                    }, 1000);
+                } else {
+                    throw new Error(result.error || '저장 실패');
+                }
+            } catch (error) {
+                console.error('저장 실패:', error);
+                showToast('저장에 실패했습니다: ' + error.message, 'error');
+            }
+        }
+
+        // 폼 데이터 수집
+        function collectFormData() {
+            return {
+                제목: document.getElementById('post-title').value.trim(),
+                요약: document.getElementById('post-summary').value.trim(),
+                카테고리: document.getElementById('post-category').value,
+                썸네일: document.getElementById('post-thumbnail').value.trim(),
+                내용: document.getElementById('content-editor').value,
+                작성일: new Date().toISOString().split('T')[0],
+                공개여부: true
+            };
+        }
+
+        // 토스트 표시
+        function showToast(message, type = '') {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = 'toast show ' + type;
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // 페이지 로드 시 임시저장 복원 확인
+        window.addEventListener('load', function() {
+            if (!isEditing) {
+                const draft = localStorage.getItem('keai_draft_post');
+                if (draft) {
+                    const data = JSON.parse(draft);
+                    if (confirm('임시저장된 글이 있습니다. 복원하시겠습니까?')) {
+                        document.getElementById('post-title').value = data.제목 || '';
+                        document.getElementById('post-summary').value = data.요약 || '';
+                        document.getElementById('post-category').value = data.카테고리 || '공지';
+                        document.getElementById('post-thumbnail').value = data.썸네일 || '';
+                        document.getElementById('content-editor').value = data.내용 || '';
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

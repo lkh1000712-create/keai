@@ -1,0 +1,1476 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KLT2444N9N"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-KLT2444N9N');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO 기본 -->
+    <title>게시글 | 한국기업심사원 KEAI</title>
+    <meta name="description" content="한국기업심사원 KEAI - 정부정책자금 관련 공지사항, 뉴스, 정보를 확인하세요.">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="한국기업심사원 KEAI">
+    <meta property="og:title" content="게시글 | 한국기업심사원 KEAI">
+    <meta property="og:description" content="한국기업심사원 KEAI - 정부정책자금 관련 공지사항, 뉴스, 정보를 확인하세요.">
+    <meta property="og:image" content="https://keai-three.vercel.app/og/og-home.png">
+    <meta property="og:locale" content="ko_KR">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="게시글 | 한국기업심사원 KEAI">
+    <meta name="twitter:description" content="한국기업심사원 KEAI - 정부정책자금 관련 공지사항, 뉴스, 정보를 확인하세요.">
+    <meta name="twitter:image" content="https://keai-three.vercel.app/og/og-home.png">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://keai-three.vercel.app/post.html">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="파비콘.png">
+    <link rel="apple-touch-icon" href="파비콘.png">
+
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="css/styles.css">
+
+    <!-- Post Page Styles -->
+    <style>
+    /* Post Detail Page */
+    .keai-post-section {
+        background: linear-gradient(180deg, #F8FAFC 0%, #EFF6FF 100%);
+        min-height: calc(100vh - 200px);
+        padding: 40px 0 80px;
+    }
+
+    /* 2컬럼 레이아웃 */
+    .keai-post-layout {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    @media (min-width: 1024px) {
+        .keai-post-layout {
+            grid-template-columns: 1fr 300px;
+        }
+    }
+
+    .keai-post-main {
+        min-width: 0;
+    }
+
+    /* Breadcrumb */
+    .keai-post-breadcrumb {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 24px;
+        font-size: 14px;
+        color: #6B7280;
+    }
+
+    .keai-post-breadcrumb a {
+        color: #6B7280;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .keai-post-breadcrumb a:hover {
+        color: #0F4C81;
+    }
+
+    .keai-post-breadcrumb svg {
+        width: 16px;
+        height: 16px;
+        fill: #9CA3AF;
+    }
+
+    .keai-post-breadcrumb span.current {
+        color: #1F2937;
+        font-weight: 500;
+    }
+
+    /* Post Card */
+    .keai-post-card {
+        background: #FFFFFF;
+        border-radius: 20px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+    }
+
+    /* Post Header */
+    .keai-post-header {
+        padding: 40px 40px 30px;
+        border-bottom: 1px solid #E5E7EB;
+    }
+
+    .keai-post-category {
+        display: inline-block;
+        padding: 6px 16px;
+        background: linear-gradient(135deg, #0F4C81 0%, #1A73E8 100%);
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: 600;
+        color: #FFFFFF;
+        margin-bottom: 16px;
+    }
+
+    .keai-post-category.notice {
+        background: linear-gradient(135deg, #0F4C81 0%, #1A73E8 100%);
+    }
+
+    .keai-post-category.news {
+        background: linear-gradient(135deg, #059669 0%, #10B981 100%);
+    }
+
+    .keai-post-category.info {
+        background: linear-gradient(135deg, #D97706 0%, #F59E0B 100%);
+    }
+
+    .keai-post-title {
+        font-size: 28px;
+        font-weight: 700;
+        color: #1F2937;
+        line-height: 1.4;
+        margin-bottom: 12px;
+        word-break: keep-all;
+    }
+
+    .keai-post-subtitle {
+        font-size: 16px;
+        color: #6B7280;
+        line-height: 1.6;
+        margin-bottom: 20px;
+    }
+
+    .keai-post-meta {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        font-size: 14px;
+        color: #6B7280;
+        padding-top: 20px;
+        border-top: 1px solid #E5E7EB;
+    }
+
+    .keai-post-meta-item {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .keai-post-meta-item svg {
+        width: 18px;
+        height: 18px;
+        fill: #9CA3AF;
+    }
+
+    @media (min-width: 768px) {
+        .keai-post-title {
+            font-size: 32px;
+        }
+        .keai-post-subtitle {
+            font-size: 17px;
+        }
+    }
+
+    /* Post Thumbnail */
+    .keai-post-thumbnail-wrap {
+        width: 100%;
+        border-bottom: 1px solid #E5E7EB;
+    }
+
+    .keai-post-thumbnail {
+        width: 100%;
+        max-height: 500px;
+        object-fit: cover;
+        display: block;
+    }
+
+    /* Post Content */
+    .keai-post-content {
+        padding: 40px;
+    }
+
+    .keai-post-body {
+        font-size: 16px;
+        line-height: 1.9;
+        color: #374151;
+    }
+
+    .keai-post-body p {
+        margin-bottom: 16px;
+    }
+
+    /* 섹션 제목 (■) */
+    .keai-post-body .section-title {
+        color: #0F4C81;
+        font-size: 18px;
+        font-weight: 700;
+        margin: 32px 0 16px 0;
+        padding-bottom: 8px;
+        border-bottom: 2px solid #E5E7EB;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .keai-post-body .section-title::before {
+        content: '';
+        width: 4px;
+        height: 20px;
+        background: linear-gradient(135deg, #0F4C81 0%, #1A73E8 100%);
+        border-radius: 2px;
+    }
+
+    /* 숫자 리스트 */
+    .keai-post-body .number-list {
+        list-style: none;
+        padding: 0;
+        margin: 16px 0;
+    }
+
+    .keai-post-body .number-list li {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        margin-bottom: 12px;
+        font-size: 15px;
+        line-height: 1.6;
+    }
+
+    .keai-post-body .number-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 24px;
+        height: 24px;
+        background: linear-gradient(135deg, #0F4C81 0%, #1A73E8 100%);
+        color: #fff;
+        border-radius: 50%;
+        font-size: 12px;
+        font-weight: 700;
+        flex-shrink: 0;
+    }
+
+    /* 불릿 리스트 */
+    .keai-post-body .bullet-list {
+        list-style: none;
+        padding: 0;
+        margin: 16px 0;
+    }
+
+    .keai-post-body .bullet-list li {
+        position: relative;
+        padding-left: 20px;
+        margin-bottom: 10px;
+        font-size: 15px;
+        line-height: 1.6;
+    }
+
+    .keai-post-body .bullet-list li::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 10px;
+        width: 6px;
+        height: 6px;
+        background: #0F4C81;
+        border-radius: 50%;
+    }
+
+    /* 하위 항목 */
+    .keai-post-body .sub-item {
+        margin-left: 36px;
+        padding: 4px 0;
+        color: #6B7280;
+        font-size: 14px;
+        border-left: 2px solid #E5E7EB;
+        padding-left: 12px;
+    }
+
+    .keai-post-body blockquote {
+        margin: 24px 0;
+        padding: 20px 25px;
+        background: #F3F4F6;
+        border-left: 4px solid #0F4C81;
+        border-radius: 0 8px 8px 0;
+        font-style: italic;
+        color: #4B5563;
+    }
+
+    .keai-post-body strong {
+        color: #0F4C81;
+        font-weight: 600;
+    }
+
+    /* Post Footer */
+    .keai-post-footer {
+        padding: 30px 40px;
+        border-top: 1px solid #E5E7EB;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .keai-post-back-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 24px;
+        background: #FFFFFF;
+        border: 2px solid #0F4C81;
+        border-radius: 30px;
+        color: #0F4C81;
+        font-size: 15px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .keai-post-back-btn:hover {
+        background: #0F4C81;
+        color: #FFFFFF;
+    }
+
+    .keai-post-back-btn svg {
+        width: 18px;
+        height: 18px;
+        fill: currentColor;
+    }
+
+    .keai-post-cta-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 24px;
+        background: linear-gradient(135deg, #0F4C81 0%, #1A73E8 100%);
+        border: none;
+        border-radius: 30px;
+        color: #FFFFFF;
+        font-size: 15px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(15, 76, 129, 0.3);
+    }
+
+    .keai-post-cta-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(15, 76, 129, 0.4);
+    }
+
+    .keai-post-cta-btn svg {
+        width: 18px;
+        height: 18px;
+        fill: currentColor;
+    }
+
+    /* ===== 사이드바 ===== */
+    .keai-post-sidebar {
+        display: none;
+    }
+
+    @media (min-width: 1024px) {
+        .keai-post-sidebar {
+            display: block;
+        }
+    }
+
+    .keai-sidebar-sticky {
+        position: sticky;
+        top: 100px;
+    }
+
+    .keai-sidebar-card {
+        background: #FFFFFF;
+        border-radius: 16px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        padding: 24px;
+        margin-bottom: 20px;
+    }
+
+    .keai-sidebar-title {
+        font-size: 14px;
+        font-weight: 700;
+        color: #0F4C81;
+        margin: 0 0 16px 0;
+        padding-bottom: 12px;
+        border-bottom: 2px solid #E5E7EB;
+    }
+
+    /* 글 정보 리스트 */
+    .keai-info-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .keai-info-list li {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 0;
+        border-bottom: 1px solid #F3F4F6;
+        font-size: 13px;
+    }
+
+    .keai-info-list li:last-child {
+        border-bottom: none;
+    }
+
+    .keai-info-label {
+        color: #6B7280;
+    }
+
+    .keai-info-value {
+        color: #1F2937;
+        font-weight: 600;
+    }
+
+    /* 공유 버튼 */
+    .keai-share-buttons {
+        display: flex;
+        gap: 10px;
+    }
+
+    .keai-share-btn {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        border: 1px solid #E5E7EB;
+        background: #F9FAFB;
+        color: #6B7280;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .keai-share-btn:hover {
+        background: #0F4C81;
+        border-color: #0F4C81;
+        color: #FFFFFF;
+        transform: translateY(-2px);
+    }
+
+    .keai-share-btn svg {
+        width: 20px;
+        height: 20px;
+        fill: currentColor;
+    }
+
+    /* 목록 버튼 */
+    .keai-sidebar-back {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: 100%;
+        padding: 14px;
+        background: #FFFFFF;
+        border: 2px solid #0F4C81;
+        border-radius: 12px;
+        color: #0F4C81;
+        font-size: 14px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .keai-sidebar-back:hover {
+        background: #0F4C81;
+        color: #FFFFFF;
+    }
+
+    .keai-sidebar-back svg {
+        width: 18px;
+        height: 18px;
+        fill: currentColor;
+    }
+
+    /* ===== 관련 게시글 ===== */
+    .keai-related-section {
+        margin-top: 50px;
+        padding-top: 40px;
+        border-top: 2px solid #E5E7EB;
+    }
+
+    .keai-related-title {
+        font-size: 22px;
+        font-weight: 700;
+        color: #1F2937;
+        margin: 0 0 24px 0;
+    }
+
+    .keai-related-title span {
+        color: #0F4C81;
+    }
+
+    .keai-related-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    @media (min-width: 640px) {
+        .keai-related-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .keai-related-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    .keai-related-card {
+        background: #FFFFFF;
+        border-radius: 16px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .keai-related-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    }
+
+    .keai-related-thumb {
+        width: 100%;
+        height: 140px;
+        background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+
+    .keai-related-thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .keai-related-thumb svg {
+        width: 40px;
+        height: 40px;
+        fill: #93C5FD;
+    }
+
+    .keai-related-content {
+        padding: 16px;
+    }
+
+    .keai-related-category {
+        display: inline-block;
+        padding: 4px 10px;
+        background: linear-gradient(135deg, #0F4C81 0%, #1A73E8 100%);
+        border-radius: 12px;
+        font-size: 11px;
+        font-weight: 600;
+        color: #FFFFFF;
+        margin-bottom: 8px;
+    }
+
+    .keai-related-card-title {
+        font-size: 15px;
+        font-weight: 600;
+        color: #1F2937;
+        line-height: 1.4;
+        margin: 0;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    /* ===== 모바일 하단 바 ===== */
+    .keai-mobile-bar {
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-top: 1px solid #E5E7EB;
+        padding: 12px 20px;
+        z-index: 1000;
+        gap: 12px;
+    }
+
+    @media (min-width: 1024px) {
+        .keai-mobile-bar {
+            display: none;
+        }
+    }
+
+    .keai-mobile-back-btn {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 14px;
+        background: #FFFFFF;
+        border: 2px solid #0F4C81;
+        border-radius: 12px;
+        color: #0F4C81;
+        font-size: 14px;
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+    .keai-mobile-share-btn {
+        width: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #F3F4F6;
+        border: 1px solid #E5E7EB;
+        border-radius: 12px;
+        color: #6B7280;
+        cursor: pointer;
+    }
+
+    .keai-mobile-share-btn:hover {
+        background: #0F4C81;
+        border-color: #0F4C81;
+        color: #FFFFFF;
+    }
+
+    .keai-mobile-bar svg {
+        width: 18px;
+        height: 18px;
+        fill: currentColor;
+    }
+
+    /* Loading State */
+    .keai-post-loading {
+        text-align: center;
+        padding: 100px 20px;
+        color: #6B7280;
+    }
+
+    .keai-post-loading .spinner {
+        width: 50px;
+        height: 50px;
+        border: 4px solid #E5E7EB;
+        border-top-color: #0F4C81;
+        border-radius: 50%;
+        animation: postSpin 1s linear infinite;
+        margin: 0 auto 20px;
+    }
+
+    @keyframes postSpin {
+        to { transform: rotate(360deg); }
+    }
+
+    /* Error State */
+    .keai-post-error {
+        text-align: center;
+        padding: 100px 20px;
+        color: #6B7280;
+    }
+
+    .keai-post-error svg {
+        width: 80px;
+        height: 80px;
+        fill: #D1D5DB;
+        margin-bottom: 20px;
+    }
+
+    .keai-post-error h3 {
+        font-size: 24px;
+        font-weight: 700;
+        color: #1F2937;
+        margin-bottom: 10px;
+    }
+
+    .keai-post-error p {
+        margin-bottom: 30px;
+    }
+
+    /* Toast 알림 */
+    .keai-toast {
+        position: fixed;
+        bottom: 100px;
+        left: 50%;
+        transform: translateX(-50%) translateY(20px);
+        background: #1F2937;
+        color: #FFFFFF;
+        padding: 14px 28px;
+        border-radius: 30px;
+        font-size: 14px;
+        font-weight: 500;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        z-index: 2000;
+    }
+
+    .keai-toast.show {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(0);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .keai-post-section {
+            padding: 20px 0 100px;
+        }
+
+        .keai-post-layout {
+            padding: 0 16px;
+        }
+
+        .keai-post-breadcrumb {
+            margin-bottom: 16px;
+            font-size: 13px;
+        }
+
+        .keai-post-header {
+            padding: 24px 20px 20px;
+        }
+
+        .keai-post-title {
+            font-size: 22px;
+        }
+
+        .keai-post-subtitle {
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+
+        .keai-post-meta {
+            flex-wrap: wrap;
+            gap: 12px;
+            font-size: 13px;
+        }
+
+        .keai-post-content {
+            padding: 24px 20px;
+        }
+
+        .keai-post-body {
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        .keai-post-footer {
+            padding: 20px;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .keai-post-back-btn,
+        .keai-post-cta-btn {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .keai-related-section {
+            margin-top: 30px;
+            padding-top: 30px;
+        }
+
+        .keai-related-title {
+            font-size: 18px;
+        }
+    }
+    </style>
+</head>
+<body>
+
+<!-- ================================================
+     HEADER
+     ================================================ -->
+<header class="keai-header">
+    <div class="keai-header-container">
+        <div class="keai-header-main">
+            <a href="index.html" class="keai-logo">
+                <img src="logo.png" alt="KEAI 한국기업심사원" class="keai-logo-image" data-image-id="logo">
+            </a>
+
+            <nav class="keai-nav">
+                <ul class="keai-nav-list">
+                    <li class="keai-nav-item"><a href="index.html">홈</a></li>
+                    <li class="keai-nav-item"><a href="company.html">회사소개</a></li>
+                    <li class="keai-nav-item"><a href="process.html">진행과정</a></li>
+                    <li class="keai-nav-item"><a href="fund.html">자금상담</a></li>
+                    <li class="keai-nav-item"><a href="pro.html">전문서비스</a></li>
+                    <li class="keai-nav-item"><a href="mkt.html">온라인마케팅</a></li>
+                </ul>
+            </nav>
+
+            <div class="keai-header-cta">
+                <a href="process.html#form" class="keai-btn-header-cta">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                    <span>무료심사</span>
+                </a>
+            </div>
+
+            <button class="keai-mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="메뉴 열기">
+                <svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="keai-mobile-menu" id="keaiMobileMenu">
+        <div class="keai-mobile-menu-header">
+            <span class="keai-mobile-menu-title">메뉴</span>
+            <button class="keai-mobile-menu-close" onclick="toggleMobileMenu()" aria-label="메뉴 닫기">
+                <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+            </button>
+        </div>
+        <nav>
+            <ul class="keai-mobile-nav-list">
+                <li class="keai-mobile-nav-item"><a href="index.html" onclick="toggleMobileMenu()">홈</a></li>
+                <li class="keai-mobile-nav-item"><a href="company.html" onclick="toggleMobileMenu()">회사소개</a></li>
+                <li class="keai-mobile-nav-item"><a href="process.html" onclick="toggleMobileMenu()">진행과정</a></li>
+                <li class="keai-mobile-nav-item"><a href="fund.html" onclick="toggleMobileMenu()">자금상담</a></li>
+                <li class="keai-mobile-nav-item"><a href="pro.html" onclick="toggleMobileMenu()">전문서비스</a></li>
+                <li class="keai-mobile-nav-item"><a href="mkt.html" onclick="toggleMobileMenu()">온라인마케팅</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="keai-mobile-overlay" id="keaiMobileOverlay" onclick="toggleMobileMenu()"></div>
+</header>
+
+<!-- ================================================
+     POST DETAIL SECTION
+     ================================================ -->
+<section class="keai-post-section">
+    <!-- Loading State -->
+    <div class="keai-post-loading" id="post-loading">
+        <div class="spinner"></div>
+        <p>게시글을 불러오는 중...</p>
+    </div>
+
+    <!-- Error State -->
+    <div class="keai-post-error" id="post-error" style="display: none;">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+        <h3>게시글을 찾을 수 없습니다</h3>
+        <p>요청하신 게시글이 존재하지 않거나 삭제되었습니다.</p>
+        <a href="process.html#board" class="keai-post-back-btn">
+            <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+            <span>목록으로 돌아가기</span>
+        </a>
+    </div>
+
+    <!-- 2컬럼 레이아웃 -->
+    <div class="keai-post-layout" id="post-layout" style="display: none;">
+        <!-- 메인 콘텐츠 -->
+        <main class="keai-post-main">
+            <!-- Breadcrumb -->
+            <div class="keai-post-breadcrumb">
+                <a href="index.html">홈</a>
+                <svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+                <a href="process.html#board">공지사항 & 뉴스</a>
+                <svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+                <span class="current" id="breadcrumb-category">게시글</span>
+            </div>
+
+            <!-- Post Card -->
+            <article class="keai-post-card" id="post-card">
+                <div class="keai-post-header">
+                    <span class="keai-post-category" id="post-category">공지</span>
+                    <h1 class="keai-post-title" id="post-title">게시글 제목</h1>
+                    <p class="keai-post-subtitle" id="post-subtitle">게시글 요약이 여기에 표시됩니다.</p>
+                    <div class="keai-post-meta">
+                        <div class="keai-post-meta-item">
+                            <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                            <span>KEAI</span>
+                        </div>
+                        <div class="keai-post-meta-item">
+                            <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/></svg>
+                            <span id="post-date">2025.01.01</span>
+                        </div>
+                        <div class="keai-post-meta-item">
+                            <svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/></svg>
+                            <span id="post-views">조회 0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="keai-post-thumbnail-wrap" id="post-thumbnail-wrap" style="display: none;">
+                    <img class="keai-post-thumbnail" id="post-thumbnail" src="" alt="">
+                </div>
+
+                <div class="keai-post-content">
+                    <div class="keai-post-body" id="post-body"></div>
+                </div>
+
+                <div class="keai-post-footer">
+                    <a href="process.html#board" class="keai-post-back-btn">
+                        <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+                        <span>목록으로</span>
+                    </a>
+                    <a href="process.html#form" class="keai-post-cta-btn">
+                        <span>무료심사 신청하기</span>
+                        <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+                    </a>
+                </div>
+            </article>
+
+            <!-- 관련 게시글 -->
+            <section class="keai-related-section" id="related-section" style="display: none;">
+                <h2 class="keai-related-title"><span>관련</span> 게시글</h2>
+                <div class="keai-related-grid" id="related-grid"></div>
+            </section>
+        </main>
+
+        <!-- 사이드바 -->
+        <aside class="keai-post-sidebar">
+            <div class="keai-sidebar-sticky">
+                <!-- 공유하기 -->
+                <div class="keai-sidebar-card">
+                    <h3 class="keai-sidebar-title">공유하기</h3>
+                    <div class="keai-share-buttons">
+                        <button class="keai-share-btn" onclick="shareFacebook()" title="페이스북 공유">
+                            <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                        </button>
+                        <button class="keai-share-btn" onclick="shareTwitter()" title="트위터 공유">
+                            <svg viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>
+                        </button>
+                        <button class="keai-share-btn" onclick="copyLink()" title="링크 복사">
+                            <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 글 정보 -->
+                <div class="keai-sidebar-card">
+                    <h3 class="keai-sidebar-title">글 정보</h3>
+                    <ul class="keai-info-list">
+                        <li>
+                            <span class="keai-info-label">카테고리</span>
+                            <span class="keai-info-value" id="info-category">공지</span>
+                        </li>
+                        <li>
+                            <span class="keai-info-label">작성자</span>
+                            <span class="keai-info-value">KEAI</span>
+                        </li>
+                        <li>
+                            <span class="keai-info-label">작성일</span>
+                            <span class="keai-info-value" id="info-date">2025.01.01</span>
+                        </li>
+                        <li>
+                            <span class="keai-info-label">조회수</span>
+                            <span class="keai-info-value" id="info-views">0</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 목록 버튼 -->
+                <a href="process.html#board" class="keai-sidebar-back">
+                    <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+                    목록으로 돌아가기
+                </a>
+            </div>
+        </aside>
+    </div>
+</section>
+
+<!-- 모바일 하단 바 -->
+<div class="keai-mobile-bar" id="mobile-bar" style="display: none;">
+    <a href="process.html#board" class="keai-mobile-back-btn">
+        <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+        목록으로
+    </a>
+    <button class="keai-mobile-share-btn" onclick="shareNative()">
+        <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/></svg>
+    </button>
+</div>
+
+<!-- Toast 알림 -->
+<div class="keai-toast" id="toast">링크가 복사되었습니다</div>
+
+<!-- ================================================
+     FOOTER
+     ================================================ -->
+<footer class="keai-footer">
+    <div class="keai-footer-wrapper">
+        <div class="keai-footer-container">
+            <div class="keai-footer-top">
+                <div class="keai-footer-info">
+                    <div class="keai-footer-logo">
+                        <img src="white_logo.png" alt="KEAI 한국기업심사원" class="keai-footer-logo-image" data-image-id="logo-white">
+                    </div>
+                    <p class="keai-footer-desc">자금확보 전문 컨설팅 | 기업심사 전문가의 1:1 맞춤 컨설팅</p>
+                </div>
+            </div>
+
+            <div class="keai-footer-middle">
+                <div class="keai-footer-contact">
+                    <h4 class="keai-footer-title">Contact</h4>
+
+                    <div class="keai-contact-item">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M16 12h-3a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h3v7z"></path>
+                        </svg>
+                        <span>대표자: 이강희</span>
+                    </div>
+
+                    <div class="keai-contact-item">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="12" y1="8" x2="12" y2="16"></line>
+                            <line x1="8" y1="12" x2="16" y2="12"></line>
+                        </svg>
+                        <span>사업자등록번호: 794-35-01595</span>
+                    </div>
+
+                    <div class="keai-contact-item">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.81.36 1.6.7 2.35a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.75.34 1.54.57 2.35.7A2 2 0 0 1 22 16.92z"></path>
+                        </svg>
+                        <span>대표전화: 1688-8401</span>
+                    </div>
+
+                    <div class="keai-contact-item">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                            <path d="M12 12l8-5H4l8 5z"></path>
+                        </svg>
+                        <span>이메일: ceo@k-eai.kr</span>
+                    </div>
+
+                    <div class="keai-contact-item">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                        <span>주소: 인천광역시 서구 중봉대로 612번길 10-20, 505-J302호</span>
+                    </div>
+
+                    <div class="keai-contact-item">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                        <span>상담시간: 평일 09:00-18:00</span>
+                    </div>
+                </div>
+
+                <div class="keai-footer-menu">
+                    <h4 class="keai-footer-title">Menu</h4>
+                    <ul class="keai-footer-list">
+                        <li><a href="index.html">홈</a></li>
+                        <li><a href="company.html">회사소개</a></li>
+                        <li><a href="process.html">진행과정</a></li>
+                        <li><a href="fund.html">자금상담</a></li>
+                        <li><a href="pro.html">전문서비스</a></li>
+                        <li><a href="mkt.html">온라인마케팅</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="keai-footer-bottom">
+                <p class="keai-copyright">© 2025 한국기업심사원 KEAI. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Main JavaScript -->
+<script src="js/main.js"></script>
+<script src="js/image-loader.js"></script>
+
+<!-- Post Detail Script -->
+<script>
+(function() {
+    const API_URL = '/api/board';
+
+    // URL에서 게시글 ID 추출
+    const urlParams = new URLSearchParams(window.location.search);
+    const postId = urlParams.get('id');
+
+    // DOM 요소
+    const loadingEl = document.getElementById('post-loading');
+    const errorEl = document.getElementById('post-error');
+    const layoutEl = document.getElementById('post-layout');
+    const mobileBarEl = document.getElementById('mobile-bar');
+
+    let currentPost = null;
+    let allPosts = [];
+
+    // 게시글 로드
+    async function loadPost() {
+        if (!postId) {
+            showError();
+            return;
+        }
+
+        try {
+            const response = await fetch(API_URL);
+            if (!response.ok) throw new Error('API 호출 실패');
+
+            const result = await response.json();
+            if (!result.success) throw new Error('게시글 로드 실패');
+
+            allPosts = result.posts.map(post => ({
+                id: post.id,
+                title: post.제목,
+                content: post.내용,
+                excerpt: post.요약 || (post.내용 || '').substring(0, 100),
+                category: post.카테고리 || '공지',
+                thumbnail: post.썸네일,
+                date: post.작성일,
+                views: post.조회수 || 0
+            }));
+
+            currentPost = allPosts.find(p => p.id === postId);
+
+            if (!currentPost) {
+                loadDemoPost();
+                return;
+            }
+
+            renderPost();
+            renderRelatedPosts();
+
+        } catch (error) {
+            console.error('게시글 로드 실패:', error);
+            loadDemoPost();
+        }
+    }
+
+    // 데모 데이터
+    function loadDemoPost() {
+        const demoPosts = {
+            '1': {
+                id: '1',
+                title: '2025년 상반기 정책자금 신청 일정 안내',
+                content: '2025년 상반기 정책자금 신청 일정을 안내드립니다.\n\n■ 중소벤처기업부 정책자금\n- 신청기간: 2025년 1월 2일 ~ 6월 30일\n- 대상: 중소기업 및 소상공인\n- 지원한도: 최대 100억원\n\n■ 신용보증기금 보증지원\n- 신청기간: 상시\n- 대상: 신용등급 BB 이상 기업\n- 지원한도: 최대 30억원\n\n■ 기술보증기금 기술평가보증\n- 신청기간: 상시\n- 대상: 기술력 보유 기업\n- 지원한도: 최대 50억원\n\n자세한 내용은 KEAI로 문의해 주세요.',
+                excerpt: '2025년 상반기 정책자금 신청 일정을 확인하세요.',
+                category: '공지',
+                thumbnail: null,
+                date: '2025-01-15',
+                views: 1247
+            },
+            '2': {
+                id: '2',
+                title: 'KEAI 컨설팅으로 5억 자금 확보 성공 사례',
+                content: 'AI 기반 솔루션을 개발하는 스타트업이 KEAI의 전문 컨설팅을 통해 정책자금 5억원을 성공적으로 확보했습니다.\n\n■ 기업 개요\n- 업종: AI/소프트웨어\n- 창업년도: 2023년\n- 직원 수: 12명\n\n■ 컨설팅 과정\n1. 기업 현황 분석\n2. 적합 자금 매칭\n3. 신청 서류 컨설팅\n4. 심사 대응 지원\n\n■ 결과\n- 확보 금액: 5억원\n- 소요 기간: 약 2개월\n\n"KEAI 없이는 불가능했을 것입니다. 전문적인 컨설팅에 감사드립니다." - 해당 기업 대표',
+                excerpt: 'KEAI 컨설팅을 통해 5억원 자금을 확보한 성공 사례를 소개합니다.',
+                category: '뉴스',
+                thumbnail: null,
+                date: '2025-01-10',
+                views: 892
+            },
+            '3': {
+                id: '3',
+                title: '정책자금 신청 시 주의해야 할 5가지',
+                content: '정책자금 신청 시 반드시 주의해야 할 5가지 사항을 안내드립니다.\n\n1. 서류 준비는 미리미리\n   - 사업계획서, 재무제표, 기술자료 등 필수 서류를 사전에 꼼꼼히 준비하세요.\n\n2. 신용등급 관리\n   - 대표자 및 기업 신용등급이 심사에 큰 영향을 미칩니다.\n\n3. 자금 용도 명확화\n   - 자금 사용 계획을 구체적으로 작성해야 합니다.\n\n4. 일정 확인\n   - 각 정책자금마다 신청 기간이 다르니 미리 확인하세요.\n\n5. 전문가 상담\n   - 경험 많은 전문가의 도움을 받으면 확보 가능성이 높아집니다.',
+                excerpt: '정책자금 신청 전 꼭 확인해야 할 5가지 핵심 사항입니다.',
+                category: '정보',
+                thumbnail: null,
+                date: '2025-01-05',
+                views: 2156
+            }
+        };
+
+        currentPost = demoPosts[postId];
+        allPosts = Object.values(demoPosts);
+
+        if (currentPost) {
+            renderPost();
+            renderRelatedPosts();
+        } else {
+            showError();
+        }
+    }
+
+    // 에러 표시
+    function showError() {
+        loadingEl.style.display = 'none';
+        errorEl.style.display = 'block';
+    }
+
+    // 게시글 렌더링
+    function renderPost() {
+        loadingEl.style.display = 'none';
+        layoutEl.style.display = 'grid';
+        mobileBarEl.style.display = 'flex';
+
+        // SEO 메타태그 업데이트
+        updateMetaTags(currentPost);
+
+        // 페이지 제목
+        document.title = `${currentPost.title} | 한국기업심사원 KEAI`;
+
+        // 브레드크럼
+        document.getElementById('breadcrumb-category').textContent = currentPost.category;
+
+        // 헤더
+        const categoryEl = document.getElementById('post-category');
+        categoryEl.textContent = currentPost.category;
+        categoryEl.className = 'keai-post-category ' + getCategoryClass(currentPost.category);
+
+        document.getElementById('post-title').textContent = currentPost.title;
+        document.getElementById('post-subtitle').textContent = currentPost.excerpt;
+        document.getElementById('post-date').textContent = formatDate(currentPost.date);
+        document.getElementById('post-views').textContent = `조회 ${currentPost.views.toLocaleString()}`;
+
+        // 썸네일
+        if (currentPost.thumbnail) {
+            const thumbWrap = document.getElementById('post-thumbnail-wrap');
+            const thumbImg = document.getElementById('post-thumbnail');
+            thumbImg.src = currentPost.thumbnail;
+            thumbImg.alt = currentPost.title;
+            thumbWrap.style.display = 'block';
+        }
+
+        // 본문
+        document.getElementById('post-body').innerHTML = formatContent(currentPost.content);
+
+        // 사이드바 정보
+        document.getElementById('info-category').textContent = currentPost.category;
+        document.getElementById('info-date').textContent = formatDate(currentPost.date);
+        document.getElementById('info-views').textContent = currentPost.views.toLocaleString();
+    }
+
+    // 관련 게시글 렌더링
+    function renderRelatedPosts() {
+        const relatedSection = document.getElementById('related-section');
+        const relatedGrid = document.getElementById('related-grid');
+
+        // 같은 카테고리 우선, 최대 3개
+        const sameCategory = allPosts.filter(p => p.id !== currentPost.id && p.category === currentPost.category);
+        const others = allPosts.filter(p => p.id !== currentPost.id && p.category !== currentPost.category);
+        const related = [...sameCategory, ...others].slice(0, 3);
+
+        if (related.length === 0) {
+            relatedSection.style.display = 'none';
+            return;
+        }
+
+        relatedSection.style.display = 'block';
+        relatedGrid.innerHTML = related.map(post => `
+            <a href="post.html?id=${post.id}" class="keai-related-card">
+                <div class="keai-related-thumb">
+                    ${post.thumbnail
+                        ? `<img src="${post.thumbnail}" alt="${post.title}" loading="lazy">`
+                        : `<svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-5-7l-3 3.72L9 13l-3 4h12l-4-5z"/></svg>`
+                    }
+                </div>
+                <div class="keai-related-content">
+                    <span class="keai-related-category">${post.category}</span>
+                    <h3 class="keai-related-card-title">${post.title}</h3>
+                </div>
+            </a>
+        `).join('');
+    }
+
+    // 카테고리 클래스
+    function getCategoryClass(category) {
+        if (category === '공지') return 'notice';
+        if (category === '뉴스') return 'news';
+        if (category === '정보') return 'info';
+        return '';
+    }
+
+    // 날짜 포맷
+    function formatDate(dateStr) {
+        if (!dateStr) return '-';
+        const date = new Date(dateStr);
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}.${month}.${day}`;
+    }
+
+    // 콘텐츠 포맷팅
+    function formatContent(content) {
+        if (!content) return '';
+
+        let normalized = content.trim();
+
+        // 구조화 패턴 확인
+        const hasStructurePatterns = /(■|\d+[\.\)]\s|[•\-\*]\s)/m.test(normalized);
+
+        if (hasStructurePatterns) {
+            return formatStructuredContent(normalized);
+        }
+
+        // 일반 텍스트
+        return normalized
+            .split('\n')
+            .map(line => {
+                const trimmed = line.trim();
+                if (!trimmed) return '<div style="height: 16px;"></div>';
+                return `<p>${trimmed}</p>`;
+            })
+            .join('');
+    }
+
+    // 구조화된 콘텐츠 포맷팅
+    function formatStructuredContent(content) {
+        let html = '';
+        const lines = content.split('\n');
+        let inNumberList = false;
+        let inBulletList = false;
+
+        lines.forEach((line, index) => {
+            const trimmedLine = line.trim();
+
+            if (!trimmedLine) {
+                if (inNumberList) { html += '</ul>'; inNumberList = false; }
+                if (inBulletList) { html += '</ul>'; inBulletList = false; }
+                html += '<div style="height: 16px;"></div>';
+                return;
+            }
+
+            // ■ 섹션 제목
+            if (trimmedLine.startsWith('■')) {
+                if (inNumberList) { html += '</ul>'; inNumberList = false; }
+                if (inBulletList) { html += '</ul>'; inBulletList = false; }
+                const title = trimmedLine.replace(/^■\s*/, '');
+                html += `<div class="section-title">${title}</div>`;
+                return;
+            }
+
+            // 숫자 리스트 (1. 2. 3.)
+            if (/^\d+[\.\)]\s/.test(trimmedLine)) {
+                if (inBulletList) { html += '</ul>'; inBulletList = false; }
+                if (!inNumberList) {
+                    html += '<ul class="number-list">';
+                    inNumberList = true;
+                }
+                const number = trimmedLine.match(/^(\d+)/)[1];
+                const text = trimmedLine.replace(/^\d+[\.\)]\s*/, '');
+                html += `<li><span class="number-badge">${number}</span><span>${text}</span></li>`;
+                return;
+            }
+
+            // 하위 항목 (들여쓰기 + -)
+            if (/^\s{2,}-\s/.test(line)) {
+                const text = line.replace(/^\s*-\s*/, '');
+                html += `<div class="sub-item">- ${text}</div>`;
+                return;
+            }
+
+            // 불릿 리스트 (• - *)
+            if (/^[•\-\*]\s/.test(trimmedLine)) {
+                if (inNumberList) { html += '</ul>'; inNumberList = false; }
+                if (!inBulletList) {
+                    html += '<ul class="bullet-list">';
+                    inBulletList = true;
+                }
+                const text = trimmedLine.replace(/^[•\-\*]\s*/, '');
+                html += `<li>${text}</li>`;
+                return;
+            }
+
+            // 일반 텍스트
+            if (inNumberList) { html += '</ul>'; inNumberList = false; }
+            if (inBulletList) { html += '</ul>'; inBulletList = false; }
+            html += `<p>${trimmedLine}</p>`;
+        });
+
+        if (inNumberList) html += '</ul>';
+        if (inBulletList) html += '</ul>';
+
+        return html;
+    }
+
+    // 공유 기능
+    window.shareFacebook = function() {
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`, '_blank', 'width=600,height=400');
+    };
+
+    window.shareTwitter = function() {
+        window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(currentPost.title)}`, '_blank', 'width=600,height=400');
+    };
+
+    window.copyLink = function() {
+        navigator.clipboard.writeText(window.location.href).then(() => {
+            showToast('링크가 복사되었습니다');
+        }).catch(() => {
+            const input = document.createElement('input');
+            input.value = window.location.href;
+            document.body.appendChild(input);
+            input.select();
+            document.execCommand('copy');
+            document.body.removeChild(input);
+            showToast('링크가 복사되었습니다');
+        });
+    };
+
+    window.shareNative = function() {
+        if (navigator.share) {
+            navigator.share({
+                title: currentPost.title,
+                text: currentPost.excerpt,
+                url: window.location.href
+            });
+        } else {
+            copyLink();
+        }
+    };
+
+    // Toast 표시
+    function showToast(message) {
+        const toast = document.getElementById('toast');
+        toast.textContent = message;
+        toast.classList.add('show');
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, 2000);
+    }
+
+    // SEO 메타태그 업데이트
+    function updateMetaTags(post) {
+        const url = window.location.href;
+        const image = post.thumbnail || 'https://keai-three.vercel.app/og/og-home.png';
+        const description = post.excerpt || post.title;
+
+        updateMeta('description', description);
+        updateMeta('og:title', `${post.title} | 한국기업심사원 KEAI`, 'property');
+        updateMeta('og:description', description, 'property');
+        updateMeta('og:image', image, 'property');
+        updateMeta('twitter:title', `${post.title} | 한국기업심사원 KEAI`);
+        updateMeta('twitter:description', description);
+        updateMeta('twitter:image', image);
+
+        const canonical = document.querySelector('link[rel="canonical"]');
+        if (canonical) canonical.href = url;
+    }
+
+    function updateMeta(name, content, attr = 'name') {
+        let meta = document.querySelector(`meta[${attr}="${name}"]`);
+        if (meta) {
+            meta.setAttribute('content', content);
+        }
+    }
+
+    // 초기화
+    loadPost();
+})();
+</script>
+
+</body>
+</html>

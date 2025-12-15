@@ -1,0 +1,624 @@
+<!-- ================================================ -->
+<!-- 이음파트너스 자금상담 히어로 섹션 -->
+<!-- 섹션 ID: #s202511173517a7716bd32 -->
+<!-- ================================================ -->
+<style>
+/* Pretendard 폰트 */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
+
+/* 기본 스타일 초기화 */
+#s202511173517a7716bd32 * {
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif !important;
+}
+
+/* 아임웹 구조 완전 리셋 */
+#s202511173517a7716bd32 .section_body,
+#s202511173517a7716bd32 .inside,
+#s202511173517a7716bd32 .widget,
+#s202511173517a7716bd32 .widget_inner {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 auto !important;
+    background: transparent !important;
+}
+
+/* 히어로 섹션 래퍼 */
+#s202511173517a7716bd32 {
+    position: relative !important;
+    width: 100vw !important;
+    margin-left: calc(-50vw + 50%) !important;
+    background: url('https://cdn.imweb.me/upload/S20251117ed7f35ec2bb5b/2c68425b72c7e.png') center/cover no-repeat !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    z-index: 1 !important;
+}
+
+/* 아임웹 기본 섹션 간격 제거 */
+#s202511173517a7716bd32.fr-section {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+/* 아임웹 자동 생성 패딩 div 완전 제거 */
+div[id^="padding_w"] {
+    display: none !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    max-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    line-height: 0 !important;
+}
+
+/* 특정 섹션 다음 패딩 제거 */
+#s202511173517a7716bd32 + div[id*="padding"] {
+    display: none !important;
+}
+
+/* 다음 섹션과의 최소 간격 확보 (중첩 방지) */
+#s202511173517a7716bd32 + section,
+#s202511173517a7716bd32 + div[class*="section"],
+#s202511173517a7716bd32 + .fr-section {
+    margin-top: 0 !important;
+    position: relative !important;
+    z-index: 2 !important;
+}
+
+/* 히어로 섹션 오버레이 효과 - 가독성 향상 */
+#s202511173517a7716bd32::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: linear-gradient(180deg, rgba(44, 62, 80, 0.85) 0%, rgba(91, 75, 138, 0.75) 100%) !important;
+    z-index: 0 !important;
+}
+
+#s202511173517a7716bd32 .hero-container {
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+/* 컨테이너 - 전체 높이로 확장 */
+#s202511173517a7716bd32 .hero-container {
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    padding: 110px 20px 60px !important;
+    min-height: 100% !important;
+}
+
+/* 히어로 콘텐츠 */
+#s202511173517a7716bd32 .hero-content {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 60px !important;
+    align-items: center !important;
+}
+
+#s202511173517a7716bd32 .hero-text {
+    color: #ffffff !important;
+}
+
+#s202511173517a7716bd32 .hero-badge {
+    display: inline-block !important;
+    background: rgba(234, 138, 76, 0.15) !important;
+    color: #EA8A4C !important;
+    padding: 8px 20px !important;
+    border-radius: 30px !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    margin: 0 0 20px 0 !important;
+    border: 1px solid rgba(234, 138, 76, 0.3) !important;
+    backdrop-filter: blur(10px) !important;
+    box-shadow: 0 0 20px rgba(234, 138, 76, 0.2) !important;
+}
+
+#s202511173517a7716bd32 .hero-title {
+    font-size: 48px !important;
+    font-weight: 700 !important;
+    line-height: 1.3 !important;
+    margin: 0 0 24px 0 !important;
+    color: #ffffff !important;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3) !important;
+    padding: 0 !important;
+}
+
+#s202511173517a7716bd32 .hero-title .highlight {
+    color: #EA8A4C !important;
+    text-shadow: 0 0 30px rgba(234, 138, 76, 0.8) !important;
+}
+
+#s202511173517a7716bd32 .hero-description {
+    font-size: 20px !important;
+    line-height: 1.6 !important;
+    margin: 0 0 40px 0 !important;
+    color: rgba(255, 255, 255, 0.95) !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) !important;
+    padding: 0 !important;
+}
+
+/* 모바일 전용 줄바꿈 */
+#s202511173517a7716bd32 .mobile-br {
+    display: none !important;
+}
+
+/* CTA 버튼 그룹 */
+#s202511173517a7716bd32 .hero-buttons {
+    display: flex !important;
+    gap: 16px !important;
+    flex-wrap: wrap !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+#s202511173517a7716bd32 .btn-primary {
+    background: linear-gradient(135deg, #EA8A4C 0%, #D77839 100%) !important;
+    color: #ffffff !important;
+    padding: 18px 40px !important;
+    border-radius: 8px !important;
+    font-size: 18px !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 20px rgba(234, 138, 76, 0.4) !important;
+    cursor: pointer !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+    position: relative !important;
+    overflow: hidden !important;
+    border: none !important;
+}
+
+/* 반짝임 효과 */
+#s202511173517a7716bd32 .btn-primary::before {
+    content: '' !important;
+    position: absolute !important;
+    top: -50% !important;
+    left: -50% !important;
+    width: 200% !important;
+    height: 200% !important;
+    background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.3) 50%, transparent 70%) !important;
+    transform: translateX(-100%) translateY(-100%) rotate(45deg) !important;
+    transition: all 0.6s ease !important;
+}
+
+#s202511173517a7716bd32 .btn-primary:hover::before {
+    transform: translateX(100%) translateY(100%) rotate(45deg) !important;
+}
+
+#s202511173517a7716bd32 .btn-primary:hover {
+    background: linear-gradient(135deg, #D77839 0%, #EA8A4C 100%) !important;
+    box-shadow: 0 6px 25px rgba(234, 138, 76, 0.5) !important;
+    transform: translateY(-2px) !important;
+}
+
+#s202511173517a7716bd32 .btn-secondary {
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(10px) !important;
+    color: #ffffff !important;
+    padding: 18px 40px !important;
+    border: 2px solid rgba(255, 255, 255, 0.3) !important;
+    border-radius: 8px !important;
+    font-size: 18px !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+}
+
+#s202511173517a7716bd32 .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.2) !important;
+    border-color: rgba(234, 138, 76, 0.5) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(234, 138, 76, 0.3) !important;
+}
+
+/* 히어로 비주얼 영역 */
+#s202511173517a7716bd32 .hero-visual {
+    position: relative !important;
+}
+
+#s202511173517a7716bd32 .fund-cards {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 20px !important;
+}
+
+#s202511173517a7716bd32 .fund-card {
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(15px) !important;
+    -webkit-backdrop-filter: blur(15px) !important;
+    border-radius: 16px !important;
+    padding: 30px !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+    transition: all 0.3s ease !important;
+    cursor: pointer !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    position: relative !important;
+    overflow: hidden !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+#s202511173517a7716bd32 .fund-card:hover {
+    background: rgba(255, 255, 255, 0.15) !important;
+    transform: translateY(-4px) !important;
+    border-color: rgba(234, 138, 76, 0.5) !important;
+    box-shadow: 0 8px 30px rgba(234, 138, 76, 0.3), 0 0 40px rgba(234, 138, 76, 0.2) !important;
+}
+
+#s202511173517a7716bd32 .fund-card-icon {
+    width: 60px !important;
+    height: 60px !important;
+    background: linear-gradient(135deg, #EA8A4C 0%, #D77839 100%) !important;
+    border-radius: 12px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 0 20px 0 !important;
+    box-shadow: 0 4px 15px rgba(234, 138, 76, 0.4) !important;
+    padding: 0 !important;
+}
+
+#s202511173517a7716bd32 .fund-card-icon svg {
+    width: 30px !important;
+    height: 30px !important;
+    fill: #ffffff !important;
+}
+
+#s202511173517a7716bd32 .fund-card-title {
+    font-size: 22px !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
+    margin: 0 0 8px 0 !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+    padding: 0 !important;
+}
+
+#s202511173517a7716bd32 .fund-card-desc {
+    font-size: 16px !important;
+    color: rgba(255, 255, 255, 0.85) !important;
+    line-height: 1.5 !important;
+    margin: 0 0 20px 0 !important;
+    padding: 0 !important;
+}
+
+#s202511173517a7716bd32 .fund-card-amount {
+    font-size: 24px !important;
+    font-weight: 700 !important;
+    color: #EA8A4C !important;
+    margin: 0 0 8px 0 !important;
+    text-shadow: 0 0 15px rgba(234, 138, 76, 0.6) !important;
+    padding: 0 !important;
+}
+
+#s202511173517a7716bd32 .fund-card-rate {
+    font-size: 18px !important;
+    font-weight: 600 !important;
+    color: rgba(255, 255, 255, 0.75) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* 모바일 요약 카드 - PC에서는 숨김 */
+#s202511173517a7716bd32 .mobile-summary-card {
+    display: none !important;
+}
+
+/* 반응형 디자인 - 태블릿 */
+@media (min-width: 768px) {
+    #s202511173517a7716bd32 .hero-container {
+        padding: 100px 40px 60px !important;
+    }
+}
+
+/* 반응형 디자인 - 데스크톱 */
+@media (min-width: 1024px) {
+    #s202511173517a7716bd32 .hero-container {
+        padding: 120px 40px 60px !important;
+    }
+}
+
+/* 반응형 디자인 - 968px 이하 */
+@media (max-width: 968px) {
+    #s202511173517a7716bd32 .hero-content {
+        grid-template-columns: 1fr !important;
+        text-align: center !important;
+        gap: 40px !important;
+    }
+
+    #s202511173517a7716bd32 .hero-title {
+        font-size: 38px !important;
+    }
+
+    #s202511173517a7716bd32 .hero-buttons {
+        justify-content: center !important;
+    }
+}
+
+/* 반응형 디자인 - 모바일 */
+@media (max-width: 768px) {
+    #s202511173517a7716bd32 .hero-container {
+        padding: 110px 20px 60px !important;
+    }
+
+    #s202511173517a7716bd32 .hero-badge {
+        font-size: 12px !important;
+        padding: 6px 16px !important;
+        margin: 0 0 16px 0 !important;
+    }
+
+    #s202511173517a7716bd32 .hero-title {
+        font-size: 28px !important;
+        line-height: 1.4 !important;
+        margin: 0 0 16px 0 !important;
+        word-break: keep-all !important;
+    }
+
+    #s202511173517a7716bd32 .hero-description {
+        font-size: 16px !important;
+        line-height: 1.6 !important;
+        margin: 0 0 28px 0 !important;
+        word-break: keep-all !important;
+    }
+
+    #s202511173517a7716bd32 .mobile-br {
+        display: block !important;
+    }
+
+    #s202511173517a7716bd32 .hero-buttons {
+        gap: 12px !important;
+        margin: 0 0 24px 0 !important;
+    }
+
+    #s202511173517a7716bd32 .btn-primary,
+    #s202511173517a7716bd32 .btn-secondary {
+        font-size: 16px !important;
+        padding: 14px 28px !important;
+    }
+
+    /* 모바일 요약 카드 표시 */
+    #s202511173517a7716bd32 .mobile-summary-card {
+        display: block !important;
+        background: rgba(255, 255, 255, 0.1) !important;
+        backdrop-filter: blur(15px) !important;
+        border: 1px solid rgba(255, 255, 255, 0.2) !important;
+        border-radius: 16px !important;
+        padding: 20px !important;
+        margin: 0 0 24px 0 !important;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2) !important;
+    }
+
+    #s202511173517a7716bd32 .summary-stats {
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 0 !important;
+        text-align: center !important;
+    }
+
+    #s202511173517a7716bd32 .stat-item {
+        color: #ffffff !important;
+        padding: 0 12px !important;
+        border-right: 1px solid rgba(255, 255, 255, 0.2) !important;
+    }
+
+    #s202511173517a7716bd32 .stat-item:last-child {
+        border-right: none !important;
+    }
+
+    #s202511173517a7716bd32 .stat-number {
+        font-size: 22px !important;
+        font-weight: 700 !important;
+        color: #EA8A4C !important;
+        margin: 0 0 4px 0 !important;
+        text-shadow: 0 0 15px rgba(234, 138, 76, 0.8) !important;
+        padding: 0 !important;
+    }
+
+    #s202511173517a7716bd32 .stat-label {
+        font-size: 12px !important;
+        color: rgba(255, 255, 255, 0.85) !important;
+        font-weight: 500 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    #s202511173517a7716bd32 .hero-visual {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    #s202511173517a7716bd32 .fund-cards {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 12px !important;
+    }
+
+    #s202511173517a7716bd32 .fund-card {
+        padding: 20px 16px !important;
+        min-height: 180px !important;
+    }
+
+    #s202511173517a7716bd32 .fund-card-icon {
+        width: 48px !important;
+        height: 48px !important;
+        margin: 0 0 12px 0 !important;
+    }
+
+    #s202511173517a7716bd32 .fund-card-icon svg {
+        width: 24px !important;
+        height: 24px !important;
+    }
+
+    #s202511173517a7716bd32 .fund-card-title {
+        font-size: 16px !important;
+        margin: 0 0 6px 0 !important;
+    }
+
+    #s202511173517a7716bd32 .fund-card-desc {
+        font-size: 13px !important;
+        margin: 0 0 12px 0 !important;
+    }
+
+    #s202511173517a7716bd32 .fund-card-amount {
+        font-size: 18px !important;
+        margin: 0 0 4px 0 !important;
+    }
+
+    #s202511173517a7716bd32 .fund-card-rate {
+        font-size: 14px !important;
+    }
+}
+
+/* 480px 이하 모바일 */
+@media (max-width: 480px) {
+    #s202511173517a7716bd32 .hero-container {
+        padding: 100px 15px 60px !important;
+    }
+
+    #s202511173517a7716bd32 .hero-title {
+        font-size: 24px !important;
+    }
+
+    #s202511173517a7716bd32 .hero-description {
+        font-size: 15px !important;
+    }
+
+    #s202511173517a7716bd32 .btn-primary,
+    #s202511173517a7716bd32 .btn-secondary {
+        font-size: 15px !important;
+        padding: 12px 24px !important;
+    }
+}
+</style>
+
+<section id="s202511173517a7716bd32">
+    <div class="hero-container">
+        <div class="hero-content">
+            <div class="hero-text">
+                <span class="hero-badge">이음파트너스 자금조달 컨설팅</span>
+                <h1 class="hero-title">
+                    기업심사관 출신 전문가의<br>
+                    <span class="highlight">맞춤형 자금조달 전략</span>
+                </h1>
+                <p class="hero-description">
+                    정책자금부터 사업자 대출까지,<br class="mobile-br"> 전문가가 직접 분석하고<br>
+                    대표자가 직접 신청할 수 있도록<br class="mobile-br"> 체계적으로 지원합니다
+                </p>
+                <div class="hero-buttons">
+                    <a href="#s202510319184017476688" class="btn-primary" onclick="scrollToForm(event)">
+                        무료 심사 신청하기
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 모바일 요약 카드 -->
+            <div class="mobile-summary-card">
+                <div class="summary-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">심사관</div>
+                        <div class="stat-label">출신 전문가</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">1:1</div>
+                        <div class="stat-label">맞춤 분석</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">직접</div>
+                        <div class="stat-label">신청 지원</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <div class="fund-cards">
+                    <div class="fund-card">
+                        <div class="fund-card-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"/>
+                            </svg>
+                        </div>
+                        <h3 class="fund-card-title">정책자금</h3>
+                        <p class="fund-card-desc">창업·성장·시설자금</p>
+                        <div class="fund-card-amount">최대 70억원</div>
+                        <div class="fund-card-rate">연 2.99%~</div>
+                    </div>
+
+                    <div class="fund-card">
+                        <div class="fund-card-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="fund-card-title">정부지원자금</h3>
+                        <p class="fund-card-desc">중진공·소진공 지원</p>
+                        <div class="fund-card-amount">최대 60억원</div>
+                        <div class="fund-card-rate">연 2.99%~</div>
+                    </div>
+
+                    <div class="fund-card">
+                        <div class="fund-card-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="fund-card-title">보증서발급</h3>
+                        <p class="fund-card-desc">신용·기술보증서</p>
+                        <div class="fund-card-amount">최대 30억원</div>
+                        <div class="fund-card-rate">기관별 안내</div>
+                    </div>
+
+                    <div class="fund-card">
+                        <div class="fund-card-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm0 4c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm6 12H6v-1.4c0-2 4-3.1 6-3.1s6 1.1 6 3.1V19z"/>
+                            </svg>
+                        </div>
+                        <h3 class="fund-card-title">맞춤 컨설팅</h3>
+                        <p class="fund-card-desc">대표자 역량분석</p>
+                        <div class="fund-card-amount">무료 심사</div>
+                        <div class="fund-card-rate">1:1 전문가</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // CTA 버튼 클릭 시 입력폼으로 이동
+    function scrollToForm(event) {
+        event.preventDefault();
+        const formSection = document.querySelector('#s202510319184017476688');
+        if (formSection) {
+            const companyInput = formSection.querySelector('input[name="company"]');
+            if (companyInput) {
+                companyInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                setTimeout(() => { companyInput.focus(); }, 800);
+            } else {
+                formSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+    }
+    </script>
+</section>

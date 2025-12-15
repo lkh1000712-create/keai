@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이음파트너스 - 정책자금 전문상담 신청</title>
+    <style>
+/* 폰트 설정 */
+#s20251117b45aced0ca8a6 {
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif !important;
+}
+
+/* 이음파트너스 색상 변수 정의 */
+:root {
+    --primary-orange: #EA8A4C;
+    --primary-orange-dark: #D77839;
+    --primary-purple: #5B4B8A;
+    --navy: #2C3E50;
+    --beige-light: #F5F1E8;
+    --gray-50: #F9FAFB;
+    --gray-100: #F3F4F6;
+    --gray-200: #E5E7EB;
+    --gray-600: #4B5563;
+    --gray-800: #1F2937;
+}
+
+/* 섹션 배경 - 흰색 */
+#s20251117b45aced0ca8a6 {
+    background: #FFFFFF !important;
+    padding: 80px 0 !important;
+    position: relative !important;
+    width: 100vw !important;
+    margin-left: calc(-50vw + 50%) !important;
+}
+
+#s20251117b45aced0ca8a6 .section-container {
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    padding: 0 20px !important;
+}
+
+/* 폼 레이아웃 래퍼 (2컬럼) - ex 스타일 */
+#s20251117b45aced0ca8a6 .form-wrapper {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 0 !important;
+}
+
+/* 왼쪽 이미지 영역 - ex 스타일 */
+#s20251117b45aced0ca8a6 .bank-form-image {
+    display: none !important;
+    position: relative !important;
+    overflow: hidden !important;
+    border-radius: 16px 0 0 16px !important;
+}
+
+#s20251117b45aced0ca8a6 .bank-form-image img {
+    width: 120% !important;
+    height: 120% !important;
+    object-fit: cover !important;
+    object-position: center top !important;
+    transform: scale(1.2) translateY(-15%) !important;
+}
+
+/* 이미지 오버레이 */
+#s20251117b45aced0ca8a6 .bank-form-image-overlay {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: linear-gradient(180deg, rgba(91, 75, 138, 0.7) 0%, rgba(234, 138, 76, 0.6) 100%) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 40px !important;
+    text-align: center !important;
+}
+
+#s20251117b45aced0ca8a6 .bank-form-image-title {
+    font-size: 28px !important;
+    font-weight: 700 !important;
+    color: #FFFFFF !important;
+    margin-bottom: 16px !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+}
+
+#s20251117b45aced0ca8a6 .bank-form-image-text {
+    font-size: 16px !important;
+    color: rgba(255, 255, 255, 0.95) !important;
+    line-height: 1.7 !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* 우측 폼 영역 - 밝은 글래스모피즘 */
+#s20251117b45aced0ca8a6 .form-area {
+    background: rgba(255, 255, 255, 0.85) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border: 2px solid rgba(0, 0, 0, 0.1) !important;
+    border-radius: 16px !important;
+    padding: 40px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+    position: relative !important;
+}
+
+#s20251117b45aced0ca8a6 .form-area::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(234, 138, 76, 0.6), transparent);
+    animation: pulse-line 3s ease infinite;
+}
+
+@keyframes pulse-line {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
+
+#s20251117b45aced0ca8a6 .form-header {
+    text-align: center !important;
+    margin-bottom: 40px !important;
+}
+
+#s20251117b45aced0ca8a6 .form-title {
+    font-size: 24px !important;
+    font-weight: 700 !important;
+    color: #1e293b !important;
+    margin-bottom: 8px !important;
+}
+
+#s20251117b45aced0ca8a6 .form-subtitle {
+    font-size: 16px !important;
+    color: #64748b !important;
+}
+
+/* 폼 그룹 */
+#s20251117b45aced0ca8a6 .form-row {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 20px !important;
+    margin-bottom: 16px !important;
+}
+
+#s20251117b45aced0ca8a6 .form-row.four-columns {
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 16px !important;
+}
+
+#s20251117b45aced0ca8a6 .form-row.full {
+    grid-template-columns: 1fr !important;
+    margin-bottom: 12px !important;
+}
+
+#s20251117b45aced0ca8a6 .form-group {
+    margin-bottom: 0 !important;
+}
+
+#s20251117b45aced0ca8a6 .form-label {
+    display: block !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: #1e293b !important;
+    margin-bottom: 8px !important;
+}
+
+#s20251117b45aced0ca8a6 .required {
+    color: #ef4444 !important;
+}
+
+#s20251117b45aced0ca8a6 .form-control {
+    width: 100% !important;
+    padding: 12px 16px !important;
+    font-size: 15px !important;
+    line-height: 1.5 !important;
+    border: 2px solid #CED4DA !important;
+    border-radius: 4px !important;
+    background: #FFFFFF !important;
+    transition: all 0.2s ease !important;
+    box-sizing: border-box !important;
+    height: 46px !important;
+}
+
+#s20251117b45aced0ca8a6 .form-control:focus {
+    outline: none !important;
+    border-color: #EA8A4C !important;
+    box-shadow: 0 0 0 3px rgba(234, 138, 76, 0.1) !important;
+    background: #FFFFFF !important;
+}
+
+#s20251117b45aced0ca8a6 select.form-control {
+    cursor: pointer !important;
+    appearance: none !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2364748b'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg>") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 12px center !important;
+    background-size: 20px !important;
+    padding-right: 40px !important;
+}
+
+#s20251117b45aced0ca8a6 textarea.form-control {
+    min-height: 60px !important;
+    height: 60px !important;
+    resize: vertical !important;
+}
+
+/* 자금 종류 선택 */
+#s20251117b45aced0ca8a6 .fund-type-group {
+    margin-bottom: 16px !important;
+}
+
+#s20251117b45aced0ca8a6 .fund-type-label {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: #1e293b !important;
+    margin-bottom: 12px !important;
+    display: block !important;
+}
+
+#s20251117b45aced0ca8a6 .fund-type-options {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px !important;
+}
+
+#s20251117b45aced0ca8a6 .fund-type-option {
+    position: relative !important;
+}
+
+#s20251117b45aced0ca8a6 .fund-type-option input[type="checkbox"] {
+    position: absolute !important;
+    opacity: 0 !important;
+}
+
+#s20251117b45aced0ca8a6 .fund-type-option label {
+    display: block !important;
+    padding: 12px 16px !important;
+    background: #FFFFFF !important;
+    border: 2px solid #CED4DA !important;
+    border-radius: 4px !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    text-align: center !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    color: #212529 !important;
+}
+
+#s20251117b45aced0ca8a6 .fund-type-option input[type="checkbox"]:checked + label {
+    background: rgba(234, 138, 76, 0.1) !important;
+    border-color: #EA8A4C !important;
+    color: #EA8A4C !important;
+    font-weight: 600 !important;
+}
+
+/* 개인정보 동의 */
+#s20251117b45aced0ca8a6 .privacy-section {
+    margin: 20px 0 !important;
+    padding: 16px !important;
+    background: #F8F9FA !important;
+    border: 1px solid #DEE2E6 !important;
+    border-radius: 8px !important;
+}
+
+#s20251117b45aced0ca8a6 .privacy-title {
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    color: #1e293b !important;
+    margin-bottom: 12px !important;
+}
+
+#s20251117b45aced0ca8a6 .privacy-content {
+    font-size: 13px !important;
+    color: #495057 !important;
+    line-height: 1.6 !important;
+    margin-bottom: 16px !important;
+    max-height: 150px !important;
+    overflow-y: auto !important;
+    padding: 12px !important;
+    background: #FFFFFF !important;
+    border: 1px solid #DEE2E6 !important;
+    border-radius: 4px !important;
+    display: none !important;
+}
+
+#s20251117b45aced0ca8a6 .privacy-content.show {
+    display: block !important;
+}
+
+#s20251117b45aced0ca8a6 .privacy-checkbox {
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: 8px !important;
+}
+
+#s20251117b45aced0ca8a6 .privacy-checkbox input[type="checkbox"] {
+    width: 18px !important;
+    height: 18px !important;
+    cursor: pointer !important;
+    margin-top: 2px !important;
+    flex-shrink: 0 !important;
+    accent-color: #EA8A4C !important;
+}
+
+#s20251117b45aced0ca8a6 .privacy-checkbox label {
+    font-size: 14px !important;
+    color: #495057 !important;
+    cursor: pointer !important;
+    line-height: 1.4 !important;
+}
+
+#s20251117b45aced0ca8a6 .privacy-detail-link {
+    color: #EA8A4C !important;
+    text-decoration: underline !important;
+    cursor: pointer !important;
+    font-size: 13px !important;
+    margin-left: 4px !important;
+}
+
+/* 제출 버튼 - ex 스타일 */
+#s20251117b45aced0ca8a6 .submit-section {
+    text-align: center !important;
+}
+
+#s20251117b45aced0ca8a6 .submit-button {
+    background: #EA8A4C !important;
+    color: white !important;
+    padding: 16px 48px !important;
+    border: none !important;
+    border-radius: 4px !important;
+    font-size: 18px !important;
+    font-weight: 700 !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    box-shadow: 0 4px 8px rgba(234, 138, 76, 0.2) !important;
+}
+
+#s20251117b45aced0ca8a6 .submit-button:hover {
+    background: #D77839 !important;
+    box-shadow: 0 6px 12px rgba(234, 138, 76, 0.3) !important;
+    transform: translateY(-2px) !important;
+}
+
+#s20251117b45aced0ca8a6 .submit-button:disabled {
+    background: #CED4DA !important;
+    cursor: not-allowed !important;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+#s20251117b45aced0ca8a6 .submit-note {
+    font-size: 13px !important;
+    color: #64748b !important;
+    margin-top: 12px !important;
+}
+
+/* 로딩 스피너 섹션 완전 제거 - CSS만 남김 */
+#s20251117b45aced0ca8a6 .loading-spinner {
+    display: none !important;
+}
+
+#s20251117b45aced0ca8a6 .loading-spinner.active {
+    display: none !important;
+}
+
+/* 성공/실패 메시지 */
+#s20251117b45aced0ca8a6 .message-box {
+    display: none;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+#s20251117b45aced0ca8a6 .message-box.success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+#s20251117b45aced0ca8a6 .message-box.error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+#s20251117b45aced0ca8a6 .message-box.active {
+    display: block;
+}
+
+/* 반응형: 태블릿 이상 (768px+) */
+@media (min-width: 768px) {
+    /* 2컬럼 레이아웃 활성화 */
+    #s20251117b45aced0ca8a6 .form-wrapper {
+        grid-template-columns: 1fr 1.2fr !important;
+        gap: 0 !important;
+    }
+
+    /* 왼쪽 이미지 표시 */
+    #s20251117b45aced0ca8a6 .bank-form-image {
+        display: block !important;
+    }
+
+    /* 오른쪽 폼 모서리 조정 */
+    #s20251117b45aced0ca8a6 .form-area {
+        border-radius: 0 16px 16px 0 !important;
+    }
+}
+
+@media (max-width: 768px) {
+    #s20251117b45aced0ca8a6 {
+        padding: 40px 0 !important;
+    }
+
+    #s20251117b45aced0ca8a6 .info-content {
+        padding-left: 0 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+
+    #s20251117b45aced0ca8a6 .info-title {
+        font-size: 28px !important;
+        margin-bottom: 12px !important;
+        line-height: 1.2 !important;
+    }
+
+    #s20251117b45aced0ca8a6 .info-desc {
+        font-size: 15px !important;
+        margin-bottom: 24px !important;
+        line-height: 1.4 !important;
+    }
+
+    #s20251117b45aced0ca8a6 .benefit-list {
+        margin-bottom: 24px !important;
+        width: auto !important;
+        max-width: 280px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        display: inline-block !important;
+    }
+
+    #s20251117b45aced0ca8a6 .benefit-item {
+        padding: 8px 0 !important;
+        justify-content: flex-start !important;
+    }
+
+    #s20251117b45aced0ca8a6 .benefit-text {
+        font-size: 14px !important;
+    }
+
+    #s20251117b45aced0ca8a6 .contact-info {
+        padding: 16px !important;
+        margin-bottom: 24px !important;
+    }
+
+    #s20251117b45aced0ca8a6 .contact-title {
+        font-size: 16px !important;
+        margin-bottom: 12px !important;
+    }
+
+    #s20251117b45aced0ca8a6 .contact-item {
+        margin-bottom: 8px !important;
+    }
+
+    #s20251117b45aced0ca8a6 .contact-text {
+        font-size: 14px !important;
+    }
+
+    #s20251117b45aced0ca8a6 .form-area {
+        padding: 20px 16px !important;
+        border-radius: 12px !important;
+    }
+
+    #s20251117b45aced0ca8a6 .form-header {
+        margin-bottom: 20px !important;
+    }
+
+    #s20251117b45aced0ca8a6 .form-title {
+        font-size: 20px !important;
+        margin-bottom: 4px !important;
+    }
+
+    #s20251117b45aced0ca8a6 .form-subtitle {
+        font-size: 13px !important;
+    }
+
+    #s20251117b45aced0ca8a6 .form-row {
+        gap: 10px !important;
+        margin-bottom: 8px !important;
+    }
+
+    #s20251117b45aced0ca8a6 .form-row.four-columns {
+        grid-template-columns: 1fr 1fr !important;
+    }
+
+    #s20251117b45aced0ca8a6 .form-label {
+        font-size: 12px !important;
+        margin-bottom: 4px !important;
+        font-weight: 500 !important;
+    }
+
+    #s20251117b45aced0ca8a6 .form-control {
+        padding: 8px 12px !important;
+        font-size: 14px !important;
+        height: 38px !important;
+    }
+
+    #s20251117b45aced0ca8a6 select.form-control {
+        background-size: 16px !important;
+        padding-right: 32px !important;
+    }
+
+    #s20251117b45aced0ca8a6 textarea.form-control {
+        min-height: 40px !important;
+        height: 40px !important;
+        padding: 8px 12px !important;
+    }
+
+    #s20251117b45aced0ca8a6 .fund-type-group {
+        margin-bottom: 12px !important;
+    }
+
+    #s20251117b45aced0ca8a6 .fund-type-label {
+        font-size: 12px !important;
+        margin-bottom: 8px !important;
+    }
+
+    #s20251117b45aced0ca8a6 .fund-type-options {
+        gap: 6px !important;
+    }
+
+    #s20251117b45aced0ca8a6 .fund-type-option label {
+        padding: 8px 6px !important;
+        font-size: 12px !important;
+        border-width: 1px !important;
+    }
+
+    #s20251117b45aced0ca8a6 .privacy-section {
+        margin: 12px 0 !important;
+        padding: 12px !important;
+    }
+
+    #s20251117b45aced0ca8a6 .privacy-title {
+        display: none !important;
+    }
+
+    #s20251117b45aced0ca8a6 .privacy-content {
+        font-size: 11px !important;
+        max-height: 120px !important;
+        padding: 8px !important;
+        line-height: 1.3 !important;
+        margin-bottom: 10px !important;
+    }
+
+    #s20251117b45aced0ca8a6 .privacy-checkbox {
+        gap: 6px !important;
+        align-items: flex-start !important;
+    }
+
+    #s20251117b45aced0ca8a6 .privacy-checkbox input[type="checkbox"] {
+        width: 16px !important;
+        height: 16px !important;
+        margin-top: 1px !important;
+    }
+
+    #s20251117b45aced0ca8a6 .privacy-checkbox label {
+        font-size: 12px !important;
+        line-height: 1.3 !important;
+    }
+
+    #s20251117b45aced0ca8a6 .privacy-detail-link {
+        font-size: 11px !important;
+    }
+
+    #s20251117b45aced0ca8a6 .submit-button {
+        width: 100% !important;
+        padding: 12px 24px !important;
+        font-size: 15px !important;
+    }
+
+    #s20251117b45aced0ca8a6 .submit-note {
+        font-size: 11px !important;
+        margin-top: 10px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    #s20251117b45aced0ca8a6 .form-row {
+        gap: 8px !important;
+    }
+
+    #s20251117b45aced0ca8a6 .info-title {
+        font-size: 24px !important;
+    }
+
+    #s20251117b45aced0ca8a6 .form-row:nth-child(3),
+    #s20251117b45aced0ca8a6 .form-row:nth-child(4) {
+        grid-template-columns: 1fr !important;
+    }
+}
+</style>
+</head>
+<body>
+<div id="s20251117b45aced0ca8a6">
+<div class="section-container">
+    <div class="form-wrapper">
+        <!-- 왼쪽 이미지 영역 - ex 스타일 -->
+        <div class="bank-form-image">
+            <img src="https://cdn.imweb.me/upload/S20251117ed7f35ec2bb5b/8e2759d5c1727.png" alt="이음파트너스 정책자금 상담" />
+            <div class="bank-form-image-overlay">
+                <h3 class="bank-form-image-title">
+                    성공적인 정책자금 신청을<br>
+                    이음파트너스와 함께 시작하세요
+                </h3>
+                <p class="bank-form-image-text">
+                    정책자금 전문가가<br>
+                    귀사의 성장을 지원합니다
+                </p>
+            </div>
+        </div>
+
+        <!-- 우측 폼 영역 -->
+        <div class="form-area">
+            <div class="form-header">
+                <h3 class="form-title">정책자금 무료 심사 신청</h3>
+                <p class="form-subtitle">기본 정보 입력 후 맞춤 상담을 받아보세요</p>
+            </div>
+
+            <form id="consultForm" onsubmit="handleSubmit(event)">
+                <!-- 기본 정보 - 4열 -->
+                <div class="form-row four-columns">
+                    <div class="form-group">
+                        <label class="form-label">기업명 <span class="required">*</span></label>
+                        <input type="text" class="form-control" name="company" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">사업자번호 <span class="required">*</span></label>
+                        <input type="text" class="form-control" name="bizno" placeholder="000-00-00000" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">대표자명 <span class="required">*</span></label>
+                        <input type="text" class="form-control" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">직위</label>
+                        <input type="text" class="form-control" name="position" placeholder="대표이사">
+                    </div>
+                </div>
+
+                <!-- 연락 정보 - 4열 -->
+                <div class="form-row four-columns">
+                    <div class="form-group">
+                        <label class="form-label">연락처 <span class="required">*</span></label>
+                        <input type="tel" class="form-control" name="phone" placeholder="010-0000-0000" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">이메일 <span class="required">*</span></label>
+                        <input type="email" class="form-control" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">업종</label>
+                        <select class="form-control" name="industry">
+                            <option value="">선택하세요</option>
+                            <option value="제조업">제조업</option>
+                            <option value="도소매업">도소매업</option>
+                            <option value="서비스업">서비스업</option>
+                            <option value="건설업">건설업</option>
+                            <option value="IT/소프트웨어">IT/소프트웨어</option>
+                            <option value="기타">기타</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">설립연도</label>
+                        <input type="text" class="form-control" name="founded" placeholder="2020">
+                    </div>
+                </div>
+
+                <!-- 통화가능시간 추가 -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">통화 가능 시간 <span class="required">*</span></label>
+                        <select class="form-control" name="consultTime" required>
+                            <option value="">선택하세요</option>
+                            <option value="09:00-10:00">오전 09:00 - 10:00</option>
+                            <option value="10:00-11:00">오전 10:00 - 11:00</option>
+                            <option value="11:00-12:00">오전 11:00 - 12:00</option>
+                            <option value="14:00-15:00">오후 14:00 - 15:00</option>
+                            <option value="15:00-16:00">오후 15:00 - 16:00</option>
+                            <option value="16:00-17:00">오후 16:00 - 17:00</option>
+                            <option value="17:00-18:00">오후 17:00 - 18:00</option>
+                            <option value="18:00-19:00">오후 18:00 - 19:00</option>
+                            <option value="언제나가능">언제나 가능</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">필요 자금 규모</label>
+                        <select class="form-control" name="amount">
+                            <option value="">선택하세요</option>
+                            <option value="5천만원 이하">5천만원 이하</option>
+                            <option value="5천만원~1억원">5천만원 ~ 1억원</option>
+                            <option value="1억원~3억원">1억원 ~ 3억원</option>
+                            <option value="3억원~5억원">3억원 ~ 5억원</option>
+                            <option value="5억원~10억원">5억원 ~ 10억원</option>
+                            <option value="10억원 이상">10억원 이상</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- 자금 종류 선택 -->
+                <div class="fund-type-group">
+                    <label class="fund-type-label">지원받고 싶은 자금 종류 (복수 선택 가능)</label>
+                    <div class="fund-type-options">
+                        <div class="fund-type-option">
+                            <input type="checkbox" id="fund1" name="fundType" value="창업자금">
+                            <label for="fund1">창업자금</label>
+                        </div>
+                        <div class="fund-type-option">
+                            <input type="checkbox" id="fund2" name="fundType" value="운전자금">
+                            <label for="fund2">운전자금</label>
+                        </div>
+                        <div class="fund-type-option">
+                            <input type="checkbox" id="fund3" name="fundType" value="시설자금">
+                            <label for="fund3">시설자금</label>
+                        </div>
+                        <div class="fund-type-option">
+                            <input type="checkbox" id="fund4" name="fundType" value="기타자금">
+                            <label for="fund4">기타자금</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 상담 내용 -->
+                <div class="form-row full">
+                    <div class="form-group">
+                        <label class="form-label">문의사항</label>
+                        <textarea class="form-control" name="message"
+                                  placeholder="필요하신 자금의 용도나 현재 경영 상황 등을 간략히 적어주세요"></textarea>
+                    </div>
+                </div>
+
+                <!-- 개인정보 동의 -->
+                <div class="privacy-section">
+                    <h4 class="privacy-title">개인정보 수집·이용 동의</h4>
+                    <div class="privacy-checkbox">
+                        <input type="checkbox" id="privacy" name="privacy" required>
+                        <label for="privacy">개인정보 수집·이용에 동의합니다 <span class="required">*</span>
+                        <span class="privacy-detail-link" onclick="togglePrivacyDetail()">내용보기</span></label>
+                    </div>
+                    <div class="privacy-content" id="privacyContent">
+                        <p>1. 수집항목: 기업명, 사업자번호, 대표자명, 연락처, 이메일, 문의내용</p>
+                        <p>2. 수집목적: 정책자금 상담 및 지원 서비스 제공</p>
+                        <p>3. 보유기간: 서비스 종료 후 3년</p>
+                        <p>4. 동의 거부 시 서비스 이용이 제한될 수 있습니다.</p>
+                    </div>
+                </div>
+
+                <!-- 메시지 박스 -->
+                <div class="message-box success" id="successMessage">
+                    ✅ 심사 신청이 성공적으로 완료되었습니다!
+                </div>
+
+                <div class="message-box error" id="errorMessage">
+                    ❌ 신청 처리 중 문제가 발생했습니다. 다시 시도해주세요.
+                </div>
+
+                <!-- 제출 버튼 -->
+                <div class="submit-section">
+                    <button type="submit" class="submit-button" id="submitButton">무료 심사 신청하기</button>
+                    <p class="submit-note">신청 후 이음파트너스 전문가가 24시간 내 연락드립니다</p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+// Cloudflare Workers URL - 이음파트너스
+const WORKER_URL = 'https://ieumpartners.leejeho0110.workers.dev/';
+
+// Airtable 설정 - 이음파트너스 (토큰은 Worker 환경변수에서 관리)
+const AIRTABLE_CONFIG = {
+    // token은 Cloudflare Worker 환경변수에서 설정
+    baseId: 'appiPuee00kh7GtWY',
+    tableName: '고객정보'
+};
+
+// 브랜드 정보 - 이음파트너스
+const BRAND_INFO = {
+    name: '이음파트너스',
+    ceo: '이명화',
+    phone: '1533-8231',
+    email: 'pooh_1225@daum.net',
+    address: '경기 부천시 원미구 부일로365번길 34'
+};
+
+async function handleSubmit(event) {
+    event.preventDefault();
+
+    // 폼 유효성 검사
+    const form = event.target;
+    if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+    }
+
+    // 선택된 자금 종류 확인
+    const fundTypes = document.querySelectorAll('input[name="fundType"]:checked');
+    if (fundTypes.length === 0) {
+        alert('지원받고 싶은 자금 종류를 하나 이상 선택해주세요.');
+        return;
+    }
+
+    // UI 상태 변경
+    const submitButton = document.getElementById('submitButton');
+    const successMessage = document.getElementById('successMessage');
+    const errorMessage = document.getElementById('errorMessage');
+
+    submitButton.disabled = true;
+    submitButton.textContent = '처리 중...';
+    successMessage.classList.remove('active');
+    errorMessage.classList.remove('active');
+
+    // 폼 데이터
+    const customerName = form.name.value;
+    const customerEmail = form.email.value;
+    const customerPhone = form.phone.value;
+    const companyName = form.company.value;
+    const fundTypesArray = Array.from(fundTypes).map(cb => cb.value);
+    const fundTypesList = fundTypesArray.join(', ');
+
+    // Airtable 필드 데이터
+    const airtableFields = {
+        '기업명': companyName,
+        '사업자번호': form.bizno.value,
+        '대표자명': customerName,
+        '직위': form.position.value || '-',
+        '연락처': customerPhone,
+        '이메일': customerEmail,
+        '업종': form.industry.value || '-',
+        '설립연도': form.founded.value || '-',
+        '통화가능시간': form.consultTime.value,
+        '필요자금규모': form.amount.value || '-',
+        '지원받고 싶은 자금종류': fundTypesArray,
+        '문의사항': form.message.value || '',
+        '개인정보수집및이용동의': form.privacy.checked
+    };
+
+    // 고객 확인 이메일 HTML
+    const customerHtml = `
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"></head>
+<body style="font-family: 'Pretendard', sans-serif; line-height: 1.6; color: #333;">
+    <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
+        <h2 style="color: #EA8A4C; border-bottom: 3px solid #EA8A4C; padding-bottom: 10px;">
+            정책자금 심사 신청이 접수되었습니다
+        </h2>
+        <p>${customerName} 대표님, 안녕하세요.<br>${BRAND_INFO.name}입니다.</p>
+        <p>정책자금 심사 신청이 정상적으로 접수되었습니다.</p>
+
+        <div style="background: #f9f9f9; padding: 15px; border-radius: 5px; margin: 20px 0;">
+            <h3 style="margin-top: 0; color: #EA8A4C;">신청 정보</h3>
+            <p><strong>기업명:</strong> ${companyName}</p>
+            <p><strong>대표자:</strong> ${customerName}</p>
+            <p><strong>연락처:</strong> ${customerPhone}</p>
+            <p><strong>필요 자금:</strong> ${form.amount.value || '미입력'}</p>
+            <p><strong>자금 종류:</strong> ${fundTypesList}</p>
+        </div>
+
+        <p><strong>담당 전문가가 24시간 내 연락드리겠습니다.</strong></p>
+
+        <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
+            <p style="margin: 5px 0;"><strong>${BRAND_INFO.name}</strong></p>
+            <p style="margin: 5px 0;">대표: ${BRAND_INFO.ceo}</p>
+            <p style="margin: 5px 0;">전화: ${BRAND_INFO.phone}</p>
+            <p style="margin: 5px 0;">이메일: ${BRAND_INFO.email}</p>
+            <p style="margin: 5px 0; font-size: 12px; color: #666;">${BRAND_INFO.address}</p>
+        </div>
+    </div>
+</body>
+</html>`;
+
+    // 담당자 알림 이메일 HTML
+    const staffHtml = `
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"></head>
+<body style="font-family: 'Pretendard', sans-serif; line-height: 1.6; color: #333;">
+    <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
+        <h2 style="color: #EA8A4C; border-bottom: 3px solid #EA8A4C; padding-bottom: 10px;">
+            🔔 새로운 심사 신청
+        </h2>
+
+        <div style="background: #f9f9f9; padding: 15px; border-radius: 5px; margin: 20px 0;">
+            <h3 style="margin-top: 0;">📋 기업 정보</h3>
+            <p><strong>기업명:</strong> ${companyName}</p>
+            <p><strong>사업자번호:</strong> ${form.bizno.value}</p>
+            <p><strong>업종:</strong> ${form.industry.value || '-'}</p>
+            <p><strong>설립연도:</strong> ${form.founded.value || '-'}</p>
+        </div>
+
+        <div style="background: #f9f9f9; padding: 15px; border-radius: 5px; margin: 20px 0;">
+            <h3 style="margin-top: 0;">👤 담당자 정보</h3>
+            <p><strong>대표자명:</strong> ${customerName}</p>
+            <p><strong>직위:</strong> ${form.position.value || '-'}</p>
+            <p><strong>연락처:</strong> ${customerPhone}</p>
+            <p><strong>이메일:</strong> ${customerEmail}</p>
+            <p><strong>통화가능시간:</strong> ${form.consultTime.value}</p>
+        </div>
+
+        <div style="background: #f9f9f9; padding: 15px; border-radius: 5px; margin: 20px 0;">
+            <h3 style="margin-top: 0;">💰 자금 정보</h3>
+            <p><strong>필요 자금 규모:</strong> ${form.amount.value || '-'}</p>
+            <p><strong>자금 종류:</strong> ${fundTypesList}</p>
+        </div>
+
+        <div style="background: #fff3e0; padding: 15px; border-radius: 5px; margin: 20px 0; border-left: 4px solid #EA8A4C;">
+            <h3 style="margin-top: 0;">📝 문의 내용</h3>
+            <p style="white-space: pre-wrap;">${form.message.value || '(문의사항 없음)'}</p>
+        </div>
+
+        <p style="color: #666; font-size: 14px;">
+            신청일시: ${new Date().toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' })}
+        </p>
+    </div>
+</body>
+</html>`;
+
+    // Cloudflare Worker로 전송할 페이로드
+    const payload = {
+        airtableToken: AIRTABLE_CONFIG.token,
+        airtableBaseId: AIRTABLE_CONFIG.baseId,
+        tableName: AIRTABLE_CONFIG.tableName,
+        airtableFields: airtableFields,
+
+        emailFrom: `${BRAND_INFO.name} <noreply@policy-fund.online>`,
+
+        customerEmail: customerEmail,
+        customerSubject: `[${BRAND_INFO.name}] 정책자금 심사 신청이 접수되었습니다`,
+        customerHtml: customerHtml,
+
+        staffEmail: BRAND_INFO.email,
+        staffBcc: 'mkt@polarad.co.kr',
+        staffSubject: `[${BRAND_INFO.name}] 새로운 심사 신청 - ${companyName} (${customerName})`,
+        staffHtml: staffHtml
+    };
+
+    try {
+        const response = await fetch(WORKER_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(payload)
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            // 성공 처리
+            successMessage.classList.add('active');
+            submitButton.textContent = '무료 심사 신청하기';
+            form.reset();
+
+            setTimeout(() => {
+                successMessage.classList.remove('active');
+                submitButton.disabled = false;
+            }, 5000);
+        } else {
+            throw new Error(result.error || '알 수 없는 오류');
+        }
+
+    } catch (error) {
+        console.error('Error:', error);
+        errorMessage.classList.add('active');
+        submitButton.disabled = false;
+        submitButton.textContent = '무료 심사 신청하기';
+
+        setTimeout(() => {
+            errorMessage.classList.remove('active');
+        }, 5000);
+    }
+}
+
+// 개인정보 동의 자세히보기 토글
+function togglePrivacyDetail() {
+    const content = document.getElementById('privacyContent');
+    content.classList.toggle('show');
+}
+
+// 사업자등록번호 자동 포맷팅
+document.querySelector('input[name="bizno"]').addEventListener('input', function(e) {
+    let value = e.target.value.replace(/[^0-9]/g, '');
+    if (value.length > 3 && value.length <= 5) {
+        value = value.slice(0, 3) + '-' + value.slice(3);
+    } else if (value.length > 5) {
+        value = value.slice(0, 3) + '-' + value.slice(3, 5) + '-' + value.slice(5, 10);
+    }
+    e.target.value = value;
+});
+
+// 전화번호 자동 포맷팅
+document.querySelector('input[name="phone"]').addEventListener('input', function(e) {
+    let value = e.target.value.replace(/[^0-9]/g, '');
+    if (value.length > 3 && value.length <= 7) {
+        value = value.slice(0, 3) + '-' + value.slice(3);
+    } else if (value.length > 7) {
+        value = value.slice(0, 3) + '-' + value.slice(3, 7) + '-' + value.slice(7, 11);
+    }
+    e.target.value = value;
+});
+
+// 모바일 최적화 추가 기능
+if (window.innerWidth <= 768) {
+    const inputs = document.querySelectorAll('.form-control');
+    inputs.forEach(input => {
+        input.addEventListener('focus', function() {
+            setTimeout(() => {
+                this.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 300);
+        });
+    });
+}
+</script>
+</body>
+</html>

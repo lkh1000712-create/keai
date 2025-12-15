@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-KLT2444N9N"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-KLT2444N9N');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>방문통계 - KEAI</title>
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <!-- Pretendard 폰트 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="dashboard-container">
+    <!-- 사이드바 -->
+    <aside class="sidebar"></aside>
+
+    <!-- 메인 콘텐츠 -->
+    <main class="main-content">
+      <!-- 헤더 -->
+      <header class="dashboard-header"></header>
+
+      <!-- 기간 탭 -->
+      <section class="period-tabs">
+        <button class="period-tab active" data-period="daily">일간</button>
+        <button class="period-tab" data-period="weekly">주간</button>
+        <button class="period-tab" data-period="monthly">월간</button>
+      </section>
+
+      <!-- 집계 기간 표시 -->
+      <div class="period-range" id="period-range">
+        <span class="period-range-label">집계 기간</span>
+        <span class="period-range-value" id="period-range-value">2025.01.01 ~ 2025.12.13</span>
+      </div>
+
+      <!-- 통계 카드 -->
+      <section class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+          </div>
+          <div class="stat-content">
+            <p class="stat-label">방문자</p>
+            <p class="stat-value" id="stat-visitors">128</p>
+            <p class="stat-change positive" id="stat-visitors-change">+12% 전일 대비</p>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon icon-page">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/>
+              <line x1="16" y1="17" x2="8" y2="17"/>
+              <polyline points="10 9 9 9 8 9"/>
+            </svg>
+          </div>
+          <div class="stat-content">
+            <p class="stat-label">페이지뷰</p>
+            <p class="stat-value" id="stat-pageviews">456</p>
+            <p class="stat-change positive" id="stat-pageviews-change">+8% 전일 대비</p>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon icon-time">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </div>
+          <div class="stat-content">
+            <p class="stat-label">평균 체류시간</p>
+            <p class="stat-value" id="stat-duration">2분 34초</p>
+            <p class="stat-change negative" id="stat-duration-change">-5% 전일 대비</p>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon icon-inbox">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/>
+              <path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/>
+            </svg>
+          </div>
+          <div class="stat-content">
+            <p class="stat-label">접수</p>
+            <p class="stat-value" id="stat-leads">7</p>
+            <p class="stat-change positive" id="stat-leads-change">+3건 전일 대비</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 차트 영역 -->
+      <section class="charts-grid analytics-charts">
+        <div class="chart-card chart-card-wide">
+          <div class="chart-header">
+            <h3 class="chart-title" id="chart-title">일간 통계 추이</h3>
+            <div class="chart-legend">
+              <span class="legend-item"><span class="legend-color" style="background:#0066CC"></span>방문자</span>
+              <span class="legend-item"><span class="legend-color" style="background:#10B981"></span>페이지뷰</span>
+              <span class="legend-item"><span class="legend-color" style="background:#F59E0B"></span>체류시간(초)</span>
+              <span class="legend-item"><span class="legend-color" style="background:#EF4444"></span>접수</span>
+            </div>
+          </div>
+          <div class="chart-nav-wrapper">
+            <button class="chart-nav-btn prev" id="chartPrevBtn" aria-label="이전">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+            </button>
+            <div class="chart-body chart-body-large">
+              <canvas id="trendChart"></canvas>
+            </div>
+            <button class="chart-nav-btn next" id="chartNextBtn" aria-label="다음">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+          </div>
+          <div class="chart-nav-indicator" id="chartNavIndicator">
+            <!-- JavaScript로 동적 생성 -->
+          </div>
+        </div>
+      </section>
+
+      <!-- 데이터 테이블 -->
+      <section class="data-table-section">
+        <div class="section-header">
+          <h3 class="section-title">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+              <line x1="3" y1="9" x2="21" y2="9"/>
+              <line x1="3" y1="15" x2="21" y2="15"/>
+              <line x1="9" y1="3" x2="9" y2="21"/>
+            </svg>
+            <span id="table-title">일간 상세 데이터</span>
+          </h3>
+        </div>
+        <div class="table-container">
+          <table class="analytics-table">
+            <thead>
+              <tr>
+                <th>기간</th>
+                <th>방문자</th>
+                <th>페이지뷰</th>
+                <th>체류시간</th>
+                <th>접수</th>
+                <th>전환율</th>
+              </tr>
+            </thead>
+            <tbody id="analytics-table-body">
+              <!-- JavaScript로 동적 생성 -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 인사이트 카드 -->
+      <section class="insights-section">
+        <div class="section-header">
+          <h3 class="section-title">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="12" y1="16" x2="12" y2="12"/>
+              <line x1="12" y1="8" x2="12.01" y2="8"/>
+            </svg>
+            자동 분석 인사이트
+          </h3>
+        </div>
+        <div class="insights-grid" id="insights-container">
+          <!-- 인사이트가 JavaScript로 동적 생성됩니다 -->
+        </div>
+      </section>
+
+      <!-- 전환율 섹션 -->
+      <section class="conversion-section">
+        <div class="section-header">
+          <h3 class="section-title">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+              <polyline points="17 6 23 6 23 12"/>
+            </svg>
+            전환율 분석
+          </h3>
+        </div>
+        <div class="conversion-card">
+          <div class="conversion-item">
+            <div class="conversion-label">방문자 → 접수 전환율</div>
+            <div class="conversion-value" id="conversion-rate">5.47%</div>
+            <div class="conversion-bar">
+              <div class="conversion-fill" id="conversion-fill" style="width: 5.47%"></div>
+            </div>
+            <div class="conversion-detail" id="conversion-detail">128명 방문 중 7명 접수</div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/components.js"></script>
+  <script src="../js/analytics.js?v=2"></script>
+  <script>
+    // 컴포넌트 로드
+    document.addEventListener('DOMContentLoaded', function() {
+      loadSidebar('analytics');
+      loadDashboardHeader('방문통계', '사이트 방문 현황을 한눈에 확인하세요');
+      loadMobileBottomNav('analytics');
+    });
+  </script>
+</body>
+</html>

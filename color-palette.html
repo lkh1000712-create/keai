@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KEAI 컬러 팔레트 선택</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .color-box { transition: transform 0.2s; }
+        .color-box:hover { transform: scale(1.05); }
+        .gradient-box { min-height: 120px; }
+        .selected { ring: 4px; ring-color: #000; }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen p-8">
+    <div class="max-w-6xl mx-auto">
+        <h1 class="text-3xl font-bold mb-2 text-gray-800">KEAI 컬러 팔레트 선택</h1>
+        <p class="text-gray-600 mb-8">한국기업심사원 홈페이지 블루톤 색상 선택</p>
+
+        <!-- 현재 색상 -->
+        <div class="bg-white rounded-xl p-6 mb-8 shadow-sm">
+            <h2 class="text-xl font-semibold mb-4 text-gray-700">현재 색상 (오렌지톤)</h2>
+            <div class="flex gap-4 flex-wrap">
+                <div class="text-center">
+                    <div class="w-24 h-24 rounded-lg shadow-md" style="background: #EA8A4C;"></div>
+                    <p class="mt-2 text-sm font-mono">#EA8A4C</p>
+                    <p class="text-xs text-gray-500">Primary</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-24 h-24 rounded-lg shadow-md" style="background: #D77839;"></div>
+                    <p class="mt-2 text-sm font-mono">#D77839</p>
+                    <p class="text-xs text-gray-500">Dark</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-24 h-24 rounded-lg shadow-md" style="background: #FEF3E9;"></div>
+                    <p class="mt-2 text-sm font-mono">#FEF3E9</p>
+                    <p class="text-xs text-gray-500">Background</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 그라데이션 옵션 -->
+        <h2 class="text-2xl font-bold mb-4 text-gray-800">그라데이션 옵션</h2>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            <!-- 옵션 1 -->
+            <div class="bg-white rounded-xl overflow-hidden shadow-md">
+                <div class="gradient-box flex items-center justify-center text-white font-bold text-lg"
+                     style="background: linear-gradient(135deg, #2563EB, #0EA5E9);">
+                    옵션 1: 클래식 블루
+                </div>
+                <div class="p-4">
+                    <p class="font-mono text-sm text-gray-600 mb-2">#2563EB → #0EA5E9</p>
+                    <p class="text-sm text-gray-500">신뢰감, 전문성</p>
+                    <div class="flex gap-2 mt-3">
+                        <div class="w-8 h-8 rounded" style="background: #2563EB;"></div>
+                        <div class="w-8 h-8 rounded" style="background: #3B82F6;"></div>
+                        <div class="w-8 h-8 rounded" style="background: #0EA5E9;"></div>
+                        <div class="w-8 h-8 rounded" style="background: #EFF6FF;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 옵션 2 -->
+            <div class="bg-white rounded-xl overflow-hidden shadow-md">
+                <div class="gradient-box flex items-center justify-center text-white font-bold text-lg"
+                     style="background: linear-gradient(135deg, #1E40AF, #3B82F6);">
+                    옵션 2: 딥 블루
+                </div>
+                <div class="p-4">
+                    <p class="font-mono text-sm text-gray-600 mb-2">#1E40AF → #3B82F6</p>
+                    <p class="text-sm text-gray-500">고급스러움, 안정감</p>
+                    <div class="flex gap-2 mt-3">
+                        <div class="w-8 h-8 rounded" style="background: #1E40AF;"></div>
+                        <div class="w-8 h-8 rounded" style="background: #2563EB;"></div>
+                        <div class="w-8 h-8 rounded" style="background: #3B82F6;"></div>
+                        <div class="w-8 h-8 rounded" style="background: #DBEAFE;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 옵션 3 -->
+            <div class="bg-white rounded-xl overflow-hidden shadow-md">
+                <div class="gradient-box flex items-center justify-center text-white font-bold text-lg"
+                     style="background: linear-gradient(135deg, #0284C7, #38BDF8);">
+                    옵션 3: 스카이 블루
+                </div>
+                <div class="p-4">
+                    <p class="font-mono text-sm text-gray-600 mb-2">#0284C7 → #38BDF8</p>
+                    <p class="text-sm text-gray-500">활기, 친근함</p>
+                    <div class="flex gap-2 mt-3">
+                        <div class="w-8 h-8 rounded" style="background: #0284C7;"></div>
+                        <div class="w-8 h-8 rounded" style="background: #0EA5E9;"></div>
+                        <div class="w-8 h-8 rounded" style="background: #38BDF8;"></div>
+                        <div class="w-8 h-8 rounded" style="background: #E0F2FE;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 옵션 4 -->
+            <div class="bg-white rounded-xl overflow-hidden shadow-md">
+                <div class="gradient-box flex items-center justify-center text-white font-bold text-lg"
+                     style="background: linear-gradient(135deg, #1E3A8A, #0891B2);">
+                    옵션 4: 네이비 시안
+                </div>
+                <div class="p-4">
+                    <p class="font-mono text-sm text-gray-600 mb-2">#1E3A8A → #0891B2</p>
+                    <p class="text-sm text-gray-500">권위, 현대적</p>
+                    <div class="flex gap-2 mt-3">
+                        <div class="w-8 h-8 rounded" style="background: #1E3A8A;"></div>
+                        <div class="w-8 h-8 rounded" style="background: #1D4ED8;"></div>
+                        <div class="w-8 h-8 rounded" style="background: #0891B2;"></div>
+                        <div class="w-8 h-8 rounded" style="background: #ECFEFF;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 옵션 5 -->
+            <div class="bg-white rounded-xl overflow-hidden shadow-md">
+                <div class="gradient-box flex items-center justify-center text-white font-bold text-lg"
+                     style="background: linear-gradient(135deg, #4338CA, #2563EB);">
+                    옵션 5: 인디고 블루
+                </div>
+                <div class="p-4">
+                    <p class="font-mono text-sm text-gray-600 mb-2">#4338CA → #2563EB</p>
+                    <p class="text-sm text-gray-500">창의적, 세련됨</p>
+                    <div class="flex gap-2 mt-3">
+                        <div class="w-8 h-8 rounded" style="background: #4338CA;"></div>
+                        <div class="w-8 h-8 rounded" style="background: #4F46E5;"></div>
+                        <div class="w-8 h-8 rounded" style="background: #2563EB;"></div>
+                        <div class="w-8 h-8 rounded" style="background: #EEF2FF;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 옵션 6 -->
+            <div class="bg-white rounded-xl overflow-hidden shadow-md">
+                <div class="gradient-box flex items-center justify-center text-white font-bold text-lg"
+                     style="background: linear-gradient(135deg, #0F4C81, #1A73E8);">
+                    옵션 6: 코퍼레이트 블루
+                </div>
+                <div class="p-4">
+                    <p class="font-mono text-sm text-gray-600 mb-2">#0F4C81 → #1A73E8</p>
+                    <p class="text-sm text-gray-500">기업, 공식적</p>
+                    <div class="flex gap-2 mt-3">
+                        <div class="w-8 h-8 rounded" style="background: #0F4C81;"></div>
+                        <div class="w-8 h-8 rounded" style="background: #1565C0;"></div>
+                        <div class="w-8 h-8 rounded" style="background: #1A73E8;"></div>
+                        <div class="w-8 h-8 rounded" style="background: #E3F2FD;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 버튼/UI 미리보기 -->
+        <h2 class="text-2xl font-bold mb-4 text-gray-800">UI 미리보기</h2>
+
+        <div class="grid md:grid-cols-2 gap-6 mb-8">
+            <!-- 옵션 1 UI -->
+            <div class="bg-white rounded-xl p-6 shadow-md">
+                <h3 class="font-semibold mb-4">옵션 1: 클래식 블루</h3>
+                <button class="px-6 py-3 rounded-lg text-white font-medium mb-3 w-full"
+                        style="background: linear-gradient(135deg, #2563EB, #0EA5E9);">
+                    무료 상담 신청하기
+                </button>
+                <button class="px-6 py-3 rounded-lg font-medium mb-3 w-full border-2"
+                        style="border-color: #2563EB; color: #2563EB;">
+                    자세히 보기
+                </button>
+                <div class="p-4 rounded-lg" style="background: #EFF6FF;">
+                    <p style="color: #1E3A5F;">배경 영역 텍스트 예시</p>
+                </div>
+            </div>
+
+            <!-- 옵션 4 UI -->
+            <div class="bg-white rounded-xl p-6 shadow-md">
+                <h3 class="font-semibold mb-4">옵션 4: 네이비 시안</h3>
+                <button class="px-6 py-3 rounded-lg text-white font-medium mb-3 w-full"
+                        style="background: linear-gradient(135deg, #1E3A8A, #0891B2);">
+                    무료 상담 신청하기
+                </button>
+                <button class="px-6 py-3 rounded-lg font-medium mb-3 w-full border-2"
+                        style="border-color: #1E3A8A; color: #1E3A8A;">
+                    자세히 보기
+                </button>
+                <div class="p-4 rounded-lg" style="background: #ECFEFF;">
+                    <p style="color: #164E63;">배경 영역 텍스트 예시</p>
+                </div>
+            </div>
+
+            <!-- 옵션 6 UI -->
+            <div class="bg-white rounded-xl p-6 shadow-md">
+                <h3 class="font-semibold mb-4">옵션 6: 코퍼레이트 블루</h3>
+                <button class="px-6 py-3 rounded-lg text-white font-medium mb-3 w-full"
+                        style="background: linear-gradient(135deg, #0F4C81, #1A73E8);">
+                    무료 상담 신청하기
+                </button>
+                <button class="px-6 py-3 rounded-lg font-medium mb-3 w-full border-2"
+                        style="border-color: #0F4C81; color: #0F4C81;">
+                    자세히 보기
+                </button>
+                <div class="p-4 rounded-lg" style="background: #E3F2FD;">
+                    <p style="color: #0D47A1;">배경 영역 텍스트 예시</p>
+                </div>
+            </div>
+
+            <!-- 옵션 2 UI -->
+            <div class="bg-white rounded-xl p-6 shadow-md">
+                <h3 class="font-semibold mb-4">옵션 2: 딥 블루</h3>
+                <button class="px-6 py-3 rounded-lg text-white font-medium mb-3 w-full"
+                        style="background: linear-gradient(135deg, #1E40AF, #3B82F6);">
+                    무료 상담 신청하기
+                </button>
+                <button class="px-6 py-3 rounded-lg font-medium mb-3 w-full border-2"
+                        style="border-color: #1E40AF; color: #1E40AF;">
+                    자세히 보기
+                </button>
+                <div class="p-4 rounded-lg" style="background: #DBEAFE;">
+                    <p style="color: #1E3A8A;">배경 영역 텍스트 예시</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 헤더 미리보기 -->
+        <h2 class="text-2xl font-bold mb-4 text-gray-800">헤더 미리보기</h2>
+
+        <div class="space-y-4 mb-8">
+            <!-- 옵션 1 헤더 -->
+            <div class="rounded-xl overflow-hidden shadow-md">
+                <div class="px-8 py-4 flex items-center justify-between text-white"
+                     style="background: linear-gradient(135deg, #2563EB, #0EA5E9);">
+                    <div class="font-bold text-xl">KEAI 한국기업심사원</div>
+                    <div class="flex gap-6 text-sm">
+                        <span class="font-semibold border-b-2 border-white pb-1">홈</span>
+                        <span class="opacity-80 hover:opacity-100">회사소개</span>
+                        <span class="opacity-80 hover:opacity-100">진행과정</span>
+                        <span class="opacity-80 hover:opacity-100">자금상담</span>
+                        <span class="opacity-80 hover:opacity-100">전문서비스</span>
+                    </div>
+                </div>
+                <p class="text-center py-2 bg-gray-50 text-sm text-gray-500">옵션 1: 클래식 블루</p>
+            </div>
+
+            <!-- 옵션 4 헤더 -->
+            <div class="rounded-xl overflow-hidden shadow-md">
+                <div class="px-8 py-4 flex items-center justify-between text-white"
+                     style="background: linear-gradient(135deg, #1E3A8A, #0891B2);">
+                    <div class="font-bold text-xl">KEAI 한국기업심사원</div>
+                    <div class="flex gap-6 text-sm">
+                        <span class="font-semibold border-b-2 border-white pb-1">홈</span>
+                        <span class="opacity-80 hover:opacity-100">회사소개</span>
+                        <span class="opacity-80 hover:opacity-100">진행과정</span>
+                        <span class="opacity-80 hover:opacity-100">자금상담</span>
+                        <span class="opacity-80 hover:opacity-100">전문서비스</span>
+                    </div>
+                </div>
+                <p class="text-center py-2 bg-gray-50 text-sm text-gray-500">옵션 4: 네이비 시안</p>
+            </div>
+
+            <!-- 옵션 6 헤더 -->
+            <div class="rounded-xl overflow-hidden shadow-md">
+                <div class="px-8 py-4 flex items-center justify-between text-white"
+                     style="background: linear-gradient(135deg, #0F4C81, #1A73E8);">
+                    <div class="font-bold text-xl">KEAI 한국기업심사원</div>
+                    <div class="flex gap-6 text-sm">
+                        <span class="font-semibold border-b-2 border-white pb-1">홈</span>
+                        <span class="opacity-80 hover:opacity-100">회사소개</span>
+                        <span class="opacity-80 hover:opacity-100">진행과정</span>
+                        <span class="opacity-80 hover:opacity-100">자금상담</span>
+                        <span class="opacity-80 hover:opacity-100">전문서비스</span>
+                    </div>
+                </div>
+                <p class="text-center py-2 bg-gray-50 text-sm text-gray-500">옵션 6: 코퍼레이트 블루</p>
+            </div>
+        </div>
+
+        <!-- 선택 안내 -->
+        <div class="bg-blue-50 border border-blue-200 rounded-xl p-6 text-center">
+            <p class="text-blue-800">원하는 옵션 번호를 알려주세요 (1~6)</p>
+            <p class="text-sm text-blue-600 mt-2">또는 다른 색상 조합을 원하시면 말씀해주세요</p>
+        </div>
+    </div>
+</body>
+</html>

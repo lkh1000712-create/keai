@@ -1,0 +1,32 @@
+================================================================================
+Vercel 환경변수 설정 가이드 (수정)
+================================================================================
+
+설정 위치: https://vercel.com/leekanghees-projects-760a2e89/keai/settings/environment-variables
+
+================================================================================
+변수 1: GOOGLE_CLIENT_EMAIL
+================================================================================
+keai-analytics-reader@keai-analytics.iam.gserviceaccount.com
+
+================================================================================
+변수 2: GA4_PROPERTY_ID
+================================================================================
+516503347
+
+================================================================================
+변수 3: SEARCH_CONSOLE_SITE
+================================================================================
+https://k-eai.kr
+
+================================================================================
+변수 4: GOOGLE_PRIVATE_KEY (기존 삭제 후 아래 한 줄 전체 복사)
+================================================================================
+-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCWk/Ye0ebfGeGz\n0Y94OPBS1eWTDL/wslRq795UTy6EHzpTJ7bssWp/rNoGVO8Q8UfYOePC+i91S0AG\nWXKzMxM8p6ebFZNSfaTFrIYTUTWdIlwssqbRbZxNso0yXjnw3EgM/jIleudd98hk\n/j4JzoNR+4PSSmxpFBUIjskAUvDo+V+QLu0R+USpWqLZ7ZFm1SLiI9J7ntm7T2Er\n8qAgSLjtcpP3tLhu7vAPNul/JORrzv7r0pNJIsDam7YOVxeN3U7UkLiyTB/byFOr\n4ZHeILXzyMVI+QEYDxsXRuGiwvK/9nMBx56+LQ1i7KWQHZ+/JXGteOl+Va5eDdMn\nOghX3NqdAgMBAAECggEASsaFZX61GLuAksyRY5Fa/rfLvr+JHZ1hQI2HqfR8VA4x\n55OESnw8N9T9nEFXSuGW3PC6g1u8b5ID5GNNC2Jkvi0/lUscks1kIunu1u7wIe0r\nOuMo5j15bjgp2AZk3ZB2k0U0X9ptxQNEV6rN4g7UtcSiDK76sR/Q5iQJ+wg1LGvO\ntcn9W/WaKAyLBg00JGBKTfA4e2UJZ8e90abW2aWRseDh0KyelARtq03t3bYwPnHR\ng4wEliGKz4N4vP/3AKNN2ObAuhqMEAX2uIFARyCaLHV1H8wUdk+Lxf+tSB3p/+2u\nvsRzvVPd6mP4Ju/YGvj+nAXblrQVxhISJqEwQFQDnQKBgQDRshy5TyLbFQculgRY\nX36UOA2dKya1tfQ05ud+1VHFqKMpF8mIxQp6sjbcruMcaUGxRDVzhDAHkmMtF2Wq\nPVLgleTfkJIFsWZZ+cbFcq29Ph2bwfR0mNRrgW77NQ0cXf3v7+6B8UCu4qYTFDX4\nhyy/iHJmAESd0EZ4i0+ncVpJqwKBgQC30/s5btId3RzdAzYMfJPyQSJPjvX5peaT\n8N8rtCFUaysXMwcbzgVjXCtoAdoTbKwPUklnpeBVXAZ5PpziBKecHCqIla+Tfp6t\n9ztJdIcHDIc5wMbEV73f+Q3X2LffsoN3z1TVVNn39RxZ12kUnu/hn7VQzqQXwAEq\n42AyZnb01wKBgGdxDnxXTmF2cRGJDWGu0dk6AXU7mR/gPzRth1rozirMMpiN1Gv0\nj2PRUADzALO+NJrGg/uVBMBndScEOLGPCLgjGUEzpuTKCyxta6FxHcWRw7dXKUjv\nLzJNKjsfg3Uv5Jmc6TIOmZLr2XLl8G3F+MwO+ifZEAAtguXqCwQVha17AoGBAJXy\nchBNF1OI00xsnB/fVobbHnOq93WmH8k5R7FMg4tqx4Fq/Ddv+/Eqc7WpHQuPL2Jo\nCrxjD/RQ1m775dhvV5D9YKx8/PTg6eqZqmCmjqXvUDaJyxjJQXZ6nxIcExCDer21\n/0rspceexnt6PJq3cpCmR64cgLlmww0K36L89beNAoGAVRkqpY3c3yHo61kL4yH0\n+Q4NoWoCuAtyXFUKUeGJf/2O7Ubnmjc/EInRhTAvlMHWuWuJ35MBpuoV1up1j5Jy\nVX5G80iKhUqfcTiSMLmmAEaF5Ar7d2oohVssc5+CfhlrBTF0UPz1AwLW5/+18GG7\nDZyXPIrZ5Vlaxv89SR+adtg=\n-----END PRIVATE KEY-----
+
+================================================================================
+주의사항
+================================================================================
+- GOOGLE_PRIVATE_KEY는 위 내용을 한 줄로 복사 (중간에 \n이 포함된 형태)
+- 기존에 설정한 GOOGLE_PRIVATE_KEY 삭제 후 새로 추가
+- 환경변수는 모두 Production 선택

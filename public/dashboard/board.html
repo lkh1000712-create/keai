@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KLT2444N9N"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-KLT2444N9N');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시글 관리 - KEAI 관리자</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+    <style>
+        /* 페이지 헤더 (버튼 포함) */
+        .page-header-with-btn {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .btn-new {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-new:hover {
+            background: var(--primary-dark);
+        }
+
+        .btn-new svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        /* 필터 */
+        .filter-bar {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            background: #fff;
+            border: 1px solid var(--neutral-200);
+            border-radius: 20px;
+            font-size: 14px;
+            color: var(--neutral-500);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .filter-btn.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: #fff;
+        }
+
+        /* 테이블 카드 */
+        .table-card {
+            background: #fff;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+        }
+
+        /* 테이블 */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .data-table th {
+            padding: 16px 20px;
+            text-align: left;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--neutral-500);
+            background: var(--neutral-50);
+            border-bottom: 1px solid var(--neutral-200);
+        }
+
+        .data-table td {
+            padding: 16px 20px;
+            font-size: 14px;
+            color: var(--neutral-700);
+            border-bottom: 1px solid var(--neutral-100);
+        }
+
+        .data-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .data-table tr:hover {
+            background: var(--neutral-50);
+        }
+
+        /* 카테고리 배지 */
+        .category-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .category-badge.notice { background: #EFF6FF; color: #0F4C81; }
+        .category-badge.news { background: #ECFDF5; color: #059669; }
+        .category-badge.info { background: #FEF3C7; color: #D97706; }
+
+        /* 상태 배지 */
+        .status-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status-badge.public { background: #ECFDF5; color: #059669; }
+        .status-badge.private { background: #FEF2F2; color: #DC2626; }
+
+        /* 제목 셀 */
+        .title-cell {
+            max-width: 300px;
+        }
+
+        .title-text {
+            font-weight: 500;
+            color: var(--neutral-800);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: block;
+        }
+
+        /* 액션 버튼 */
+        .action-btns {
+            display: flex;
+            gap: 8px;
+        }
+
+        .action-btn {
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s ease;
+        }
+
+        .action-btn.edit {
+            background: #EFF6FF;
+            color: #0F4C81;
+        }
+
+        .action-btn.edit:hover {
+            background: #DBEAFE;
+        }
+
+        .action-btn.delete {
+            background: #FEF2F2;
+            color: #DC2626;
+        }
+
+        .action-btn.delete:hover {
+            background: #FEE2E2;
+        }
+
+        /* 빈 상태 */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--neutral-400);
+        }
+
+        .empty-state svg {
+            width: 64px;
+            height: 64px;
+            fill: var(--neutral-300);
+            margin-bottom: 16px;
+        }
+
+        .empty-state h3 {
+            font-size: 18px;
+            color: var(--neutral-500);
+            margin-bottom: 8px;
+        }
+
+        /* 로딩 */
+        .loading {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--neutral-500);
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--neutral-200);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 16px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* 토스트 */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: var(--neutral-800);
+            color: #fff;
+            padding: 14px 28px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 500;
+            box-shadow: var(--shadow-lg);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 2000;
+        }
+
+        .toast.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .toast.success { background: #059669; }
+        .toast.error { background: #DC2626; }
+
+        /* ==========================================
+           모바일 반응형 스타일
+           ========================================== */
+        @media (max-width: 768px) {
+            /* 페이지 헤더 */
+            .page-header-with-btn {
+                flex-direction: column;
+                gap: 16px;
+                align-items: stretch;
+            }
+
+            .btn-new {
+                width: 100%;
+                justify-content: center;
+            }
+
+            /* 필터 바 - 가로 스크롤 */
+            .filter-bar {
+                overflow-x: auto;
+                flex-wrap: nowrap;
+                gap: 8px;
+                padding-bottom: 8px;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .filter-bar::-webkit-scrollbar {
+                display: none;
+            }
+
+            .filter-btn {
+                flex-shrink: 0;
+                padding: 10px 16px;
+                font-size: 13px;
+            }
+
+            /* 테이블 → 카드 형태 변환 */
+            .table-card {
+                background: transparent;
+                box-shadow: none;
+            }
+
+            .data-table {
+                display: block;
+            }
+
+            .data-table thead {
+                display: none;
+            }
+
+            .data-table tbody {
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .data-table tbody tr {
+                display: block;
+                background: #fff;
+                border-radius: var(--radius-lg);
+                padding: 16px;
+                box-shadow: var(--shadow-sm);
+                border: 1px solid var(--neutral-200);
+                position: relative;
+            }
+
+            .data-table tbody tr:hover {
+                background: #fff;
+                box-shadow: var(--shadow-md);
+            }
+
+            .data-table td {
+                display: block;
+                padding: 4px 0;
+                border: none;
+            }
+
+            /* 카테고리 - 상단 좌측 */
+            .data-table td:nth-child(1) {
+                position: absolute;
+                top: 16px;
+                left: 16px;
+            }
+
+            /* 제목 - 카테고리 아래 */
+            .data-table td:nth-child(2) {
+                padding-top: 36px;
+                padding-bottom: 12px;
+            }
+
+            .title-cell {
+                max-width: none;
+            }
+
+            .title-text {
+                white-space: normal;
+                line-height: 1.5;
+                font-size: 15px;
+            }
+
+            /* 작성일, 조회수, 상태 - 인라인 */
+            .data-table td:nth-child(3),
+            .data-table td:nth-child(4),
+            .data-table td:nth-child(5) {
+                display: inline-block;
+                font-size: 12px;
+                color: var(--neutral-500);
+                margin-right: 12px;
+            }
+
+            .data-table td:nth-child(3)::before {
+                content: "작성일 ";
+                font-weight: 500;
+            }
+
+            .data-table td:nth-child(4)::before {
+                content: "조회 ";
+                font-weight: 500;
+            }
+
+            /* 액션 버튼 - 하단 우측 */
+            .data-table td:nth-child(6) {
+                position: absolute;
+                top: 16px;
+                right: 16px;
+            }
+
+            .action-btns {
+                gap: 6px;
+            }
+
+            .action-btn {
+                padding: 8px 14px;
+                min-height: 36px;
+            }
+
+            /* 토스트 위치 조정 (하단바 위) */
+            .toast {
+                bottom: 90px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .filter-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+
+            .data-table tbody tr {
+                padding: 14px;
+            }
+
+            .title-text {
+                font-size: 14px;
+            }
+
+            .action-btn {
+                padding: 6px 10px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- 사이드바 -->
+        <aside class="sidebar"></aside>
+
+        <!-- 메인 콘텐츠 -->
+        <main class="main-content">
+            <!-- 헤더 -->
+            <header class="dashboard-header"></header>
+
+            <!-- 페이지 헤더 -->
+            <div class="page-header-with-btn">
+                <div></div>
+                <a href="post-edit.html" class="btn-new">
+                    <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                    새 게시글
+                </a>
+            </div>
+
+            <!-- 필터 -->
+            <div class="filter-bar">
+                <button class="filter-btn active" data-filter="all">전체</button>
+                <button class="filter-btn" data-filter="공지">공지</button>
+                <button class="filter-btn" data-filter="뉴스">뉴스</button>
+                <button class="filter-btn" data-filter="정보">정보</button>
+            </div>
+
+            <!-- 테이블 -->
+            <div class="table-card">
+                <div class="loading" id="loading">
+                    <div class="spinner"></div>
+                    <p>게시글을 불러오는 중...</p>
+                </div>
+
+                <div class="empty-state" id="empty-state" style="display: none;">
+                    <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                    <h3>게시글이 없습니다</h3>
+                    <p>새 게시글을 작성해보세요.</p>
+                </div>
+
+                <table class="data-table" id="posts-table" style="display: none;">
+                    <thead>
+                        <tr>
+                            <th>카테고리</th>
+                            <th>제목</th>
+                            <th>작성일</th>
+                            <th>조회수</th>
+                            <th>상태</th>
+                            <th>관리</th>
+                        </tr>
+                    </thead>
+                    <tbody id="posts-body"></tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <!-- 토스트 -->
+    <div class="toast" id="toast"></div>
+
+    <script src="../js/components.js"></script>
+    <script>
+        const API_URL = '/api/board';
+        let allPosts = [];
+        let currentFilter = 'all';
+
+        // 초기화
+        document.addEventListener('DOMContentLoaded', function() {
+            loadSidebar('board');
+            loadDashboardHeader('게시판 관리', '게시글을 작성하고 관리합니다');
+            loadMobileBottomNav('board');
+            loadPosts();
+            setupFilters();
+        });
+
+        // 게시글 로드
+        async function loadPosts() {
+            try {
+                const response = await fetch(API_URL);
+                const result = await response.json();
+
+                document.getElementById('loading').style.display = 'none';
+
+                if (result.success && result.posts && result.posts.length > 0) {
+                    allPosts = result.posts;
+                    renderPosts(allPosts);
+                } else {
+                    document.getElementById('empty-state').style.display = 'block';
+                }
+            } catch (error) {
+                console.error('게시글 로드 실패:', error);
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('empty-state').style.display = 'block';
+            }
+        }
+
+        // 게시글 렌더링
+        function renderPosts(posts) {
+            const table = document.getElementById('posts-table');
+            const tbody = document.getElementById('posts-body');
+            const emptyState = document.getElementById('empty-state');
+
+            if (posts.length === 0) {
+                table.style.display = 'none';
+                emptyState.style.display = 'block';
+                return;
+            }
+
+            table.style.display = 'table';
+            emptyState.style.display = 'none';
+
+            tbody.innerHTML = posts.map(post => {
+                const category = post.카테고리 || '공지';
+                const categoryClass = category === '뉴스' ? 'news' : category === '정보' ? 'info' : 'notice';
+                const date = post.작성일 ? formatDate(post.작성일) : '-';
+                const isPublic = post.공개여부 !== false;
+
+                return `
+                    <tr>
+                        <td><span class="category-badge ${categoryClass}">${category}</span></td>
+                        <td class="title-cell"><span class="title-text">${post.제목 || '(제목 없음)'}</span></td>
+                        <td>${date}</td>
+                        <td>${(post.조회수 || 0).toLocaleString()}</td>
+                        <td><span class="status-badge ${isPublic ? 'public' : 'private'}">${isPublic ? '공개' : '비공개'}</span></td>
+                        <td>
+                            <div class="action-btns">
+                                <button class="action-btn edit" onclick="editPost('${post.id}')">수정</button>
+                                <button class="action-btn delete" onclick="deletePost('${post.id}')">삭제</button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        // 필터 설정
+        function setupFilters() {
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+
+                    const filter = this.dataset.filter;
+                    currentFilter = filter;
+
+                    if (filter === 'all') {
+                        renderPosts(allPosts);
+                    } else {
+                        const filtered = allPosts.filter(p => p.카테고리 === filter);
+                        renderPosts(filtered);
+                    }
+                });
+            });
+        }
+
+        // 날짜 포맷
+        function formatDate(dateStr) {
+            if (!dateStr) return '-';
+            const date = new Date(dateStr);
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+
+        // 수정
+        function editPost(id) {
+            window.location.href = `post-edit.html?id=${id}`;
+        }
+
+        // 삭제
+        async function deletePost(id) {
+            if (!confirm('정말 삭제하시겠습니까?')) return;
+
+            try {
+                const response = await fetch(`${API_URL}?id=${id}`, {
+                    method: 'DELETE'
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    showToast('삭제되었습니다', 'success');
+                    allPosts = allPosts.filter(p => p.id !== id);
+                    renderPosts(currentFilter === 'all' ? allPosts : allPosts.filter(p => p.카테고리 === currentFilter));
+                } else {
+                    throw new Error(result.error);
+                }
+            } catch (error) {
+                console.error('삭제 실패:', error);
+                showToast('삭제에 실패했습니다', 'error');
+            }
+        }
+
+        // 토스트
+        function showToast(message, type = '') {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = 'toast show ' + type;
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

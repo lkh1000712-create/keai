@@ -1,0 +1,629 @@
+<!-- ================================================ -->
+<!-- 이음파트너스 상담 신청 CTA 섹션 -->
+<!-- 섹션 ID: #s202511179befa1174b66e -->
+<!-- ================================================ -->
+<style>
+/* 기본 스타일 초기화 */
+#s202511179befa1174b66e * {
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif !important;
+}
+
+/* 아임웹 구조 완전 리셋 */
+#s202511179befa1174b66e .section_body,
+#s202511179befa1174b66e .inside,
+#s202511179befa1174b66e .widget,
+#s202511179befa1174b66e .widget_inner {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding: 0 !important;
+  margin: 0 auto !important;
+  background: transparent !important;
+}
+
+/* CTA 섹션 배경 - 전체영역 확장 */
+#s202511179befa1174b66e {
+  background: url('https://cdn.imweb.me/upload/S20251117ed7f35ec2bb5b/1d82be2940e1d.png') center/cover no-repeat !important;
+  position: relative !important;
+  overflow: hidden !important;
+  width: 100vw !important;
+  margin-left: calc(-50vw + 50%) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  z-index: 1 !important;
+}
+
+/* 아임웹 기본 클래스 리셋 */
+#s202511179befa1174b66e.fr-section {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* 아임웹 자동 생성 패딩 div 완전 제거 */
+div[id^="padding_w"] {
+  display: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  line-height: 0 !important;
+}
+
+/* 특정 섹션 다음 패딩 제거 */
+#s202511179befa1174b66e + div[id*="padding"] {
+  display: none !important;
+}
+
+/* 다음 섹션 중첩 방지 */
+#s202511179befa1174b66e + section,
+#s202511179befa1174b66e + div[class*="section"],
+#s202511179befa1174b66e + .fr-section {
+  margin-top: 0 !important;
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+/* 배경 오버레이 - 이음파트너스 컬러 */
+#s202511179befa1174b66e::before {
+  content: '' !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  background: linear-gradient(180deg, rgba(44, 62, 80, 0.9) 0%, rgba(234, 138, 76, 0.85) 100%) !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+}
+
+#s202511179befa1174b66e .section-container {
+  max-width: 1200px !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+  padding: 80px 20px 60px !important; /* 모바일 */
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* CTA 콘텐츠 영역 */
+#s202511179befa1174b66e .cta-content {
+  text-align: center !important;
+  color: #ffffff !important;
+  max-width: 800px !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+}
+
+#s202511179befa1174b66e .cta-content h2 {
+  font-size: 42px !important;
+  font-weight: 700 !important;
+  line-height: 1.3 !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+  margin: 0 0 18px 0 !important;
+  padding: 0 !important;
+}
+
+#s202511179befa1174b66e .cta-content .highlight {
+  color: #FFA07A !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4) !important;
+}
+
+#s202511179befa1174b66e .cta-content p {
+  font-size: 20px !important;
+  line-height: 1.6 !important;
+  color: rgba(255, 255, 255, 0.95) !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+  margin: 0 0 35px 0 !important;
+  padding: 0 !important;
+}
+
+/* 모바일 전용 띄어쓰기 처리 */
+#s202511179befa1174b66e .mobile-br {
+  display: none !important;
+}
+
+/* CTA 버튼 그룹 */
+#s202511179befa1174b66e .cta-button-group {
+  display: flex !important;
+  gap: 20px !important;
+  justify-content: center !important;
+  flex-wrap: wrap !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* 일반 버튼 - 세컨더리 */
+#s202511179befa1174b66e .cta-button {
+  display: inline-block !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  color: #ffffff !important;
+  border: 2px solid rgba(255, 255, 255, 0.3) !important;
+  padding: 18px 30px !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  border-radius: 8px !important;
+  text-decoration: none !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+  cursor: pointer !important;
+  position: relative !important;
+  overflow: hidden !important;
+  min-width: 180px !important;
+  text-align: center !important;
+  white-space: nowrap !important;
+}
+
+#s202511179befa1174b66e .cta-button:not(.primary):hover {
+  transform: translateY(-3px) !important;
+  background: rgba(255, 255, 255, 0.2) !important;
+  border-color: rgba(255, 255, 255, 0.5) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* 메인 버튼 - 오렌지 그라데이션 (이음파트너스) */
+#s202511179befa1174b66e .cta-button.primary {
+  background: linear-gradient(135deg, #EA8A4C 0%, #D77839 100%) !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  border: none !important;
+  box-shadow: 0 4px 20px rgba(234, 138, 76, 0.4) !important;
+  position: relative !important;
+  overflow: hidden !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* 반짝임 효과 */
+#s202511179befa1174b66e .cta-button.primary::before {
+  content: '' !important;
+  position: absolute !important;
+  top: -50% !important;
+  left: -50% !important;
+  width: 200% !important;
+  height: 200% !important;
+  background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.3) 50%, transparent 70%) !important;
+  transform: translateX(-100%) translateY(-100%) rotate(45deg) !important;
+  transition: all 0.6s ease !important;
+}
+
+#s202511179befa1174b66e .cta-button.primary:hover {
+  background: linear-gradient(135deg, #D77839 0%, #FFA07A 100%) !important;
+  box-shadow: 0 6px 25px rgba(234, 138, 76, 0.5) !important;
+  transform: translateY(-3px) !important;
+}
+
+#s202511179befa1174b66e .cta-button.primary:hover::before {
+  transform: translateX(100%) translateY(100%) rotate(45deg) !important;
+}
+
+#s202511179befa1174b66e .cta-button.primary:active {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 2px 10px rgba(234, 138, 76, 0.4) !important;
+}
+
+
+/* 정부기관 섹션 */
+#s202511179befa1174b66e .government-section {
+  margin: 60px 0 0 0 !important;
+  padding: 40px 0 0 0 !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+#s202511179befa1174b66e .government-title {
+  text-align: center !important;
+  font-size: 24px !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+  margin: 0 0 30px 0 !important;
+  padding: 0 !important;
+}
+
+/* 롤링 컨테이너 - 전체 화면 */
+#s202511179befa1174b66e .government-logos-wrapper {
+  position: relative !important;
+  overflow: hidden !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  backdrop-filter: blur(10px) !important;
+  width: 100vw !important;
+  margin: 0 !important;
+  margin-left: calc(-50vw + 50%) !important;
+  padding: 25px 0 40px 0 !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+/* 무한 롤링 컨테이너 개선 */
+#s202511179befa1174b66e .government-logos {
+  display: flex !important;
+  gap: 60px !important;
+  width: calc(300% + 240px) !important;
+  animation: infiniteRolling 90s linear infinite !important;
+  margin: 0 !important;
+  padding: 0 30px !important;
+}
+
+#s202511179befa1174b66e .government-logos:hover {
+  animation-play-state: paused !important;
+}
+
+/* 인디케이터 컨테이너 */
+#s202511179befa1174b66e .logos-indicators {
+  display: flex !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  margin-top: 20px !important;
+  padding: 0 20px !important;
+}
+
+/* 모던한 인디케이터 도트 */
+#s202511179befa1174b66e .indicator-dot {
+  width: 8px !important;
+  height: 8px !important;
+  border-radius: 50% !important;
+  background: rgba(255, 255, 255, 0.3) !important;
+  transition: all 0.3s ease !important;
+  cursor: pointer !important;
+}
+
+#s202511179befa1174b66e .indicator-dot.active {
+  background: #FFA07A !important;
+  transform: scale(1.2) !important;
+  box-shadow: 0 0 10px rgba(255, 160, 122, 0.5) !important;
+}
+
+#s202511179befa1174b66e .indicator-dot:hover {
+  background: rgba(255, 160, 122, 0.6) !important;
+  transform: scale(1.1) !important;
+}
+
+/* 정부기관 로고 아이템 */
+#s202511179befa1174b66e .government-logo {
+  flex-shrink: 0 !important;
+  width: 200px !important;
+  height: 100px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: rgba(255, 255, 255, 0.95) !important;
+  border-radius: 8px !important;
+  padding: 20px !important;
+  transition: all 0.3s ease !important;
+  text-decoration: none !important;
+  position: relative !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+#s202511179befa1174b66e .government-logo:hover {
+  transform: scale(1.05) translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(234, 138, 76, 0.3) !important;
+  border-color: rgba(234, 138, 76, 0.3) !important;
+  background: #ffffff !important;
+}
+
+#s202511179befa1174b66e .government-logo img {
+  max-width: 100% !important;
+  max-height: 100% !important;
+  object-fit: contain !important;
+  transition: all 0.3s ease !important;
+}
+
+/* 텍스트 대체 (이미지 로드 실패 시) */
+#s202511179befa1174b66e .government-logo span {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  color: #1e293b !important;
+  text-align: center !important;
+  line-height: 1.2 !important;
+}
+
+/* 개선된 무한 롤링 애니메이션 */
+@keyframes infiniteRolling {
+  0% {
+      transform: translateX(0);
+  }
+  100% {
+      transform: translateX(-33.333%);
+  }
+}
+
+/* 반응형 디자인 */
+@media (min-width: 768px) {
+  #s202511179befa1174b66e .section-container {
+      padding: 100px 40px 60px !important; /* 태블릿 */
+  }
+}
+
+@media (min-width: 1024px) {
+  #s202511179befa1174b66e .section-container {
+      padding: 120px 40px 60px !important; /* 데스크톱 */
+  }
+}
+
+@media (max-width: 1024px) {
+  #s202511179befa1174b66e .cta-content h2 {
+      font-size: 38px !important;
+  }
+
+  #s202511179befa1174b66e .cta-content p {
+      font-size: 18px !important;
+  }
+
+  #s202511179befa1174b66e .government-section {
+      margin: 50px 0 0 0 !important;
+      padding-top: 35px !important;
+  }
+
+  #s202511179befa1174b66e .government-logos {
+      gap: 40px !important;
+      animation: infiniteRolling 75s linear infinite !important;
+  }
+
+  #s202511179befa1174b66e .government-logo {
+      width: 180px !important;
+      height: 90px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  #s202511179befa1174b66e .cta-content h2 {
+      font-size: 28px !important;
+      line-height: 1.4 !important;
+      word-break: keep-all !important;
+      margin: 0 0 16px 0 !important;
+  }
+
+  /* 모바일에서만 띄어쓰기 표시 */
+  #s202511179befa1174b66e .mobile-br {
+      display: inline !important;
+  }
+
+  #s202511179befa1174b66e .cta-content p {
+      font-size: 16px !important;
+      word-break: keep-all !important;
+      margin: 0 0 28px 0 !important;
+  }
+
+  #s202511179befa1174b66e .cta-button-group {
+      gap: 12px !important;
+  }
+
+  #s202511179befa1174b66e .cta-button {
+      font-size: 15px !important;
+      padding: 16px 25px !important;
+      min-width: 160px !important;
+  }
+
+  #s202511179befa1174b66e .government-section {
+      margin: 45px 0 0 0 !important;
+      padding: 35px 0 0 0 !important;
+  }
+
+  #s202511179befa1174b66e .government-title {
+      font-size: 20px !important;
+      margin: 0 0 25px 0 !important;
+  }
+
+  #s202511179befa1174b66e .government-logos-wrapper {
+      padding: 20px 0 30px !important;
+  }
+
+  #s202511179befa1174b66e .government-logo {
+      width: 150px !important;
+      height: 75px !important;
+      padding: 15px !important;
+  }
+
+  #s202511179befa1174b66e .government-logos {
+      gap: 25px !important;
+      padding: 0 20px !important;
+      animation: infiniteRolling 60s linear infinite !important;
+  }
+
+  #s202511179befa1174b66e .logos-indicators {
+      margin-top: 15px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  #s202511179befa1174b66e .section-container {
+      padding: 70px 15px 60px !important;
+  }
+
+  #s202511179befa1174b66e .cta-content h2 {
+      font-size: 24px !important;
+      margin: 0 0 14px 0 !important;
+  }
+
+  #s202511179befa1174b66e .cta-content p {
+      font-size: 15px !important;
+      margin: 0 0 24px 0 !important;
+  }
+
+  #s202511179befa1174b66e .cta-button {
+      font-size: 14px !important;
+      padding: 14px 20px !important;
+      min-width: 140px !important;
+  }
+
+  #s202511179befa1174b66e .government-section {
+      margin: 35px 0 0 0 !important;
+      padding: 30px 0 0 0 !important;
+  }
+
+  #s202511179befa1174b66e .government-title {
+      font-size: 18px !important;
+      margin: 0 0 20px 0 !important;
+  }
+
+  #s202511179befa1174b66e .government-logo {
+      width: 130px !important;
+      height: 65px !important;
+      padding: 12px !important;
+  }
+
+  #s202511179befa1174b66e .government-logos {
+      gap: 15px !important;
+      padding: 0 15px !important;
+      animation: infiniteRolling 45s linear infinite !important;
+  }
+
+  #s202511179befa1174b66e .government-logo span {
+      font-size: 11px !important;
+  }
+}
+</style>
+
+<section id="s202511179befa1174b66e">
+  <div class="section-container">
+      <div class="cta-content">
+          <h2>지금 시작하는 <span class="highlight">정책자금 컨설팅</span>으로<br> 최적의 자금조달 전략을 세우세요</h2>
+          <p>기업심사관 출신 전문가의 맞춤 전략,<br class="mobile-br"> 이음파트너스가 함께합니다</p>
+
+          <div class="cta-button-group">
+              <a href="#s20251117d3239f678439d" class="cta-button primary" onclick="scrollToForm(event)">무료 심사 신청</a>
+              <a href="#s20251117d3239f678439d" class="cta-button" onclick="scrollToForm(event)">맞춤형 자금 전략</a>
+          </div>
+      </div>
+
+      <!-- 정부기관 롤링 섹션 -->
+      <div class="government-section">
+          <h3 class="government-title">정책자금 정부기관</h3>
+          <div class="government-logos-wrapper">
+              <div class="government-logos">
+                  <!-- 첫 번째 세트 -->
+                  <a href="https://www.seoulshinbo.co.kr" target="_blank" class="government-logo" title="서울신용보증재단">
+                      <img src="https://cdn.imweb.me/upload/S20250624bfeeb8bdef278/87c7644e8191f.jpg"
+                           alt="서울신용보증재단">
+                  </a>
+                  <a href="https://www.gcgf.or.kr" target="_blank" class="government-logo" title="경기신용보증재단">
+                      <img src="https://cdn.imweb.me/upload/S20250624bfeeb8bdef278/f1e78a6971c4d.jpg"
+                           alt="경기신용보증재단">
+                  </a>
+                  <a href="https://www.kosmes.or.kr" target="_blank" class="government-logo" title="중소벤처기업진흥공단">
+                      <img src="https://cdn.imweb.me/upload/S20250624bfeeb8bdef278/12b1eaa7851a6.png"
+                           alt="중소벤처기업진흥공단">
+                  </a>
+                  <a href="https://www.kodit.co.kr" target="_blank" class="government-logo" title="신용보증기금">
+                      <img src="https://cdn.imweb.me/upload/S20250624bfeeb8bdef278/efdf18145519b.png"
+                           alt="신용보증기금">
+                  </a>
+                  <a href="https://www.kibo.or.kr" target="_blank" class="government-logo" title="기술보증기금">
+                      <img src="https://cdn.imweb.me/upload/S20250624bfeeb8bdef278/28822c88eec59.png"
+                           alt="기술보증기금">
+                  </a>
+                  <a href="https://www.semas.or.kr" target="_blank" class="government-logo" title="소상공인진흥공단">
+                      <img src="https://cdn.imweb.me/upload/S20250624bfeeb8bdef278/b84a69e337c73.png"
+                           alt="소상공인진흥공단">
+                  </a>
+
+                  <!-- 두 번째 세트 (무한 롤링을 위한 복사) -->
+                  <a href="https://www.seoulshinbo.co.kr" target="_blank" class="government-logo" title="서울신용보증재단">
+                      <img src="https://cdn.imweb.me/upload/S20250624bfeeb8bdef278/87c7644e8191f.jpg"
+                           alt="서울신용보증재단">
+                  </a>
+                  <a href="https://www.gcgf.or.kr" target="_blank" class="government-logo" title="경기신용보증재단">
+                      <img src="https://cdn.imweb.me/upload/S20250624bfeeb8bdef278/f1e78a6971c4d.jpg"
+                           alt="경기신용보증재단">
+                  </a>
+                  <a href="https://www.kosmes.or.kr" target="_blank" class="government-logo" title="중소벤처기업진흥공단">
+                      <img src="https://cdn.imweb.me/upload/S20250624bfeeb8bdef278/12b1eaa7851a6.png"
+                           alt="중소벤처기업진흥공단">
+                  </a>
+                  <a href="https://www.kodit.co.kr" target="_blank" class="government-logo" title="신용보증기금">
+                      <img src="https://cdn.imweb.me/upload/S20250624bfeeb8bdef278/efdf18145519b.png"
+                           alt="신용보증기금">
+                  </a>
+                  <a href="https://www.kibo.or.kr" target="_blank" class="government-logo" title="기술보증기금">
+                      <img src="https://cdn.imweb.me/upload/S20250624bfeeb8bdef278/28822c88eec59.png"
+                           alt="기술보증기금">
+                  </a>
+                  <a href="https://www.semas.or.kr" target="_blank" class="government-logo" title="소상공인진흥공단">
+                      <img src="https://cdn.imweb.me/upload/S20250624bfeeb8bdef278/b84a69e337c73.png"
+                           alt="소상공인진흥공단">
+                  </a>
+
+                  <!-- 세 번째 세트 (진짜 무한 롤링을 위한 추가 복사) -->
+                  <a href="https://www.seoulshinbo.co.kr" target="_blank" class="government-logo" title="서울신용보증재단">
+                      <img src="https://cdn.imweb.me/upload/S20250624bfeeb8bdef278/87c7644e8191f.jpg"
+                           alt="서울신용보증재단">
+                  </a>
+                  <a href="https://www.gcgf.or.kr" target="_blank" class="government-logo" title="경기신용보증재단">
+                      <img src="https://cdn.imweb.me/upload/S20250624bfeeb8bdef278/f1e78a6971c4d.jpg"
+                           alt="경기신용보증재단">
+                  </a>
+                  <a href="https://www.kosmes.or.kr" target="_blank" class="government-logo" title="중소벤처기업진흥공단">
+                      <img src="https://cdn.imweb.me/upload/S20250624bfeeb8bdef278/12b1eaa7851a6.png"
+                           alt="중소벤처기업진흥공단">
+                  </a>
+                  <a href="https://www.kodit.co.kr" target="_blank" class="government-logo" title="신용보증기금">
+                      <img src="https://cdn.imweb.me/upload/S20250624bfeeb8bdef278/efdf18145519b.png"
+                           alt="신용보증기금">
+                  </a>
+                  <a href="https://www.kibo.or.kr" target="_blank" class="government-logo" title="기술보증기금">
+                      <img src="https://cdn.imweb.me/upload/S20250624bfeeb8bdef278/28822c88eec59.png"
+                           alt="기술보증기금">
+                  </a>
+                  <a href="https://www.semas.or.kr" target="_blank" class="government-logo" title="소상공인진흥공단">
+                      <img src="https://cdn.imweb.me/upload/S20250624bfeeb8bdef278/b84a69e337c73.png"
+                           alt="소상공인진흥공단">
+                  </a>
+              </div>
+
+              <!-- 모던한 인디케이터 -->
+              <div class="logos-indicators">
+                  <div class="indicator-dot active"></div>
+                  <div class="indicator-dot"></div>
+                  <div class="indicator-dot"></div>
+                  <div class="indicator-dot"></div>
+                  <div class="indicator-dot"></div>
+                  <div class="indicator-dot"></div>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
+
+<script>
+function scrollToForm(event) {
+  event.preventDefault();
+
+  // 입력폼 섹션을 찾음
+  const formSection = document.querySelector('#s20251117d3239f678439d');
+
+  if (formSection) {
+      // 입력폼 섹션 내의 회사명 입력 필드를 찾음
+      const companyInput = formSection.querySelector('input[name="company"]');
+
+      if (companyInput) {
+          // 회사명 입력 필드로 스크롤하고 포커스
+          companyInput.scrollIntoView({
+              behavior: 'smooth',
+              block: 'center'
+          });
+
+          // 약간의 지연 후 포커스 (스크롤 완료 대기)
+          setTimeout(() => {
+              companyInput.focus();
+          }, 800);
+      } else {
+          // 회사명 입력 필드가 없으면 섹션으로 스크롤
+          formSection.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+          });
+      }
+  }
+}
+</script>

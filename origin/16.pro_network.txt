@@ -1,0 +1,571 @@
+<!-- ================================================ -->
+<!-- 이음파트너스 전문가 네트워크 -->
+<!-- 섹션 ID: #s2025111741098c9a54b5c -->
+<!-- ================================================ -->
+<style>
+/* Pretendard 폰트 */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
+
+/* 기본 스타일 초기화 */
+#s2025111741098c9a54b5c * {
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif !important;
+}
+
+/* 아임웹 구조 완전 리셋 */
+#s2025111741098c9a54b5c .section_body,
+#s2025111741098c9a54b5c .inside,
+#s2025111741098c9a54b5c .widget,
+#s2025111741098c9a54b5c .widget_inner {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 auto !important;
+    background: transparent !important;
+}
+
+/* 섹션 배경 - 베이지톤 + 배경 이미지 */
+#s2025111741098c9a54b5c {
+    background: url('https://cdn.imweb.me/upload/S20251117ed7f35ec2bb5b/22449daa5656a.png') center/cover no-repeat !important;
+    position: relative !important;
+    width: 100vw !important;
+    margin-left: calc(-50vw + 50%) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    z-index: 1 !important;
+}
+
+/* 아임웹 기본 섹션 간격 제거 */
+#s2025111741098c9a54b5c.fr-section {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+/* 아임웹 자동 생성 패딩 div 완전 제거 */
+div[id^="padding_w"] {
+    display: none !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    max-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    line-height: 0 !important;
+}
+
+/* 특정 섹션 다음 패딩 제거 */
+#s2025111741098c9a54b5c + div[id*="padding"] {
+    display: none !important;
+}
+
+/* 다음 섹션 중첩 방지 */
+#s2025111741098c9a54b5c + section,
+#s2025111741098c9a54b5c + div[class*="section"],
+#s2025111741098c9a54b5c + .fr-section {
+    margin-top: 0 !important;
+    position: relative !important;
+    z-index: 2 !important;
+}
+
+/* 배경 오버레이 - 베이지톤 */
+#s2025111741098c9a54b5c::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: rgba(245, 241, 232, 0.95) !important;
+    z-index: 0 !important;
+}
+
+#s2025111741098c9a54b5c .section-container {
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    padding: 80px 20px 60px !important;
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+/* 섹션 헤더 */
+#s2025111741098c9a54b5c .section-header {
+    text-align: center !important;
+    margin: 0 0 50px 0 !important;
+    padding: 0 !important;
+}
+
+#s2025111741098c9a54b5c .section-badge {
+    display: inline-block !important;
+    background: rgba(234, 138, 76, 0.1) !important;
+    color: #EA8A4C !important;
+    padding: 8px 20px !important;
+    border-radius: 30px !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    margin: 0 0 20px 0 !important;
+    border: 1px solid rgba(234, 138, 76, 0.3) !important;
+}
+
+#s2025111741098c9a54b5c .section-title {
+    font-size: 42px !important;
+    font-weight: 700 !important;
+    color: #1a1a1a !important;
+    margin: 0 0 16px 0 !important;
+    line-height: 1.3 !important;
+    padding: 0 !important;
+    word-break: keep-all !important;
+}
+
+#s2025111741098c9a54b5c .section-desc {
+    font-size: 18px !important;
+    color: #4a5568 !important;
+    line-height: 1.6 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    word-break: keep-all !important;
+}
+
+/* 전문가 카드 그리드 */
+#s2025111741098c9a54b5c .expert-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 20px !important;
+    margin: 0 0 40px 0 !important;
+    padding: 0 !important;
+}
+
+/* 전문가 카드 */
+#s2025111741098c9a54b5c .expert-card {
+    background-size: cover !important;
+    background-position: center !important;
+    border-radius: 20px !important;
+    padding: 40px !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+    position: relative !important;
+    overflow: hidden !important;
+    transition: all 0.3s ease !important;
+}
+
+#s2025111741098c9a54b5c .expert-card-law {
+    background-image: url('https://cdn.imweb.me/upload/S20251117ed7f35ec2bb5b/33d08789f9f8c.png') !important;
+}
+
+#s2025111741098c9a54b5c .expert-card-labor {
+    background-image: url('https://cdn.imweb.me/upload/S20251117ed7f35ec2bb5b/6cd79a7bad41d.png') !important;
+}
+
+#s2025111741098c9a54b5c .expert-card-patent {
+    background-image: url('https://cdn.imweb.me/upload/S20251117ed7f35ec2bb5b/fd03c86b5089d.png') !important;
+}
+
+#s2025111741098c9a54b5c .expert-card-admin {
+    background-image: url('https://cdn.imweb.me/upload/S20251117ed7f35ec2bb5b/ce2b51db06769.png') !important;
+}
+
+#s2025111741098c9a54b5c .expert-card:hover {
+    transform: translateY(-6px) !important;
+    border-color: rgba(234, 138, 76, 0.8) !important;
+    box-shadow: 0 8px 25px rgba(234, 138, 76, 0.3) !important;
+}
+
+/* 카드 헤더 */
+#s2025111741098c9a54b5c .expert-header {
+    display: flex !important;
+    align-items: center !important;
+    gap: 16px !important;
+    margin: 0 0 20px 0 !important;
+    padding: 16px !important;
+    border-bottom: none !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+#s2025111741098c9a54b5c .expert-icon {
+    width: 56px !important;
+    height: 56px !important;
+    background: linear-gradient(135deg, #EA8A4C 0%, #D77839 100%) !important;
+    border-radius: 12px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-shrink: 0 !important;
+    box-shadow: 0 4px 15px rgba(234, 138, 76, 0.3) !important;
+}
+
+#s2025111741098c9a54b5c .expert-icon svg {
+    width: 28px !important;
+    height: 28px !important;
+    fill: #ffffff !important;
+}
+
+#s2025111741098c9a54b5c .expert-title {
+    font-size: 24px !important;
+    font-weight: 700 !important;
+    color: #1a1a1a !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* 서비스 태그 영역 */
+#s2025111741098c9a54b5c .service-area {
+    margin: 0 !important;
+    padding: 16px !important;
+    border-top: none !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+#s2025111741098c9a54b5c .service-label {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: #718096 !important;
+    margin: 0 0 12px 0 !important;
+    padding: 0 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+}
+
+#s2025111741098c9a54b5c .service-tags {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+#s2025111741098c9a54b5c .service-tag {
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+    padding: 8px 16px !important;
+    border-radius: 20px !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    color: #4a5568 !important;
+    transition: all 0.2s ease !important;
+    flex: 1 1 0 !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+}
+
+#s2025111741098c9a54b5c .service-tag:hover {
+    background: rgba(234, 138, 76, 0.1) !important;
+    border-color: #EA8A4C !important;
+    color: #EA8A4C !important;
+}
+
+/* CTA 영역 */
+#s2025111741098c9a54b5c .cta-area {
+    text-align: center !important;
+    padding: 40px 0 0 0 !important;
+    margin: 0 !important;
+}
+
+#s2025111741098c9a54b5c .cta-description {
+    font-size: 18px !important;
+    color: #4a5568 !important;
+    margin: 0 0 24px 0 !important;
+    line-height: 1.6 !important;
+    padding: 0 !important;
+    word-break: keep-all !important;
+}
+
+#s2025111741098c9a54b5c .cta-button {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    background: linear-gradient(135deg, #EA8A4C 0%, #D77839 100%) !important;
+    color: #ffffff !important;
+    padding: 18px 48px !important;
+    border-radius: 10px !important;
+    font-size: 18px !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 15px rgba(234, 138, 76, 0.3) !important;
+    border: none !important;
+}
+
+#s2025111741098c9a54b5c .cta-button:hover {
+    background: linear-gradient(135deg, #D77839 0%, #EA8A4C 100%) !important;
+    transform: translateY(-3px) !important;
+    box-shadow: 0 6px 20px rgba(234, 138, 76, 0.4) !important;
+}
+
+/* 모바일 줄바꿈 */
+#s2025111741098c9a54b5c .mobile-br {
+    display: none !important;
+}
+
+/* 반응형 디자인 - 태블릿 */
+@media (min-width: 768px) {
+    #s2025111741098c9a54b5c .section-container {
+        padding: 100px 40px 60px !important;
+    }
+}
+
+/* 반응형 디자인 - 데스크톱 */
+@media (min-width: 1024px) {
+    #s2025111741098c9a54b5c .section-container {
+        padding: 120px 40px 60px !important;
+    }
+}
+
+/* 반응형 디자인 - 968px 이하 */
+@media (max-width: 968px) {
+    #s2025111741098c9a54b5c .section-title {
+        font-size: 36px !important;
+    }
+
+    #s2025111741098c9a54b5c .expert-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+/* 반응형 디자인 - 모바일 */
+@media (max-width: 768px) {
+    #s2025111741098c9a54b5c .section-container {
+        padding: 80px 20px 60px !important;
+    }
+
+    #s2025111741098c9a54b5c .section-title {
+        font-size: 28px !important;
+        word-break: keep-all !important;
+    }
+
+    #s2025111741098c9a54b5c .section-desc {
+        font-size: 16px !important;
+    }
+
+    #s2025111741098c9a54b5c .mobile-br {
+        display: inline !important;
+    }
+
+    #s2025111741098c9a54b5c .expert-grid {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+    }
+
+    #s2025111741098c9a54b5c .expert-card {
+        padding: 28px 20px !important;
+    }
+
+    #s2025111741098c9a54b5c .expert-header {
+        margin: 0 0 12px 0 !important;
+        padding: 12px !important;
+    }
+
+    #s2025111741098c9a54b5c .service-area {
+        padding: 12px !important;
+    }
+
+    #s2025111741098c9a54b5c .expert-icon {
+        width: 48px !important;
+        height: 48px !important;
+    }
+
+    #s2025111741098c9a54b5c .expert-icon svg {
+        width: 24px !important;
+        height: 24px !important;
+    }
+
+    #s2025111741098c9a54b5c .expert-title {
+        font-size: 20px !important;
+    }
+
+    #s2025111741098c9a54b5c .service-label {
+        font-size: 12px !important;
+        margin: 0 0 8px 0 !important;
+    }
+
+    #s2025111741098c9a54b5c .service-tags {
+        gap: 4px !important;
+        flex-wrap: nowrap !important;
+    }
+
+    #s2025111741098c9a54b5c .service-tag {
+        font-size: 10px !important;
+        padding: 6px 8px !important;
+        flex: 1 1 0 !important;
+        min-width: 0 !important;
+    }
+
+    #s2025111741098c9a54b5c .cta-description {
+        font-size: 16px !important;
+    }
+
+    #s2025111741098c9a54b5c .cta-button {
+        width: 100% !important;
+        justify-content: center !important;
+        padding: 16px 32px !important;
+        font-size: 16px !important;
+    }
+}
+
+/* 480px 이하 모바일 */
+@media (max-width: 480px) {
+    #s2025111741098c9a54b5c .section-container {
+        padding: 70px 15px 60px !important;
+    }
+
+    #s2025111741098c9a54b5c .section-title {
+        font-size: 24px !important;
+    }
+
+    #s2025111741098c9a54b5c .expert-header {
+        padding: 10px !important;
+    }
+
+    #s2025111741098c9a54b5c .service-area {
+        padding: 10px !important;
+    }
+
+    #s2025111741098c9a54b5c .service-label {
+        font-size: 11px !important;
+    }
+
+    #s2025111741098c9a54b5c .service-tag {
+        font-size: 9px !important;
+        padding: 5px 6px !important;
+    }
+}
+</style>
+
+<section id="s2025111741098c9a54b5c">
+<div class="section-container">
+    <div class="section-header">
+        <span class="section-badge">이음파트너스 전문가 네트워크</span>
+        <h2 class="section-title">각 분야 전문가와 함께하는<br class="mobile-br"> 비즈니스 솔루션</h2>
+        <p class="section-desc">
+            법무, 세무, 노무, 행정, 변리 등<br class="mobile-br">
+            이음파트너스의 전문가 네트워크 그룹
+        </p>
+    </div>
+
+    <!-- 전문가 카드 그리드 -->
+    <div class="expert-grid">
+        <!-- 법무/세무 전문가 -->
+        <div class="expert-card expert-card-law">
+            <div class="expert-header">
+                <div class="expert-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z M12 11.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V8.93l7-3.11v6.17z"/>
+                    </svg>
+                </div>
+                <h3 class="expert-title">법무/세무 전문가</h3>
+            </div>
+            <div class="service-area">
+                <p class="service-label">핵심 서비스</p>
+                <div class="service-tags">
+                    <span class="service-tag">법률 자문</span>
+                    <span class="service-tag">세무 전략</span>
+                    <span class="service-tag">계약 검토</span>
+                    <span class="service-tag">절세 지원</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 노무 전문가 -->
+        <div class="expert-card expert-card-labor">
+            <div class="expert-header">
+                <div class="expert-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+                    </svg>
+                </div>
+                <h3 class="expert-title">노무 전문가</h3>
+            </div>
+            <div class="service-area">
+                <p class="service-label">핵심 서비스</p>
+                <div class="service-tags">
+                    <span class="service-tag">노무 관리</span>
+                    <span class="service-tag">임금 설계</span>
+                    <span class="service-tag">노동분쟁</span>
+                    <span class="service-tag">4대보험</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 변리 전문가 -->
+        <div class="expert-card expert-card-patent">
+            <div class="expert-header">
+                <div class="expert-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M9 3V1h6v2H9zM11 21h2V8h-2v13zM17.5 11.5L19 13l-6 6-4.5-4.5L10 13l3 3 4.5-4.5z"/>
+                    </svg>
+                </div>
+                <h3 class="expert-title">변리 전문가</h3>
+            </div>
+            <div class="service-area">
+                <p class="service-label">핵심 서비스</p>
+                <div class="service-tags">
+                    <span class="service-tag">특허 출원</span>
+                    <span class="service-tag">상표 등록</span>
+                    <span class="service-tag">디자인 보호</span>
+                    <span class="service-tag">IP 전략</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 행정 전문가 -->
+        <div class="expert-card expert-card-admin">
+            <div class="expert-header">
+                <div class="expert-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                </div>
+                <h3 class="expert-title">행정 전문가</h3>
+            </div>
+            <div class="service-area">
+                <p class="service-label">핵심 서비스</p>
+                <div class="service-tags">
+                    <span class="service-tag">인허가</span>
+                    <span class="service-tag">법인 설립</span>
+                    <span class="service-tag">각종 신고</span>
+                    <span class="service-tag">민원 대행</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA 영역 -->
+    <div class="cta-area">
+        <p class="cta-description">
+            이음파트너스의 전문가 네트워크로<br class="mobile-br">
+            필요한 전문 서비스를 연결해드립니다
+        </p>
+        <a href="#s202510319184017476688" class="cta-button" onclick="scrollToForm(event)">
+            전문가 매칭 신청하기
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+            </svg>
+        </a>
+    </div>
+</div>
+</section>
+
+<script>
+function scrollToForm(event) {
+    event.preventDefault();
+    const formSection = document.querySelector('#s202510319184017476688');
+    if (formSection) {
+        const companyInput = formSection.querySelector('input[name="company"]');
+        if (companyInput) {
+            companyInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            setTimeout(() => { companyInput.focus(); }, 800);
+        } else {
+            formSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }
+}
+</script>

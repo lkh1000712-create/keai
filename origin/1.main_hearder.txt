@@ -1,0 +1,365 @@
+<!-- 이음파트너스 헤더 섹션 - Warm & Professional 스타일 -->
+<style>
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
+
+#s202510280b450264c18ad * {
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif !important;
+}
+
+#s202510280b450264c18ad .section_body,
+#s202510280b450264c18ad .inside,
+#s202510280b450264c18ad .widget,
+#s202510280b450264c18ad .widget_inner {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 auto !important;
+    background: transparent !important;
+}
+
+#s202510280b450264c18ad {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    background: #FFFFFF !important;
+    border-bottom: 1px solid #DEE2E6 !important;
+    z-index: 1000 !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
+    padding-bottom: 9px !important;
+}
+
+#s202510280b450264c18ad .bank-header-container {
+    max-width: 1400px !important;
+    margin: 0 auto !important;
+    padding: 0 20px !important;
+}
+
+#s202510280b450264c18ad .bank-header-main {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 20px 0 4px 0 !important;
+}
+
+#s202510280b450264c18ad .bank-logo {
+    display: flex !important;
+    align-items: flex-end !important;
+    gap: 12px !important;
+    text-decoration: none !important;
+}
+
+#s202510280b450264c18ad .bank-logo-image {
+    height: 60px !important;
+    width: auto !important;
+}
+
+#s202510280b450264c18ad .bank-logo-text {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-end !important;
+    gap: 2px !important;
+    padding-bottom: 2px !important;
+}
+
+#s202510280b450264c18ad .bank-logo-title {
+    font-size: 28.8px !important;
+    font-weight: 400 !important;
+    color: #EA8A4C !important;
+    line-height: 1 !important;
+    letter-spacing: 0.5px !important;
+}
+
+#s202510280b450264c18ad .bank-nav {
+    display: none !important;
+}
+
+#s202510280b450264c18ad .bank-nav-list {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    list-style: none !important;
+}
+
+#s202510280b450264c18ad .bank-nav-item a {
+    display: block !important;
+    padding: 10px 20px !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    color: #495057 !important;
+    text-decoration: none !important;
+    border-radius: 4px !important;
+    transition: all 0.2s ease !important;
+}
+
+#s202510280b450264c18ad .bank-nav-item a:hover {
+    background: #FEF3E9 !important;
+    color: #EA8A4C !important;
+}
+
+#s202510280b450264c18ad .bank-nav-item a.active {
+    background: #EA8A4C !important;
+    color: #FFFFFF !important;
+}
+
+#s202510280b450264c18ad .bank-header-cta {
+    display: none !important;
+}
+
+#s202510280b450264c18ad .bank-btn-header-cta {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 6px !important;
+    padding: 10px 20px !important;
+    background: #EA8A4C !important;
+    color: #FFFFFF !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
+    border-radius: 4px !important;
+    transition: all 0.2s ease !important;
+    box-shadow: 0 2px 4px rgba(234, 138, 76, 0.2) !important;
+    white-space: nowrap !important;
+    min-width: 110px !important;
+}
+
+#s202510280b450264c18ad .bank-btn-header-cta:hover {
+    background: #D77839 !important;
+    box-shadow: 0 4px 8px rgba(234, 138, 76, 0.3) !important;
+}
+
+#s202510280b450264c18ad .bank-mobile-menu-btn {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 40px !important;
+    height: 40px !important;
+    background: transparent !important;
+    border: none !important;
+    cursor: pointer !important;
+}
+
+#s202510280b450264c18ad .bank-mobile-menu-btn svg {
+    width: 24px !important;
+    height: 24px !important;
+    fill: #212529 !important;
+}
+
+#s202510280b450264c18ad .bank-mobile-menu {
+    position: fixed !important;
+    top: 0 !important;
+    right: -100% !important;
+    width: 280px !important;
+    height: 100vh !important;
+    background: #FFFFFF !important;
+    box-shadow: -4px 0 16px rgba(0, 0, 0, 0.1) !important;
+    padding: 24px !important;
+    overflow-y: auto !important;
+    transition: right 0.3s ease !important;
+    z-index: 1001 !important;
+}
+
+#s202510280b450264c18ad .bank-mobile-menu.active {
+    right: 0 !important;
+}
+
+#s202510280b450264c18ad .bank-mobile-menu-header {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    margin-bottom: 32px !important;
+    padding-bottom: 16px !important;
+    border-bottom: 2px solid #F1F3F5 !important;
+}
+
+#s202510280b450264c18ad .bank-mobile-menu-title {
+    font-size: 18px !important;
+    font-weight: 700 !important;
+    color: #212529 !important;
+}
+
+#s202510280b450264c18ad .bank-mobile-menu-close {
+    width: 32px !important;
+    height: 32px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: transparent !important;
+    border: none !important;
+    cursor: pointer !important;
+}
+
+#s202510280b450264c18ad .bank-mobile-nav-list {
+    list-style: none !important;
+    margin-bottom: 24px !important;
+}
+
+#s202510280b450264c18ad .bank-mobile-nav-item {
+    margin-bottom: 8px !important;
+}
+
+#s202510280b450264c18ad .bank-mobile-nav-item a {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    padding: 14px 16px !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    color: #495057 !important;
+    text-decoration: none !important;
+    border-radius: 8px !important;
+}
+
+#s202510280b450264c18ad .bank-mobile-nav-item a.active {
+    background: #EA8A4C !important;
+    color: #FFFFFF !important;
+}
+
+#s202510280b450264c18ad .bank-mobile-overlay {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100vh !important;
+    background: rgba(0, 0, 0, 0.5) !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transition: all 0.3s ease !important;
+    z-index: 999 !important;
+}
+
+#s202510280b450264c18ad .bank-mobile-overlay.active {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+@media (min-width: 768px) {
+    #s202510280b450264c18ad .bank-nav {
+        display: block !important;
+    }
+    #s202510280b450264c18ad .bank-mobile-menu-btn {
+        display: none !important;
+    }
+    #s202510280b450264c18ad .bank-logo-title {
+        font-size: 20px !important;
+    }
+}
+
+@media (min-width: 1024px) {
+    #s202510280b450264c18ad .bank-header-cta {
+        display: block !important;
+    }
+}
+</style>
+
+<header id="s202510280b450264c18ad">
+    <div class="bank-header-container">
+        <div class="bank-header-main">
+            <a href="/" class="bank-logo">
+                <img src="https://cdn.imweb.me/upload/S20251117ed7f35ec2bb5b/5a8273b5bac1b.png" alt="이음파트너스 로고" class="bank-logo-image">
+                <div class="bank-logo-text">
+                    <span class="bank-logo-title">PARTNERS</span>
+                </div>
+            </a>
+
+            <nav class="bank-nav">
+                <ul class="bank-nav-list">
+                    <li class="bank-nav-item"><a href="https://ieumpartners.imweb.me/home" id="nav-home">홈</a></li>
+                    <li class="bank-nav-item"><a href="https://ieumpartners.imweb.me/company" id="nav-company">회사소개</a></li>
+                    <li class="bank-nav-item"><a href="https://ieumpartners.imweb.me/process" id="nav-process">진행과정</a></li>
+                    <li class="bank-nav-item"><a href="https://ieumpartners.imweb.me/fund" id="nav-fund">자금상담</a></li>
+                    <li class="bank-nav-item"><a href="https://ieumpartners.imweb.me/pro" id="nav-pro">전문서비스</a></li>
+                    <li class="bank-nav-item"><a href="https://ieumpartners.imweb.me/mkt" id="nav-mkt">온라인마케팅</a></li>
+                </ul>
+            </nav>
+
+            <div class="bank-header-cta">
+                <a href="https://ieumpartners.imweb.me/fund" class="bank-btn-header-cta">
+                    <svg viewBox="0 0 24 24" fill="#FFFFFF"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                    <span>무료심사</span>
+                </a>
+            </div>
+
+            <button class="bank-mobile-menu-btn" onclick="toggleMobileMenu()">
+                <svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+            </button>
+        </div>
+    </div>
+
+    <div class="bank-mobile-menu" id="bankMobileMenu">
+        <div class="bank-mobile-menu-header">
+            <span class="bank-mobile-menu-title">메뉴</span>
+            <button class="bank-mobile-menu-close" onclick="toggleMobileMenu()">
+                <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+            </button>
+        </div>
+        <nav>
+            <ul class="bank-mobile-nav-list">
+                <li class="bank-mobile-nav-item"><a href="https://ieumpartners.imweb.me/home" onclick="toggleMobileMenu()" id="mobile-nav-home"><span>홈</span></a></li>
+                <li class="bank-mobile-nav-item"><a href="https://ieumpartners.imweb.me/company" onclick="toggleMobileMenu()" id="mobile-nav-company"><span>회사소개</span></a></li>
+                <li class="bank-mobile-nav-item"><a href="https://ieumpartners.imweb.me/process" onclick="toggleMobileMenu()" id="mobile-nav-process"><span>진행과정</span></a></li>
+                <li class="bank-mobile-nav-item"><a href="https://ieumpartners.imweb.me/fund" onclick="toggleMobileMenu()" id="mobile-nav-fund"><span>자금상담</span></a></li>
+                <li class="bank-mobile-nav-item"><a href="https://ieumpartners.imweb.me/pro" onclick="toggleMobileMenu()" id="mobile-nav-pro"><span>전문서비스</span></a></li>
+                <li class="bank-mobile-nav-item"><a href="https://ieumpartners.imweb.me/mkt" onclick="toggleMobileMenu()" id="mobile-nav-mkt"><span>온라인마케팅</span></a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="bank-mobile-overlay" id="bankMobileOverlay" onclick="toggleMobileMenu()"></div>
+</header>
+
+<script>
+(function() {
+    'use strict';
+
+    // 모바일 메뉴 토글
+    window.toggleMobileMenu = function() {
+        const menu = document.getElementById('bankMobileMenu');
+        const overlay = document.getElementById('bankMobileOverlay');
+        if (menu && overlay) {
+            menu.classList.toggle('active');
+            overlay.classList.toggle('active');
+            document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : '';
+        }
+    };
+
+    // Active 상태 자동 설정
+    function setActiveNav() {
+        const currentPath = window.location.pathname;
+        const pageMap = {
+            '/home': 'home',
+            '/': 'home',
+            '/company': 'company',
+            '/process': 'process',
+            '/fund': 'fund',
+            '/pro': 'pro',
+            '/mkt': 'mkt'
+        };
+
+        const activePage = pageMap[currentPath] || 'home';
+
+        // 데스크톱 네비게이션 active 설정
+        const navLink = document.getElementById('nav-' + activePage);
+        if (navLink) {
+            navLink.classList.add('active');
+        }
+
+        // 모바일 네비게이션 active 설정
+        const mobileNavLink = document.getElementById('mobile-nav-' + activePage);
+        if (mobileNavLink) {
+            mobileNavLink.classList.add('active');
+        }
+    }
+
+    // 페이지 로드 시 active 상태 설정
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', setActiveNav);
+    } else {
+        setActiveNav();
+    }
+})();
+</script>

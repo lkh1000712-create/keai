@@ -1,0 +1,512 @@
+<!-- ================================================ -->
+<!-- 이음파트너스 자주 묻는 질문 섹션 -->
+<!-- 섹션 ID: #s20251117d1444caf1a7f2 -->
+<!-- ================================================ -->
+<style>
+/* 폰트 설정 */
+#s20251117d1444caf1a7f2 {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif !important;
+}
+
+/* FAQ 섹션 배경 - 컴팩트한 구조 */
+#s20251117d1444caf1a7f2 {
+  background: url('https://cdn.imweb.me/upload/S202510311f2b732d023b3/b1b3fdb6f9dc0.jpg') center/cover no-repeat !important;
+  padding: 60px 0 !important;
+  width: 100vw !important;
+  margin-left: calc(-50vw + 50%) !important;
+  position: relative !important;
+}
+
+/* 배경 오버레이 */
+#s20251117d1444caf1a7f2::before {
+  content: '' !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  background: rgba(255, 255, 255, 0.95) !important;
+  z-index: 0 !important;
+}
+
+#s20251117d1444caf1a7f2 .section-container {
+  max-width: 1000px !important;
+  margin: 0 auto !important;
+  padding: 0 20px !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* 섹션 헤더 - 간격 축소 */
+#s20251117d1444caf1a7f2 .section-header {
+  text-align: center !important;
+  margin-bottom: 30px !important;
+}
+
+#s20251117d1444caf1a7f2 .section-header h2 {
+  font-size: 38px !important;
+  font-weight: 700 !important;
+  color: #1F2937 !important;
+  margin-bottom: 15px !important;
+  position: relative !important;
+  display: inline-block !important;
+}
+
+/* 제목 오렌지 언더라인 효과 - 히어로와 통일 */
+#s20251117d1444caf1a7f2 .section-header h2::after {
+  content: '' !important;
+  position: absolute !important;
+  bottom: -8px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: 80px !important;
+  height: 3px !important;
+  background: linear-gradient(90deg, transparent, #EA8A4C, #5B4B8A, transparent) !important;
+}
+
+#s20251117d1444caf1a7f2 .section-header p {
+  font-size: 18px !important;
+  color: #6B7280 !important;
+  line-height: 1.5 !important;
+}
+
+/* 모바일 줄바꿈 숨김 (데스크톱) */
+#s20251117d1444caf1a7f2 .mobile-br {
+  display: none !important;
+}
+
+/* FAQ 컨테이너 - 간격 축소 */
+#s20251117d1444caf1a7f2 .faq-container {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 15px !important;
+}
+
+/* FAQ 아이템 */
+#s20251117d1444caf1a7f2 .faq-item {
+  background: #FFFFFF !important;
+  border-radius: 12px !important;
+  overflow: hidden !important;
+  transition: all 0.3s ease !important;
+  border: 1px solid #E5E7EB !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+  position: relative !important;
+}
+
+/* 상단 라인 효과 - 히어로와 통일 */
+#s20251117d1444caf1a7f2 .faq-item::before {
+  content: '' !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  height: 2px !important;
+  background: linear-gradient(90deg, transparent, #EA8A4C, #5B4B8A, transparent) !important;
+  opacity: 0 !important;
+  transition: opacity 0.3s ease !important;
+}
+
+#s20251117d1444caf1a7f2 .faq-item:hover {
+  box-shadow: 0 4px 12px rgba(234, 138, 76, 0.08) !important;
+  border-color: #D1D5DB !important;
+}
+
+#s20251117d1444caf1a7f2 .faq-item:hover::before {
+  opacity: 1 !important;
+}
+
+#s20251117d1444caf1a7f2 .faq-item.active {
+  border-color: #EA8A4C !important;
+  box-shadow: 0 6px 20px rgba(234, 138, 76, 0.15) !important;
+  background: rgba(234, 138, 76, 0.02) !important;
+}
+
+#s20251117d1444caf1a7f2 .faq-item.active::before {
+  opacity: 1 !important;
+  height: 3px !important;
+}
+
+/* FAQ 질문 - 패딩 축소 */
+#s20251117d1444caf1a7f2 .faq-question {
+  padding: 25px 30px !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  position: relative !important;
+  transition: all 0.3s ease !important;
+}
+
+#s20251117d1444caf1a7f2 .faq-item.active .faq-question {
+  background: #FFFFFF !important;
+  border-bottom: 1px solid #E5E7EB !important;
+}
+
+/* FAQ 번호 - 오렌지/퍼플 그라데이션 (히어로와 통일) */
+#s20251117d1444caf1a7f2 .faq-number {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 36px !important;
+  height: 36px !important;
+  background: linear-gradient(135deg, #EA8A4C 0%, #5B4B8A 100%) !important;
+  color: #FFFFFF !important;
+  border-radius: 50% !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  margin-right: 18px !important;
+  flex-shrink: 0 !important;
+  box-shadow: 0 2px 8px rgba(234, 138, 76, 0.3) !important;
+  transition: all 0.3s ease !important;
+}
+
+#s20251117d1444caf1a7f2 .faq-item.active .faq-number {
+  background: linear-gradient(135deg, #D77839 0%, #5B4B8A 100%) !important;
+  box-shadow: 0 4px 12px rgba(234, 138, 76, 0.4) !important;
+  transform: scale(1.05) !important;
+}
+
+/* FAQ 질문 텍스트 */
+#s20251117d1444caf1a7f2 .faq-question-text {
+  flex: 1 !important;
+  font-size: 18px !important;
+  font-weight: 600 !important;
+  color: #1F2937 !important;
+  line-height: 1.4 !important;
+  padding-right: 20px !important;
+}
+
+/* FAQ 토글 아이콘 */
+#s20251117d1444caf1a7f2 .faq-toggle {
+  width: 22px !important;
+  height: 22px !important;
+  position: relative !important;
+  flex-shrink: 0 !important;
+}
+
+#s20251117d1444caf1a7f2 .faq-toggle::before,
+#s20251117d1444caf1a7f2 .faq-toggle::after {
+  content: '' !important;
+  position: absolute !important;
+  background: #6B7280 !important;
+  transition: all 0.3s ease !important;
+  border-radius: 1px !important;
+}
+
+#s20251117d1444caf1a7f2 .faq-toggle::before {
+  width: 22px !important;
+  height: 2px !important;
+  top: 50% !important;
+  left: 0 !important;
+  transform: translateY(-50%) !important;
+}
+
+#s20251117d1444caf1a7f2 .faq-toggle::after {
+  width: 2px !important;
+  height: 22px !important;
+  left: 50% !important;
+  top: 0 !important;
+  transform: translateX(-50%) !important;
+}
+
+#s20251117d1444caf1a7f2 .faq-item:hover .faq-toggle::before,
+#s20251117d1444caf1a7f2 .faq-item:hover .faq-toggle::after {
+  background: #EA8A4C !important;
+}
+
+#s20251117d1444caf1a7f2 .faq-item.active .faq-toggle::after {
+  opacity: 0 !important;
+}
+
+#s20251117d1444caf1a7f2 .faq-item.active .faq-toggle::before {
+  background: #EA8A4C !important;
+}
+
+/* FAQ 답변 - 패딩 축소 */
+#s20251117d1444caf1a7f2 .faq-answer {
+  max-height: 0 !important;
+  overflow: hidden !important;
+  transition: max-height 0.4s ease !important;
+}
+
+#s20251117d1444caf1a7f2 .faq-answer-inner {
+  padding: 25px 30px 25px 90px !important;
+}
+
+#s20251117d1444caf1a7f2 .faq-answer p {
+  font-size: 16px !important;
+  color: #374151 !important;
+  line-height: 1.7 !important;
+  margin: 0 !important;
+}
+
+#s20251117d1444caf1a7f2 .faq-answer p + p {
+  margin-top: 14px !important;
+}
+
+/* 강조 텍스트 */
+#s20251117d1444caf1a7f2 .faq-answer strong {
+  color: #EA8A4C !important;
+  font-weight: 700 !important;
+  background: rgba(234, 138, 76, 0.08) !important;
+  padding: 2px 6px !important;
+  border-radius: 4px !important;
+  display: inline-block !important;
+}
+
+/* 성공 강조 */
+#s20251117d1444caf1a7f2 .highlight-success {
+  color: #5B4B8A !important;
+  font-weight: 700 !important;
+  position: relative !important;
+  display: inline-block !important;
+}
+
+/* 성공 언더라인 효과 */
+#s20251117d1444caf1a7f2 .highlight-success::after {
+  content: '' !important;
+  position: absolute !important;
+  bottom: -2px !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 2px !important;
+  background: linear-gradient(90deg, #EA8A4C 0%, #5B4B8A 100%) !important;
+  opacity: 0.6 !important;
+}
+
+#s20251117d1444caf1a7f2 .faq-item.active .faq-answer {
+  max-height: 700px !important;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  #s20251117d1444caf1a7f2 {
+      padding: 30px 0 !important;
+  }
+
+  #s20251117d1444caf1a7f2 .section-header {
+      margin-bottom: 25px !important;
+  }
+
+  #s20251117d1444caf1a7f2 .section-header h2 {
+      font-size: 30px !important;
+  }
+
+  #s20251117d1444caf1a7f2 .section-header p {
+      font-size: 16px !important;
+  }
+
+  /* 모바일 줄바꿈 표시 (태블릿) */
+  #s20251117d1444caf1a7f2 .mobile-br {
+      display: inline !important;
+  }
+
+  #s20251117d1444caf1a7f2 .faq-container {
+      gap: 12px !important;
+  }
+
+  #s20251117d1444caf1a7f2 .faq-question {
+      padding: 20px 18px !important;
+  }
+
+  #s20251117d1444caf1a7f2 .faq-number {
+      width: 32px !important;
+      height: 32px !important;
+      font-size: 14px !important;
+      margin-right: 14px !important;
+  }
+
+  #s20251117d1444caf1a7f2 .faq-question-text {
+      font-size: 14px !important;
+      padding-right: 15px !important;
+      line-height: 1.3 !important;
+  }
+
+  #s20251117d1444caf1a7f2 .faq-answer-inner {
+      padding: 20px 18px 20px 60px !important;
+  }
+
+  #s20251117d1444caf1a7f2 .faq-answer p {
+      font-size: 15px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  #s20251117d1444caf1a7f2 {
+      padding: 25px 0 !important;
+  }
+
+  #s20251117d1444caf1a7f2 .section-container {
+      padding: 0 15px !important;
+  }
+
+  #s20251117d1444caf1a7f2 .section-header h2 {
+      font-size: 26px !important;
+  }
+
+  #s20251117d1444caf1a7f2 .section-header p {
+      font-size: 15px !important;
+  }
+
+  #s20251117d1444caf1a7f2 .faq-question {
+      padding: 18px 15px !important;
+  }
+
+  #s20251117d1444caf1a7f2 .faq-number {
+      width: 28px !important;
+      height: 28px !important;
+      font-size: 13px !important;
+      margin-right: 12px !important;
+  }
+
+  #s20251117d1444caf1a7f2 .faq-question-text {
+      font-size: 12px !important;
+      line-height: 1.3 !important;
+  }
+
+  #s20251117d1444caf1a7f2 .faq-toggle {
+      width: 18px !important;
+      height: 18px !important;
+  }
+
+  #s20251117d1444caf1a7f2 .faq-toggle::before {
+      width: 18px !important;
+  }
+
+  #s20251117d1444caf1a7f2 .faq-toggle::after {
+      height: 18px !important;
+  }
+
+  #s20251117d1444caf1a7f2 .faq-answer-inner {
+      padding: 18px 15px 18px 15px !important;
+  }
+
+  #s20251117d1444caf1a7f2 .faq-answer p {
+      font-size: 14px !important;
+  }
+}
+</style>
+
+<section id="s20251117d1444caf1a7f2">
+  <div class="section-container">
+      <div class="section-header">
+          <h2>자주 묻는 질문</h2>
+          <p>이음파트너스 정책자금 컨설팅에 관한<br class="mobile-br">모든 궁금증을 풀어드립니다</p>
+      </div>
+
+      <div class="faq-container">
+          <!-- FAQ 1 -->
+          <div class="faq-item">
+              <div class="faq-question" onclick="toggleFAQ(this)">
+                  <div style="display: flex; align-items: center;">
+                      <span class="faq-number">Q1</span>
+                      <span class="faq-question-text">이음파트너스는 어떤 방식으로 도움을 주나요?</span>
+                  </div>
+                  <div class="faq-toggle"></div>
+              </div>
+              <div class="faq-answer">
+                  <div class="faq-answer-inner">
+                      <p>정책자금 심사 기준을 정확히 이해한 전문가가 <span class="highlight-success">대표님이 직접 작성하고 신청</span>하실 수 있도록 전 과정을 안내합니다. 서류 대행이나 평가는 하지 않으며, 어떤 정보를 어떻게 작성해야 하는지 구체적인 방법을 공유하여 스스로 완성도 높은 신청서를 준비하실 수 있도록 돕습니다.</p>
+                  </div>
+              </div>
+          </div>
+
+          <!-- FAQ 2 -->
+          <div class="faq-item">
+              <div class="faq-question" onclick="toggleFAQ(this)">
+                  <div style="display: flex; align-items: center;">
+                      <span class="faq-number">Q2</span>
+                      <span class="faq-question-text">컨설팅은 어떤 순서로 진행되나요?</span>
+                  </div>
+                  <div class="faq-toggle"></div>
+              </div>
+              <div class="faq-answer">
+                  <div class="faq-answer-inner">
+                      <p><strong>체계적인 단계별 안내</strong>로 진행됩니다. 먼저 대표자의 역량과 현재 상황을 분석하여 강점과 개선 방향을 찾습니다. 다음으로 가장 적합한 정책자금을 발굴하여 제안드립니다. 이후 서류 작성법부터 면접 준비까지 세심하게 안내하며, 자금 확보 이후에도 추가 지원사업 정보를 지속적으로 공유해드립니다.</p>
+                  </div>
+              </div>
+          </div>
+
+          <!-- FAQ 3 -->
+          <div class="faq-item">
+              <div class="faq-question" onclick="toggleFAQ(this)">
+                  <div style="display: flex; align-items: center;">
+                      <span class="faq-number">Q3</span>
+                      <span class="faq-question-text">어떤 정부지원사업을 안내받을 수 있나요?</span>
+                  </div>
+                  <div class="faq-toggle"></div>
+              </div>
+              <div class="faq-answer">
+                  <div class="faq-answer-inner">
+                      <p>정부 및 지자체 전 분야 지원사업을 안내합니다. <strong>창업지원금, 운영자금, 시설투자, 기술개발(R&D), 해외진출, 인증취득</strong> 등 사업 단계와 목적에 맞는 자금을 찾아드립니다. 일반적으로 잘 알려지지 않은 틈새 지원사업까지 발굴하여 더 많은 기회를 제공합니다.</p>
+                  </div>
+              </div>
+          </div>
+
+          <!-- FAQ 4 -->
+          <div class="faq-item">
+              <div class="faq-question" onclick="toggleFAQ(this)">
+                  <div style="display: flex; align-items: center;">
+                      <span class="faq-number">Q4</span>
+                      <span class="faq-question-text">컨설팅 비용은 어떻게 되나요?</span>
+                  </div>
+                  <div class="faq-toggle"></div>
+              </div>
+              <div class="faq-answer">
+                  <div class="faq-answer-inner">
+                      <p>초기 상담과 현황 분석은 <strong>무료</strong>로 진행됩니다. 본격적인 컨설팅 비용은 프로젝트 성격과 난이도에 따라 산정되며, <strong>직접 상담을 통해 정확한 견적</strong>을 안내드립니다. 투명하고 명확한 가격 정책으로 예산 계획을 수립하실 수 있도록 돕겠습니다.</p>
+                  </div>
+              </div>
+          </div>
+
+          <!-- FAQ 5 -->
+          <div class="faq-item">
+              <div class="faq-question" onclick="toggleFAQ(this)">
+                  <div style="display: flex; align-items: center;">
+                      <span class="faq-number">Q5</span>
+                      <span class="faq-question-text">신청부터 지급까지 얼마나 걸리나요?</span>
+                  </div>
+                  <div class="faq-toggle"></div>
+              </div>
+              <div class="faq-answer">
+                  <div class="faq-answer-inner">
+                      <p>사업 종류에 따라 다르지만 <strong>긴급운전자금은 3-4주</strong>, 일반 정책자금은 <strong>2-3개월</strong> 정도 소요됩니다. 이음파트너스는 빠른 처리보다 <strong>최대 지원금액, 유리한 금리, 장기 상환조건</strong> 확보를 우선합니다. 철저한 준비로 실질적 도움이 되는 최상의 결과를 만들어냅니다.</p>
+                  </div>
+              </div>
+          </div>
+
+          <!-- FAQ 6 -->
+          <div class="faq-item">
+              <div class="faq-question" onclick="toggleFAQ(this)">
+                  <div style="display: flex; align-items: center;">
+                      <span class="faq-number">Q6</span>
+                      <span class="faq-question-text">자금 수령 후에도 안내를 받나요?</span>
+                  </div>
+                  <div class="faq-toggle"></div>
+              </div>
+              <div class="faq-answer">
+                  <div class="faq-answer-inner">
+                      <p>물론입니다. 이음파트너스는 <strong>장기 성장 파트너</strong>를 지향합니다. 자금 활용 모니터링, 후속 지원사업 추천, 추가 자금 조달 안내 등을 종합적으로 제공합니다. 일회성 지원이 아닌 지속 가능한 성장 기반을 함께 만들어갑니다.</p>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
+
+<script>
+function toggleFAQ(element) {
+  const faqItem = element.parentElement;
+  const allItems = document.querySelectorAll('#s20251117d1444caf1a7f2 .faq-item');
+
+  // 다른 모든 FAQ 닫기
+  allItems.forEach(item => {
+      if (item !== faqItem && item.classList.contains('active')) {
+          item.classList.remove('active');
+      }
+  });
+
+  // 현재 FAQ 토글
+  faqItem.classList.toggle('active');
+}
+</script>

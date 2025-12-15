@@ -1,0 +1,495 @@
+<!-- ================================================ -->
+<!-- 이음파트너스 전문서비스 히어로 섹션 -->
+<!-- 섹션 ID: #s2025111705261af623184 -->
+<!-- ================================================ -->
+<style>
+/* Pretendard 폰트 */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
+
+/* 기본 스타일 초기화 */
+#s2025111705261af623184 * {
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif !important;
+}
+
+/* 아임웹 구조 완전 리셋 */
+#s2025111705261af623184 .section_body,
+#s2025111705261af623184 .inside,
+#s2025111705261af623184 .widget,
+#s2025111705261af623184 .widget_inner {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 auto !important;
+    background: transparent !important;
+}
+
+/* 히어로 섹션 래퍼 */
+#s2025111705261af623184 {
+    position: relative !important;
+    width: 100vw !important;
+    margin-left: calc(-50vw + 50%) !important;
+    background: url('https://cdn.imweb.me/upload/S20251117ed7f35ec2bb5b/65881afefdadf.png') center/cover no-repeat !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    z-index: 1 !important;
+}
+
+/* 아임웹 기본 섹션 간격 제거 */
+#s2025111705261af623184.fr-section {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+/* 아임웹 자동 생성 패딩 div 완전 제거 */
+div[id^="padding_w"] {
+    display: none !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    max-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    line-height: 0 !important;
+}
+
+/* 특정 섹션 다음 패딩 제거 */
+#s2025111705261af623184 + div[id*="padding"] {
+    display: none !important;
+}
+
+/* 다음 섹션과의 최소 간격 확보 (중첩 방지) */
+#s2025111705261af623184 + section,
+#s2025111705261af623184 + div[class*="section"],
+#s2025111705261af623184 + .fr-section {
+    margin-top: 0 !important;
+    position: relative !important;
+    z-index: 2 !important;
+}
+
+/* 히어로 섹션 오버레이 효과 - 가독성 향상 */
+#s2025111705261af623184::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: linear-gradient(180deg, rgba(44, 62, 80, 0.85) 0%, rgba(234, 138, 76, 0.75) 100%) !important;
+    z-index: 0 !important;
+}
+
+#s2025111705261af623184 .hero-container {
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+/* 컨테이너 - 전체 높이로 확장 */
+#s2025111705261af623184 .hero-container {
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    padding: 130px 20px 80px !important;
+    min-height: 100% !important;
+}
+
+/* 히어로 콘텐츠 */
+#s2025111705261af623184 .hero-content {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 60px !important;
+    align-items: center !important;
+}
+
+#s2025111705261af623184 .hero-text {
+    color: #ffffff !important;
+}
+
+#s2025111705261af623184 .hero-badge {
+    display: inline-block !important;
+    background: rgba(255, 255, 255, 0.15) !important;
+    color: #FFFFFF !important;
+    padding: 8px 20px !important;
+    border-radius: 30px !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    margin: 0 0 20px 0 !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    backdrop-filter: blur(10px) !important;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2) !important;
+}
+
+#s2025111705261af623184 .hero-title {
+    font-size: 48px !important;
+    font-weight: 700 !important;
+    line-height: 1.3 !important;
+    margin: 0 0 24px 0 !important;
+    color: #ffffff !important;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3) !important;
+    padding: 0 !important;
+}
+
+#s2025111705261af623184 .hero-title .highlight {
+    color: #FFD700 !important;
+    text-shadow: 0 0 30px rgba(255, 215, 0, 0.8) !important;
+}
+
+#s2025111705261af623184 .hero-description {
+    font-size: 20px !important;
+    line-height: 1.6 !important;
+    margin: 0 0 40px 0 !important;
+    color: rgba(255, 255, 255, 0.95) !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) !important;
+    padding: 0 !important;
+}
+
+/* 모바일 전용 줄바꿈 */
+#s2025111705261af623184 .mobile-br {
+    display: none !important;
+}
+
+/* CTA 버튼 그룹 */
+#s2025111705261af623184 .hero-buttons {
+    display: flex !important;
+    gap: 16px !important;
+    flex-wrap: wrap !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+#s2025111705261af623184 .btn-primary {
+    background: linear-gradient(135deg, #EA8A4C 0%, #D77839 100%) !important;
+    color: #ffffff !important;
+    padding: 18px 40px !important;
+    border-radius: 8px !important;
+    font-size: 18px !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 20px rgba(234, 138, 76, 0.4) !important;
+    cursor: pointer !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+    position: relative !important;
+    overflow: hidden !important;
+    border: none !important;
+}
+
+/* 반짝임 효과 */
+#s2025111705261af623184 .btn-primary::before {
+    content: '' !important;
+    position: absolute !important;
+    top: -50% !important;
+    left: -50% !important;
+    width: 200% !important;
+    height: 200% !important;
+    background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.3) 50%, transparent 70%) !important;
+    transform: translateX(-100%) translateY(-100%) rotate(45deg) !important;
+    transition: all 0.6s ease !important;
+}
+
+#s2025111705261af623184 .btn-primary:hover::before {
+    transform: translateX(100%) translateY(100%) rotate(45deg) !important;
+}
+
+#s2025111705261af623184 .btn-primary:hover {
+    background: linear-gradient(135deg, #D77839 0%, #EA8A4C 100%) !important;
+    box-shadow: 0 6px 25px rgba(234, 138, 76, 0.5) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* 히어로 비주얼 영역 */
+#s2025111705261af623184 .hero-visual {
+    position: relative !important;
+}
+
+#s2025111705261af623184 .service-cards {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 20px !important;
+}
+
+#s2025111705261af623184 .service-card {
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(15px) !important;
+    -webkit-backdrop-filter: blur(15px) !important;
+    border-radius: 16px !important;
+    padding: 30px !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+    transition: all 0.3s ease !important;
+    cursor: pointer !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    position: relative !important;
+    overflow: hidden !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+#s2025111705261af623184 .service-card:hover {
+    background: rgba(255, 255, 255, 0.15) !important;
+    transform: translateY(-4px) !important;
+    border-color: rgba(234, 138, 76, 0.5) !important;
+    box-shadow: 0 8px 30px rgba(234, 138, 76, 0.3), 0 0 40px rgba(234, 138, 76, 0.2) !important;
+}
+
+#s2025111705261af623184 .service-card-icon {
+    width: 60px !important;
+    height: 60px !important;
+    background: linear-gradient(135deg, #EA8A4C 0%, #D77839 100%) !important;
+    border-radius: 12px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 0 20px 0 !important;
+    box-shadow: 0 4px 15px rgba(234, 138, 76, 0.4) !important;
+    padding: 0 !important;
+}
+
+#s2025111705261af623184 .service-card-icon svg {
+    width: 30px !important;
+    height: 30px !important;
+    fill: #ffffff !important;
+}
+
+#s2025111705261af623184 .service-card-title {
+    font-size: 22px !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
+    margin: 0 0 8px 0 !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+    padding: 0 !important;
+}
+
+#s2025111705261af623184 .service-card-desc {
+    font-size: 16px !important;
+    color: rgba(255, 255, 255, 0.85) !important;
+    line-height: 1.5 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* 반응형 디자인 - 태블릿 */
+@media (min-width: 768px) {
+    #s2025111705261af623184 .hero-container {
+        padding: 120px 40px 80px !important;
+    }
+}
+
+/* 반응형 디자인 - 데스크톱 */
+@media (min-width: 1024px) {
+    #s2025111705261af623184 .hero-container {
+        padding: 140px 40px 80px !important;
+    }
+}
+
+/* 반응형 디자인 - 968px 이하 */
+@media (max-width: 968px) {
+    #s2025111705261af623184 .hero-content {
+        grid-template-columns: 1fr !important;
+        text-align: center !important;
+        gap: 40px !important;
+    }
+
+    #s2025111705261af623184 .hero-title {
+        font-size: 38px !important;
+    }
+
+    #s2025111705261af623184 .hero-buttons {
+        justify-content: center !important;
+    }
+}
+
+/* 반응형 디자인 - 모바일 */
+@media (max-width: 768px) {
+    #s2025111705261af623184 .hero-container {
+        padding: 140px 20px 80px !important;
+    }
+
+    #s2025111705261af623184 .hero-badge {
+        font-size: 12px !important;
+        padding: 6px 16px !important;
+        margin: 0 0 16px 0 !important;
+    }
+
+    #s2025111705261af623184 .hero-title {
+        font-size: 28px !important;
+        line-height: 1.4 !important;
+        margin: 0 0 16px 0 !important;
+        word-break: keep-all !important;
+    }
+
+    #s2025111705261af623184 .hero-description {
+        font-size: 16px !important;
+        line-height: 1.6 !important;
+        margin: 0 0 28px 0 !important;
+        word-break: keep-all !important;
+    }
+
+    #s2025111705261af623184 .mobile-br {
+        display: block !important;
+    }
+
+    #s2025111705261af623184 .hero-buttons {
+        gap: 12px !important;
+        margin: 0 0 24px 0 !important;
+    }
+
+    #s2025111705261af623184 .btn-primary {
+        font-size: 16px !important;
+        padding: 14px 28px !important;
+    }
+
+    #s2025111705261af623184 .hero-visual {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    #s2025111705261af623184 .service-cards {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 12px !important;
+    }
+
+    #s2025111705261af623184 .service-card {
+        padding: 20px 16px !important;
+        min-height: 180px !important;
+    }
+
+    #s2025111705261af623184 .service-card-icon {
+        width: 48px !important;
+        height: 48px !important;
+        margin: 0 0 12px 0 !important;
+    }
+
+    #s2025111705261af623184 .service-card-icon svg {
+        width: 24px !important;
+        height: 24px !important;
+    }
+
+    #s2025111705261af623184 .service-card-title {
+        font-size: 16px !important;
+        margin: 0 0 6px 0 !important;
+    }
+
+    #s2025111705261af623184 .service-card-desc {
+        font-size: 13px !important;
+        margin: 0 !important;
+    }
+}
+
+/* 480px 이하 모바일 */
+@media (max-width: 480px) {
+    #s2025111705261af623184 .hero-container {
+        padding: 130px 15px 70px !important;
+    }
+
+    #s2025111705261af623184 .hero-title {
+        font-size: 24px !important;
+    }
+
+    #s2025111705261af623184 .hero-description {
+        font-size: 15px !important;
+    }
+
+    #s2025111705261af623184 .btn-primary {
+        font-size: 15px !important;
+        padding: 12px 24px !important;
+    }
+}
+</style>
+
+<section id="s2025111705261af623184">
+    <div class="hero-container">
+        <div class="hero-content">
+            <div class="hero-text">
+                <span class="hero-badge">이음파트너스 전문서비스 매칭</span>
+                <h1 class="hero-title">
+                    각 분야 전문가와 함께하는<br>
+                    <span class="highlight">이음파트너스 전문 네트워크</span>
+                </h1>
+                <p class="hero-description">
+                    법무, 세무, 노무, 행정, 변리 등<br class="mobile-br"> 전문 서비스가 필요할 때<br>
+                    이음파트너스의 신뢰 네트워크로<br class="mobile-br"> 필요한 전문가를 매칭해드립니다
+                </p>
+                <div class="hero-buttons">
+                    <a href="#s202510319184017476688" class="btn-primary" onclick="scrollToForm(event)">
+                        무료 심사 신청하기
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <div class="service-cards">
+                    <div class="service-card">
+                        <div class="service-card-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3zm-1 16l-4-4 1.41-1.41L11 15.17l6.59-6.59L19 10l-8 8z"/>
+                            </svg>
+                        </div>
+                        <h3 class="service-card-title">법무</h3>
+                        <p class="service-card-desc">법률 자문 및 소송 지원</p>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-card-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/>
+                            </svg>
+                        </div>
+                        <h3 class="service-card-title">세무</h3>
+                        <p class="service-card-desc">세무 신고 및 절세 전략</p>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-card-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                            </svg>
+                        </div>
+                        <h3 class="service-card-title">노무</h3>
+                        <p class="service-card-desc">노무 관리 및 분쟁 해결</p>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-card-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zM6 20V4h7v5h5v11H6z"/>
+                            </svg>
+                        </div>
+                        <h3 class="service-card-title">변리·행정</h3>
+                        <p class="service-card-desc">특허·인허가 지원</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // CTA 버튼 클릭 시 입력폼으로 이동
+    function scrollToForm(event) {
+        event.preventDefault();
+        const formSection = document.querySelector('#s202510319184017476688');
+        if (formSection) {
+            const companyInput = formSection.querySelector('input[name="company"]');
+            if (companyInput) {
+                companyInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                setTimeout(() => { companyInput.focus(); }, 800);
+            } else {
+                formSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+    }
+    </script>
+</section>

@@ -1,0 +1,456 @@
+<!-- 이음파트너스 진행과정 히어로 섹션 -->
+<style>
+/* Pretendard 폰트 */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
+
+/* 기본 스타일 초기화 */
+#s20251117278b03545a046 * {
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif !important;
+}
+
+/* 아임웹 구조 완전 리셋 */
+#s20251117278b03545a046 .section_body,
+#s20251117278b03545a046 .inside,
+#s20251117278b03545a046 .widget,
+#s20251117278b03545a046 .widget_inner {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 auto !important;
+    background: transparent !important;
+}
+
+/* 히어로 섹션 래퍼 */
+#s20251117278b03545a046 {
+    position: relative !important;
+    width: 100vw !important;
+    margin-left: calc(-50vw + 50%) !important;
+    background: url('https://cdn.imweb.me/upload/S202510311f2b732d023b3/b84cc350baac9.jpg') center/cover no-repeat !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    z-index: 1 !important;
+}
+
+/* 아임웹 기본 섹션 간격 제거 */
+#s20251117278b03545a046.fr-section {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+/* 아임웹 자동 생성 패딩 div 완전 제거 */
+div[id^="padding_w"] {
+    display: none !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    max-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    line-height: 0 !important;
+}
+
+/* 특정 섹션 다음 패딩 제거 */
+#s20251117278b03545a046 + div[id*="padding"] {
+    display: none !important;
+}
+
+/* 다음 섹션과의 최소 간격 확보 (중첩 방지) */
+#s20251117278b03545a046 + section,
+#s20251117278b03545a046 + div[class*="section"],
+#s20251117278b03545a046 + .fr-section {
+    margin-top: 0 !important;
+    position: relative !important;
+    z-index: 2 !important;
+}
+
+/* 히어로 섹션 오버레이 효과 - 가독성 향상 */
+#s20251117278b03545a046::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: linear-gradient(180deg, rgba(44, 62, 80, 0.85) 0%, rgba(234, 138, 76, 0.75) 100%) !important;
+    z-index: 0 !important;
+}
+
+#s20251117278b03545a046 .bank-hero-container {
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+/* 컨테이너 - 전체 높이로 확장 */
+#s20251117278b03545a046 .bank-hero-container {
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    padding: 110px 20px 60px !important;
+    min-height: 100% !important;
+}
+
+/* 헤드라인 섹션 */
+#s20251117278b03545a046 .bank-hero-headline {
+    text-align: center !important;
+    margin-bottom: 60px !important;
+}
+
+#s20251117278b03545a046 .bank-hero-badge {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    padding: 8px 16px !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    border-radius: 100px !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    color: #2C3E50 !important;
+    margin-bottom: 20px !important;
+}
+
+#s20251117278b03545a046 .bank-hero-badge svg {
+    width: 16px !important;
+    height: 16px !important;
+    fill: #2C3E50 !important;
+}
+
+#s20251117278b03545a046 .bank-hero-title {
+    font-size: 36px !important;
+    font-weight: 700 !important;
+    line-height: 1.4 !important;
+    color: #FFFFFF !important;
+    margin-bottom: 20px !important;
+    word-break: keep-all !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+}
+
+#s20251117278b03545a046 .bank-hero-title-highlight {
+    color: #FFD699 !important;
+}
+
+#s20251117278b03545a046 .bank-hero-description {
+    font-size: 16px !important;
+    line-height: 1.7 !important;
+    color: rgba(255, 255, 255, 0.95) !important;
+    word-break: keep-all !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* CTA 버튼 그룹 */
+#s20251117278b03545a046 .bank-hero-cta {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    margin-top: 32px !important;
+}
+
+/* Primary Button */
+#s20251117278b03545a046 .bank-btn-primary {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    width: 100% !important;
+    padding: 18px 32px !important;
+    background: #EA8A4C !important;
+    color: #FFFFFF !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
+    border: none !important;
+    border-radius: 4px !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    box-shadow: 0 2px 4px rgba(234, 138, 76, 0.2) !important;
+}
+
+#s20251117278b03545a046 .bank-btn-primary:hover {
+    background: #D77839 !important;
+    box-shadow: 0 4px 8px rgba(234, 138, 76, 0.3) !important;
+    transform: translateY(-1px) !important;
+}
+
+#s20251117278b03545a046 .bank-btn-primary svg {
+    width: 20px !important;
+    height: 20px !important;
+    fill: currentColor !important;
+}
+
+/* Secondary Button */
+#s20251117278b03545a046 .bank-btn-secondary {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    width: 100% !important;
+    padding: 18px 32px !important;
+    background: #FFFFFF !important;
+    color: #EA8A4C !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
+    border: 2px solid #EA8A4C !important;
+    border-radius: 4px !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+}
+
+#s20251117278b03545a046 .bank-btn-secondary:hover {
+    background: #FFF5ED !important;
+    border-color: #D77839 !important;
+    color: #D77839 !important;
+}
+
+#s20251117278b03545a046 .bank-btn-secondary svg {
+    width: 20px !important;
+    height: 20px !important;
+    fill: currentColor !important;
+}
+
+/* 중요 안내 박스 */
+#s20251117278b03545a046 .bank-notice-box {
+    background: rgba(234, 138, 76, 0.15) !important;
+    border: 1px solid rgba(234, 138, 76, 0.4) !important;
+    border-left: 4px solid #EA8A4C !important;
+    border-radius: 12px !important;
+    padding: 20px 24px !important;
+    margin-top: 60px !important;
+    margin-bottom: 0 !important;
+    text-align: center !important;
+    width: auto !important;
+    max-width: fit-content !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+#s20251117278b03545a046 .bank-notice-title {
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    color: #FFD699 !important;
+    margin-bottom: 12px !important;
+    display: block !important;
+    text-align: center !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+}
+
+#s20251117278b03545a046 .bank-notice-list {
+    font-size: 13px !important;
+    color: rgba(255, 255, 255, 0.95) !important;
+    line-height: 1.7 !important;
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: inline-block !important;
+    text-align: left !important;
+}
+
+#s20251117278b03545a046 .bank-notice-list li {
+    padding-left: 18px !important;
+    position: relative !important;
+    margin-bottom: 6px !important;
+    white-space: nowrap !important;
+}
+
+#s20251117278b03545a046 .bank-notice-list li::before {
+    content: '•' !important;
+    position: absolute !important;
+    left: 0 !important;
+    color: #FFD699 !important;
+    font-weight: 700 !important;
+}
+
+/* 반응형: 모바일 작은 화면 */
+@media (max-width: 480px) {
+    #s20251117278b03545a046 .bank-notice-list {
+        font-size: 11px !important;
+    }
+
+    #s20251117278b03545a046 .bank-notice-title {
+        font-size: 12px !important;
+    }
+
+    #s20251117278b03545a046 .bank-notice-box {
+        padding: 16px 12px !important;
+    }
+}
+
+/* 반응형: 태블릿 */
+@media (min-width: 768px) {
+    #s20251117278b03545a046 .bank-hero-container {
+        padding: 100px 40px 60px !important;
+    }
+
+    #s20251117278b03545a046 .bank-hero-badge {
+        font-size: 14px !important;
+    }
+
+    #s20251117278b03545a046 .bank-hero-title {
+        font-size: 48px !important;
+    }
+
+    #s20251117278b03545a046 .bank-hero-description {
+        font-size: 18px !important;
+    }
+
+    #s20251117278b03545a046 .bank-hero-cta {
+        flex-direction: row !important;
+        justify-content: center !important;
+        gap: 16px !important;
+    }
+
+    #s20251117278b03545a046 .bank-btn-primary,
+    #s20251117278b03545a046 .bank-btn-secondary {
+        width: auto !important;
+        min-width: 200px !important;
+    }
+
+    #s20251117278b03545a046 .bank-notice-box {
+        padding: 24px 32px !important;
+    }
+
+    #s20251117278b03545a046 .bank-notice-title {
+        font-size: 15px !important;
+    }
+
+    #s20251117278b03545a046 .bank-notice-list {
+        font-size: 14px !important;
+    }
+}
+
+/* 반응형: 데스크톱 */
+@media (min-width: 1024px) {
+    #s20251117278b03545a046 .bank-hero-container {
+        padding: 120px 40px 60px !important;
+    }
+
+    #s20251117278b03545a046 .bank-hero-title {
+        font-size: 56px !important;
+    }
+
+    #s20251117278b03545a046 .bank-hero-description {
+        font-size: 20px !important;
+    }
+}
+</style>
+
+<section id="s20251117278b03545a046">
+    <div class="bank-hero-container">
+        <!-- 헤드라인 -->
+        <div class="bank-hero-headline">
+            <div class="bank-hero-badge">
+                <svg viewBox="0 0 24 24">
+                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+                </svg>
+                <span>체계적인 자금조달 프로세스</span>
+            </div>
+
+            <h1 class="bank-hero-title">
+                체계적인 분석과 진행으로<br>
+                <span class="bank-hero-title-highlight">맞춤형 자금조달 컨설팅</span>을 제공합니다
+            </h1>
+
+            <p class="bank-hero-description">
+                이음파트너스의 전문가가 처음부터 끝까지<br>
+                정책자금 확보 전 과정을 함께합니다
+            </p>
+
+            <!-- CTA 버튼 -->
+            <div class="bank-hero-cta">
+                <a href="#consult-form" class="bank-btn-primary">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                    </svg>
+                    <span>진행 과정 상담하기</span>
+                </a>
+                <a href="#s202511179befa1174b66e" class="bank-btn-secondary">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                    <span>진행기관 확인하기</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- 중요 안내 -->
+        <div class="bank-notice-box">
+            <div class="bank-notice-title">⚠️ 중요 안내</div>
+            <ul class="bank-notice-list">
+                <li>기업 가치 평가를 하지 않습니다</li>
+                <li>정책자금 접수 및 서류작성 대행을 하지 않습니다</li>
+                <li>정책자금 접수는 대표님이 직접 작성 및 접수합니다</li>
+                <li>서류작성에 필요한 정보를 안내하고 공유합니다</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<script>
+(function() {
+    'use strict';
+
+    const NAMESPACE = 'ProcessHero_' + Date.now();
+
+    function initHero() {
+        const section = document.getElementById('s20251117278b03545a046');
+        if (!section) return false;
+
+        // 스크롤 애니메이션
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+                }
+            });
+        }, observerOptions);
+
+        // 애니메이션 대상
+        const elements = section.querySelectorAll(
+            '.bank-hero-headline, .bank-notice-box'
+        );
+
+        elements.forEach((el, index) => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+            observer.observe(el);
+        });
+
+        // animated 클래스 추가 시 스타일
+        const style = document.createElement('style');
+        style.textContent = `
+            #s20251117278b03545a046 .animated {
+                opacity: 1 !important;
+                transform: translateY(0) !important;
+            }
+        `;
+        document.head.appendChild(style);
+
+        return true;
+    }
+
+    // 초기화
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() {
+            initHero();
+        });
+    } else {
+        initHero();
+    }
+
+    setTimeout(function() {
+        initHero();
+    }, 100);
+})();
+</script>

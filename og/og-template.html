@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1200, height=630">
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            width: 1200px;
+            height: 630px;
+            font-family: 'Pretendard', -apple-system, sans-serif;
+            overflow: hidden;
+        }
+        .og-card {
+            width: 1200px;
+            height: 630px;
+            background: linear-gradient(135deg, #0F4C81 0%, #1565C0 50%, #1A73E8 100%);
+            display: flex;
+            position: relative;
+            overflow: hidden;
+        }
+        /* 배경 패턴 */
+        .og-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .og-card::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        /* 콘텐츠 영역 */
+        .og-content {
+            flex: 1;
+            padding: 60px 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+        /* 로고 */
+        .og-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 40px;
+        }
+        .og-logo-icon {
+            width: 48px;
+            height: 48px;
+            background: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 24px;
+            color: #0F4C81;
+        }
+        .og-logo-text {
+            color: white;
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+        /* 배지 */
+        .og-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            padding: 10px 20px;
+            border-radius: 30px;
+            color: white;
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 24px;
+            width: fit-content;
+        }
+        .og-badge svg {
+            width: 18px;
+            height: 18px;
+            fill: #90CAF9;
+        }
+        /* 제목 */
+        .og-title {
+            color: white;
+            font-size: 52px;
+            font-weight: 800;
+            line-height: 1.3;
+            letter-spacing: -0.03em;
+            margin-bottom: 20px;
+        }
+        .og-title span {
+            color: #90CAF9;
+        }
+        /* 설명 */
+        .og-description {
+            color: rgba(255,255,255,0.85);
+            font-size: 22px;
+            font-weight: 400;
+            line-height: 1.6;
+        }
+        /* 우측 아이콘 영역 */
+        .og-icon-area {
+            width: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+        .og-icon-circle {
+            width: 280px;
+            height: 280px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .og-icon-circle svg {
+            width: 120px;
+            height: 120px;
+            fill: white;
+        }
+        /* 하단 URL */
+        .og-footer {
+            position: absolute;
+            bottom: 30px;
+            left: 80px;
+            color: rgba(255,255,255,0.6);
+            font-size: 16px;
+            font-weight: 500;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="og-card" id="og-card">
+        <div class="og-content">
+            <div class="og-logo">
+                <div class="og-logo-icon">K</div>
+                <div class="og-logo-text">한국기업심사원 KEAI</div>
+            </div>
+            <div class="og-badge">
+                <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+                <span id="badge-text">기업심사 전문 컨설팅</span>
+            </div>
+            <h1 class="og-title" id="og-title">
+                정부정책자금<br>
+                <span>전문 경영컨설팅</span>
+            </h1>
+            <p class="og-description" id="og-description">
+                기업심사 전문가의 1:1 맞춤 상담으로<br>
+                자금확보 가능성을 높여드립니다
+            </p>
+        </div>
+        <div class="og-icon-area">
+            <div class="og-icon-circle">
+                <svg id="og-icon" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                </svg>
+            </div>
+        </div>
+        <div class="og-footer">keai-three.vercel.app</div>
+    </div>
+</body>
+</html>

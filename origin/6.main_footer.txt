@@ -1,0 +1,569 @@
+<!-- ================================================ -->
+<!-- 푸터 섹션 - 이음파트너스 -->
+<!-- 섹션 ID: #s20251117087077e729552 -->
+<!-- ================================================ -->
+
+<style>
+/* Pretendard 폰트 */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
+
+/* 이음파트너스 색상 변수 정의 */
+:root {
+    --ieum-main: #EA8A4C;
+    --ieum-dark: #D77839;
+    --ieum-light: #F5A76C;
+    --ieum-purple: #5B4B8A;
+    --ieum-navy: #2C3E50;
+    --ieum-beige: #F5F1E8;
+    --ieum-gray: #64748b;
+    --ieum-light-gray: #f8fafc;
+    --ieum-border: #e2e8f0;
+    --ieum-white: #ffffff;
+    --ieum-footer-bg: #2C3E50;
+    --ieum-footer-dark: #1F2937;
+}
+
+/* 푸터 섹션 - 전체 너비 배경 */
+#s20251117087077e729552 {
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif !important;
+}
+
+#s20251117087077e729552 .footer-wrapper {
+    background: #1e293b !important;
+    background-color: #1e293b !important;
+    color: white !important;
+    padding: 60px 0 0 !important;
+    margin: 0 !important;
+    width: 100vw !important;
+    position: relative !important;
+    left: 50% !important;
+    right: 50% !important;
+    margin-left: -50vw !important;
+    margin-right: -50vw !important;
+}
+
+/* 푸터 내용 컨테이너 - 중앙 정렬 */
+#s20251117087077e729552 .footer-container {
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    padding: 0 20px !important;
+}
+
+/* 푸터 상단 - 회사 정보 */
+#s20251117087077e729552 .footer-top {
+    padding-bottom: 30px !important;
+    border-bottom: 1px solid rgba(234, 138, 76, 0.2) !important;
+}
+
+#s20251117087077e729552 .footer-info {
+    margin-bottom: 0 !important;
+}
+
+/* 로고 영역 - 헤더와 동일한 스타일 */
+#s20251117087077e729552 .footer-logo {
+    display: flex !important;
+    align-items: flex-end !important;
+    gap: 12px !important;
+    margin-bottom: 12px !important;
+    justify-content: flex-start !important;
+}
+
+/* 로고 이미지 - 헤더와 동일한 크기 */
+#s20251117087077e729552 .footer-logo-image {
+    height: 60px !important;
+    width: auto !important;
+}
+
+/* PARTNERS 텍스트 - 헤더와 동일한 스타일 */
+#s20251117087077e729552 .footer-logo-text-wrapper {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-end !important;
+    gap: 2px !important;
+    padding-bottom: 2px !important;
+}
+
+#s20251117087077e729552 .footer-logo-text {
+    font-size: 28.8px !important;
+    font-weight: 400 !important;
+    color: var(--ieum-main) !important;
+    line-height: 1 !important;
+    letter-spacing: 0.5px !important;
+}
+
+#s20251117087077e729552 .footer-desc {
+    color: rgba(255, 255, 255, 0.9) !important;
+    line-height: 1.8 !important;
+    font-size: 15px !important;
+    margin: 0 !important;
+    text-align: left !important;
+    white-space: nowrap !important;
+}
+
+/* 중간 영역 - Contact와 Service Menu 나란히 */
+#s20251117087077e729552 .footer-middle {
+    display: grid !important;
+    grid-template-columns: 2.5fr 1fr !important;
+    gap: 80px !important;
+    padding: 40px 0 30px !important;
+    border-bottom: 1px solid rgba(234, 138, 76, 0.2) !important;
+}
+
+/* 메뉴 영역 */
+#s20251117087077e729552 .footer-title {
+    font-size: 18px !important;
+    font-weight: 600 !important;
+    margin-bottom: 20px !important;
+    color: var(--ieum-light) !important;
+}
+
+#s20251117087077e729552 .footer-list {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+#s20251117087077e729552 .footer-list li {
+    margin-bottom: 12px !important;
+}
+
+#s20251117087077e729552 .footer-list a {
+    color: rgba(255, 255, 255, 0.8) !important;
+    text-decoration: none !important;
+    transition: all 0.3s ease !important;
+    font-size: 15px !important;
+}
+
+#s20251117087077e729552 .footer-list a:hover {
+    color: var(--ieum-main) !important;
+    padding-left: 5px !important;
+}
+
+/* 연락처 영역 */
+#s20251117087077e729552 .contact-item {
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: 10px !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    margin-bottom: 14px !important;
+    font-size: 15px !important;
+}
+
+#s20251117087077e729552 .contact-item span {
+    word-break: keep-all !important;
+    line-height: 1.4 !important;
+}
+
+#s20251117087077e729552 .contact-item svg {
+    width: 16px !important;
+    height: 16px !important;
+    flex-shrink: 0 !important;
+    stroke: var(--ieum-light) !important;
+}
+
+/* 파트너십 섹션 - 별도 영역으로 분리 */
+#s20251117087077e729552 .partnership-section {
+    padding: 30px 0 !important;
+    border-bottom: 1px solid rgba(234, 138, 76, 0.2) !important;
+    display: flex !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+}
+
+/* 파트너십 링크 - 그린 글로우 효과 */
+#s20251117087077e729552 .partnership-link {
+    display: inline-block !important;
+}
+
+#s20251117087077e729552 .partnership-link a {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 14px !important;
+    text-decoration: none !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    transition: all 0.3s ease !important;
+    /* 글래스모피즘 배지 효과 */
+    background: linear-gradient(135deg, rgba(234, 138, 76, 0.15), rgba(245, 167, 108, 0.1)) !important;
+    border: 2px solid rgba(234, 138, 76, 0.4) !important;
+    border-radius: 10px !important;
+    padding: 14px 25px !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    box-shadow: 0 0 30px rgba(234, 138, 76, 0.3) !important;
+}
+
+/* 오렌지 글로우 반짝이는 애니메이션 */
+@keyframes orangeGlow {
+    0%, 100% {
+        box-shadow: 0 0 30px rgba(234, 138, 76, 0.3),
+                    0 0 50px rgba(234, 138, 76, 0.2),
+                    inset 0 0 20px rgba(234, 138, 76, 0.1);
+        border-color: rgba(234, 138, 76, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 50px rgba(234, 138, 76, 0.6),
+                    0 0 80px rgba(234, 138, 76, 0.4),
+                    inset 0 0 30px rgba(234, 138, 76, 0.2);
+        border-color: rgba(234, 138, 76, 0.7);
+    }
+}
+
+#s20251117087077e729552 .partnership-link a {
+    animation: orangeGlow 3s ease-in-out infinite !important;
+}
+
+/* 호버 효과 */
+#s20251117087077e729552 .partnership-link a:hover {
+    background: linear-gradient(135deg, rgba(234, 138, 76, 0.25), rgba(245, 167, 108, 0.15)) !important;
+    transform: translateY(-3px) scale(1.02) !important;
+    box-shadow: 0 0 60px rgba(234, 138, 76, 0.6),
+                0 0 90px rgba(234, 138, 76, 0.4) !important;
+}
+
+#s20251117087077e729552 .partnership-icon {
+    width: auto !important;
+    height: 24px !important;
+    max-width: 112px !important;
+    object-fit: contain !important;
+    display: block !important;
+    filter: brightness(0) invert(1) drop-shadow(0 0 8px rgba(234, 138, 76, 0.8)) !important;
+}
+
+#s20251117087077e729552 .partnership-link span {
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    white-space: nowrap !important;
+    /* 오렌지 글로우 텍스트 효과 */
+    color: #F5A76C !important;
+    text-shadow: 0 0 15px rgba(245, 167, 108, 0.8),
+                 0 0 30px rgba(245, 167, 108, 0.5) !important;
+}
+
+#s20251117087077e729552 .business-info {
+    margin-top: 20px !important;
+    padding-top: 20px !important;
+    border-top: 1px solid rgba(234, 138, 76, 0.2) !important;
+}
+
+#s20251117087077e729552 .business-info-item {
+    font-size: 14px !important;
+    color: rgba(255, 255, 255, 0.7) !important;
+    margin-bottom: 8px !important;
+}
+
+/* 하단 영역 */
+#s20251117087077e729552 .footer-bottom {
+    padding: 30px 0 !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+}
+
+#s20251117087077e729552 .copyright {
+    color: rgba(255, 255, 255, 0.7) !important;
+    margin: 0 !important;
+    font-size: 14px !important;
+}
+
+#s20251117087077e729552 .footer-links {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+}
+
+#s20251117087077e729552 .footer-links a {
+    color: rgba(255, 255, 255, 0.7) !important;
+    text-decoration: none !important;
+    transition: color 0.3s ease !important;
+    font-size: 14px !important;
+}
+
+#s20251117087077e729552 .footer-links a:hover {
+    color: var(--ieum-main) !important;
+}
+
+#s20251117087077e729552 .footer-links .divider {
+    color: rgba(234, 138, 76, 0.4) !important;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 968px) {
+    #s20251117087077e729552 .footer-middle {
+        grid-template-columns: 1fr !important;
+        gap: 40px !important;
+    }
+
+    #s20251117087077e729552 .footer-bottom {
+        flex-direction: column !important;
+        gap: 20px !important;
+        text-align: center !important;
+    }
+}
+
+@media (max-width: 768px) {
+    #s20251117087077e729552 .footer-wrapper {
+        padding: 40px 0 0 !important;
+    }
+
+    #s20251117087077e729552 .footer-container {
+        padding: 0 16px !important;
+    }
+
+    #s20251117087077e729552 .footer-top {
+        padding-bottom: 24px !important;
+    }
+
+    #s20251117087077e729552 .footer-middle {
+        grid-template-columns: 1.5fr 0.7fr !important;
+        gap: 12px !important;
+        padding: 30px 0 !important;
+    }
+
+    #s20251117087077e729552 .footer-info {
+        text-align: left !important;
+    }
+
+    #s20251117087077e729552 .footer-logo {
+        justify-content: flex-start !important;
+        margin-bottom: 10px !important;
+    }
+
+    #s20251117087077e729552 .footer-logo-image {
+        height: 40px !important;
+    }
+
+    #s20251117087077e729552 .footer-logo-text {
+        font-size: 20px !important;
+    }
+
+    #s20251117087077e729552 .footer-desc {
+        font-size: 13px !important;
+        text-align: left !important;
+    }
+
+    #s20251117087077e729552 .footer-contact {
+        text-align: left !important;
+    }
+
+    #s20251117087077e729552 .footer-contact .footer-title {
+        font-size: 15px !important;
+        margin-bottom: 12px !important;
+    }
+
+    #s20251117087077e729552 .contact-item {
+        font-size: 11.5px !important;
+        margin-bottom: 8px !important;
+        gap: 8px !important;
+    }
+
+    #s20251117087077e729552 .contact-item svg {
+        width: 12px !important;
+        height: 12px !important;
+    }
+
+    /* 모바일에서 주소의 서울특별시 숨김 */
+    #s20251117087077e729552 .address-province {
+        display: none !important;
+    }
+
+    /* 모바일에서는 파트너십 가운데 정렬 */
+    #s20251117087077e729552 .partnership-section {
+        justify-content: center !important;
+    }
+
+    /* 파트너십 링크 모바일 최적화 */
+    #s20251117087077e729552 .partnership-link {
+        margin-top: 10px !important;
+        padding-top: 10px !important;
+    }
+
+    #s20251117087077e729552 .partnership-link a {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        gap: 10px !important;
+        padding: 12px 16px !important;
+        text-align: center !important;
+    }
+
+    #s20251117087077e729552 .partnership-icon {
+        width: 20px !important;
+        height: 20px !important;
+    }
+
+    #s20251117087077e729552 .partnership-link span {
+        white-space: normal !important;
+        word-break: keep-all !important;
+        line-height: 1.4 !important;
+        font-size: 12px !important;
+    }
+
+    #s20251117087077e729552 .footer-menu {
+        text-align: left !important;
+    }
+
+    #s20251117087077e729552 .footer-menu .footer-title {
+        font-size: 14px !important;
+        margin-bottom: 12px !important;
+    }
+
+    #s20251117087077e729552 .footer-list {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 6px !important;
+    }
+
+    #s20251117087077e729552 .footer-list li {
+        margin-bottom: 0 !important;
+    }
+
+    #s20251117087077e729552 .footer-list a {
+        font-size: 10.5px !important;
+        display: block !important;
+        padding: 4px 0 !important;
+        text-align: left !important;
+    }
+
+    #s20251117087077e729552 .footer-list a:hover {
+        padding-left: 5px !important;
+    }
+
+    #s20251117087077e729552 .footer-bottom {
+        padding: 20px 0 !important;
+        border-top: 1px solid rgba(234, 138, 76, 0.1) !important;
+    }
+
+    #s20251117087077e729552 .copyright {
+        font-size: 12px !important;
+        margin-bottom: 10px !important;
+    }
+
+    #s20251117087077e729552 .footer-links a {
+        font-size: 12px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    #s20251117087077e729552 .footer-middle {
+        grid-template-columns: 1.6fr 0.6fr !important;
+        gap: 10px !important;
+    }
+}
+</style>
+
+<div id="s20251117087077e729552">
+    <div class="footer-wrapper">
+        <div class="footer-container">
+            <div class="footer-top">
+                <!-- 회사 정보 (상단 전체 너비) -->
+                <div class="footer-info">
+                    <div class="footer-logo">
+                        <img src="https://cdn.imweb.me/upload/S20251117ed7f35ec2bb5b/5a8273b5bac1b.png" alt="이음파트너스 로고" class="footer-logo-image">
+                        <div class="footer-logo-text-wrapper">
+                            <span class="footer-logo-text">PARTNERS</span>
+                        </div>
+                    </div>
+                    <p class="footer-desc">정책자금 전문 컨설팅 | 정책자금 분석 전문가의 1:1 맞춤 컨설팅</p>
+                </div>
+            </div>
+
+            <!-- Contact와 Service Menu 나란히 배치 -->
+            <div class="footer-middle">
+                <!-- 왼쪽: Contact -->
+                <div class="footer-contact">
+                    <h4 class="footer-title">Contact</h4>
+
+                    <!-- 대표자를 Contact 바로 아래로 이동 -->
+                    <div class="contact-item">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M16 12h-3a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h3v7z"></path>
+                        </svg>
+                        <span>대표자: 이명화</span>
+                    </div>
+
+                    <!-- 사업자등록번호를 대표자 아래로 이동 -->
+                    <div class="contact-item">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="12" y1="8" x2="12" y2="16"></line>
+                            <line x1="8" y1="12" x2="16" y2="12"></line>
+                        </svg>
+                        <span>사업자등록번호: 173-28-02047</span>
+                    </div>
+
+                    <div class="contact-item">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                        </svg>
+                        <span>대표전화: 1533-8231</span>
+                    </div>
+
+                    <div class="contact-item">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                        </svg>
+                        <span>연락처: 010-2495-0627</span>
+                    </div>
+
+                    <div class="contact-item">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                            <path d="M12 12l8-5H4l8 5z"></path>
+                        </svg>
+                        <span>이메일: pooh_1225@daum.net</span>
+                    </div>
+
+                    <!-- 주소는 한 번만 표시 (중복 제거) -->
+                    <div class="contact-item">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                        <span>주소: <span class="address-province">경기도 </span>부천시 부일로 356번길 34 노빌리움 1302호</span>
+                    </div>
+
+                    <div class="contact-item">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                        <span>상담시간: 평일 09:00-18:00</span>
+                    </div>
+                </div>
+
+                <!-- 오른쪽: Service Menu -->
+                <div class="footer-menu">
+                    <h4 class="footer-title">Menu</h4>
+                    <ul class="footer-list">
+                        <li><a href="https://ieumpartners.imweb.me/home">홈</a></li>
+                        <li><a href="https://ieumpartners.imweb.me/company">회사소개</a></li>
+                        <li><a href="https://ieumpartners.imweb.me/process">진행과정</a></li>
+                        <li><a href="https://ieumpartners.imweb.me/fund">자금상담</a></li>
+                        <li><a href="https://ieumpartners.imweb.me/pro">전문서비스</a></li>
+                        <li><a href="https://ieumpartners.imweb.me/mkt">온라인마케팅</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 파트너십 섹션 - 오렌지 글로우 효과 -->
+            <div class="partnership-section">
+                <div class="partnership-link">
+                    <a href="https://www.jjk-biz.com/" target="_blank" rel="noopener noreferrer">
+                        <img src="https://cdn.imweb.me/upload/S2025072970f03c9c7eca7/ac036acf8a029.png" alt="업무협약 아이콘" class="partnership-icon">
+                        <span>정책자금지원센터 | 업무협약 이음파트너스</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p class="copyright">© 2025 이음파트너스. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#">이용약관</a>
+                    <span class="divider">|</span>
+                    <a href="#">개인정보처리방침</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

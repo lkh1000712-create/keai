@@ -1,0 +1,320 @@
+!-- ================================================ --
+!-- 이음파트너스 회사소개 히어로 섹션 --
+!-- 섹션 ID #s202511170dce566cd8859 --
+!-- ================================================ --
+style
+ Pretendard 폰트 
+@import url('httpscdn.jsdelivr.netghorioncactuspretendard@v1.3.9distwebstaticpretendard.min.css');
+
+ 기본 스타일 초기화 
+#s202511170dce566cd8859  {
+    margin 0 !important;
+    padding 0 !important;
+    box-sizing border-box !important;
+    font-family 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif !important;
+}
+
+ 아임웹 구조 완전 리셋 
+#s202511170dce566cd8859 .section_body,
+#s202511170dce566cd8859 .inside,
+#s202511170dce566cd8859 .widget,
+#s202511170dce566cd8859 .widget_inner {
+    width 100% !important;
+    max-width 100% !important;
+    padding 0 !important;
+    margin 0 auto !important;
+    background transparent !important;
+}
+
+ 히어로 섹션 래퍼 
+#s202511170dce566cd8859 {
+    position relative !important;
+    width 100vw !important;
+    margin-left calc(-50vw + 50%) !important;
+    background url('httpscdn.imweb.meuploadS20251117ed7f35ec2bb5ba716cda6f19b7.png') centercover no-repeat !important;
+    padding 0 !important;
+    margin 0 !important;
+    z-index 1 !important;
+}
+
+ 아임웹 기본 섹션 간격 제거 
+#s202511170dce566cd8859.fr-section {
+    margin-top 0 !important;
+    margin-bottom 0 !important;
+    padding-top 0 !important;
+    padding-bottom 0 !important;
+}
+
+ 아임웹 자동 생성 패딩 div 완전 제거 
+div[id^=padding_w] {
+    display none !important;
+    height 0 !important;
+    min-height 0 !important;
+    max-height 0 !important;
+    margin 0 !important;
+    padding 0 !important;
+    overflow hidden !important;
+    visibility hidden !important;
+    opacity 0 !important;
+    line-height 0 !important;
+}
+
+ 특정 섹션 다음 패딩 제거 
+#s202511170dce566cd8859 + div[id=padding] {
+    display none !important;
+}
+
+ 다음 섹션과의 최소 간격 확보 (중첩 방지) 
+#s202511170dce566cd8859 + section,
+#s202511170dce566cd8859 + div[class=section],
+#s202511170dce566cd8859 + .fr-section {
+    margin-top 0 !important;
+    position relative !important;
+    z-index 2 !important;
+}
+
+ 히어로 섹션 오버레이 효과 - 가독성 향상 
+#s202511170dce566cd8859before {
+    content '' !important;
+    position absolute !important;
+    top 0 !important;
+    left 0 !important;
+    width 100% !important;
+    height 100% !important;
+    background linear-gradient(180deg, rgba(44, 62, 80, 0.85) 0%, rgba(91, 75, 138, 0.75) 100%) !important;
+    z-index 0 !important;
+}
+
+#s202511170dce566cd8859 .hero-container {
+    position relative !important;
+    z-index 1 !important;
+}
+
+ 컨테이너 - 전체 높이로 확장 
+#s202511170dce566cd8859 .hero-container {
+    max-width 1200px !important;
+    margin 0 auto !important;
+    padding 110px 20px 60px !important;
+    min-height 100% !important;
+}
+
+ 헤드라인 섹션 
+#s202511170dce566cd8859 .hero-headline {
+    text-align center !important;
+    margin-bottom 60px !important;
+}
+
+#s202511170dce566cd8859 .hero-badge {
+    display inline-flex !important;
+    align-items center !important;
+    gap 6px !important;
+    padding 8px 16px !important;
+    background rgba(255, 255, 255, 0.95) !important;
+    border 1px solid rgba(255, 255, 255, 0.3) !important;
+    border-radius 100px !important;
+    font-size 13px !important;
+    font-weight 600 !important;
+    color #EA8A4C !important;
+    margin-bottom 20px !important;
+}
+
+#s202511170dce566cd8859 .hero-title {
+    font-size 36px !important;
+    font-weight 700 !important;
+    line-height 1.4 !important;
+    color #FFFFFF !important;
+    margin-bottom 20px !important;
+    word-break keep-all !important;
+    text-shadow 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+}
+
+#s202511170dce566cd8859 .hero-title-highlight {
+    color #EA8A4C !important;
+}
+
+#s202511170dce566cd8859 .hero-subtitle {
+    font-size 16px !important;
+    line-height 1.7 !important;
+    color rgba(255, 255, 255, 0.95) !important;
+    word-break keep-all !important;
+    text-shadow 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+    margin-bottom 16px !important;
+}
+
+#s202511170dce566cd8859 .hero-description {
+    font-size 16px !important;
+    line-height 1.7 !important;
+    color rgba(255, 255, 255, 0.9) !important;
+    word-break keep-all !important;
+    text-shadow 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+}
+
+ 모바일 전용 줄바꿈 
+#s202511170dce566cd8859 .mobile-br {
+    display none !important;
+}
+
+ 중요 안내 박스 
+#s202511170dce566cd8859 .notice-box {
+    background rgba(234, 138, 76, 0.15) !important;
+    border 1px solid rgba(234, 138, 76, 0.4) !important;
+    border-left 4px solid #EA8A4C !important;
+    border-radius 12px !important;
+    padding 20px 24px !important;
+    margin-top 60px !important;
+    margin-bottom 0 !important;
+    text-align center !important;
+    width auto !important;
+    max-width fit-content !important;
+    margin-left auto !important;
+    margin-right auto !important;
+}
+
+#s202511170dce566cd8859 .notice-title {
+    font-size 14px !important;
+    font-weight 700 !important;
+    color #EA8A4C !important;
+    margin-bottom 12px !important;
+    display block !important;
+    text-align center !important;
+    text-shadow 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+}
+
+#s202511170dce566cd8859 .notice-list {
+    font-size 13px !important;
+    color rgba(255, 255, 255, 0.95) !important;
+    line-height 1.7 !important;
+    list-style none !important;
+    padding 0 !important;
+    margin 0 !important;
+    display inline-block !important;
+    text-align left !important;
+}
+
+#s202511170dce566cd8859 .notice-list li {
+    padding-left 18px !important;
+    position relative !important;
+    margin-bottom 6px !important;
+    white-space nowrap !important;
+}
+
+#s202511170dce566cd8859 .notice-list libefore {
+    content '•' !important;
+    position absolute !important;
+    left 0 !important;
+    color #EA8A4C !important;
+    font-weight 700 !important;
+}
+
+ 반응형 모바일 작은 화면 
+@media (max-width 480px) {
+    #s202511170dce566cd8859 .notice-list {
+        font-size 11px !important;
+    }
+
+    #s202511170dce566cd8859 .notice-title {
+        font-size 12px !important;
+    }
+
+    #s202511170dce566cd8859 .notice-box {
+        padding 16px 12px !important;
+    }
+}
+
+ 반응형 태블릿 
+@media (min-width 768px) {
+    #s202511170dce566cd8859 .hero-container {
+        padding 100px 40px 60px !important;
+    }
+
+    #s202511170dce566cd8859 .hero-badge {
+        font-size 14px !important;
+    }
+
+    #s202511170dce566cd8859 .hero-title {
+        font-size 48px !important;
+    }
+
+    #s202511170dce566cd8859 .hero-subtitle {
+        font-size 18px !important;
+    }
+
+    #s202511170dce566cd8859 .hero-description {
+        font-size 18px !important;
+    }
+
+    #s202511170dce566cd8859 .notice-box {
+        padding 24px 32px !important;
+    }
+
+    #s202511170dce566cd8859 .notice-title {
+        font-size 15px !important;
+    }
+
+    #s202511170dce566cd8859 .notice-list {
+        font-size 14px !important;
+    }
+}
+
+ 반응형 데스크톱 
+@media (min-width 1024px) {
+    #s202511170dce566cd8859 .hero-container {
+        padding 120px 40px 60px !important;
+    }
+
+    #s202511170dce566cd8859 .hero-title {
+        font-size 56px !important;
+    }
+
+    #s202511170dce566cd8859 .hero-subtitle {
+        font-size 20px !important;
+    }
+
+    #s202511170dce566cd8859 .hero-description {
+        font-size 20px !important;
+    }
+}
+
+ 반응형 모바일 
+@media (max-width 768px) {
+    #s202511170dce566cd8859 .mobile-br {
+        display inline !important;
+    }
+}
+style
+
+section id=s202511170dce566cd8859
+    div class=hero-container
+        !-- 헤드라인 --
+        div class=hero-headline
+            div class=hero-badge
+                About Us
+            div
+
+            h1 class=hero-title
+                span class=hero-title-highlight이음파트너스span
+            h1
+
+            p class=hero-subtitle
+                정책자금 전문 컨설팅  대표자 역량 강화br class=mobile-br
+                중소기업의 든든한 성장 동반자
+            p
+
+            p class=hero-description
+                정책자금 분석부터 맞춤형 자금조달 전략까지br class=mobile-br
+                체계적 컨설팅으로 성장을 함께 만들어갑니다
+            p
+        div
+
+        !-- 중요 안내 --
+        div class=notice-box
+            div class=notice-title⚠️ 중요 안내div
+            ul class=notice-list
+                li기업 가치를 평가하지 않습니다li
+                li정책자금 접수 및 서류작성 대행을 하지 않습니다li
+                li정책자금 접수는 대표님이 직접 작성 및 접수합니다li
+                li서류작성에 필요한 정보를 안내하고 지원합니다li
+            ul
+        div
+    div
+section

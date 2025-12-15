@@ -4,8 +4,26 @@ const nextConfig = {
   images: {
     formats: ['image/avif', 'image/webp'],
   },
-  // 정적 내보내기 (Vercel 배포 전 로컬 테스트용)
-  // output: 'export',
+  // 정적 HTML 파일 rewrites
+  async rewrites() {
+    return [
+      // 대시보드
+      { source: '/dashboard', destination: '/dashboard/index.html' },
+      { source: '/dashboard/leads', destination: '/dashboard/leads.html' },
+      { source: '/dashboard/board', destination: '/dashboard/board.html' },
+      { source: '/dashboard/images', destination: '/dashboard/images.html' },
+      { source: '/dashboard/analytics', destination: '/dashboard/analytics.html' },
+      { source: '/dashboard/settings', destination: '/dashboard/settings.html' },
+      // 메인 사이트
+      { source: '/company', destination: '/company.html' },
+      { source: '/process', destination: '/process.html' },
+      { source: '/fund', destination: '/fund.html' },
+      { source: '/pro', destination: '/pro.html' },
+      { source: '/mkt', destination: '/mkt.html' },
+      { source: '/post', destination: '/post.html' },
+      { source: '/admin-login', destination: '/admin-login.html' },
+    ];
+  },
 };
 
 export default nextConfig;
