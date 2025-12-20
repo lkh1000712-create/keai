@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>한국기업심사원 모바일 명함</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body {
+            width: 1080px;
+            height: 1920px;
+            overflow: hidden;
+            background: #ffffff;
+        }
+        body { font-family: 'Pretendard', sans-serif; }
+
+        .card {
+            width: 1080px;
+            height: 1920px;
+            background: linear-gradient(180deg, #ffffff 0%, #f8fafc 50%, #ffffff 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 160px 80px 120px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -200px;
+            right: -200px;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.05) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .top-accent {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(90deg, #3B82F6, #1D4ED8, #3B82F6);
+        }
+
+        .logo-section {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo-img {
+            height: 140px;
+            width: auto;
+            margin-bottom: 20px;
+        }
+
+        .company-name-kr {
+            font-size: 48px;
+            font-weight: 700;
+            color: #1e293b;
+            letter-spacing: 4px;
+        }
+
+        .company-name-en {
+            font-size: 18px;
+            color: #64748b;
+            letter-spacing: 1px;
+            margin-top: 8px;
+        }
+
+        .name-section {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .name {
+            font-size: 80px;
+            font-weight: 700;
+            color: #1e293b;
+            letter-spacing: 24px;
+            margin-bottom: 28px;
+        }
+
+        .position {
+            font-size: 36px;
+            color: #3B82F6;
+            font-weight: 600;
+            letter-spacing: 12px;
+            padding: 16px 48px;
+            border: 2px solid rgba(59, 130, 246, 0.4);
+            border-radius: 40px;
+            display: inline-block;
+        }
+
+        .divider {
+            width: 240px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #3B82F6, transparent);
+            margin: 20px 0;
+        }
+
+        .slogan-section {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .slogan {
+            font-size: 40px;
+            color: #334155;
+            font-weight: 600;
+            letter-spacing: 2px;
+            margin-bottom: 25px;
+            line-height: 1.4;
+        }
+
+        .service-tags {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .service-tag {
+            font-size: 26px;
+            color: #3B82F6;
+            padding: 14px 32px;
+            background: rgba(59, 130, 246, 0.08);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 30px;
+            letter-spacing: 2px;
+            font-weight: 500;
+        }
+
+        .contact-section {
+            width: 100%;
+            max-width: 700px;
+            position: relative;
+            z-index: 1;
+            margin: 0 auto;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            padding: 36px 40px 36px 100px;
+        }
+
+        .contact-icon {
+            width: 76px;
+            height: 76px;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 32px;
+            flex-shrink: 0;
+        }
+
+        .contact-icon svg {
+            width: 36px;
+            height: 36px;
+            fill: #3B82F6;
+        }
+
+        .contact-text { flex: 1; }
+
+        .contact-label {
+            font-size: 22px;
+            color: #475569;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .contact-value {
+            font-size: 43px;
+            color: #1e293b;
+            font-weight: 600;
+            letter-spacing: 2px;
+        }
+
+        .contact-value.small { font-size: 36px; }
+        .contact-value.xsmall { font-size: 29px; }
+
+        .partnership {
+            margin-top: auto;
+            padding-top: 50px;
+            padding-bottom: 140px;
+            border-top: 1px solid rgba(59, 130, 246, 0.15);
+            text-align: center;
+            width: 100%;
+        }
+
+        .partnership-text {
+            font-size: 22px;
+            color: #94a3b8;
+            letter-spacing: 3px;
+        }
+
+        .partnership-text span {
+            color: #3B82F6;
+            font-weight: 600;
+        }
+
+        .website {
+            margin-top: 30px;
+            font-size: 32px;
+            color: #3B82F6;
+            letter-spacing: 3px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="top-accent"></div>
+
+        <div class="logo-section">
+            <img src="한국기업심사원 파비콘 복사.png" alt="한국기업심사원" class="logo-img">
+            <p class="company-name-kr">한국기업심사원</p>
+            <p class="company-name-en">Korea Enterprise Auditing Institute</p>
+        </div>
+
+        <div class="name-section">
+            <h1 class="name">이 강 희</h1>
+            <span class="position">기업심사관</span>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="slogan-section">
+            <p class="slogan">기업의 성장을 함께하는<br>신뢰의 파트너</p>
+            <div class="service-tags">
+                <span class="service-tag">기업심사</span>
+                <span class="service-tag">정책자금</span>
+                <span class="service-tag">컨설팅</span>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="contact-section">
+            <div class="contact-item">
+                <div class="contact-icon">
+                    <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                </div>
+                <div class="contact-text">
+                    <p class="contact-label">대표전화</p>
+                    <p class="contact-value">1688-8401</p>
+                </div>
+            </div>
+
+            <div class="contact-item">
+                <div class="contact-icon">
+                    <svg viewBox="0 0 24 24"><path d="M15.5 1h-8C6.12 1 5 2.12 5 3.5v17C5 21.88 6.12 23 7.5 23h8c1.38 0 2.5-1.12 2.5-2.5v-17C18 2.12 16.88 1 15.5 1zm-4 21c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4.5-4H7V4h9v14z"/></svg>
+                </div>
+                <div class="contact-text">
+                    <p class="contact-label">휴대전화</p>
+                    <p class="contact-value">010-2888-6514</p>
+                </div>
+            </div>
+
+            <div class="contact-item">
+                <div class="contact-icon">
+                    <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                </div>
+                <div class="contact-text">
+                    <p class="contact-label">이메일</p>
+                    <p class="contact-value small">ceo@k-eai.kr</p>
+                </div>
+            </div>
+
+            <div class="contact-item">
+                <div class="contact-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                </div>
+                <div class="contact-text">
+                    <p class="contact-label">주소</p>
+                    <p class="contact-value xsmall">인천광역시 서구 중봉대로612번길<br>10-20, 505-J302호(청라프라자)</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="partnership">
+            <p class="partnership-text"><span>JJK그룹</span> 업무협약 파트너</p>
+            <p class="website">k-eai.kr</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -3133,3 +3133,30 @@ body {
     height: 28px;
   }
 }
+
+/* ================================================
+   Loading Skeleton
+   ================================================ */
+@keyframes skeleton-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+.loading-skeleton {
+  background: linear-gradient(90deg, var(--neutral-200) 25%, var(--neutral-100) 50%, var(--neutral-200) 75%);
+  background-size: 200% 100%;
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+  border-radius: var(--radius-sm);
+  color: transparent !important;
+  min-width: 60px;
+  display: inline-block;
+}
+
+.stat-value.loading-skeleton {
+  min-height: 36px;
+  min-width: 80px;
+}

@@ -12,6 +12,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>방문통계 - KEAI</title>
+  <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="stylesheet" href="../css/dashboard.css">
   <!-- Pretendard 폰트 -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
@@ -54,8 +55,8 @@
           </div>
           <div class="stat-content">
             <p class="stat-label">방문자</p>
-            <p class="stat-value" id="stat-visitors">128</p>
-            <p class="stat-change positive" id="stat-visitors-change">+12% 전일 대비</p>
+            <p class="stat-value loading-skeleton" id="stat-visitors">-</p>
+            <p class="stat-change" id="stat-visitors-change">로딩중...</p>
           </div>
         </div>
 
@@ -71,8 +72,8 @@
           </div>
           <div class="stat-content">
             <p class="stat-label">페이지뷰</p>
-            <p class="stat-value" id="stat-pageviews">456</p>
-            <p class="stat-change positive" id="stat-pageviews-change">+8% 전일 대비</p>
+            <p class="stat-value loading-skeleton" id="stat-pageviews">-</p>
+            <p class="stat-change" id="stat-pageviews-change">로딩중...</p>
           </div>
         </div>
 
@@ -85,8 +86,8 @@
           </div>
           <div class="stat-content">
             <p class="stat-label">평균 체류시간</p>
-            <p class="stat-value" id="stat-duration">2분 34초</p>
-            <p class="stat-change negative" id="stat-duration-change">-5% 전일 대비</p>
+            <p class="stat-value loading-skeleton" id="stat-duration">-</p>
+            <p class="stat-change" id="stat-duration-change">로딩중...</p>
           </div>
         </div>
 
@@ -99,8 +100,8 @@
           </div>
           <div class="stat-content">
             <p class="stat-label">접수</p>
-            <p class="stat-value" id="stat-leads">7</p>
-            <p class="stat-change positive" id="stat-leads-change">+3건 전일 대비</p>
+            <p class="stat-value loading-skeleton" id="stat-leads">-</p>
+            <p class="stat-change" id="stat-leads-change">로딩중...</p>
           </div>
         </div>
       </section>
@@ -215,7 +216,7 @@
 
   <script src="../js/config.js"></script>
   <script src="../js/components.js"></script>
-  <script src="../js/analytics.js?v=4"></script>
+  <script src="../js/analytics.js?v=6"></script>
   <script>
     // 컴포넌트 로드
     document.addEventListener('DOMContentLoaded', function() {
