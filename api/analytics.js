@@ -10,11 +10,11 @@ function getEnv(key, defaultValue = '') {
 
 const AIRTABLE_TOKEN = getEnv('AIRTABLE_TOKEN');
 const AIRTABLE_BASE_ID = getEnv('AIRTABLE_BASE_ID', 'appxVw5QQ0g4JEjoR');
-const ANALYTICS_TABLE_NAME = '방문통계';
+const ANALYTICS_TABLE_ID = 'tblXRK9sUVuWlPMJ7'; // 방문통계 테이블 ID
 
 // Airtable에서 방문통계 데이터 조회
 async function getAnalyticsFromAirtable(startDate, endDate) {
-    const url = `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${encodeURIComponent(ANALYTICS_TABLE_NAME)}`;
+    const url = `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${ANALYTICS_TABLE_ID}`;
 
     // 날짜 범위 필터
     const filterFormula = `AND(IS_AFTER({날짜}, '${startDate}'), IS_BEFORE({날짜}, '${endDate}'))`;

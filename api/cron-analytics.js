@@ -14,8 +14,8 @@ function getEnv(key, defaultValue = '') {
 const CRON_SECRET = getEnv('CRON_SECRET', 'keai-cron-secret-2024');
 const AIRTABLE_TOKEN = getEnv('AIRTABLE_TOKEN');
 const AIRTABLE_BASE_ID = getEnv('AIRTABLE_BASE_ID', 'appxVw5QQ0g4JEjoR');
-const ANALYTICS_TABLE_NAME = '방문통계';
-const LEADS_TABLE_NAME = '한국기업심사원';
+const ANALYTICS_TABLE_ID = 'tblXRK9sUVuWlPMJ7'; // 방문통계 테이블 ID
+const LEADS_TABLE_ID = 'tblS5O4LN5C7L9Km7'; // 한국기업심사원 테이블 ID
 const GA4_PROPERTY_ID = getEnv('GA4_PROPERTY_ID', '516503347');
 const SEARCH_CONSOLE_SITE = getEnv('SEARCH_CONSOLE_SITE', 'https://k-eai.kr');
 
@@ -134,7 +134,7 @@ async function getSearchConsoleData(accessToken, startDate, endDate) {
 
 // Airtable에서 특정 날짜 레코드 확인
 async function getExistingRecord(date) {
-    const url = `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${encodeURIComponent(ANALYTICS_TABLE_NAME)}`;
+    const url = `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${ANALYTICS_TABLE_ID}`;
     const params = new URLSearchParams({
         'filterByFormula': `{날짜} = '${date}'`,
         'maxRecords': '1'
@@ -155,7 +155,7 @@ async function getExistingRecord(date) {
 
 // Airtable에 데이터 저장/업데이트
 async function upsertAnalyticsData(record) {
-    const url = `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${encodeURIComponent(ANALYTICS_TABLE_NAME)}`;
+    const url = `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${ANALYTICS_TABLE_ID}`;
 
     // 기존 레코드 확인
     const existing = await getExistingRecord(record.날짜);
@@ -187,7 +187,7 @@ async function upsertAnalyticsData(record) {
 
 // Airtable에서 일별 접수 건수 가져오기
 async function getDailyLeadsCount(date) {
-    const url = `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${encodeURIComponent(LEADS_TABLE_NAME)}`;
+    const url = `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${LEADS_TABLE_ID}`;
     const startOfDay = `${date}T00:00:00.000Z`;
     const endOfDay = `${date}T23:59:59.999Z`;
 
