@@ -104,6 +104,163 @@ async function getGA4Data(accessToken, startDate, endDate) {
     return response.json();
 }
 
+// GA4 트래픽 소스 데이터 가져오기 (날짜별)
+async function getGA4TrafficSources(accessToken, startDate, endDate) {
+    const response = await fetch(
+        `https://analyticsdata.googleapis.com/v1beta/properties/${GA4_PROPERTY_ID}:runReport`,
+        {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${accessToken}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                dateRanges: [{ startDate, endDate }],
+                dimensions: [
+                    { name: 'date' },
+                    { name: 'sessionDefaultChannelGroup' }
+                ],
+                metrics: [{ name: 'activeUsers' }],
+                orderBys: [{ dimension: { dimensionName: 'date' } }],
+            }),
+        }
+    );
+
+    if (!response.ok) {
+        console.error('GA4 Traffic Source Error:', await response.text());
+        return null;
+    }
+    return response.json();
+}
+
+// GA4 기기별 데이터 가져오기 (날짜별)
+async function getGA4DeviceData(accessToken, startDate, endDate) {
+    const response = await fetch(
+        `https://analyticsdata.googleapis.com/v1beta/properties/${GA4_PROPERTY_ID}:runReport`,
+        {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${accessToken}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                dateRanges: [{ startDate, endDate }],
+                dimensions: [
+                    { name: 'date' },
+                    { name: 'deviceCategory' }
+                ],
+                metrics: [{ name: 'activeUsers' }],
+                orderBys: [{ dimension: { dimensionName: 'date' } }],
+            }),
+        }
+    );
+
+    if (!response.ok) {
+        console.error('GA4 Device Error:', await response.text());
+        return null;
+    }
+    return response.json();
+}
+
+// GA4 인기 페이지 데이터 가져오기 (날짜별)
+async function getGA4TopPages(accessToken, startDate, endDate) {
+    const response = await fetch(
+        `https://analyticsdata.googleapis.com/v1beta/properties/${GA4_PROPERTY_ID}:runReport`,
+        {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${accessToken}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                dateRanges: [{ startDate, endDate }],
+                dimensions: [
+                    { name: 'date' },
+                    { name: 'pagePath' }
+                ],
+                metrics: [{ name: 'screenPageViews' }],
+                orderBys: [
+                    { dimension: { dimensionName: 'date' } },
+                    { metric: { metricName: 'screenPageViews' }, desc: true }
+                ],
+                limit: 500,
+            }),
+        }
+    );
+
+    if (!response.ok) {
+        console.error('GA4 Top Pages Error:', await response.text());
+        return null;
+    }
+    return response.json();
+}
+
+// GA4 방문 국가 데이터 가져오기 (날짜별)
+async function getGA4Countries(accessToken, startDate, endDate) {
+    const response = await fetch(
+        `https://analyticsdata.googleapis.com/v1beta/properties/${GA4_PROPERTY_ID}:runReport`,
+        {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${accessToken}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                dateRanges: [{ startDate, endDate }],
+                dimensions: [
+                    { name: 'date' },
+                    { name: 'country' }
+                ],
+                metrics: [{ name: 'activeUsers' }],
+                orderBys: [
+                    { dimension: { dimensionName: 'date' } },
+                    { metric: { metricName: 'activeUsers' }, desc: true }
+                ],
+                limit: 500,
+            }),
+        }
+    );
+
+    if (!response.ok) {
+        console.error('GA4 Countries Error:', await response.text());
+        return null;
+    }
+    return response.json();
+}
+
+// GA4 유입 경로 (참조 URL) 데이터 가져오기 (날짜별)
+async function getGA4Referrers(accessToken, startDate, endDate) {
+    const response = await fetch(
+        `https://analyticsdata.googleapis.com/v1beta/properties/${GA4_PROPERTY_ID}:runReport`,
+        {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${accessToken}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                dateRanges: [{ startDate, endDate }],
+                dimensions: [
+                    { name: 'date' },
+                    { name: 'sessionSource' }
+                ],
+                metrics: [{ name: 'activeUsers' }],
+                orderBys: [
+                    { dimension: { dimensionName: 'date' } },
+                    { metric: { metricName: 'activeUsers' }, desc: true }
+                ],
+                limit: 500,
+            }),
+        }
+    );
+
+    if (!response.ok) {
+        console.error('GA4 Referrers Error:', await response.text());
+        return null;
+    }
+    return response.json();
+}
+
 // Search Console 데이터 가져오기
 async function getSearchConsoleData(accessToken, startDate, endDate) {
     const response = await fetch(
@@ -269,13 +426,18 @@ export default async function handler(req, res) {
         // Access Token 획득
         const accessToken = await getAccessToken();
 
-        // GA4 + Search Console 데이터 가져오기
-        const [ga4Data, searchConsoleData] = await Promise.all([
+        // GA4 + Search Console + 추가 데이터 가져오기
+        const [ga4Data, searchConsoleData, trafficData, deviceData, topPagesData, countriesData, referrersData] = await Promise.all([
             getGA4Data(accessToken, startDateStr, endDateStr),
             getSearchConsoleData(accessToken, startDateStr, endDateStr),
+            getGA4TrafficSources(accessToken, startDateStr, endDateStr),
+            getGA4DeviceData(accessToken, startDateStr, endDateStr),
+            getGA4TopPages(accessToken, startDateStr, endDateStr),
+            getGA4Countries(accessToken, startDateStr, endDateStr),
+            getGA4Referrers(accessToken, startDateStr, endDateStr),
         ]);
 
-        // GA4 데이터 파싱
+        // GA4 기본 데이터 파싱
         const ga4Rows = ga4Data?.rows || [];
         const ga4Map = {};
         ga4Rows.forEach(row => {
@@ -300,12 +462,94 @@ export default async function handler(req, res) {
             };
         });
 
+        // 트래픽 소스 파싱 (날짜별)
+        const trafficMap = {};
+        (trafficData?.rows || []).forEach(row => {
+            const dateRaw = row.dimensionValues[0].value;
+            const formattedDate = `${dateRaw.substring(0, 4)}-${dateRaw.substring(4, 6)}-${dateRaw.substring(6, 8)}`;
+            const channel = row.dimensionValues[1].value.toLowerCase();
+            const users = parseInt(row.metricValues[0].value) || 0;
+
+            if (!trafficMap[formattedDate]) {
+                trafficMap[formattedDate] = { organic: 0, direct: 0, referral: 0, social: 0, paid: 0, other: 0 };
+            }
+            if (channel.includes('organic')) trafficMap[formattedDate].organic += users;
+            else if (channel.includes('direct')) trafficMap[formattedDate].direct += users;
+            else if (channel.includes('referral')) trafficMap[formattedDate].referral += users;
+            else if (channel.includes('social')) trafficMap[formattedDate].social += users;
+            else if (channel.includes('paid')) trafficMap[formattedDate].paid += users;
+            else trafficMap[formattedDate].other += users;
+        });
+
+        // 기기별 파싱 (날짜별)
+        const deviceMap = {};
+        (deviceData?.rows || []).forEach(row => {
+            const dateRaw = row.dimensionValues[0].value;
+            const formattedDate = `${dateRaw.substring(0, 4)}-${dateRaw.substring(4, 6)}-${dateRaw.substring(6, 8)}`;
+            const device = row.dimensionValues[1].value.toLowerCase();
+            const users = parseInt(row.metricValues[0].value) || 0;
+
+            if (!deviceMap[formattedDate]) {
+                deviceMap[formattedDate] = { desktop: 0, mobile: 0, tablet: 0 };
+            }
+            if (device === 'desktop') deviceMap[formattedDate].desktop += users;
+            else if (device === 'mobile') deviceMap[formattedDate].mobile += users;
+            else if (device === 'tablet') deviceMap[formattedDate].tablet += users;
+        });
+
+        // 인기 페이지 파싱 (날짜별 상위 5개)
+        const topPagesMap = {};
+        (topPagesData?.rows || []).forEach(row => {
+            const dateRaw = row.dimensionValues[0].value;
+            const formattedDate = `${dateRaw.substring(0, 4)}-${dateRaw.substring(4, 6)}-${dateRaw.substring(6, 8)}`;
+            const pagePath = row.dimensionValues[1].value;
+            const views = parseInt(row.metricValues[0].value) || 0;
+
+            if (!topPagesMap[formattedDate]) topPagesMap[formattedDate] = [];
+            if (topPagesMap[formattedDate].length < 5) {
+                topPagesMap[formattedDate].push({ path: pagePath, views });
+            }
+        });
+
+        // 국가별 파싱 (날짜별 상위 5개)
+        const countriesMap = {};
+        (countriesData?.rows || []).forEach(row => {
+            const dateRaw = row.dimensionValues[0].value;
+            const formattedDate = `${dateRaw.substring(0, 4)}-${dateRaw.substring(4, 6)}-${dateRaw.substring(6, 8)}`;
+            const country = row.dimensionValues[1].value;
+            const users = parseInt(row.metricValues[0].value) || 0;
+
+            if (!countriesMap[formattedDate]) countriesMap[formattedDate] = [];
+            if (countriesMap[formattedDate].length < 5) {
+                countriesMap[formattedDate].push({ country, users });
+            }
+        });
+
+        // 유입 경로 파싱 (날짜별 상위 5개)
+        const referrersMap = {};
+        (referrersData?.rows || []).forEach(row => {
+            const dateRaw = row.dimensionValues[0].value;
+            const formattedDate = `${dateRaw.substring(0, 4)}-${dateRaw.substring(4, 6)}-${dateRaw.substring(6, 8)}`;
+            const source = row.dimensionValues[1].value;
+            const users = parseInt(row.metricValues[0].value) || 0;
+
+            if (!referrersMap[formattedDate]) referrersMap[formattedDate] = [];
+            if (referrersMap[formattedDate].length < 5) {
+                referrersMap[formattedDate].push({ source, users });
+            }
+        });
+
         // Airtable에 저장
         let savedCount = 0;
         let errorCount = 0;
 
         for (const [date, ga4] of Object.entries(ga4Map)) {
             const search = searchMap[date] || { clicks: 0, impressions: 0 };
+            const traffic = trafficMap[date] || { organic: 0, direct: 0, referral: 0, social: 0, paid: 0, other: 0 };
+            const device = deviceMap[date] || { desktop: 0, mobile: 0, tablet: 0 };
+            const topPages = topPagesMap[date] || [];
+            const countries = countriesMap[date] || [];
+            const referrers = referrersMap[date] || [];
             const leadsCount = await getDailyLeadsCount(date);
 
             const record = {
@@ -317,6 +561,21 @@ export default async function handler(req, res) {
                 'leads': leadsCount,
                 'clicks': search.clicks,
                 'impressions': search.impressions,
+                // 트래픽 소스
+                'sourceOrganic': traffic.organic,
+                'sourceDirect': traffic.direct,
+                'sourceReferral': traffic.referral,
+                'sourceSocial': traffic.social,
+                'sourcePaid': traffic.paid,
+                'sourceOther': traffic.other,
+                // 기기별
+                'deviceDesktop': device.desktop,
+                'deviceMobile': device.mobile,
+                'deviceTablet': device.tablet,
+                // JSON 데이터
+                'topPages': JSON.stringify(topPages),
+                'topCountries': JSON.stringify(countries),
+                'topReferrers': JSON.stringify(referrers),
                 'collectedAt': new Date().toISOString(),
             };
 

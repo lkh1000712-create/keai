@@ -276,7 +276,8 @@ body {
 }
 
 .chart-body-large {
-  min-height: 300px;
+  min-height: 250px;
+  height: 250px;
 }
 
 .chart-legend {
@@ -2487,8 +2488,8 @@ body {
 
 @media (max-width: 480px) {
   .analytics-charts .chart-body-large {
-    min-height: 180px;
-    height: 180px;
+    min-height: 200px;
+    height: 200px;
   }
 
   .analytics-charts .chart-legend {

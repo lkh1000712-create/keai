@@ -38,6 +38,9 @@ let analyticsData = {
   }
 };
 
+// API 응답 전체 저장 (추가 통계용)
+let fullApiResponse = null;
+
 // 페이지 초기화
 document.addEventListener('DOMContentLoaded', function() {
   initPeriodTabs();
@@ -56,7 +59,7 @@ function getCachedData() {
     const cached = localStorage.getItem(CACHE_KEY);
     if (!cached) return null;
 
-    const { data, timestamp } = JSON.parse(cached);
+    const { data, apiResponse, timestamp } = JSON.parse(cached);
     const now = Date.now();
 
     // 캐시 만료 확인 (24시간)
@@ -65,7 +68,7 @@ function getCachedData() {
       return null;
     }
 
-    return data;
+    return { data, apiResponse };
   } catch (e) {
     console.error('캐시 로드 오류:', e);
     return null;
@@ -73,10 +76,11 @@ function getCachedData() {
 }
 
 // 캐시에 데이터 저장
-function setCachedData(data) {
+function setCachedData(data, apiResponse = null) {
   try {
     const cacheData = {
       data: data,
+      apiResponse: apiResponse,
       timestamp: Date.now()
     };
     localStorage.setItem(CACHE_KEY, JSON.stringify(cacheData));
@@ -105,11 +109,15 @@ async function loadAnalyticsData() {
   showLoading(true);
 
   // 캐시 확인
-  const cachedData = getCachedData();
-  if (cachedData) {
+  const cachedResult = getCachedData();
+  if (cachedResult) {
     console.log('캐시에서 데이터 로드');
-    analyticsData = cachedData;
+    analyticsData = cachedResult.data;
+    fullApiResponse = cachedResult.apiResponse;
     updateDashboard();
+    if (cachedResult.apiResponse) {
+      updateAdditionalStats(cachedResult.apiResponse);
+    }
     showLoading(false);
     updateCacheStatus(true);
     return;
@@ -132,13 +140,17 @@ async function loadAnalyticsData() {
     const result = await response.json();
 
     if (result.success && result.dailyData) {
+      // API 응답 전체 저장 (추가 통계용)
+      fullApiResponse = result;
+
       // 데이터 가공
       processRawData(result.dailyData);
 
-      // 캐시 저장
-      setCachedData(analyticsData);
+      // 캐시 저장 (API 응답 포함)
+      setCachedData(analyticsData, result);
 
       updateDashboard();
+      updateAdditionalStats(result);
       updateCacheStatus(true);
     } else {
       console.error('데이터 없음:', result);
@@ -1076,4 +1088,187 @@ function updateConversion(data) {
   if (rateEl) rateEl.textContent = rate + '%';
   if (fillEl) fillEl.style.width = Math.min(parseFloat(rate) * 2, 100) + '%';
   if (detailEl) detailEl.textContent = `${visitors.toLocaleString()}명 방문 중 ${leads}명 접수`;
+}
+
+// ================================================
+// 추가 통계 섹션 렌더링
+// ================================================
+
+// 트래픽 소스 렌더링
+function renderTrafficSources(totals) {
+  const container = document.getElementById('traffic-sources');
+  if (!container) return;
+
+  const sources = [
+    { key: 'organic', label: '자연 검색', value: totals.sourceOrganic || 0 },
+    { key: 'direct', label: '직접 방문', value: totals.sourceDirect || 0 },
+    { key: 'referral', label: '참조 트래픽', value: totals.sourceReferral || 0 },
+    { key: 'social', label: '소셜 미디어', value: totals.sourceSocial || 0 },
+    { key: 'paid', label: '유료 광고', value: totals.sourcePaid || 0 },
+    { key: 'other', label: '기타', value: totals.sourceOther || 0 },
+  ];
+
+  const total = sources.reduce((sum, s) => sum + s.value, 0);
+
+  if (total === 0) {
+    container.innerHTML = '<div class="no-data-message">데이터가 없습니다</div>';
+    return;
+  }
+
+  container.innerHTML = sources
+    .filter(s => s.value > 0)
+    .sort((a, b) => b.value - a.value)
+    .map(s => {
+      const percent = total > 0 ? ((s.value / total) * 100).toFixed(1) : 0;
+      return `
+        <div class="traffic-source-item">
+          <span class="traffic-source-label">${s.label}</span>
+          <div class="traffic-source-bar-container">
+            <div class="traffic-source-bar ${s.key}" style="width: ${percent}%"></div>
+          </div>
+          <span class="traffic-source-value">${s.value.toLocaleString()} (${percent}%)</span>
+        </div>
+      `;
+    }).join('');
+}
+
+// 기기별 사용자 렌더링
+function renderDeviceBreakdown(totals) {
+  const container = document.getElementById('device-breakdown');
+  if (!container) return;
+
+  const devices = [
+    { key: 'desktop', label: '데스크톱', value: totals.deviceDesktop || 0, icon: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>' },
+    { key: 'mobile', label: '모바일', value: totals.deviceMobile || 0, icon: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>' },
+    { key: 'tablet', label: '태블릿', value: totals.deviceTablet || 0, icon: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>' },
+  ];
+
+  const total = devices.reduce((sum, d) => sum + d.value, 0);
+
+  if (total === 0) {
+    container.innerHTML = '<div class="no-data-message">데이터가 없습니다</div>';
+    return;
+  }
+
+  container.innerHTML = devices
+    .filter(d => d.value > 0)
+    .sort((a, b) => b.value - a.value)
+    .map(d => {
+      const percent = total > 0 ? ((d.value / total) * 100).toFixed(1) : 0;
+      return `
+        <div class="device-item">
+          <div class="device-icon">${d.icon}</div>
+          <div class="device-info">
+            <div class="device-name">${d.label}</div>
+            <div class="device-bar-container">
+              <div class="device-bar ${d.key}" style="width: ${percent}%"></div>
+            </div>
+          </div>
+          <div class="device-value">
+            ${d.value.toLocaleString()}
+            <span class="device-percent">(${percent}%)</span>
+          </div>
+        </div>
+      `;
+    }).join('');
+}
+
+// 인기 페이지 렌더링
+function renderTopPages(topPages) {
+  const container = document.getElementById('top-pages-list');
+  if (!container) return;
+
+  if (!topPages || topPages.length === 0) {
+    container.innerHTML = '<div class="no-data-message">데이터가 없습니다</div>';
+    return;
+  }
+
+  container.innerHTML = topPages.slice(0, 5).map((page, idx) => {
+    const rankClass = idx < 3 ? `rank-${idx + 1}` : '';
+    const pageName = page.path === '/' ? '홈페이지' : page.path;
+    return `
+      <div class="list-item">
+        <span class="list-item-rank ${rankClass}">${idx + 1}</span>
+        <span class="list-item-name" title="${page.path}">${pageName}</span>
+        <span class="list-item-value">${page.views.toLocaleString()} 뷰</span>
+      </div>
+    `;
+  }).join('');
+}
+
+// 유입 경로 렌더링
+function renderReferrers(topReferrers) {
+  const container = document.getElementById('referrers-list');
+  if (!container) return;
+
+  if (!topReferrers || topReferrers.length === 0) {
+    container.innerHTML = '<div class="no-data-message">데이터가 없습니다</div>';
+    return;
+  }
+
+  container.innerHTML = topReferrers.slice(0, 5).map((ref, idx) => {
+    const rankClass = idx < 3 ? `rank-${idx + 1}` : '';
+    const sourceName = ref.source === '(direct)' ? '직접 방문' : ref.source;
+    return `
+      <div class="list-item">
+        <span class="list-item-rank ${rankClass}">${idx + 1}</span>
+        <span class="list-item-name" title="${ref.source}">${sourceName}</span>
+        <span class="list-item-value">${ref.users.toLocaleString()}명</span>
+      </div>
+    `;
+  }).join('');
+}
+
+// 방문 지역 렌더링
+function renderCountries(topCountries) {
+  const container = document.getElementById('countries-list');
+  if (!container) return;
+
+  if (!topCountries || topCountries.length === 0) {
+    container.innerHTML = '<div class="no-data-message">데이터가 없습니다</div>';
+    return;
+  }
+
+  // 국가 코드를 한국어로 변환
+  const countryNames = {
+    'South Korea': '대한민국',
+    'Korea': '대한민국',
+    'United States': '미국',
+    'Japan': '일본',
+    'China': '중국',
+    'Taiwan': '대만',
+    'Vietnam': '베트남',
+    'Thailand': '태국',
+    'Philippines': '필리핀',
+    'Singapore': '싱가포르',
+    'Hong Kong': '홍콩',
+    'Canada': '캐나다',
+    'United Kingdom': '영국',
+    'Germany': '독일',
+    'Australia': '호주',
+    '(not set)': '알 수 없음',
+  };
+
+  container.innerHTML = topCountries.slice(0, 8).map((country, idx) => {
+    const rankClass = idx < 3 ? `rank-${idx + 1}` : '';
+    const countryName = countryNames[country.country] || country.country;
+    return `
+      <div class="list-item">
+        <span class="list-item-rank ${rankClass}">${idx + 1}</span>
+        <span class="list-item-name">${countryName}</span>
+        <span class="list-item-value">${country.users.toLocaleString()}명</span>
+      </div>
+    `;
+  }).join('');
+}
+
+// 추가 통계 섹션 업데이트
+function updateAdditionalStats(apiResponse) {
+  if (!apiResponse) return;
+
+  renderTrafficSources(apiResponse.totals || {});
+  renderDeviceBreakdown(apiResponse.totals || {});
+  renderTopPages(apiResponse.topPages || []);
+  renderReferrers(apiResponse.topReferrers || []);
+  renderCountries(apiResponse.topCountries || []);
 }

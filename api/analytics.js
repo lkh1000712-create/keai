@@ -117,7 +117,32 @@ export default async function handler(req, res) {
             leads: record.fields['leads'] || 0,
             clicks: record.fields['clicks'] || 0,
             impressions: record.fields['impressions'] || 0,
+            // 트래픽 소스
+            sourceOrganic: record.fields['sourceOrganic'] || 0,
+            sourceDirect: record.fields['sourceDirect'] || 0,
+            sourceReferral: record.fields['sourceReferral'] || 0,
+            sourceSocial: record.fields['sourceSocial'] || 0,
+            sourcePaid: record.fields['sourcePaid'] || 0,
+            sourceOther: record.fields['sourceOther'] || 0,
+            // 기기별
+            deviceDesktop: record.fields['deviceDesktop'] || 0,
+            deviceMobile: record.fields['deviceMobile'] || 0,
+            deviceTablet: record.fields['deviceTablet'] || 0,
+            // JSON 데이터
+            topPages: safeJsonParse(record.fields['topPages']),
+            topCountries: safeJsonParse(record.fields['topCountries']),
+            topReferrers: safeJsonParse(record.fields['topReferrers']),
         }));
+
+        // JSON 안전 파싱 함수
+        function safeJsonParse(str) {
+            if (!str) return [];
+            try {
+                return JSON.parse(str);
+            } catch {
+                return [];
+            }
+        }
 
         // 합계 계산
         const totals = {
@@ -133,7 +158,57 @@ export default async function handler(req, res) {
             avgCtr: dailyData.length > 0 && dailyData.reduce((sum, d) => sum + d.impressions, 0) > 0
                 ? (dailyData.reduce((sum, d) => sum + d.clicks, 0) / dailyData.reduce((sum, d) => sum + d.impressions, 0)) * 100
                 : 0,
+            // 트래픽 소스 합계
+            sourceOrganic: dailyData.reduce((sum, d) => sum + d.sourceOrganic, 0),
+            sourceDirect: dailyData.reduce((sum, d) => sum + d.sourceDirect, 0),
+            sourceReferral: dailyData.reduce((sum, d) => sum + d.sourceReferral, 0),
+            sourceSocial: dailyData.reduce((sum, d) => sum + d.sourceSocial, 0),
+            sourcePaid: dailyData.reduce((sum, d) => sum + d.sourcePaid, 0),
+            sourceOther: dailyData.reduce((sum, d) => sum + d.sourceOther, 0),
+            // 기기별 합계
+            deviceDesktop: dailyData.reduce((sum, d) => sum + d.deviceDesktop, 0),
+            deviceMobile: dailyData.reduce((sum, d) => sum + d.deviceMobile, 0),
+            deviceTablet: dailyData.reduce((sum, d) => sum + d.deviceTablet, 0),
         };
+
+        // 인기 페이지 집계 (전체 기간)
+        const pageViewsMap = {};
+        dailyData.forEach(d => {
+            (d.topPages || []).forEach(p => {
+                if (!pageViewsMap[p.path]) pageViewsMap[p.path] = 0;
+                pageViewsMap[p.path] += p.views;
+            });
+        });
+        const aggregatedTopPages = Object.entries(pageViewsMap)
+            .map(([path, views]) => ({ path, views }))
+            .sort((a, b) => b.views - a.views)
+            .slice(0, 10);
+
+        // 국가별 집계 (전체 기간)
+        const countryMap = {};
+        dailyData.forEach(d => {
+            (d.topCountries || []).forEach(c => {
+                if (!countryMap[c.country]) countryMap[c.country] = 0;
+                countryMap[c.country] += c.users;
+            });
+        });
+        const aggregatedTopCountries = Object.entries(countryMap)
+            .map(([country, users]) => ({ country, users }))
+            .sort((a, b) => b.users - a.users)
+            .slice(0, 10);
+
+        // 유입 경로 집계 (전체 기간)
+        const referrerMap = {};
+        dailyData.forEach(d => {
+            (d.topReferrers || []).forEach(r => {
+                if (!referrerMap[r.source]) referrerMap[r.source] = 0;
+                referrerMap[r.source] += r.users;
+            });
+        });
+        const aggregatedTopReferrers = Object.entries(referrerMap)
+            .map(([source, users]) => ({ source, users }))
+            .sort((a, b) => b.users - a.users)
+            .slice(0, 10);
 
         // Search Console 데이터 형식
         const searchData = dailyData.map(d => ({
@@ -152,6 +227,10 @@ export default async function handler(req, res) {
             totals,
             dailyData,
             searchData,
+            // 집계 데이터
+            topPages: aggregatedTopPages,
+            topCountries: aggregatedTopCountries,
+            topReferrers: aggregatedTopReferrers,
             source: 'airtable-cache',
             recordCount: records.length,
         });
