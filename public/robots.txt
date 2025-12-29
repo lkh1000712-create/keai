@@ -1,11 +1,11 @@
 # KEAI - 한국기업심사원 robots.txt
-# https://keai-three.vercel.app
+# https://www.k-eai.kr
 
 User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://keai-three.vercel.app/sitemap.xml
+Sitemap: https://www.k-eai.kr/sitemap.xml
 
 # Disallow
 Disallow: /dashboard/

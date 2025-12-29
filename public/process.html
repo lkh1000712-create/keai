@@ -1816,7 +1816,7 @@
                 content: post.내용 || post.content,
                 excerpt: post.요약 || (post.내용 || '').substring(0, 100),
                 category: post.카테고리 || post.category || '공지',
-                thumbnail: post.썸네일 && post.썸네일[0] ? post.썸네일[0].url : null,
+                thumbnail: post.썸네일 || null,
                 date: post.작성일 || post.date,
                 views: post.조회수 || 0
             }));

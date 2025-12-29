@@ -3,6 +3,12 @@
   "buildCommand": "",
   "outputDirectory": "public",
   "cleanUrls": true,
+  "crons": [
+    {
+      "path": "/api/generate-post",
+      "schedule": "0 0 * * *"
+    }
+  ],
   "rewrites": [
     { "source": "/board", "destination": "/board.html" },
     { "source": "/admin-login", "destination": "/admin-login.html" },
@@ -11,7 +17,7 @@
     { "source": "/fund", "destination": "/fund.html" },
     { "source": "/pro", "destination": "/pro.html" },
     { "source": "/mkt", "destination": "/mkt.html" },
-    { "source": "/post", "destination": "/post.html" },
+    { "source": "/post/:path*", "destination": "/post.html" },
     { "source": "/dashboard", "destination": "/dashboard/index.html" },
     { "source": "/dashboard/images", "destination": "/dashboard/images.html" },
     { "source": "/dashboard/board", "destination": "/dashboard/board.html" },

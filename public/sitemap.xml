@@ -1,39 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://k-eai.kr/</loc>
-    <lastmod>2025-12-13</lastmod>
+    <loc>https://www.k-eai.kr/</loc>
+    <lastmod>2025-12-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://k-eai.kr/company.html</loc>
-    <lastmod>2025-12-13</lastmod>
+    <loc>https://www.k-eai.kr/company</loc>
+    <lastmod>2025-12-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://k-eai.kr/process.html</loc>
-    <lastmod>2025-12-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://k-eai.kr/fund.html</loc>
-    <lastmod>2025-12-13</lastmod>
+    <loc>https://www.k-eai.kr/process</loc>
+    <lastmod>2025-12-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://k-eai.kr/pro.html</loc>
-    <lastmod>2025-12-13</lastmod>
+    <loc>https://www.k-eai.kr/fund</loc>
+    <lastmod>2025-12-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.k-eai.kr/pro</loc>
+    <lastmod>2025-12-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://k-eai.kr/mkt.html</loc>
-    <lastmod>2025-12-13</lastmod>
+    <loc>https://www.k-eai.kr/mkt</loc>
+    <lastmod>2025-12-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.k-eai.kr/board</loc>
+    <lastmod>2025-12-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- 주요 게시글 (상단 고정) -->
+  <url>
+    <loc>https://www.k-eai.kr/post/2026년-정책자금-44조원-공급-비수도권-기업-60-집중-지원</loc>
+    <lastmod>2025-12-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.k-eai.kr/post/2026년-신설-ai-혁신기업을-위한-ax-스프린트-우대트랙-1400억원</loc>
+    <lastmod>2025-12-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.k-eai.kr/post/2026년-신규-도입-정책자금-내비게이션으로-맞춤-자금-추천받으세요</loc>
+    <lastmod>2025-12-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 </urlset>
