@@ -1,14 +1,52 @@
 # KEAI - 한국기업심사원 robots.txt
 # https://www.k-eai.kr
 
+# 기본 크롤러 허용
 User-agent: *
+Allow: /
+Disallow: /dashboard/
+Disallow: /api/
+Disallow: /*.json$
+Disallow: /js/config.js
+
+# Google
+User-agent: Googlebot
+Allow: /
+
+# Bing
+User-agent: Bingbot
+Allow: /
+
+# AI 크롤러 명시적 허용
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: Anthropic-AI
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Cohere-AI
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Applebot-Extended
 Allow: /
 
 # Sitemap
 Sitemap: https://www.k-eai.kr/sitemap.xml
 
-# Disallow
-Disallow: /dashboard/
-Disallow: /api/
-Disallow: /*.json$
-Disallow: /js/config.js
+# AI 크롤러를 위한 추가 정보
+# LLMs.txt: https://www.k-eai.kr/llms.txt

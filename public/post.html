@@ -1625,19 +1625,64 @@
     // SEO 메타태그 업데이트
     function updateMetaTags(post) {
         const url = window.location.href;
-        const image = post.thumbnail || 'https://keai-three.vercel.app/og/og-home.png';
+        const image = post.thumbnail || 'https://www.k-eai.kr/og/og-home.png';
         const description = post.excerpt || post.title;
 
         updateMeta('description', description);
         updateMeta('og:title', `${post.title} | 한국기업심사원 KEAI`, 'property');
         updateMeta('og:description', description, 'property');
         updateMeta('og:image', image, 'property');
+        updateMeta('og:url', url, 'property');
         updateMeta('twitter:title', `${post.title} | 한국기업심사원 KEAI`);
         updateMeta('twitter:description', description);
         updateMeta('twitter:image', image);
 
         const canonical = document.querySelector('link[rel="canonical"]');
         if (canonical) canonical.href = url;
+
+        // JSON-LD Article 스키마 추가
+        addArticleSchema(post, url, image, description);
+    }
+
+    // JSON-LD Article 스키마 생성
+    function addArticleSchema(post, url, image, description) {
+        // 기존 스키마 제거
+        const existing = document.querySelector('script[type="application/ld+json"]');
+        if (existing) existing.remove();
+
+        const schema = {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": post.title,
+            "description": description,
+            "image": image,
+            "datePublished": post.date,
+            "dateModified": post.date,
+            "author": {
+                "@type": "Organization",
+                "name": "한국기업심사원 KEAI",
+                "url": "https://www.k-eai.kr"
+            },
+            "publisher": {
+                "@type": "Organization",
+                "name": "한국기업심사원 KEAI",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://www.k-eai.kr/logo.png"
+                }
+            },
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": url
+            },
+            "articleSection": post.category,
+            "inLanguage": "ko-KR"
+        };
+
+        const script = document.createElement('script');
+        script.type = 'application/ld+json';
+        script.textContent = JSON.stringify(schema);
+        document.head.appendChild(script);
     }
 
     function updateMeta(name, content, attr = 'name') {
