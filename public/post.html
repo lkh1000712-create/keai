@@ -1450,7 +1450,7 @@
 
         relatedSection.style.display = 'block';
         relatedGrid.innerHTML = related.map(post => `
-            <a href="post.html?id=${post.id}" class="keai-related-card">
+            <a href="${post.slug ? `/p/${encodeURIComponent(post.slug)}` : `post.html?id=${post.id}`}" class="keai-related-card">
                 <div class="keai-related-thumb">
                     ${post.thumbnail
                         ? `<img src="${post.thumbnail}" alt="${post.title}" loading="lazy">`

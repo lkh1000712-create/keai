@@ -1884,7 +1884,7 @@
         const postsToShow = allPosts.slice(0, currentPage * POSTS_PER_PAGE);
 
         gridEl.innerHTML = postsToShow.map((post, index) => `
-            <article class="keai-board-card" data-id="${post.id}">
+            <article class="keai-board-card" data-id="${post.id}" data-slug="${post.slug}">
                 <div class="keai-board-card-thumbnail">
                     ${post.thumbnail
                         ? `<img src="${post.thumbnail}" alt="${post.title}" loading="lazy">`
@@ -1920,8 +1920,12 @@
         // 카드 클릭 이벤트
         gridEl.querySelectorAll('.keai-board-card').forEach(card => {
             card.addEventListener('click', () => {
-                const postId = card.dataset.id;
-                window.location.href = `post.html?id=${postId}`;
+                const slug = card.dataset.slug;
+                if (slug) {
+                    window.location.href = `/p/${encodeURIComponent(slug)}`;
+                } else {
+                    window.location.href = `post.html?id=${card.dataset.id}`;
+                }
             });
         });
     }
