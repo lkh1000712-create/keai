@@ -10,17 +10,17 @@ function getEnv(key, defaultValue = '') {
 
 const AIRTABLE_TOKEN = getEnv('AIRTABLE_TOKEN');
 const AIRTABLE_BASE_ID = getEnv('AIRTABLE_BASE_ID', 'appxVw5QQ0g4JEjoR');
-const ANALYTICS_TABLE_ID = 'tblXRK9sUVuWlPMJ7'; // 방문통계 테이블 ID
+const ANALYTICS_TABLE_ID = 'tblvtCiOigcPRPXpY'; // Analytics 테이블 ID
 
 // Airtable에서 방문통계 데이터 조회
 async function getAnalyticsFromAirtable(startDate, endDate) {
     const url = `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${ANALYTICS_TABLE_ID}`;
 
     // 날짜 범위 필터
-    const filterFormula = `AND(IS_AFTER({날짜}, '${startDate}'), IS_BEFORE({날짜}, '${endDate}'))`;
+    const filterFormula = `AND(IS_AFTER({date}, '${startDate}'), IS_BEFORE({date}, '${endDate}'))`;
     const params = new URLSearchParams({
         'filterByFormula': filterFormula,
-        'sort[0][field]': '날짜',
+        'sort[0][field]': 'date',
         'sort[0][direction]': 'asc',
         'maxRecords': '365'
     });
@@ -97,14 +97,14 @@ export default async function handler(req, res) {
 
         // 데이터 파싱
         const dailyData = records.map(record => ({
-            date: (record.fields['날짜'] || '').replace(/-/g, ''),
-            visitors: record.fields['방문자'] || 0,
-            pageviews: record.fields['페이지뷰'] || 0,
-            duration: record.fields['평균체류시간'] || 0,
-            sessions: record.fields['세션수'] || 0,
-            leads: record.fields['접수건수'] || 0,
-            clicks: record.fields['검색클릭'] || 0,
-            impressions: record.fields['검색노출'] || 0,
+            date: (record.fields['date'] || '').replace(/-/g, ''),
+            visitors: record.fields['visitors'] || 0,
+            pageviews: record.fields['pageviews'] || 0,
+            duration: record.fields['avgDuration'] || 0,
+            sessions: record.fields['sessions'] || 0,
+            leads: record.fields['leads'] || 0,
+            clicks: record.fields['clicks'] || 0,
+            impressions: record.fields['impressions'] || 0,
         }));
 
         // 합계 계산

@@ -14,7 +14,7 @@ function getEnv(key, defaultValue = '') {
 const CRON_SECRET = getEnv('CRON_SECRET', 'keai-cron-secret-2024');
 const AIRTABLE_TOKEN = getEnv('AIRTABLE_TOKEN');
 const AIRTABLE_BASE_ID = getEnv('AIRTABLE_BASE_ID', 'appxVw5QQ0g4JEjoR');
-const ANALYTICS_TABLE_ID = 'tblXRK9sUVuWlPMJ7'; // 방문통계 테이블 ID
+const ANALYTICS_TABLE_ID = 'tblvtCiOigcPRPXpY'; // Analytics 테이블 ID
 const LEADS_TABLE_ID = 'tblS5O4LN5C7L9Km7'; // 한국기업심사원 테이블 ID
 const GA4_PROPERTY_ID = getEnv('GA4_PROPERTY_ID', '516503347');
 const SEARCH_CONSOLE_SITE = getEnv('SEARCH_CONSOLE_SITE', 'https://k-eai.kr');
@@ -136,7 +136,7 @@ async function getSearchConsoleData(accessToken, startDate, endDate) {
 async function getExistingRecord(date) {
     const url = `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${ANALYTICS_TABLE_ID}`;
     const params = new URLSearchParams({
-        'filterByFormula': `{날짜} = '${date}'`,
+        'filterByFormula': `{date} = '${date}'`,
         'maxRecords': '1'
     });
 
@@ -159,7 +159,7 @@ async function upsertAnalyticsData(record) {
 
     try {
         // 기존 레코드 확인
-        const existing = await getExistingRecord(record['날짜']);
+        const existing = await getExistingRecord(record['date']);
 
         if (existing) {
             // 업데이트
@@ -173,7 +173,7 @@ async function upsertAnalyticsData(record) {
             });
             if (!response.ok) {
                 const errorText = await response.text();
-                console.error(`[Airtable Update Error] ${record['날짜']}: ${errorText}`);
+                console.error(`[Airtable Update Error] ${record['date']}: ${errorText}`);
             }
             return response.ok;
         } else {
@@ -188,12 +188,12 @@ async function upsertAnalyticsData(record) {
             });
             if (!response.ok) {
                 const errorText = await response.text();
-                console.error(`[Airtable Create Error] ${record['날짜']}: ${errorText}`);
+                console.error(`[Airtable Create Error] ${record['date']}: ${errorText}`);
             }
             return response.ok;
         }
     } catch (error) {
-        console.error(`[Airtable Exception] ${record['날짜']}: ${error.message}`);
+        console.error(`[Airtable Exception] ${record['date']}: ${error.message}`);
         return false;
     }
 }
@@ -309,15 +309,15 @@ export default async function handler(req, res) {
             const leadsCount = await getDailyLeadsCount(date);
 
             const record = {
-                '날짜': date,
-                '방문자': ga4.visitors,
-                '페이지뷰': ga4.pageviews,
-                '평균체류시간': Math.round(ga4.duration * 10) / 10,
-                '세션수': ga4.sessions,
-                '접수건수': leadsCount,
-                '검색클릭': search.clicks,
-                '검색노출': search.impressions,
-                '수집일시': new Date().toISOString(),
+                'date': date,
+                'visitors': ga4.visitors,
+                'pageviews': ga4.pageviews,
+                'avgDuration': Math.round(ga4.duration * 10) / 10,
+                'sessions': ga4.sessions,
+                'leads': leadsCount,
+                'clicks': search.clicks,
+                'impressions': search.impressions,
+                'collectedAt': new Date().toISOString(),
             };
 
             const success = await upsertAnalyticsData(record);
