@@ -62,35 +62,47 @@ export default async function handler(req, res) {
     }
 
     try {
-        const { period = '30days' } = req.query;
-
-        // 날짜 계산
-        const endDate = new Date();
-        const startDate = new Date();
-
-        switch (period) {
-            case '7days':
-                startDate.setDate(endDate.getDate() - 7);
-                break;
-            case '30days':
-                startDate.setDate(endDate.getDate() - 30);
-                break;
-            case '90days':
-                startDate.setDate(endDate.getDate() - 90);
-                break;
-            case '1year':
-                startDate.setFullYear(endDate.getFullYear() - 1);
-                break;
-            default:
-                startDate.setDate(endDate.getDate() - 30);
-        }
-
-        // 하루 전부터 조회 (필터 조건이 IS_AFTER이므로)
-        startDate.setDate(startDate.getDate() - 1);
+        const { period = '30days', startDate: queryStartDate, endDate: queryEndDate } = req.query;
 
         const formatDate = (d) => d.toISOString().split('T')[0];
-        const startDateStr = formatDate(startDate);
-        const endDateStr = formatDate(endDate);
+
+        let startDateStr, endDateStr;
+
+        // 직접 날짜 지정이 있으면 사용, 없으면 period 기반 계산
+        if (queryStartDate && queryEndDate) {
+            // 직접 날짜 지정
+            const start = new Date(queryStartDate);
+            start.setDate(start.getDate() - 1); // 필터 조건이 IS_AFTER이므로 하루 전
+            startDateStr = formatDate(start);
+            endDateStr = queryEndDate;
+        } else {
+            // period 기반 계산
+            const endDate = new Date();
+            const startDate = new Date();
+
+            switch (period) {
+                case '7days':
+                    startDate.setDate(endDate.getDate() - 7);
+                    break;
+                case '30days':
+                    startDate.setDate(endDate.getDate() - 30);
+                    break;
+                case '90days':
+                    startDate.setDate(endDate.getDate() - 90);
+                    break;
+                case '1year':
+                    startDate.setFullYear(endDate.getFullYear() - 1);
+                    break;
+                default:
+                    startDate.setDate(endDate.getDate() - 30);
+            }
+
+            // 하루 전부터 조회 (필터 조건이 IS_AFTER이므로)
+            startDate.setDate(startDate.getDate() - 1);
+
+            startDateStr = formatDate(startDate);
+            endDateStr = formatDate(endDate);
+        }
 
         // Airtable에서 데이터 조회
         const records = await getAnalyticsFromAirtable(startDateStr, endDateStr);

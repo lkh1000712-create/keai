@@ -1,60 +1,11 @@
 /* ================================================
    KEAI 방문통계 - analytics.js
-   GA4 + Search Console API 연동
+   Airtable 캐시 기반 통계 (하루 1회 갱신)
    ================================================ */
 
-// API 데이터 저장 변수
-let apiData = null;
-let isApiLoaded = false;
-
-// GA4 API에서 데이터 가져오기
-async function fetchAnalyticsData(period = '30days') {
-  try {
-    const response = await fetch(`/api/analytics?period=${period}`);
-    const data = await response.json();
-
-    if (data.success) {
-      apiData = data;
-      isApiLoaded = true;
-      console.log('GA4 데이터 로드 성공:', data.totals);
-      return data;
-    } else {
-      console.warn('API 오류, 샘플 데이터 사용:', data.error);
-      return null;
-    }
-  } catch (error) {
-    console.warn('API 호출 실패, 샘플 데이터 사용:', error);
-    return null;
-  }
-}
-
-// API 데이터를 차트 형식으로 변환
-function convertApiDataToChartFormat(apiResponse) {
-  if (!apiResponse || !apiResponse.dailyData) return null;
-
-  const dailyData = apiResponse.dailyData;
-  const labels = [];
-  const visitors = [];
-  const pageviews = [];
-  const duration = [];
-  const leads = [];
-
-  dailyData.forEach(day => {
-    // 날짜 형식 변환: 20251215 -> 12/15
-    const dateStr = day.date;
-    const month = parseInt(dateStr.substring(4, 6));
-    const date = parseInt(dateStr.substring(6, 8));
-    labels.push(`${month}/${date}`);
-
-    visitors.push(day.visitors || 0);
-    pageviews.push(day.pageviews || 0);
-    duration.push(Math.round(day.duration || 0));
-    leads.push(0); // Airtable 연동 필요
-  });
-
-  return { labels, visitors, pageviews, duration, leads };
-}
-
+// 캐시 설정
+const CACHE_KEY = 'keai_analytics_cache';
+const CACHE_DURATION = 24 * 60 * 60 * 1000; // 24시간 (밀리초)
 
 // 월 이름 배열
 const monthNames = ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'];
@@ -72,139 +23,154 @@ let expandedMonths = new Set([selectedMonth]);
 
 // 모바일 차트 네비게이션
 let chartViewStart = 0;
-const MOBILE_VIEW_COUNT = 4; // 모바일에서 한 번에 보여줄 데이터 개수
+const MOBILE_VIEW_COUNT = 4;
+
+// 전체 데이터 저장
+let analyticsData = {
+  daily: {},
+  weekly: {},
+  monthly: {
+    labels: [],
+    visitors: [],
+    pageviews: [],
+    duration: [],
+    leads: []
+  }
+};
 
 // 페이지 초기화
-document.addEventListener('DOMContentLoaded', async function() {
-  console.log('[Analytics] DOMContentLoaded 시작');
-
+document.addEventListener('DOMContentLoaded', function() {
   initPeriodTabs();
   initChartNavigation();
-
-  // GA4 API 데이터 로드 시도
-  console.log('[Analytics] API 호출 시작...');
-  const apiResponse = await fetchAnalyticsData('30days');
-  console.log('[Analytics] API 응답:', apiResponse);
-
-  if (apiResponse?.totals) {
-    console.log('[Analytics] updateStatCardsFromApi 호출 - totals:', apiResponse.totals);
-    updateStatCardsFromApi(apiResponse.totals);
-
-    // DOM 업데이트 확인용 지연 로그
-    setTimeout(() => {
-      const visitorEl = document.getElementById('stat-visitors');
-      console.log('[Analytics] DOM 확인 - stat-visitors 현재값:', visitorEl?.textContent);
-    }, 100);
-  } else {
-    console.log('[Analytics] API 응답에 totals 없음, apiResponse.success:', apiResponse?.success);
-  }
-
-  updateDashboard();
-  console.log('[Analytics] DOMContentLoaded 완료');
+  initRefreshButton();
+  loadAnalyticsData();
 });
 
-// 로딩 상태 표시
-function showLoadingState() {
-  const cards = document.querySelectorAll('.stat-card .stat-value');
-  cards.forEach(card => {
-    card.dataset.originalText = card.textContent;
-    card.textContent = '로딩...';
-  });
-}
+// ================================================
+// 캐시 관리
+// ================================================
 
-// 로딩 상태 해제
-function hideLoadingState() {
-  const cards = document.querySelectorAll('.stat-card .stat-value');
-  cards.forEach(card => {
-    if (card.dataset.originalText) {
-      card.textContent = card.dataset.originalText;
+// 캐시에서 데이터 로드
+function getCachedData() {
+  try {
+    const cached = localStorage.getItem(CACHE_KEY);
+    if (!cached) return null;
+
+    const { data, timestamp } = JSON.parse(cached);
+    const now = Date.now();
+
+    // 캐시 만료 확인 (24시간)
+    if (now - timestamp > CACHE_DURATION) {
+      localStorage.removeItem(CACHE_KEY);
+      return null;
     }
-  });
+
+    return data;
+  } catch (e) {
+    console.error('캐시 로드 오류:', e);
+    return null;
+  }
 }
 
-// 스켈레톤 로딩 클래스 제거
-function removeSkeletonLoading() {
-  document.querySelectorAll('.loading-skeleton').forEach(el => {
-    el.classList.remove('loading-skeleton');
-  });
+// 캐시에 데이터 저장
+function setCachedData(data) {
+  try {
+    const cacheData = {
+      data: data,
+      timestamp: Date.now()
+    };
+    localStorage.setItem(CACHE_KEY, JSON.stringify(cacheData));
+  } catch (e) {
+    console.error('캐시 저장 오류:', e);
+  }
 }
 
-// API 데이터로 통계 카드 직접 업데이트
-function updateStatCardsFromApi(totals) {
-  console.log('[updateStatCardsFromApi] 함수 진입, totals:', totals);
+// 캐시 강제 갱신 버튼 초기화
+function initRefreshButton() {
+  const refreshBtn = document.getElementById('refreshCacheBtn');
+  if (refreshBtn) {
+    refreshBtn.addEventListener('click', function() {
+      localStorage.removeItem(CACHE_KEY);
+      loadAnalyticsData();
+    });
+  }
+}
 
-  if (!totals) {
-    console.log('[updateStatCardsFromApi] totals가 없어서 종료');
+// ================================================
+// 데이터 로드
+// ================================================
+
+async function loadAnalyticsData() {
+  // 로딩 표시
+  showLoading(true);
+
+  // 캐시 확인
+  const cachedData = getCachedData();
+  if (cachedData) {
+    console.log('캐시에서 데이터 로드');
+    analyticsData = cachedData;
+    updateDashboard();
+    showLoading(false);
+    updateCacheStatus(true);
     return;
   }
 
-  // 스켈레톤 제거
-  removeSkeletonLoading();
+  // API에서 1년치 데이터 로드
+  console.log('API에서 데이터 로드');
+  try {
+    const endDate = new Date();
+    const startDate = new Date();
+    startDate.setFullYear(startDate.getFullYear() - 1);
 
-  // 방문자
-  const visitorEl = document.getElementById('stat-visitors');
-  console.log('[updateStatCardsFromApi] stat-visitors 요소:', visitorEl, '업데이트할 값:', totals.visitors);
-  if (visitorEl) {
-    visitorEl.textContent = totals.visitors.toLocaleString();
-    console.log('[updateStatCardsFromApi] stat-visitors 업데이트 완료:', visitorEl.textContent);
-  }
+    const formatDate = (d) => d.toISOString().split('T')[0];
+    const response = await fetch(`/api/analytics?startDate=${formatDate(startDate)}&endDate=${formatDate(endDate)}`);
 
-  // 페이지뷰
-  const pageviewEl = document.getElementById('stat-pageviews');
-  if (pageviewEl) {
-    pageviewEl.textContent = totals.pageviews.toLocaleString();
-    console.log('[updateStatCardsFromApi] stat-pageviews 업데이트 완료:', pageviewEl.textContent);
-  }
-
-  // 평균 체류시간
-  const durationEl = document.getElementById('stat-duration');
-  if (durationEl) {
-    const seconds = Math.round(totals.avgDuration || 0);
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    durationEl.textContent = `${mins}:${String(secs).padStart(2, '0')}`;
-    console.log('[updateStatCardsFromApi] stat-duration 업데이트 완료:', durationEl.textContent);
-  }
-
-  // Airtable 접수 건수
-  const leadsEl = document.getElementById('stat-leads');
-  if (leadsEl) {
-    // leads가 있으면 사용, 없으면 0 표시
-    const leadsCount = totals.leads !== undefined ? totals.leads : 0;
-    leadsEl.textContent = leadsCount.toLocaleString();
-    console.log('[updateStatCardsFromApi] stat-leads 업데이트 완료:', leadsEl.textContent, '(totalLeads:', totals.totalLeads, ')');
-  }
-
-  console.log('[updateStatCardsFromApi] 모든 업데이트 완료');
-}
-
-// 현재 데이터 가져오기 (API 데이터만 사용)
-function getCurrentData() {
-  // API 데이터가 있으면 사용
-  if (isApiLoaded && apiData?.dailyData) {
-    const chartData = convertApiDataToChartFormat(apiData);
-    if (chartData && chartData.labels.length > 0) {
-      return chartData;
+    if (!response.ok) {
+      throw new Error('API 응답 오류');
     }
+
+    const result = await response.json();
+
+    if (result.success && result.dailyData) {
+      // 데이터 가공
+      processRawData(result.dailyData);
+
+      // 캐시 저장
+      setCachedData(analyticsData);
+
+      updateDashboard();
+      updateCacheStatus(true);
+    } else {
+      console.error('데이터 없음:', result);
+      showNoData();
+    }
+  } catch (error) {
+    console.error('데이터 로드 오류:', error);
+    showNoData();
   }
 
-  // API 데이터가 없으면 빈 데이터 반환
-  return { labels: [], visitors: [], pageviews: [], duration: [], leads: [] };
+  showLoading(false);
 }
 
-// API 데이터에서 월별로 그룹화된 데이터 가져오기
-function getGroupedApiData() {
-  if (!isApiLoaded || !apiData?.dailyData) return {};
+// 원시 데이터를 일간/주간/월간으로 가공
+function processRawData(rawData) {
+  // 일간 데이터 (월별로 그룹화)
+  const dailyByMonth = {};
 
-  const grouped = {};
-  apiData.dailyData.forEach(day => {
-    const dateStr = day.date; // 20251215
-    const monthKey = `${dateStr.substring(0, 4)}-${dateStr.substring(4, 6)}`; // 2025-12
-    const month = parseInt(dateStr.substring(4, 6));
-    const date = parseInt(dateStr.substring(6, 8));
+  rawData.forEach(item => {
+    // date 형식: "20251229" 또는 "2025-12-29"
+    let dateStr = item.date;
+    if (dateStr.includes('-')) {
+      dateStr = dateStr.replace(/-/g, '');
+    }
 
-    if (!grouped[monthKey]) {
-      grouped[monthKey] = {
+    const year = dateStr.substring(0, 4);
+    const month = dateStr.substring(4, 6);
+    const day = dateStr.substring(6, 8);
+    const monthKey = `${year}-${month}`;
+
+    if (!dailyByMonth[monthKey]) {
+      dailyByMonth[monthKey] = {
         labels: [],
         visitors: [],
         pageviews: [],
@@ -213,20 +179,138 @@ function getGroupedApiData() {
       };
     }
 
-    grouped[monthKey].labels.push(`${month}/${date}`);
-    grouped[monthKey].visitors.push(day.visitors || 0);
-    grouped[monthKey].pageviews.push(day.pageviews || 0);
-    grouped[monthKey].duration.push(Math.round(day.duration || 0));
-    grouped[monthKey].leads.push(0); // Airtable 연동 필요
+    const label = `${parseInt(month)}/${parseInt(day)}`;
+    dailyByMonth[monthKey].labels.push(label);
+    dailyByMonth[monthKey].visitors.push(item.visitors || 0);
+    dailyByMonth[monthKey].pageviews.push(item.pageviews || 0);
+    dailyByMonth[monthKey].duration.push(item.duration || 0);
+    dailyByMonth[monthKey].leads.push(item.leads || 0);
   });
 
-  return grouped;
+  analyticsData.daily = dailyByMonth;
+
+  // 주간 데이터 (월별로 그룹화)
+  const weeklyByMonth = {};
+
+  Object.keys(dailyByMonth).forEach(monthKey => {
+    const monthData = dailyByMonth[monthKey];
+    const weekCount = Math.ceil(monthData.labels.length / 7);
+
+    weeklyByMonth[monthKey] = {
+      labels: [],
+      visitors: [],
+      pageviews: [],
+      duration: [],
+      leads: []
+    };
+
+    for (let w = 0; w < weekCount; w++) {
+      const start = w * 7;
+      const end = Math.min(start + 7, monthData.labels.length);
+
+      const weekVisitors = monthData.visitors.slice(start, end).reduce((a, b) => a + b, 0);
+      const weekPageviews = monthData.pageviews.slice(start, end).reduce((a, b) => a + b, 0);
+      const weekDuration = monthData.duration.slice(start, end);
+      const avgDuration = weekDuration.length > 0 ? Math.round(weekDuration.reduce((a, b) => a + b, 0) / weekDuration.length) : 0;
+      const weekLeads = monthData.leads.slice(start, end).reduce((a, b) => a + b, 0);
+
+      weeklyByMonth[monthKey].labels.push(`W${w + 1}`);
+      weeklyByMonth[monthKey].visitors.push(weekVisitors);
+      weeklyByMonth[monthKey].pageviews.push(weekPageviews);
+      weeklyByMonth[monthKey].duration.push(avgDuration);
+      weeklyByMonth[monthKey].leads.push(weekLeads);
+    }
+  });
+
+  analyticsData.weekly = weeklyByMonth;
+
+  // 월간 데이터
+  const monthlyData = {
+    labels: [],
+    visitors: [],
+    pageviews: [],
+    duration: [],
+    leads: []
+  };
+
+  Object.keys(dailyByMonth).sort().forEach(monthKey => {
+    const monthData = dailyByMonth[monthKey];
+    const [year, month] = monthKey.split('-');
+
+    monthlyData.labels.push(monthNames[parseInt(month) - 1]);
+    monthlyData.visitors.push(monthData.visitors.reduce((a, b) => a + b, 0));
+    monthlyData.pageviews.push(monthData.pageviews.reduce((a, b) => a + b, 0));
+
+    const avgDuration = monthData.duration.length > 0
+      ? Math.round(monthData.duration.reduce((a, b) => a + b, 0) / monthData.duration.length)
+      : 0;
+    monthlyData.duration.push(avgDuration);
+    monthlyData.leads.push(monthData.leads.reduce((a, b) => a + b, 0));
+  });
+
+  analyticsData.monthly = monthlyData;
+}
+
+// ================================================
+// UI 업데이트
+// ================================================
+
+function showLoading(show) {
+  const loader = document.getElementById('analytics-loader');
+  const content = document.getElementById('analytics-content');
+
+  if (loader) loader.style.display = show ? 'flex' : 'none';
+  if (content) content.style.display = show ? 'none' : 'block';
+}
+
+function showNoData() {
+  const content = document.getElementById('analytics-content');
+  if (content) {
+    content.innerHTML = '<div class="no-data" style="text-align:center; padding:60px; color:#999;">데이터를 불러올 수 없습니다. 잠시 후 다시 시도해주세요.</div>';
+    content.style.display = 'block';
+  }
+}
+
+function updateCacheStatus(isCached) {
+  const statusEl = document.getElementById('cache-status');
+  if (statusEl) {
+    try {
+      const cachedRaw = localStorage.getItem(CACHE_KEY);
+      if (cachedRaw) {
+        const { timestamp } = JSON.parse(cachedRaw);
+        const cacheTime = new Date(timestamp);
+        statusEl.innerHTML = `<span class="cache-badge">캐시됨</span> ${cacheTime.toLocaleString('ko-KR')} 기준`;
+      } else {
+        statusEl.innerHTML = '<span class="cache-badge live">실시간</span>';
+      }
+    } catch (e) {
+      statusEl.innerHTML = '<span class="cache-badge live">실시간</span>';
+    }
+  }
+}
+
+// 현재 데이터 가져오기 (일간/주간은 월별, 월간은 전체)
+function getCurrentData() {
+  if (currentPeriod === 'monthly') {
+    return analyticsData.monthly;
+  }
+
+  const monthData = currentPeriod === 'daily'
+    ? analyticsData.daily[selectedMonth]
+    : analyticsData.weekly[selectedMonth];
+
+  // 해당 월 데이터가 없으면 빈 데이터 반환
+  if (!monthData) {
+    return { labels: [], visitors: [], pageviews: [], duration: [], leads: [] };
+  }
+
+  return monthData;
 }
 
 // 사용 가능한 월 목록 가져오기 (역순)
 function getAvailableMonths() {
-  const grouped = getGroupedApiData();
-  return Object.keys(grouped).sort().reverse();
+  const data = currentPeriod === 'daily' ? analyticsData.daily : analyticsData.weekly;
+  return Object.keys(data).sort().reverse();
 }
 
 // 차트 네비게이션 초기화
@@ -263,12 +347,14 @@ function initPeriodTabs() {
       tabs.forEach(t => t.classList.remove('active'));
       this.classList.add('active');
       currentPeriod = this.dataset.period;
-      chartViewStart = 0; // 기간 변경 시 차트 시작점 리셋
+      chartViewStart = 0;
 
       // 기간 변경 시 최신 월로 리셋
-      const now = new Date();
-      selectedMonth = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
-      expandedMonths = new Set([selectedMonth]);
+      const months = getAvailableMonths();
+      if (months.length > 0) {
+        selectedMonth = months[0];
+        expandedMonths = new Set([selectedMonth]);
+      }
 
       updateDashboard();
     });
@@ -283,10 +369,8 @@ function updateDashboard() {
   // 집계 기간 업데이트
   updatePeriodRange();
 
-  // 통계 카드 업데이트 (API 데이터가 없을 때만 샘플 데이터 사용)
-  if (!isApiLoaded) {
-    updateStatCards(data, prevData);
-  }
+  // 통계 카드 업데이트
+  updateStatCards(data, prevData);
 
   // 차트 업데이트
   updateChart(data);
@@ -301,7 +385,7 @@ function updateDashboard() {
   updateConversion(data);
 }
 
-// 집계 기간 업데이트 (통계 카드 기준일)
+// 집계 기간 업데이트
 function updatePeriodRange() {
   const now = new Date();
   const currentYear = now.getFullYear();
@@ -311,10 +395,8 @@ function updatePeriodRange() {
   let rangeText = '';
 
   if (currentPeriod === 'monthly') {
-    // 월간: 이번 달 전체
-    rangeText = `${currentYear}.${String(currentMonth).padStart(2, '0')}.01 ~ ${currentYear}.${String(currentMonth).padStart(2, '0')}.${String(currentDate).padStart(2, '0')}`;
+    rangeText = `${currentYear}.01.01 ~ ${currentYear}.${String(currentMonth).padStart(2, '0')}.${String(currentDate).padStart(2, '0')}`;
   } else if (currentPeriod === 'weekly') {
-    // 주간: 이번 주 (월요일 ~ 오늘)
     const dayOfWeek = now.getDay();
     const mondayOffset = dayOfWeek === 0 ? 6 : dayOfWeek - 1;
     const monday = new Date(now);
@@ -326,11 +408,11 @@ function updatePeriodRange() {
 
     rangeText = `${monYear}.${monMonth}.${monDate} ~ ${currentYear}.${String(currentMonth).padStart(2, '0')}.${String(currentDate).padStart(2, '0')}`;
   } else {
-    // 일간: 오늘
     rangeText = `${currentYear}.${String(currentMonth).padStart(2, '0')}.${String(currentDate).padStart(2, '0')}`;
   }
 
-  document.getElementById('period-range-value').textContent = rangeText;
+  const el = document.getElementById('period-range-value');
+  if (el) el.textContent = rangeText;
 }
 
 // 이전 기간 데이터 (비교용)
@@ -347,7 +429,6 @@ function getPreviousPeriodData() {
     };
   }
 
-  // 이전 기간의 마지막 값 (간단 비교)
   return {
     visitors: data.visitors[len - 2],
     pageviews: data.pageviews[len - 2],
@@ -358,6 +439,8 @@ function getPreviousPeriodData() {
 
 // 통계 카드 업데이트
 function updateStatCards(data, prevData) {
+  if (!data.visitors || data.visitors.length === 0) return;
+
   const current = {
     visitors: data.visitors[data.visitors.length - 1],
     pageviews: data.pageviews[data.pageviews.length - 1],
@@ -368,30 +451,35 @@ function updateStatCards(data, prevData) {
   const periodLabel = getPeriodLabel();
 
   // 방문자
-  document.getElementById('stat-visitors').textContent = current.visitors.toLocaleString();
+  const visitorsEl = document.getElementById('stat-visitors');
+  if (visitorsEl) visitorsEl.textContent = current.visitors.toLocaleString();
   updateChangeIndicator('stat-visitors-change', current.visitors, prevData.visitors, periodLabel);
 
   // 페이지뷰
-  document.getElementById('stat-pageviews').textContent = current.pageviews.toLocaleString();
+  const pageviewsEl = document.getElementById('stat-pageviews');
+  if (pageviewsEl) pageviewsEl.textContent = current.pageviews.toLocaleString();
   updateChangeIndicator('stat-pageviews-change', current.pageviews, prevData.pageviews, periodLabel);
 
   // 체류시간
-  document.getElementById('stat-duration').textContent = formatDuration(current.duration);
+  const durationEl = document.getElementById('stat-duration');
+  if (durationEl) durationEl.textContent = formatDuration(current.duration);
   updateChangeIndicator('stat-duration-change', current.duration, prevData.duration, periodLabel);
 
   // 접수
-  document.getElementById('stat-leads').textContent = current.leads.toLocaleString();
+  const leadsEl = document.getElementById('stat-leads');
+  if (leadsEl) leadsEl.textContent = current.leads.toLocaleString();
   updateChangeIndicator('stat-leads-change', current.leads, prevData.leads, periodLabel, true);
 }
 
 // 변화율 표시 업데이트
 function updateChangeIndicator(elementId, current, previous, periodLabel, isCount = false) {
   const element = document.getElementById(elementId);
+  if (!element) return;
+
   const change = previous > 0 ? ((current - previous) / previous * 100).toFixed(1) : 0;
   const diff = current - previous;
 
   if (isCount) {
-    // 접수는 건수로 표시
     const sign = diff >= 0 ? '+' : '';
     element.textContent = `${sign}${diff}건 ${periodLabel}`;
     element.className = `stat-change ${diff >= 0 ? 'positive' : 'negative'}`;
@@ -413,26 +501,32 @@ function getPeriodLabel() {
 
 // 시간 포맷
 function formatDuration(seconds) {
+  if (!seconds || seconds === 0) return '0분 0초';
   const min = Math.floor(seconds / 60);
-  const sec = seconds % 60;
+  const sec = Math.round(seconds % 60);
   return `${min}분 ${sec}초`;
 }
 
-// 데이터 테이블 업데이트 (API 데이터 기반)
+// 데이터 테이블 업데이트 (월별 그룹화)
 function updateDataTable() {
   const tableBody = document.getElementById('analytics-table-body');
   const tableTitle = document.getElementById('table-title');
 
+  if (!tableBody) return;
+
   // 테이블 타이틀 업데이트
-  tableTitle.textContent = '일별 상세 데이터 (GA4)';
+  const titleMap = {
+    daily: '일별 상세 데이터 (1년간)',
+    weekly: '주간 상세 데이터 (1년간)',
+    monthly: '월간 상세 데이터 (1년간)'
+  };
+  if (tableTitle) tableTitle.textContent = titleMap[currentPeriod];
 
   let rows = '';
 
-  // API 데이터가 없으면 안내 메시지
-  if (!isApiLoaded || !apiData?.dailyData) {
-    rows = '<tr><td colspan="6" style="text-align:center; color:#999; padding:40px;">데이터를 불러오는 중...</td></tr>';
+  if (currentPeriod === 'monthly') {
+    rows = renderMonthlyTable(analyticsData.monthly);
   } else {
-    // 월별 그룹화 테이블 렌더링
     rows = renderGroupedTable();
   }
 
@@ -444,13 +538,15 @@ function updateDataTable() {
 
 // 월간 테이블 렌더링
 function renderMonthlyTable(data) {
-  if (!data.labels.length) return '<tr><td colspan="6" style="text-align:center; color:#999; padding:40px;">데이터가 없습니다</td></tr>';
+  if (!data.labels || !data.labels.length) {
+    return '<tr><td colspan="6" style="text-align:center; color:#999; padding:40px;">데이터가 없습니다</td></tr>';
+  }
 
   const totalVisitors = data.visitors.reduce((a, b) => a + b, 0);
   const totalPageviews = data.pageviews.reduce((a, b) => a + b, 0);
   const avgDuration = Math.round(data.duration.reduce((a, b) => a + b, 0) / data.duration.length);
   const totalLeads = data.leads.reduce((a, b) => a + b, 0);
-  const totalConversionRate = ((totalLeads / totalVisitors) * 100).toFixed(2);
+  const totalConversionRate = totalVisitors > 0 ? ((totalLeads / totalVisitors) * 100).toFixed(2) : '0.00';
 
   let rows = '';
   const len = data.labels.length;
@@ -460,7 +556,7 @@ function renderMonthlyTable(data) {
     const pageviews = data.pageviews[i];
     const duration = data.duration[i];
     const leads = data.leads[i];
-    const conversionRate = ((leads / visitors) * 100).toFixed(2);
+    const conversionRate = visitors > 0 ? ((leads / visitors) * 100).toFixed(2) : '0.00';
 
     const isCurrent = i === len - 1;
     const rowClass = isCurrent ? 'current' : '';
@@ -491,16 +587,17 @@ function renderMonthlyTable(data) {
   return rows;
 }
 
-// 월별 그룹화 테이블 렌더링 (API 데이터 기반)
+// 월별 그룹화 테이블 렌더링
 function renderGroupedTable() {
   const months = getAvailableMonths();
-  if (!months.length) return '<tr><td colspan="6" style="text-align:center; color:#999; padding:40px;">데이터가 없습니다</td></tr>';
+  if (!months.length) {
+    return '<tr><td colspan="6" style="text-align:center; color:#999; padding:40px;">데이터가 없습니다</td></tr>';
+  }
 
-  const groupedData = getGroupedApiData();
   let rows = '';
 
   months.forEach((monthKey, monthIdx) => {
-    const data = groupedData[monthKey];
+    const data = currentPeriod === 'daily' ? analyticsData.daily[monthKey] : analyticsData.weekly[monthKey];
     if (!data || !data.labels.length) return;
 
     // 월 합계 계산
@@ -508,17 +605,17 @@ function renderGroupedTable() {
     const totalPageviews = data.pageviews.reduce((a, b) => a + b, 0);
     const avgDuration = Math.round(data.duration.reduce((a, b) => a + b, 0) / data.duration.length);
     const totalLeads = data.leads.reduce((a, b) => a + b, 0);
-    const conversionRate = ((totalLeads / totalVisitors) * 100).toFixed(2);
+    const conversionRate = totalVisitors > 0 ? ((totalLeads / totalVisitors) * 100).toFixed(2) : '0.00';
 
-    // 월 이름 가져오기 (모바일에서는 축약)
+    // 월 이름 가져오기
     const [year, month] = monthKey.split('-');
     const monthLabel = isMobile()
-      ? `${year.slice(2)}.${month}`               // 모바일: "25.11"
-      : `${year}년 ${parseInt(month)}월`;         // PC: "2025년 11월"
+      ? `${year.slice(2)}.${month}`
+      : `${year}년 ${parseInt(month)}월`;
     const isExpanded = expandedMonths.has(monthKey);
     const isCurrent = monthIdx === 0;
 
-    // 월 헤더 행 (클릭으로 펼치기/접기) - 각 컬럼에 합계 표시
+    // 월 헤더 행
     rows += `
       <tr class="month-group-header ${isCurrent ? 'current' : ''}" data-month="${monthKey}">
         <td>
@@ -543,7 +640,7 @@ function renderGroupedTable() {
         const pageviews = data.pageviews[i];
         const duration = data.duration[i];
         const leads = data.leads[i];
-        const cr = ((leads / visitors) * 100).toFixed(2);
+        const cr = visitors > 0 ? ((leads / visitors) * 100).toFixed(2) : '0.00';
 
         const isLatest = monthIdx === 0 && i === len - 1;
 
@@ -586,7 +683,6 @@ function bindMonthToggleEvents() {
       } else {
         expandedMonths.add(monthKey);
       }
-      // 선택된 월 업데이트
       selectedMonth = monthKey;
       chartViewStart = 0;
       updateDashboard();
@@ -607,7 +703,6 @@ function getChartData(data) {
     return data;
   }
 
-  // 모바일: 일부 데이터만 표시
   const end = chartViewStart + MOBILE_VIEW_COUNT;
   return {
     labels: data.labels.slice(chartViewStart, end),
@@ -636,13 +731,10 @@ function updateChartNavigation(data) {
 
   const totalPoints = data.labels.length;
   const maxStart = totalPoints - MOBILE_VIEW_COUNT;
-  const totalPages = Math.ceil(totalPoints / MOBILE_VIEW_COUNT);
 
-  // 버튼 활성화/비활성화
   prevBtn.disabled = chartViewStart <= 0;
   nextBtn.disabled = chartViewStart >= maxStart;
 
-  // 인디케이터 생성
   let dots = '';
   for (let i = 0; i <= maxStart; i++) {
     const isActive = i === chartViewStart ? 'active' : '';
@@ -653,35 +745,33 @@ function updateChartNavigation(data) {
 
 // 차트 업데이트
 function updateChart(data) {
-  const ctx = document.getElementById('trendChart').getContext('2d');
-  const mobile = isMobile();
+  const ctx = document.getElementById('trendChart');
+  if (!ctx) return;
 
-  // 모바일용 데이터 슬라이싱
+  const mobile = isMobile();
   const chartData = getChartData(data);
 
-  // 차트 네비게이션 UI 업데이트
   updateChartNavigation(data);
 
   // 차트 타이틀 업데이트
   const titleMap = {
-    daily: '일간 통계 추이 (최근 7일)',
-    weekly: '주간 통계 추이 (최근 4주)',
-    monthly: '월간 통계 추이 (최근 4개월)'
+    daily: '일간 통계 추이',
+    weekly: '주간 통계 추이',
+    monthly: '월간 통계 추이'
   };
-  document.getElementById('chart-title').textContent = titleMap[currentPeriod];
+  const chartTitle = document.getElementById('chart-title');
+  if (chartTitle) chartTitle.textContent = titleMap[currentPeriod];
 
   // 기존 차트 제거
   if (trendChart) {
     trendChart.destroy();
   }
 
-  // 모바일용 폰트 크기
   const fontSize = mobile ? 10 : 12;
   const tickFontSize = mobile ? 9 : 11;
-  const pointRadius = mobile ? 3 : 3;
+  const pointRadius = mobile ? 3 : 4;
   const borderWidth = mobile ? 2 : 2.5;
 
-  // 새 차트 생성
   trendChart = new Chart(ctx, {
     type: 'line',
     data: {
@@ -753,23 +843,15 @@ function updateChart(data) {
           borderWidth: 1,
           padding: mobile ? 8 : 12,
           boxPadding: mobile ? 4 : 6,
-          titleFont: {
-            size: fontSize
-          },
-          bodyFont: {
-            size: fontSize
-          }
+          titleFont: { size: fontSize },
+          bodyFont: { size: fontSize }
         }
       },
       scales: {
         x: {
-          grid: {
-            display: false
-          },
+          grid: { display: false },
           ticks: {
-            font: {
-              size: tickFontSize
-            },
+            font: { size: tickFontSize },
             maxRotation: 0,
             minRotation: 0
           }
@@ -778,16 +860,11 @@ function updateChart(data) {
           type: 'linear',
           display: true,
           position: 'left',
-          grid: {
-            color: '#F3F4F6'
-          },
+          grid: { color: '#F3F4F6' },
           ticks: {
-            font: {
-              size: tickFontSize
-            },
+            font: { size: tickFontSize },
             maxTicksLimit: mobile ? 5 : 8,
             callback: function(value) {
-              // 모바일에서 큰 숫자 간략화
               if (mobile && value >= 1000) {
                 return (value / 1000).toFixed(1) + 'k';
               }
@@ -799,13 +876,9 @@ function updateChart(data) {
           type: 'linear',
           display: true,
           position: 'right',
-          grid: {
-            drawOnChartArea: false,
-          },
+          grid: { drawOnChartArea: false },
           ticks: {
-            font: {
-              size: tickFontSize
-            },
+            font: { size: tickFontSize },
             maxTicksLimit: mobile ? 5 : 8
           }
         }
@@ -826,6 +899,8 @@ window.addEventListener('resize', function() {
 // 인사이트 업데이트
 function updateInsights(data, prevData) {
   const container = document.getElementById('insights-container');
+  if (!container) return;
+
   const insights = generateInsights(data, prevData);
 
   container.innerHTML = insights.map(insight => `
@@ -839,11 +914,21 @@ function updateInsights(data, prevData) {
   `).join('');
 }
 
-// 인사이트 생성 (AI 없이 규칙 기반)
+// 인사이트 생성
 function generateInsights(data, prevData) {
   const insights = [];
-  const len = data.visitors.length;
 
+  if (!data.visitors || data.visitors.length === 0) {
+    insights.push({
+      type: 'info',
+      icon: '📊',
+      title: '데이터 없음',
+      description: '아직 통계 데이터가 없습니다.'
+    });
+    return insights;
+  }
+
+  const len = data.visitors.length;
   const current = {
     visitors: data.visitors[len - 1],
     pageviews: data.pageviews[len - 1],
@@ -864,7 +949,7 @@ function generateInsights(data, prevData) {
 
   // 2. 최고 기록
   const maxVisitors = Math.max(...data.visitors);
-  if (current.visitors === maxVisitors) {
+  if (current.visitors === maxVisitors && current.visitors > 0) {
     insights.push({
       type: 'positive',
       icon: '🏆',
@@ -874,23 +959,25 @@ function generateInsights(data, prevData) {
   }
 
   // 3. 전환율 분석
-  const conversionRate = (current.leads / current.visitors * 100).toFixed(2);
-  const prevConversionRate = (prevData.leads / prevData.visitors * 100).toFixed(2);
+  if (current.visitors > 0 && prevData.visitors > 0) {
+    const conversionRate = (current.leads / current.visitors * 100).toFixed(2);
+    const prevConversionRate = (prevData.leads / prevData.visitors * 100).toFixed(2);
 
-  if (conversionRate > prevConversionRate) {
-    insights.push({
-      type: 'positive',
-      icon: '✨',
-      title: '전환율 상승',
-      description: `전환율이 ${prevConversionRate}%에서 ${conversionRate}%로 개선되었습니다.`
-    });
-  } else if (conversionRate < prevConversionRate) {
-    insights.push({
-      type: 'warning',
-      icon: '⚠️',
-      title: '전환율 주의',
-      description: `전환율이 ${prevConversionRate}%에서 ${conversionRate}%로 하락했습니다. 랜딩 페이지 점검을 권장합니다.`
-    });
+    if (parseFloat(conversionRate) > parseFloat(prevConversionRate)) {
+      insights.push({
+        type: 'positive',
+        icon: '✨',
+        title: '전환율 상승',
+        description: `전환율이 ${prevConversionRate}%에서 ${conversionRate}%로 개선되었습니다.`
+      });
+    } else if (parseFloat(conversionRate) < parseFloat(prevConversionRate)) {
+      insights.push({
+        type: 'warning',
+        icon: '⚠️',
+        title: '전환율 주의',
+        description: `전환율이 ${prevConversionRate}%에서 ${conversionRate}%로 하락했습니다.`
+      });
+    }
   }
 
   // 4. 체류시간 분석
@@ -900,14 +987,7 @@ function generateInsights(data, prevData) {
       type: 'positive',
       icon: '⏱️',
       title: '체류시간 양호',
-      description: `평균 체류시간이 평균(${formatDuration(Math.round(avgDuration))}) 대비 높습니다. 콘텐츠 품질이 좋습니다.`
-    });
-  } else if (current.duration < avgDuration * 0.9) {
-    insights.push({
-      type: 'warning',
-      icon: '⏱️',
-      title: '체류시간 감소',
-      description: `평균 체류시간이 평균 대비 낮습니다. 콘텐츠 개선을 고려해보세요.`
+      description: `평균 체류시간이 평균(${formatDuration(Math.round(avgDuration))}) 대비 높습니다.`
     });
   }
 
@@ -918,19 +998,21 @@ function generateInsights(data, prevData) {
       type: 'positive',
       icon: '📥',
       title: '접수 증가 추세',
-      description: `상담 접수가 ${leadsTrend.streak}${getPeriodUnit()} 연속 증가하고 있습니다. 좋은 흐름입니다!`
+      description: `상담 접수가 ${leadsTrend.streak}${getPeriodUnit()} 연속 증가하고 있습니다!`
     });
   }
 
   // 6. 페이지뷰/방문자 비율
-  const pagesPerVisitor = (current.pageviews / current.visitors).toFixed(1);
-  if (pagesPerVisitor >= 3.5) {
-    insights.push({
-      type: 'positive',
-      icon: '📄',
-      title: '높은 페이지 탐색률',
-      description: `방문자당 평균 ${pagesPerVisitor}페이지를 조회합니다. 사이트 구조가 효과적입니다.`
-    });
+  if (current.visitors > 0) {
+    const pagesPerVisitor = (current.pageviews / current.visitors).toFixed(1);
+    if (parseFloat(pagesPerVisitor) >= 3.5) {
+      insights.push({
+        type: 'positive',
+        icon: '📄',
+        title: '높은 페이지 탐색률',
+        description: `방문자당 평균 ${pagesPerVisitor}페이지를 조회합니다.`
+      });
+    }
   }
 
   // 인사이트가 없을 경우 기본 메시지
@@ -943,7 +1025,7 @@ function generateInsights(data, prevData) {
     });
   }
 
-  return insights.slice(0, 4); // 최대 4개
+  return insights.slice(0, 4);
 }
 
 // 추세 감지
@@ -980,12 +1062,18 @@ function getPeriodUnit() {
 
 // 전환율 업데이트
 function updateConversion(data) {
+  if (!data.visitors || data.visitors.length === 0) return;
+
   const len = data.visitors.length;
   const visitors = data.visitors[len - 1];
   const leads = data.leads[len - 1];
-  const rate = (leads / visitors * 100).toFixed(2);
+  const rate = visitors > 0 ? (leads / visitors * 100).toFixed(2) : '0.00';
 
-  document.getElementById('conversion-rate').textContent = rate + '%';
-  document.getElementById('conversion-fill').style.width = Math.min(rate * 2, 100) + '%'; // 시각적 스케일 조정
-  document.getElementById('conversion-detail').textContent = `${visitors.toLocaleString()}명 방문 중 ${leads}명 접수`;
+  const rateEl = document.getElementById('conversion-rate');
+  const fillEl = document.getElementById('conversion-fill');
+  const detailEl = document.getElementById('conversion-detail');
+
+  if (rateEl) rateEl.textContent = rate + '%';
+  if (fillEl) fillEl.style.width = Math.min(parseFloat(rate) * 2, 100) + '%';
+  if (detailEl) detailEl.textContent = `${visitors.toLocaleString()}명 방문 중 ${leads}명 접수`;
 }
