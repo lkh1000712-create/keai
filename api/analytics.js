@@ -62,19 +62,27 @@ export default async function handler(req, res) {
     }
 
     try {
-        const { period = '30days', startDate: queryStartDate, endDate: queryEndDate } = req.query;
+        const { period = '30days', days, startDate: queryStartDate, endDate: queryEndDate } = req.query;
 
         const formatDate = (d) => d.toISOString().split('T')[0];
 
         let startDateStr, endDateStr;
 
-        // 직접 날짜 지정이 있으면 사용, 없으면 period 기반 계산
+        // 직접 날짜 지정이 있으면 사용, 없으면 period/days 기반 계산
         if (queryStartDate && queryEndDate) {
             // 직접 날짜 지정
             const start = new Date(queryStartDate);
             start.setDate(start.getDate() - 1); // 필터 조건이 IS_AFTER이므로 하루 전
             startDateStr = formatDate(start);
             endDateStr = queryEndDate;
+        } else if (days) {
+            // days 파라미터 (analytics.html 호환)
+            const endDate = new Date();
+            const startDate = new Date();
+            startDate.setDate(endDate.getDate() - parseInt(days));
+            startDate.setDate(startDate.getDate() - 1); // IS_AFTER 보정
+            startDateStr = formatDate(startDate);
+            endDateStr = formatDate(endDate);
         } else {
             // period 기반 계산
             const endDate = new Date();
@@ -107,12 +115,15 @@ export default async function handler(req, res) {
         // Airtable에서 데이터 조회
         const records = await getAnalyticsFromAirtable(startDateStr, endDateStr);
 
-        // 데이터 파싱
+        // 데이터 파싱 (analytics.html과 호환되는 형식)
         const dailyData = records.map(record => ({
-            date: (record.fields['date'] || '').replace(/-/g, ''),
+            date: record.fields['date'] || '',  // YYYY-MM-DD 형식 유지
             visitors: record.fields['visitors'] || 0,
             pageviews: record.fields['pageviews'] || 0,
-            duration: record.fields['avgDuration'] || 0,
+            avg_duration: record.fields['avgDuration'] || 0,  // analytics.html 호환
+            bounce_rate: record.fields['sessions'] > 0
+                ? (1 - (record.fields['pageviews'] / record.fields['sessions']))
+                : 0,  // 이탈률 계산
             sessions: record.fields['sessions'] || 0,
             leads: record.fields['leads'] || 0,
             clicks: record.fields['clicks'] || 0,
@@ -128,10 +139,10 @@ export default async function handler(req, res) {
             deviceDesktop: record.fields['deviceDesktop'] || 0,
             deviceMobile: record.fields['deviceMobile'] || 0,
             deviceTablet: record.fields['deviceTablet'] || 0,
-            // JSON 데이터
-            topPages: safeJsonParse(record.fields['topPages']),
-            topCountries: safeJsonParse(record.fields['topCountries']),
-            topReferrers: safeJsonParse(record.fields['topReferrers']),
+            // JSON 데이터 (문자열로 유지)
+            topPages: record.fields['topPages'] || '[]',
+            topCountries: record.fields['topCountries'] || '[]',
+            topReferrers: record.fields['topReferrers'] || '[]',
         }));
 
         // JSON 안전 파싱 함수
@@ -225,7 +236,8 @@ export default async function handler(req, res) {
             startDate: formatDate(new Date(startDateStr)),
             endDate: endDateStr,
             totals,
-            dailyData,
+            data: dailyData,  // analytics.html 호환 (result.data)
+            dailyData,        // 기존 호환성 유지
             searchData,
             // 집계 데이터
             topPages: aggregatedTopPages,
