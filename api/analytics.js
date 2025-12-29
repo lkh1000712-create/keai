@@ -185,7 +185,8 @@ export default async function handler(req, res) {
         // 인기 페이지 집계 (전체 기간)
         const pageViewsMap = {};
         dailyData.forEach(d => {
-            (d.topPages || []).forEach(p => {
+            const pages = safeJsonParse(d.topPages);
+            pages.forEach(p => {
                 if (!pageViewsMap[p.path]) pageViewsMap[p.path] = 0;
                 pageViewsMap[p.path] += p.views;
             });
@@ -198,7 +199,8 @@ export default async function handler(req, res) {
         // 국가별 집계 (전체 기간)
         const countryMap = {};
         dailyData.forEach(d => {
-            (d.topCountries || []).forEach(c => {
+            const countries = safeJsonParse(d.topCountries);
+            countries.forEach(c => {
                 if (!countryMap[c.country]) countryMap[c.country] = 0;
                 countryMap[c.country] += c.users;
             });
@@ -211,7 +213,8 @@ export default async function handler(req, res) {
         // 유입 경로 집계 (전체 기간)
         const referrerMap = {};
         dailyData.forEach(d => {
-            (d.topReferrers || []).forEach(r => {
+            const referrers = safeJsonParse(d.topReferrers);
+            referrers.forEach(r => {
                 if (!referrerMap[r.source]) referrerMap[r.source] = 0;
                 referrerMap[r.source] += r.users;
             });
