@@ -7,6 +7,10 @@
     {
       "path": "/api/generate-post",
       "schedule": "0 0 * * *"
+    },
+    {
+      "path": "/api/cron-analytics?days=7",
+      "schedule": "0 1 * * *"
     }
   ],
   "rewrites": [
