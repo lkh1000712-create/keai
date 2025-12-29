@@ -157,31 +157,44 @@ async function getExistingRecord(date) {
 async function upsertAnalyticsData(record) {
     const url = `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${ANALYTICS_TABLE_ID}`;
 
-    // 기존 레코드 확인
-    const existing = await getExistingRecord(record.날짜);
+    try {
+        // 기존 레코드 확인
+        const existing = await getExistingRecord(record['날짜']);
 
-    if (existing) {
-        // 업데이트
-        const response = await fetch(`${url}/${existing.id}`, {
-            method: 'PATCH',
-            headers: {
-                'Authorization': `Bearer ${AIRTABLE_TOKEN}`,
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ fields: record })
-        });
-        return response.ok;
-    } else {
-        // 새로 생성
-        const response = await fetch(url, {
-            method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${AIRTABLE_TOKEN}`,
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ fields: record })
-        });
-        return response.ok;
+        if (existing) {
+            // 업데이트
+            const response = await fetch(`${url}/${existing.id}`, {
+                method: 'PATCH',
+                headers: {
+                    'Authorization': `Bearer ${AIRTABLE_TOKEN}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ fields: record })
+            });
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error(`[Airtable Update Error] ${record['날짜']}: ${errorText}`);
+            }
+            return response.ok;
+        } else {
+            // 새로 생성
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${AIRTABLE_TOKEN}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ fields: record })
+            });
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error(`[Airtable Create Error] ${record['날짜']}: ${errorText}`);
+            }
+            return response.ok;
+        }
+    } catch (error) {
+        console.error(`[Airtable Exception] ${record['날짜']}: ${error.message}`);
+        return false;
     }
 }
 
