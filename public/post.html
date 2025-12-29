@@ -1280,10 +1280,7 @@
     // URL에서 게시글 ID 또는 슬러그 추출
     const urlParams = new URLSearchParams(window.location.search);
     const postId = urlParams.get('id');
-
-    // URL 경로에서 슬러그 추출 (/p/슬러그 형태)
-    const pathParts = window.location.pathname.split('/');
-    const postSlug = pathParts.length >= 3 && pathParts[1] === 'p' ? decodeURIComponent(pathParts[2]) : null;
+    const postSlug = urlParams.get('slug'); // querystring에서 슬러그
 
     // DOM 요소
     const loadingEl = document.getElementById('post-loading');
