@@ -1,7 +1,9 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "nextjs",
+  "cleanUrls": true,
   "rewrites": [
+    { "source": "/board", "destination": "/board.html" },
     { "source": "/admin-login", "destination": "/admin-login.html" },
     { "source": "/company", "destination": "/company.html" },
     { "source": "/process", "destination": "/process.html" },
@@ -14,7 +16,8 @@
     { "source": "/dashboard/board", "destination": "/dashboard/board.html" },
     { "source": "/dashboard/leads", "destination": "/dashboard/leads.html" },
     { "source": "/dashboard/analytics", "destination": "/dashboard/analytics.html" },
-    { "source": "/dashboard/settings", "destination": "/dashboard/settings.html" }
+    { "source": "/dashboard/settings", "destination": "/dashboard/settings.html" },
+    { "source": "/dashboard/popups", "destination": "/dashboard/popups.html" }
   ],
   "headers": [
     {

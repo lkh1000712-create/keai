@@ -435,10 +435,20 @@
             <!-- 페이지 헤더 -->
             <div class="page-header-with-btn">
                 <div></div>
-                <a href="post-edit.html" class="btn-new">
-                    <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-                    새 게시글
-                </a>
+                <div style="display: flex; gap: 12px;">
+                    <button onclick="openGenerateModal()" class="btn-new" style="background: #10B981;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="fill: none;">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                            <path d="M2 17l10 5 10-5"/>
+                            <path d="M2 12l10 5 10-5"/>
+                        </svg>
+                        AI 자동생성
+                    </button>
+                    <a href="post-edit.html" class="btn-new">
+                        <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                        새 게시글
+                    </a>
+                </div>
             </div>
 
             <!-- 필터 -->
@@ -477,6 +487,53 @@
                 </table>
             </div>
         </main>
+    </div>
+
+    <!-- AI 자동생성 모달 -->
+    <div class="modal-overlay" id="generateModal" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: none; align-items: center; justify-content: center; z-index: 1000; padding: 20px;">
+        <div style="background: #fff; border-radius: 16px; width: 100%; max-width: 520px; max-height: 90vh; overflow-y: auto;">
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 20px 24px; border-bottom: 1px solid var(--neutral-200);">
+                <h3 style="font-size: 18px; font-weight: 600; color: var(--neutral-800);">AI 게시글 자동생성</h3>
+                <button onclick="closeGenerateModal()" style="background: none; border: none; font-size: 24px; color: var(--neutral-400); cursor: pointer;">&times;</button>
+            </div>
+            <div style="padding: 24px;">
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; font-size: 14px; font-weight: 500; color: var(--neutral-700); margin-bottom: 8px;">카테고리 <span style="color: #EF4444;">*</span></label>
+                    <select id="genCategory" style="width: 100%; padding: 12px 16px; border: 1px solid var(--neutral-200); border-radius: 8px; font-size: 14px;">
+                        <option value="">선택해주세요</option>
+                        <option value="정책자금 가이드">정책자금 가이드</option>
+                        <option value="운전자금·시설자금">운전자금·시설자금</option>
+                        <option value="정책자금 심사 기준">정책자금 심사 기준</option>
+                        <option value="정책자금 준비 방법·서류">정책자금 준비 방법·서류</option>
+                    </select>
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; font-size: 14px; font-weight: 500; color: var(--neutral-700); margin-bottom: 8px;">주제 (선택)</label>
+                    <input type="text" id="genTopic" placeholder="예: 신용점수가 낮을 때 대처법" style="width: 100%; padding: 12px 16px; border: 1px solid var(--neutral-200); border-radius: 8px; font-size: 14px;">
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; font-size: 14px; font-weight: 500; color: var(--neutral-700); margin-bottom: 8px;">추가 요청사항 (선택)</label>
+                    <textarea id="genCustom" placeholder="예: 초보 대표님도 이해하기 쉽게 작성해주세요" rows="3" style="width: 100%; padding: 12px 16px; border: 1px solid var(--neutral-200); border-radius: 8px; font-size: 14px; resize: vertical;"></textarea>
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                        <input type="checkbox" id="genAutoSave">
+                        <span style="font-size: 14px; color: var(--neutral-700);">생성 후 바로 저장 (비공개 상태)</span>
+                    </label>
+                </div>
+
+                <!-- 결과 미리보기 -->
+                <div id="genResult" style="display: none; margin-top: 20px; padding: 20px; background: var(--neutral-50); border-radius: 12px; border: 1px solid var(--neutral-200);">
+                    <h4 style="font-size: 16px; font-weight: 600; color: var(--neutral-800); margin-bottom: 12px;" id="genResultTitle"></h4>
+                    <div id="genResultContent" style="font-size: 14px; color: var(--neutral-600); line-height: 1.8; white-space: pre-line;"></div>
+                    <div id="genResultSummary" style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--neutral-200); font-size: 13px; color: var(--neutral-500); font-style: italic;"></div>
+                </div>
+            </div>
+            <div style="padding: 16px 24px; border-top: 1px solid var(--neutral-200); display: flex; justify-content: flex-end; gap: 12px;">
+                <button type="button" onclick="closeGenerateModal()" style="padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer; background: #fff; border: 1px solid var(--neutral-200); color: var(--neutral-700);">취소</button>
+                <button type="button" onclick="generatePost()" id="genBtn" style="padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer; background: #10B981; border: none; color: #fff;">생성하기</button>
+            </div>
+        </div>
     </div>
 
     <!-- 토스트 -->
@@ -624,6 +681,76 @@
             setTimeout(() => {
                 toast.classList.remove('show');
             }, 3000);
+        }
+
+        // ========================================
+        // AI 자동생성 기능
+        // ========================================
+
+        // 모달 열기
+        function openGenerateModal() {
+            document.getElementById('generateModal').style.display = 'flex';
+            document.getElementById('genResult').style.display = 'none';
+            document.getElementById('genCategory').value = '';
+            document.getElementById('genTopic').value = '';
+            document.getElementById('genCustom').value = '';
+            document.getElementById('genAutoSave').checked = false;
+        }
+
+        // 모달 닫기
+        function closeGenerateModal() {
+            document.getElementById('generateModal').style.display = 'none';
+        }
+
+        // 게시글 생성
+        async function generatePost() {
+            const category = document.getElementById('genCategory').value;
+            const topic = document.getElementById('genTopic').value.trim();
+            const customPrompt = document.getElementById('genCustom').value.trim();
+            const autoSave = document.getElementById('genAutoSave').checked;
+
+            if (!category) {
+                alert('카테고리를 선택해주세요.');
+                return;
+            }
+
+            const btn = document.getElementById('genBtn');
+            const originalText = btn.textContent;
+            btn.textContent = '생성 중...';
+            btn.disabled = true;
+
+            try {
+                const response = await fetch('/api/generate-post', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ category, topic, customPrompt, autoSave })
+                });
+
+                const result = await response.json();
+
+                if (result.success && result.post) {
+                    // 결과 표시
+                    document.getElementById('genResultTitle').textContent = result.post.제목 || '';
+                    document.getElementById('genResultContent').textContent = result.post.내용 || '';
+                    document.getElementById('genResultSummary').textContent = result.post.요약 ? `요약: ${result.post.요약}` : '';
+                    document.getElementById('genResult').style.display = 'block';
+
+                    if (result.saved) {
+                        showToast('게시글이 생성되어 저장되었습니다 (비공개)', 'success');
+                        loadPosts(); // 목록 새로고침
+                    } else {
+                        showToast('게시글이 생성되었습니다. 위 내용을 확인하세요.', 'success');
+                    }
+                } else {
+                    throw new Error(result.error || '생성 실패');
+                }
+            } catch (error) {
+                console.error('생성 오류:', error);
+                showToast('게시글 생성에 실패했습니다: ' + error.message, 'error');
+            } finally {
+                btn.textContent = originalText;
+                btn.disabled = false;
+            }
         }
     </script>
 </body>
