@@ -186,7 +186,7 @@
         }
 
         /* 썸네일 업로드 */
-        .thumbnail-upload {
+        .thumbnail-upload-area {
             display: flex;
             align-items: center;
             gap: 16px;
@@ -202,6 +202,11 @@
             justify-content: center;
             overflow: hidden;
             border: 2px dashed #E5E7EB;
+            flex-shrink: 0;
+        }
+
+        .thumbnail-preview.has-image {
+            border: none;
         }
 
         .thumbnail-preview img {
@@ -216,8 +221,58 @@
             fill: #9CA3AF;
         }
 
-        .thumbnail-input {
-            flex: 1;
+        .thumbnail-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .btn-upload, .btn-remove {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+        }
+
+        .btn-upload {
+            background: #EFF6FF;
+            color: #0F4C81;
+        }
+
+        .btn-upload:hover {
+            background: #DBEAFE;
+        }
+
+        .btn-remove {
+            background: #FEF2F2;
+            color: #DC2626;
+        }
+
+        .btn-remove:hover {
+            background: #FEE2E2;
+        }
+
+        .upload-status {
+            font-size: 12px;
+            color: #6B7280;
+        }
+
+        .upload-status.uploading {
+            color: #0F4C81;
+        }
+
+        .upload-status.success {
+            color: #059669;
+        }
+
+        .upload-status.error {
+            color: #DC2626;
         }
 
         /* 에디터 영역 */
@@ -596,8 +651,25 @@
                     </select>
                 </div>
                 <div class="form-row">
-                    <label class="form-label">썸네일 URL</label>
-                    <input type="text" id="post-thumbnail" class="form-input" placeholder="이미지 URL (선택사항)">
+                    <label class="form-label">썸네일</label>
+                    <div class="thumbnail-upload-area">
+                        <div class="thumbnail-preview" id="thumbnail-preview">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                        </div>
+                        <div class="thumbnail-controls">
+                            <input type="file" id="thumbnail-file" accept="image/*" style="display:none">
+                            <button type="button" class="btn-upload" onclick="document.getElementById('thumbnail-file').click()">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16h6v-6h4l-7-7-7 7h4v6zm-4 2h14v2H5v-2z"/></svg>
+                                이미지 업로드
+                            </button>
+                            <button type="button" class="btn-remove" id="btn-remove-thumbnail" style="display:none" onclick="removeThumbnail()">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+                                삭제
+                            </button>
+                            <span class="upload-status" id="upload-status"></span>
+                        </div>
+                        <input type="hidden" id="post-thumbnail" value="">
+                    </div>
                 </div>
             </div>
         </div>
@@ -682,7 +754,121 @@
 
             // 키보드 단축키
             document.getElementById('content-editor').addEventListener('keydown', handleKeyboard);
+
+            // 썸네일 파일 업로드 이벤트
+            document.getElementById('thumbnail-file').addEventListener('change', handleThumbnailUpload);
         });
+
+        // 썸네일 업로드 처리
+        async function handleThumbnailUpload(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            // 이미지 타입 확인
+            if (!file.type.startsWith('image/')) {
+                showToast('이미지 파일만 업로드 가능합니다', 'error');
+                return;
+            }
+
+            const status = document.getElementById('upload-status');
+            status.textContent = '업로드 중...';
+            status.className = 'upload-status uploading';
+
+            try {
+                // 이미지 압축
+                const compressedImage = await compressImage(file, 800, 0.8);
+
+                // 서버에 업로드
+                const response = await fetch('/api/upload-thumbnail', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        imageData: compressedImage,
+                        fileName: file.name
+                    })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    // 썸네일 URL 저장
+                    document.getElementById('post-thumbnail').value = result.url;
+
+                    // 미리보기 표시
+                    const preview = document.getElementById('thumbnail-preview');
+                    preview.innerHTML = `<img src="${result.url}" alt="썸네일">`;
+                    preview.classList.add('has-image');
+
+                    // 삭제 버튼 표시
+                    document.getElementById('btn-remove-thumbnail').style.display = 'inline-flex';
+
+                    status.textContent = result.message;
+                    status.className = 'upload-status success';
+                } else {
+                    throw new Error(result.error);
+                }
+            } catch (error) {
+                console.error('업로드 실패:', error);
+                status.textContent = '업로드 실패: ' + error.message;
+                status.className = 'upload-status error';
+            }
+
+            // 파일 입력 초기화 (같은 파일 다시 선택 가능하도록)
+            e.target.value = '';
+        }
+
+        // 이미지 압축 (Canvas 사용)
+        function compressImage(file, maxWidth, quality) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = new Image();
+                    img.onload = function() {
+                        const canvas = document.createElement('canvas');
+                        let width = img.width;
+                        let height = img.height;
+
+                        // 최대 너비 제한
+                        if (width > maxWidth) {
+                            height = (height * maxWidth) / width;
+                            width = maxWidth;
+                        }
+
+                        canvas.width = width;
+                        canvas.height = height;
+
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, width, height);
+
+                        // WebP로 압축 (지원하지 않으면 JPEG)
+                        let dataUrl;
+                        if (canvas.toDataURL('image/webp').startsWith('data:image/webp')) {
+                            dataUrl = canvas.toDataURL('image/webp', quality);
+                        } else {
+                            dataUrl = canvas.toDataURL('image/jpeg', quality);
+                        }
+
+                        resolve(dataUrl);
+                    };
+                    img.onerror = reject;
+                    img.src = e.target.result;
+                };
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+        }
+
+        // 썸네일 삭제
+        function removeThumbnail() {
+            document.getElementById('post-thumbnail').value = '';
+
+            const preview = document.getElementById('thumbnail-preview');
+            preview.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>';
+            preview.classList.remove('has-image');
+
+            document.getElementById('btn-remove-thumbnail').style.display = 'none';
+            document.getElementById('upload-status').textContent = '';
+        }
 
         // 게시글 로드 (수정 모드)
         async function loadPost(id) {
@@ -697,6 +883,14 @@
                     document.getElementById('post-category').value = post.카테고리 || '공지';
                     document.getElementById('post-thumbnail').value = post.썸네일 || '';
                     document.getElementById('content-editor').value = post.내용 || '';
+
+                    // 기존 썸네일 표시
+                    if (post.썸네일) {
+                        const preview = document.getElementById('thumbnail-preview');
+                        preview.innerHTML = `<img src="${post.썸네일}" alt="썸네일">`;
+                        preview.classList.add('has-image');
+                        document.getElementById('btn-remove-thumbnail').style.display = 'inline-flex';
+                    }
                 }
             } catch (error) {
                 console.error('게시글 로드 실패:', error);
