@@ -812,7 +812,8 @@
                 category: post.카테고리 || post.category || '공지',
                 thumbnail: post.썸네일 || null,
                 date: post.작성일 || post.date,
-                views: post.조회수 || 0
+                views: post.조회수 || 0,
+                slug: post.슬러그 || ''
             }));
 
             filterAndRender();
