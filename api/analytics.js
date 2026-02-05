@@ -122,8 +122,8 @@ export default async function handler(req, res) {
             pageviews: record.fields['pageviews'] || 0,
             avg_duration: record.fields['avgDuration'] || 0,  // analytics.html 호환
             bounce_rate: record.fields['sessions'] > 0
-                ? (1 - (record.fields['pageviews'] / record.fields['sessions']))
-                : 0,  // 이탈률 계산
+                ? Math.max(0, 1 - (record.fields['pageviews'] / record.fields['sessions']))
+                : 0,  // 이탈률 계산 (음수 방지)
             sessions: record.fields['sessions'] || 0,
             leads: record.fields['leads'] || 0,
             clicks: record.fields['clicks'] || 0,
@@ -160,7 +160,7 @@ export default async function handler(req, res) {
             visitors: dailyData.reduce((sum, d) => sum + d.visitors, 0),
             pageviews: dailyData.reduce((sum, d) => sum + d.pageviews, 0),
             avgDuration: dailyData.length > 0
-                ? dailyData.reduce((sum, d) => sum + d.duration, 0) / dailyData.length
+                ? dailyData.reduce((sum, d) => sum + d.avg_duration, 0) / dailyData.length
                 : 0,
             sessions: dailyData.reduce((sum, d) => sum + d.sessions, 0),
             leads: dailyData.reduce((sum, d) => sum + d.leads, 0),

@@ -1,0 +1,50 @@
+name: Analytics Data Collection
+
+on:
+  schedule:
+    # 매일 KST 01:00 (UTC 16:00 전날)
+    - cron: '0 16 * * *'
+  workflow_dispatch:
+    inputs:
+      days:
+        description: '수집할 일수 (기본 7)'
+        required: false
+        default: '7'
+
+env:
+  SITE_URL: https://k-eai.kr
+  CRON_SECRET: keai-cron-secret-2024
+
+jobs:
+  collect-analytics:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Collect GA4 Analytics Data
+        run: |
+          DAYS="${{ github.event.inputs.days || '7' }}"
+          echo "Collecting analytics data for ${DAYS} days..."
+
+          RESPONSE=$(curl -sL -w "\n%{http_code}" \
+            "${SITE_URL}/api/cron-analytics?secret=${CRON_SECRET}&days=${DAYS}")
+
+          HTTP_CODE=$(echo "$RESPONSE" | tail -1)
+          BODY=$(echo "$RESPONSE" | head -n -1)
+
+          echo "HTTP Status: ${HTTP_CODE}"
+          echo "Response: ${BODY}"
+
+          if [ "$HTTP_CODE" != "200" ]; then
+            echo "::error::API call failed with status ${HTTP_CODE}"
+            exit 1
+          fi
+
+          echo "$BODY" | python3 -c "
+          import sys, json
+          data = json.load(sys.stdin)
+          if data.get('success'):
+              print(f\"Saved: {data.get('savedCount', 0)}, Errors: {data.get('errorCount', 0)}\")
+          else:
+              print(f\"Error: {data.get('error', 'unknown')}\")
+              sys.exit(1)
+          "
