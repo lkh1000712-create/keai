@@ -275,8 +275,8 @@
 
     // Airtable 설정 - KEAI (토큰은 Worker 환경변수에서 관리)
     const AIRTABLE_CONFIG = {
-        baseId: 'appxVw5QQ0g4JEjoR',
-        tableName: '한국기업심사원'
+        baseId: 'appYxrGK0yOZ8YdIG',
+        tableName: '고객정보'
     };
 
     // 브랜드 정보 - KEAI
@@ -288,7 +288,7 @@
         address: '인천광역시 서구 중봉대로 612번길 10-20, 505-J302호(청라동, 청라프라자)',
         bizno: '794-35-01595',
         hours: '평일 09:00-18:00',
-        logo: 'https://keai-three.vercel.app/logo.png'
+        logo: 'https://k-eai.kr/logo.png'
     };
 
     window.handleSubmit = async function(event) {
@@ -332,7 +332,7 @@
             '설립연도': form.founded.value || '-',
             '통화가능시간': form.consultTime.value,
             '필요자금규모': form.amount.value || '-',
-            '자금종류': fundTypesArray,
+            '자금종류': fundTypesArray.join(', '),
             '문의사항': form.message.value || '',
             '개인정보동의': form.privacy.checked
         };

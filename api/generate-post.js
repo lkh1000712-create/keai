@@ -269,6 +269,38 @@ export default async function handler(req, res) {
 
   // GET: Cron 자동 실행
   if (req.method === 'GET') {
+    // 디버그 모드: 이미지 생성 및 R2 업로드 테스트
+    if (req.query.debug === 'true') {
+      const debugResult = {
+        env: {
+          R2_ACCESS_KEY_ID: R2_ACCESS_KEY_ID ? '설정됨' : '없음',
+          R2_SECRET_ACCESS_KEY: R2_SECRET_ACCESS_KEY ? '설정됨' : '없음',
+          R2_ENDPOINT: R2_ENDPOINT,
+          R2_BUCKET_NAME: R2_BUCKET_NAME,
+          R2_PUBLIC_URL: R2_PUBLIC_URL,
+          GEMINI_API_KEY: GEMINI_API_KEY ? '설정됨' : '없음'
+        },
+        tests: {}
+      };
+
+      // 1. 이미지 생성 테스트
+      try {
+        const testImage = await generateThumbnailImage('테스트 제목', '정책자금 심사 기준');
+        debugResult.tests.imageGeneration = testImage ? '✅ 성공 (base64 길이: ' + testImage.base64.length + ')' : '❌ 실패 (null 반환)';
+
+        // 2. R2 업로드 테스트
+        if (testImage) {
+          const testFilename = `debug-test-${Date.now()}.png`;
+          const uploadedUrl = await uploadImageToR2(testImage, testFilename);
+          debugResult.tests.r2Upload = uploadedUrl ? '✅ 성공: ' + uploadedUrl : '❌ 실패';
+        }
+      } catch (e) {
+        debugResult.tests.error = e.message;
+      }
+
+      return res.status(200).json(debugResult);
+    }
+
     // Cron 인증 확인
     const authHeader = req.headers.authorization;
     const forceRun = req.query.force === 'true';
@@ -931,7 +963,7 @@ async function refreshBoardCache() {
     // 내부 API 호출로 캐시 갱신
     const baseUrl = process.env.VERCEL_URL
       ? `https://${process.env.VERCEL_URL}`
-      : 'https://keai-three.vercel.app';
+      : 'https://k-eai.kr';
 
     const response = await fetch(`${baseUrl}/api/board?refresh=true`, {
       method: 'GET',
